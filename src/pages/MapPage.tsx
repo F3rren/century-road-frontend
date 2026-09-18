@@ -15,6 +15,7 @@ export function MapPage() {
       <EventsPanel
         selectedCountry={selectedCountry}
         onClearCountry={() => setSelectedCountry(null)}
+        onSelectCountry={setSelectedCountry}
       />
       <div className="relative flex-1">
         <MapView
@@ -26,7 +27,10 @@ export function MapPage() {
         <div className="absolute top-4 right-4 z-10">
           <ProjectionToggle value={projection} onChange={setProjection} />
         </div>
-        <div className="absolute bottom-8 right-4 z-10">
+        {/* Top-left, not bottom-right: MapLibre's own NavigationControl
+            already anchors bottom-right, and bottom-left is used by the
+            mobile "Eventi" trigger + the map's attribution control. */}
+        <div className="absolute top-4 left-4 z-10">
           <HeatLegend />
         </div>
       </div>

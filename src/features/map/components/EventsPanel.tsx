@@ -1,4 +1,8 @@
-import { X, Globe, CalendarDays } from 'lucide-react';
+import { useState } from 'react';
+import { X, Globe, CalendarDays, CalendarClock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useEvents } from '../hooks/useEvents';
 import { EventCard } from './EventCard';
 import type { Country, HistoricalEvent } from '../types';
@@ -38,13 +42,29 @@ function Section({ title, events, emptyMessage }: SectionProps) {
 interface EventsPanelProps {
   selectedCountry: Country | null;
   onClearCountry: () => void;
+  onSelectCountry: (country: Country) => void;
 }
 
-export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProps) {
-  const { globalEvents, countryFiltered, today } = useEvents(selectedCountry?.code);
+export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }: EventsPanelProps) {
+  const { globalEvents, countryFiltered, today, availableCountries } = useEvents(
+    selectedCountry?.code,
+  );
+  // The map/globe is pointer-only: below desktop this panel isn't docked, so
+  // it needs its own open state instead of always taking up map width.
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  return (
-    <aside className="flex h-full w-72 shrink-0 flex-col border-r bg-background/95 backdrop-blur-sm">
+  // Picking a country is the main way into this panel on mobile, where it
+  // isn't permanently docked — surface it automatically. Adjusted during
+  // render (tracking the previous value) rather than in an effect.
+  const [prevSelectedCountry, setPrevSelectedCountry] = useState(selectedCountry);
+  if (selectedCountry !== prevSelectedCountry) {
+    setPrevSelectedCountry(selectedCountry);
+    if (!isDesktop && selectedCountry) setMobileOpen(true);
+  }
+
+  const panel = (
+    <>
       {/* Header */}
       <div className="flex items-center gap-2 border-b px-4 py-3">
         {selectedCountry ? (
@@ -53,13 +73,14 @@ export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProp
             <span className="flex-1 truncate text-sm font-semibold">
               {selectedCountry.name}
             </span>
-            <button
+            <Button
+              variant="ghost"
+              size="iconSm"
               onClick={onClearCountry}
-              className="rounded-md p-1 hover:bg-accent transition-colors"
               aria-label="Torna alla vista globale"
             >
               <X className="h-4 w-4 text-muted-foreground" />
-            </button>
+            </Button>
           </>
         ) : (
           <>
@@ -74,8 +95,9 @@ export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProp
         )}
       </div>
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-5">
+      {/* Content — aria-live announces the swap when a country is picked via
+          map click, keyboard picker, or cleared back to the global view. */}
+      <div className="flex-1 overflow-y-auto p-3 space-y-5" aria-live="polite">
         {selectedCountry ? (
           countryFiltered?.all.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
@@ -86,7 +108,7 @@ export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProp
               </p>
               <button
                 onClick={onClearCountry}
-                className="mt-2 text-xs text-primary hover:underline"
+                className="mt-2 text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
               >
                 Torna alla vista globale
               </button>
@@ -107,6 +129,32 @@ export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProp
           )
         ) : (
           <>
+            <div>
+              <label
+                htmlFor="country-picker"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+              >
+                Vai a un paese
+              </label>
+              <select
+                id="country-picker"
+                className="w-full rounded-md border bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                value=""
+                onChange={(e) => {
+                  const country = availableCountries.find((c) => c.code === e.target.value);
+                  if (country) onSelectCountry(country);
+                }}
+              >
+                <option value="" disabled>
+                  Seleziona un paese…
+                </option>
+                {availableCountries.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             {globalEvents.length > 0 && (
               <Section
                 title={
@@ -118,11 +166,61 @@ export function EventsPanel({ selectedCountry, onClearCountry }: EventsPanelProp
               />
             )}
             <p className="text-xs text-muted-foreground text-center pt-2 pb-1">
-              Clicca un paese sulla mappa per vedere i suoi eventi
+              Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi
             </p>
           </>
         )}
       </div>
-    </aside>
+    </>
+  );
+
+  if (isDesktop) {
+    return (
+      <aside className="flex h-full w-72 shrink-0 flex-col border-r bg-background/95 backdrop-blur-sm">
+        {panel}
+      </aside>
+    );
+  }
+
+  return (
+    <>
+      <Button
+        size="sm"
+        className="absolute bottom-4 left-4 z-10 shadow-md"
+        onClick={() => setMobileOpen(true)}
+      >
+        <CalendarClock className="h-4 w-4" />
+        Eventi
+      </Button>
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={cn(
+          'fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-sm flex-col border-r bg-background transition-transform duration-300',
+          mobileOpen ? 'translate-x-0' : '-translate-x-full',
+        )}
+        aria-hidden={!mobileOpen}
+      >
+        <div className="flex items-center justify-between border-b px-4 py-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Eventi
+          </span>
+          <Button
+            variant="ghost"
+            size="iconSm"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Chiudi pannello eventi"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+        {panel}
+      </aside>
+    </>
   );
 }
