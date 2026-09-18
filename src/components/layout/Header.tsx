@@ -28,6 +28,12 @@ export function Header({ sidebarOpen, onMenuToggle, className }: HeaderProps) {
       >
         {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>
+      {/* Masthead: stays visible even with the sidebar collapsed (mobile,
+          or manually closed on desktop) so identity never fully drops. */}
+      <span className="hidden items-baseline gap-2 font-display uppercase tracking-wide sm:flex">
+        <span className="text-sm font-semibold">Century Road</span>
+        <span className="text-xs text-muted-foreground">press archive</span>
+      </span>
       <div className="flex-1" />
       <Button
         variant="ghost"

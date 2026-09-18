@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Self-hosted (not a Google Fonts CDN link) — a single weight, latin-only
-   subset. Used deliberately for content that carries the product's own
-   voice (page titles, event titles/years): a historical almanac earns an
-   editorial serif for its content, while UI chrome stays on the system
-   sans. Not a blanket font swap. */
+/* Self-hosted (not a Google Fonts CDN link) — single weights, latin-only
+   subsets. Reading voice: Source Serif 4 for event titles/content. Display
+   voice: Oswald, a condensed newsroom-grotesque with real early-20th-century
+   headline lineage, for headings and datelines. Everything else stays on
+   the system sans. See PRODUCT.md / .impeccable/surfaces for the direction
+   this pairing serves. */
 @font-face {
   font-family: "Source Serif 4";
   font-style: normal;
@@ -18,56 +19,90 @@
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/oswald-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Wire-service newsroom archive — see .impeccable/surfaces direction
+   contract. Ground is bulletin ivory / newsroom black, not a neutral gray
+   scale; wire-red is the one committed accent (Restrained strategy: it is
+   --primary itself, not a second color layered on top of it), reserved for
+   interactive/active/"today" emphasis, never a decorative field. Radius is
+   near-zero throughout — clippings and rules, not rounded cards. */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142.1 76.2% 36.3%;
-    --success-foreground: 355.7 100% 97.3%;
-    --sidebar: 222.2 47.4% 11.2%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
+    --background: 43.3 50% 92.9%; /* bulletin ivory */
+    --foreground: 30 13% 9%; /* newsprint ink */
+    --card: 42 55.6% 96.5%;
+    --card-foreground: 30 13% 9%;
+    --border: 41.5 25% 79.6%; /* hairline */
+    --input: 41.5 25% 79.6%;
+    --ring: 30 13% 9%; /* ink-based: legible against any surface, incl. wire-red */
+    --radius: 0.125rem;
+    --primary: 350.1 73.9% 45.1%; /* wire-red */
+    --primary-foreground: 42 55.6% 96.5%;
+    --secondary: 43.2 41% 88%;
+    --secondary-foreground: 30 13% 9%;
+    --muted: 43.2 41% 88%;
+    --muted-foreground: 38.2 11.5% 37.6%;
+    --accent: 43.2 41% 88%;
+    --accent-foreground: 30 13% 9%;
+    --destructive: 12.9 68.4% 37.3%; /* rust — distinct from wire-red, same warm-ink family */
+    --destructive-foreground: 42 55.6% 96.5%;
+    --success: 135 25.9% 33.3%;
+    --success-foreground: 42 55.6% 96.5%;
+    /* Sidebar is a fixed newsroom-black directory board, not a themed
+       surface — it doesn't flip with light/dark (it didn't before this
+       redesign either; only its hue is changing, navy to newsroom-black). */
+    --sidebar: 30 11.1% 7.1%;
+    --sidebar-foreground: 40 36.6% 92%;
+    --sidebar-border: 40 11.5% 20.4%;
+    /* Same fixed logic applies to the active-tab accent: --primary swaps
+       between the light/dark wire-red, but the sidebar never does, and the
+       light-mode wire-red (45% L) measures only 2.85:1 against the sidebar's
+       always-dark background — a real WCAG AA failure, not a rounding
+       error. This is a brighter wire-red, verified at 4.99:1, used only
+       inside the sidebar. */
+    --sidebar-accent: 352 74% 65%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142.1 70.6% 45.3%;
-    --success-foreground: 144.9 80.4% 10%;
-    --sidebar: 222.2 47.4% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 14%;
+    --background: 30 11.1% 7.1%; /* newsroom at night */
+    --foreground: 40 36.6% 92%;
+    --card: 40 12% 9.8%;
+    --card-foreground: 40 36.6% 92%;
+    --border: 40 11.5% 20.4%;
+    --input: 40 11.5% 20.4%;
+    --ring: 40 36.6% 92%;
+    /* 60% L, not the naive "brighter than light-mode" 55.5%: at 55.5%,
+       ivory-on-primary (filled buttons) measured 4.02:1, under AA. Verified
+       at 60%: 4.95:1 as text against the dark background, 4.73:1 with dark
+       ink (not ivory) as the fill's foreground below — one value can't
+       satisfy both roles with ivory text, so the foreground swaps to ink
+       here specifically. */
+    --primary: 352.2 74.4% 60%;
+    --primary-foreground: 30 13% 9%;
+    --secondary: 38.2 18% 12%;
+    --secondary-foreground: 40 36.6% 92%;
+    --muted: 38.2 18% 12%;
+    --muted-foreground: 40 13.3% 60.2%;
+    --accent: 38.2 18% 12%;
+    --accent-foreground: 40 36.6% 92%;
+    --destructive: 15 61.9% 55.7%;
+    --destructive-foreground: 30 13% 9%;
+    --success: 134 22.5% 59%;
+    --success-foreground: 30 13% 9%;
+    --sidebar: 30 11.1% 7.1%;
+    --sidebar-foreground: 40 36.6% 92%;
+    --sidebar-border: 40 11.5% 20.4%;
+    --sidebar-accent: 352 74% 65%;
   }
 }
 

@@ -15,7 +15,7 @@ const options: { value: ProjectionType; label: string; Icon: typeof Globe }[] = 
 
 export function ProjectionToggle({ value, onChange }: ProjectionToggleProps) {
   return (
-    <MapOverlayPanel className="flex items-center gap-1 rounded-full p-1" role="group" aria-label="Proiezione mappa">
+    <MapOverlayPanel className="flex items-stretch divide-x divide-white/15" role="group" aria-label="Proiezione mappa">
       {options.map(({ value: opt, label, Icon }) => (
         <Button
           key={opt}
@@ -26,7 +26,7 @@ export function ProjectionToggle({ value, onChange }: ProjectionToggleProps) {
           aria-pressed={value === opt}
         >
           <Icon className="h-3.5 w-3.5 shrink-0" />
-          {/* Below sm: icon-only, so this pill plus HeatLegend (opposite
+          {/* Below sm: icon-only, so this control plus HeatLegend (opposite
               top corner) never crowd a narrow viewport. The label stays
               in the accessible name at every width via sr-only. */}
           <span className="sr-only sm:not-sr-only">{label}</span>

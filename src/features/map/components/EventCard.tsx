@@ -1,39 +1,32 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { CATEGORY_LABELS } from '../constants/categories';
 import type { HistoricalEvent } from '../types';
 
-// Direct swatches (not design tokens) because these are data categories, not
-// UI surfaces — but every one needs an explicit dark: pair so the badges
-// don't stay light-mode-only once `.dark` is applied. `text-yellow-800`
-// (rather than -700) keeps "culture" at a safe WCAG AA contrast on yellow-100.
-const CATEGORY_STYLES: Record<HistoricalEvent['category'], string> = {
-  war:      'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300',
-  politics: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
-  science:  'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300',
-  culture:  'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
-  disaster: 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
-  economy:  'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300',
+const MONTH_ABBR = [
+  '', 'GEN', 'FEB', 'MAR', 'APR', 'MAG', 'GIU',
+  'LUG', 'AGO', 'SET', 'OTT', 'NOV', 'DIC',
+];
+
+// A small section-flag swatch + text, not a filled pill — the one
+// committed accent in this redesign is wire-red (--primary); category
+// color-coding is a separate data dimension and stays deliberately
+// quieter than that. Every entry still needs an explicit dark: pair.
+const CATEGORY_SWATCH: Record<HistoricalEvent['category'], string> = {
+  war:      'bg-red-600 dark:bg-red-400',
+  politics: 'bg-blue-600 dark:bg-blue-400',
+  science:  'bg-purple-600 dark:bg-purple-400',
+  culture:  'bg-yellow-600 dark:bg-yellow-400',
+  disaster: 'bg-orange-600 dark:bg-orange-400',
+  economy:  'bg-green-600 dark:bg-green-400',
 };
 
-// Text-only counterpart of CATEGORY_STYLES, used inline next to the country
-// name — kept as its own map instead of string-splitting CATEGORY_STYLES so
-// the two can't silently drift when either map's class list changes.
-const CATEGORY_TEXT_STYLES: Record<HistoricalEvent['category'], string> = {
-  war:      'text-red-700 dark:text-red-300',
-  politics: 'text-blue-700 dark:text-blue-300',
-  science:  'text-purple-700 dark:text-purple-300',
-  culture:  'text-yellow-800 dark:text-yellow-300',
-  disaster: 'text-orange-700 dark:text-orange-300',
-  economy:  'text-green-700 dark:text-green-300',
-};
-
-const CATEGORY_LABELS: Record<HistoricalEvent['category'], string> = {
-  war:      'Guerra',
-  politics: 'Politica',
-  science:  'Scienza',
-  culture:  'Cultura',
-  disaster: 'Disastro',
-  economy:  'Economia',
+// Type size carries importance, not color alone — raised from the
+// festival-lineup-poster challenger in the direction contract.
+const TITLE_SIZE: Record<HistoricalEvent['importance'], string> = {
+  high: 'text-lg',
+  medium: 'text-base',
+  low: 'text-sm',
 };
 
 interface EventCardProps {
@@ -48,8 +41,8 @@ export function EventCard({ event, compact = false }: EventCardProps) {
   return (
     <div
       className={cn(
-        'group rounded-lg border bg-card p-3 transition-shadow',
-        canExpand && 'cursor-pointer hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+        'group border-b border-border py-3 first:pt-0 last:border-b-0',
+        canExpand && 'cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
       )}
       role={canExpand ? 'button' : undefined}
       tabIndex={canExpand ? 0 : undefined}
@@ -66,37 +59,35 @@ export function EventCard({ event, compact = false }: EventCardProps) {
           : undefined
       }
     >
-      <div className="flex items-start gap-2">
-        <span
+      {/* Dateline stamp: place + full date, monospace, the wire-bulletin
+          device the whole redesign is built around. */}
+      <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+        {event.countryName} &middot; {event.day} {MONTH_ABBR[event.month]} {event.year}
+      </p>
+      <p
+        className={cn(
+          'mt-1 font-display font-semibold leading-tight tracking-tight transition-[color] motion-safe:duration-150',
+          TITLE_SIZE[event.importance],
+          !expanded && 'line-clamp-2',
+          canExpand && 'group-hover:text-primary',
+        )}
+      >
+        {event.title}
+      </p>
+      <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <span className={cn('h-2 w-2 shrink-0', CATEGORY_SWATCH[event.category])} aria-hidden="true" />
+        {CATEGORY_LABELS[event.category]}
+      </p>
+      {!compact && (
+        <p
           className={cn(
-            'shrink-0 rounded-md px-1.5 py-0.5 text-xs font-serif font-semibold tabular-nums',
-            CATEGORY_STYLES[event.category],
+            'mt-1.5 font-serif text-sm leading-relaxed text-muted-foreground',
+            !expanded && 'line-clamp-2'
           )}
         >
-          {event.year}
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className={cn('text-sm font-serif font-semibold leading-tight', !expanded && 'line-clamp-2')}>
-            {event.title}
-          </p>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            {event.countryName} &middot;{' '}
-            <span className={cn('font-medium', CATEGORY_TEXT_STYLES[event.category])}>
-              {CATEGORY_LABELS[event.category]}
-            </span>
-          </p>
-          {!compact && (
-            <p
-              className={cn(
-                'mt-1 text-xs text-muted-foreground leading-relaxed',
-                !expanded && 'line-clamp-2'
-              )}
-            >
-              {event.description}
-            </p>
-          )}
-        </div>
-      </div>
+          {event.description}
+        </p>
+      )}
     </div>
   );
 }

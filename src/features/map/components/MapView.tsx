@@ -140,13 +140,16 @@ export function MapView({
         paint: { 'fill-color': 'transparent', 'fill-opacity': 0 },
       });
 
-      // 3. Blue highlight for selected country
+      // 3. Wire-red highlight for selected country — MapLibre paint
+      // properties can't read CSS custom properties, and the basemap is
+      // always light regardless of app theme, so this is the fixed
+      // light-mode --primary hex rather than the token.
       map.addLayer({
         id: 'countries-highlight',
         type: 'fill',
         source: 'countries-ne',
         filter: ['==', 'iso_a2', ''],
-        paint: { 'fill-color': '#3b82f6', 'fill-opacity': 0.3 },
+        paint: { 'fill-color': '#C81E3A', 'fill-opacity': 0.3 },
       });
 
       // 4. Border for selected country
@@ -155,7 +158,7 @@ export function MapView({
         type: 'line',
         source: 'countries-ne',
         filter: ['==', 'iso_a2', ''],
-        paint: { 'line-color': '#3b82f6', 'line-width': 1.5 },
+        paint: { 'line-color': '#C81E3A', 'line-width': 1.5 },
       });
 
       map.on('click', 'countries-fill', (e) => {

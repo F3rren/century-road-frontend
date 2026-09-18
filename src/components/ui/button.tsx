@@ -12,11 +12,14 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         ghost: "hover:bg-accent hover:text-accent-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        // Used on top of the map/globe: dark glass surface, not tied to the app theme
-        // (the basemap underneath is always a light tileset).
+        // Used on top of the map/globe: a solid dark plaque, not tied to
+        // the app theme (the basemap underneath is always a light tileset).
         overlay:
           "text-white/80 hover:text-white hover:bg-white/10 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
-        overlayActive: "bg-white text-black shadow-sm focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        // Active state is wire-red, same as every other "this is selected/
+        // current" moment in the app (nav, selected country) — one
+        // recognizable accent, not a separate white/black treatment here.
+        overlayActive: "bg-primary text-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-black",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -25,7 +28,7 @@ const buttonVariants = cva(
         // visual weight — it only grows the hit area and the hover state.
         sm: "h-11 px-4 text-sm",
         icon: "h-11 w-11 shrink-0 p-0",
-        pill: "rounded-full px-3 py-1.5 text-xs",
+        pill: "h-11 px-4 text-xs",
       },
     },
     defaultVariants: {
