@@ -6,6 +6,17 @@ interface DashboardStatsProps {
 }
 
 export function DashboardStats({ stats }: DashboardStatsProps) {
+  if (stats.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-1 rounded-lg border border-dashed py-12 text-center">
+        <p className="text-sm font-medium">Nessuna statistica disponibile</p>
+        <p className="text-xs text-muted-foreground">
+          I dati compariranno qui non appena saranno disponibili.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {stats.map((stat) => (
@@ -16,7 +27,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <p
               className={cn(
                 "mt-1 text-xs font-medium",
-                stat.change >= 0 ? "text-green-600" : "text-destructive"
+                stat.change >= 0 ? "text-success" : "text-destructive"
               )}
             >
               {stat.change >= 0 ? "+" : ""}
