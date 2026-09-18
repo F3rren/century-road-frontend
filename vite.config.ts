@@ -13,6 +13,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // maplibre-gl loads its worker via a relative import.meta.url; esbuild's
+  // dep pre-bundling relocates the package into node_modules/.vite/deps
+  // without moving the worker file along with it, so the worker 404s at
+  // runtime and the map never renders. Excluding it from optimizeDeps
+  // serves it straight from node_modules, where the relative path resolves.
+  optimizeDeps: {
+    exclude: ["maplibre-gl"],
+  },
   server: {
     host: "0.0.0.0",
     port: 5173,
