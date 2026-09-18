@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { MapPage } from '@/pages/MapPage';
 import { DashboardPage } from '@/pages/DashboardPage';
+import { SettingsPage } from '@/pages/SettingsPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 // Vite exposes whatever base it was built with as BASE_URL, so the router prefix
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true,          element: <MapPage /> },
       { path: 'dashboard',    element: <DashboardPage /> },
+      { path: 'settings',     element: <SettingsPage /> },
       { path: '*',            element: <NotFoundPage /> },
     ],
   },

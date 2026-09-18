@@ -1,50 +1,98 @@
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Globe, LayoutDashboard, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
   open: boolean;
+  isDesktop: boolean;
+  onClose: () => void;
   className?: string;
 }
 
 const navItems = [
-  { label: 'Mappa',        href: '/',          icon: Globe,            end: true  },
-  { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true  },
-  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false },
+  { label: 'Mappa',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
+  { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
+  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '3' },
 ];
 
-export function Sidebar({ open, className }: SidebarProps) {
+export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
+  // Mobile drawer: Escape closes it, like any overlay.
+  useEffect(() => {
+    if (isDesktop || !open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [isDesktop, open, onClose]);
+
   return (
-    <aside
-      className={cn(
-        'flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-300',
-        open ? 'w-60' : 'w-0 overflow-hidden',
-        className,
+    <>
+      {!isDesktop && open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50"
+          onClick={onClose}
+          aria-hidden="true"
+        />
       )}
-    >
-      <div className="flex h-14 items-center px-4 font-semibold text-lg shrink-0">
-        Century Road
-      </div>
-      <nav className="flex-1 px-2 py-4 space-y-1">
-        {navItems.map(({ label, href, icon: Icon, end }) => (
-          <NavLink
-            key={href}
-            to={href}
-            end={end}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                isActive
-                  ? 'bg-primary text-primary-foreground'
-                  : 'hover:bg-sidebar-border',
-              )
-            }
-          >
-            <Icon className="h-4 w-4 shrink-0" />
-            {label}
-          </NavLink>
-        ))}
-      </nav>
-    </aside>
+      <aside
+        aria-label="Navigazione principale"
+        className={cn(
+          'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 motion-reduce:duration-75',
+          isDesktop
+            ? open
+              ? 'w-60'
+              : 'w-0'
+            : cn(
+                'fixed inset-y-0 left-0 z-50 w-64 transition-transform duration-300 motion-reduce:duration-75',
+                open ? 'translate-x-0' : '-translate-x-full'
+              ),
+          className,
+        )}
+        // Closed (either width-collapsed on desktop, or off-screen on
+        // mobile) means genuinely hidden: no tabbing into it, no
+        // announcing it to screen readers.
+        aria-hidden={!open}
+      >
+        {/* Inner content keeps a fixed width so it clips instead of
+            reflowing/wrapping while the <aside> animates its width. */}
+        <div className={cn('flex h-full flex-col', isDesktop ? 'w-60' : 'w-64')}>
+          <div className="flex h-14 shrink-0 items-center border-b border-sidebar-border px-4 whitespace-nowrap">
+            <span className="font-display text-lg font-semibold uppercase tracking-wide">
+              Century Road
+            </span>
+          </div>
+          {/* Index tabs, not nav pills: an active left rule in the one
+              accent color, like a tabbed directory board — not a filled
+              rounded highlight. */}
+          <nav className="flex-1 px-0 py-2">
+            {navItems.map(({ label, href, icon: Icon, end, shortcut }) => (
+              <NavLink
+                key={href}
+                to={href}
+                end={end}
+                tabIndex={!open ? -1 : undefined}
+                aria-keyshortcuts={shortcut}
+                onClick={() => {
+                  if (!isDesktop) onClose();
+                }}
+                className={({ isActive }) =>
+                  cn(
+                    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 font-display text-sm font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
+                    isActive
+                      ? 'border-sidebar-accent bg-sidebar-border/40 text-sidebar-accent'
+                      : 'border-transparent text-sidebar-foreground/70 hover:border-sidebar-border hover:bg-sidebar-border/20 hover:text-sidebar-foreground',
+                  )
+                }
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      </aside>
+    </>
   );
 }

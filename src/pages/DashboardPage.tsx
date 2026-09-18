@@ -1,21 +1,20 @@
+import { PageHeader } from "@/components/ui/PageHeader";
 import { DashboardStats, useDashboard } from "@/features/dashboard";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export function DashboardPage() {
-  const { stats, loading } = useDashboard();
+  const { stats } = useDashboard();
+  usePageTitle("Dashboard");
 
   return (
     <div className="h-full overflow-y-auto p-6">
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">Panoramica generale</p>
-      </div>
-      {loading ? (
-        <p className="text-muted-foreground text-sm">Caricamento...</p>
-      ) : (
+      <div className="mx-auto max-w-6xl space-y-6">
+        <PageHeader
+          title="Dashboard"
+          description="Statistiche sull'archivio storico di Century Road"
+        />
         <DashboardStats stats={stats} />
-      )}
-    </div>
+      </div>
     </div>
   );
 }

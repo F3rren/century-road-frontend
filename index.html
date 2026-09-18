@@ -3,7 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/oswald-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>Century Road</title>
+    <script>
+      // Applies the persisted/system theme before first paint, so there's
+      // no flash of the wrong theme while React mounts and its own effect
+      // (which merely reads this back) runs.
+      (function () {
+        try {
+          var stored = localStorage.getItem("century-road-theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          if (theme === "dark") document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T15:00:00.000Z",
+  "title": "Design System: Century Road",
+  "extensions": {
+    "colorMeta": {
+      "wire-red": {
+        "role": "primary",
+        "displayName": "Wire-Red",
+        "canonical": "#c81e3a",
+        "tonalRamp": ["#430a13", "#6f1120", "#9b172d", "#c81e3a", "#e13753", "#e8647a", "#f2a6b3", "#fce9ec"]
+      },
+      "bulletin-ivory": {
+        "role": "neutral",
+        "displayName": "Bulletin Ivory",
+        "canonical": "#f6f1e4",
+        "tonalRamp": ["#392f13", "#604e20", "#866d2d", "#ac8c39", "#c6a653", "#d2ba79", "#e6d7b3", "#f9f5ec"]
+      },
+      "newsroom-black": {
+        "role": "neutral",
+        "displayName": "Newsroom Black",
+        "canonical": "#141210",
+        "tonalRamp": ["#2a2622", "#474039", "#63594f", "#7f7366", "#998c80", "#b0a69c", "#d2ccc6", "#f4f2f1"]
+      },
+      "rust": {
+        "role": "tertiary",
+        "displayName": "Rust",
+        "canonical": "#a03a1e"
+      },
+      "archive-green": {
+        "role": "tertiary",
+        "displayName": "Archive Green",
+        "canonical": "#3f6b4a"
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Oswald Display", "purpose": "Page titles, nav, section labels, headlines at high importance." },
+      "body": { "displayName": "Source Serif Reading", "purpose": "Event descriptions and other reading content." },
+      "dateline": { "displayName": "Wire Dateline", "purpose": "Place + date stamp on every event clipping — the one monospace use in the system." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "clipping-hover", "value": "color 150ms ease (motion-safe only)", "purpose": "The signature interaction: an expandable event clipping's headline transitions to wire-red on hover/focus before the click/Enter/Space toggle reveals its full text." },
+      { "name": "drawer-slide", "value": "transform/width 300ms, 75ms under prefers-reduced-motion", "purpose": "Sidebar and events-panel mobile drawers." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Filled wire-red action button. Foreground flips ivory/ink by theme — see the Wire-Red Foreground Rule.",
+      "html": "<button class=\"ds-btn-primary\">Riprova</button>",
+      "css": ".ds-btn-primary { background: #c81e3a; color: #fbf8f1; height: 2.75rem; padding: 0 1rem; border: none; border-radius: 1px; font-weight: 500; font-size: 0.875rem; transition: background-color 0.15s; } .ds-btn-primary:hover { background: rgba(200,30,58,0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #1a1714, 0 0 0 4px #f6f1e4; } @media (prefers-color-scheme: dark) { .ds-btn-primary { background: #e54d61; color: #1a1714; } }"
+    },
+    {
+      "name": "Ghost Icon Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Icon-only chrome control (menu toggle, theme toggle, close). No fill at rest.",
+      "html": "<button class=\"ds-btn-ghost\" aria-label=\"Chiudi\">✕</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #1a1714; width: 2.75rem; height: 2.75rem; border: none; border-radius: 1px; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.15s; } .ds-btn-ghost:hover { background: #ede6d4; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px #1a1714, 0 0 0 4px #f6f1e4; }"
+    },
+    {
+      "name": "Event Clipping",
+      "kind": "custom",
+      "refersTo": "event-clipping",
+      "description": "The signature content unit: a wire dateline, a headline sized by importance, a category swatch + label, and a serif description — separated from siblings by a hairline rule, never boxed individually.",
+      "html": "<div class=\"ds-clipping\"><p class=\"ds-clipping-dateline\">SERBIA · 28 GIU 1914</p><p class=\"ds-clipping-title\">Assassinio di Francesco Ferdinando</p><p class=\"ds-clipping-meta\"><span class=\"ds-clipping-swatch\"></span>Guerra</p><p class=\"ds-clipping-desc\">L'assassinio dell'arciduca austriaco a Sarajevo scatena la Prima Guerra Mondiale.</p></div>",
+      "css": ".ds-clipping { border-bottom: 1px solid #d8d0be; padding: 0.75rem 0; cursor: pointer; } .ds-clipping-dateline { font-family: ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6b6355; } .ds-clipping-title { font-family: Oswald, sans-serif; font-weight: 600; font-size: 1.125rem; letter-spacing: -0.005em; margin-top: 0.25rem; transition: color 0.15s; } .ds-clipping:hover .ds-clipping-title { color: #c81e3a; } .ds-clipping-meta { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; color: #6b6355; margin-top: 0.25rem; } .ds-clipping-swatch { width: 0.5rem; height: 0.5rem; background: #dc2626; flex-shrink: 0; } .ds-clipping-desc { font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; line-height: 1.5; color: #6b6355; margin-top: 0.375rem; }"
+    },
+    {
+      "name": "Sidebar Nav Item",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Index-tab style nav item: a left border marks the active route, not a filled pill.",
+      "html": "<a class=\"ds-nav-item ds-nav-item--active\" href=\"#\">Mappa</a>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.9375rem; border-left: 2px solid transparent; font-family: Oswald, sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(242,237,227,0.7); background: #141210; transition: color 0.15s, background-color 0.15s, border-color 0.15s; } .ds-nav-item:hover { color: #f2ede3; border-left-color: #3a362e; background: rgba(58,54,46,0.2); } .ds-nav-item--active { color: #e86475; border-left-color: #e86475; background: rgba(58,54,46,0.4); }"
+    },
+    {
+      "name": "Map Overlay Plaque",
+      "kind": "custom",
+      "refersTo": "map-overlay-panel",
+      "description": "Solid dark plaque for controls floating over the map (projection toggle, heat legend). Not theme-reactive — the basemap underneath is always light. No blur, no glass.",
+      "html": "<div class=\"ds-overlay-plaque\">OGGI NEL '900</div>",
+      "css": ".ds-overlay-plaque { background: rgba(20,18,16,0.9); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); font-family: Oswald, sans-serif; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.5rem 0.75rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Wire-Service Newsroom Archive",
+    "overview": "Century Road reads as a press archive, not a library, a museum, or a SaaS dashboard. Every historical event is a dateline — a place and a date stamped together, the way a wire bulletin's header works — and the whole interface adopts a newsroom's own working materials: bulletin-paper ivory, newsprint ink, ruled clippings instead of cards, and exactly one committed color (wire-red) reserved for the interactive and \"live\" moments. This direction was assigned by the project's concept-seed roll rather than picked by default — the obvious \"atlas/almanac\" (cream + sepia + hairline cartography) was offered and explicitly declined as the more predictable choice for a historical-cartographic product.\n\nThe system is deliberately restrained: neutrals carry the surface, one accent carries emphasis, and radius is functionally zero throughout (clippings and rules, not soft rounded cards). Nothing here is glass, blur, or gradient — depth comes from hairline rules and ruled division, never shadow.",
+    "keyCharacteristics": [
+      "One committed accent (wire-red) — never a decorative field, always interactive/active/\"today\"",
+      "Ruled clippings, not cards — hairline dividers replace borders-plus-shadow",
+      "Type size carries importance (event headline size scales with historical importance) — not color alone",
+      "Display voice (Oswald) for headings/labels; reading voice (Source Serif 4) for event titles and body content",
+      "Near-zero radius everywhere (1–2px) — square, not soft",
+      "The sidebar is a fixed newsroom-black directory board that never themes with light/dark — everything else does"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Wire-red is the only saturated color permitted in the interface. Category color-coding stays deliberately quieter — solid small squares, never filled pill backgrounds.", "section": "colors" },
+      { "name": "The Wire-Red Foreground Rule", "body": "A filled wire-red surface uses ivory text in light mode but dark ink text in dark mode — dark-mode wire-red is brighter and needs dark text, not ivory-on-ivory. Caught as a real WCAG failure during the build (4.02:1, under the 4.5:1 floor) and fixed; don't revert to one foreground for both themes.", "section": "colors" },
+      { "name": "The Sidebar Accent Rule", "body": "Never use the primary token for text inside the sidebar. The sidebar never themes with light/dark, but primary does — light-mode wire-red on the sidebar's fixed dark background measures 2.85:1, a real failure. Use sidebar-accent (verified 4.99:1) instead.", "section": "colors" },
+      { "name": "The Single-Weight Rule", "body": "Both custom faces are self-hosted at exactly one weight each (600). Nothing uses a browser-synthesized faux bold.", "section": "typography" },
+      { "name": "The Size-Carries-Importance Rule", "body": "An event's historical importance maps to headline type size, never to color — donated by a declined challenger during the direction round.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Every surface sits flush with no elevation. Nothing lifts on hover; only color and hairline rules communicate state.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reserve wire-red for interactive/active/\"today\" moments only.",
+      "Do use sidebar-accent (never primary) for any accent color rendered inside the sidebar.",
+      "Do use dark ink (not ivory) as the foreground on a dark-mode wire-red fill.",
+      "Do let event importance drive headline type size, not a color or icon change.",
+      "Do keep both custom typefaces at their single hosted weight (600).",
+      "Do separate list content with hairline rules instead of individual card borders + shadow."
+    ],
+    "donts": [
+      "Don't add box-shadow anywhere.",
+      "Don't add backdrop-blur or any glass treatment.",
+      "Don't round corners beyond the 1–2px system radius.",
+      "Don't introduce a second saturated accent color alongside wire-red — use rust for a genuine destructive/delete need.",
+      "Don't use the light-mode wire-red value inside the sidebar or any other fixed-dark surface without verifying contrast by computation."
+    ]
+  }
+}

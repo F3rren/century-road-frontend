@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
-import type { StatCard } from "../types";
+import { useMemo } from "react";
+import { MOCK_EVENTS } from "@/features/map/data/mockEvents";
+import { computeStats } from "../lib/computeStats";
 
+// No loading/error state: this derives from MOCK_EVENTS, already in memory,
+// so there is nothing to wait on or fail. That changes the moment this
+// reads from a real API instead (see PRODUCT.md's data constraint) — at
+// that point loading/error come back for a genuine reason, not as
+// simulated states over synchronous data.
 export function useDashboard() {
-  const [stats, setStats] = useState<StatCard[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Replace with real API call: api.get<StatCard[]>('/dashboard/stats')
-    const mockStats: StatCard[] = [
-      { id: "1", label: "Utenti totali", value: 1240, change: 12 },
-      { id: "2", label: "Ricavi mensili", value: "€ 48.200", change: 8 },
-      { id: "3", label: "Ordini attivi", value: 87, change: -3 },
-    ];
-    setTimeout(() => {
-      setStats(mockStats);
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  return { stats, loading };
+  const stats = useMemo(() => computeStats(MOCK_EVENTS), []);
+  return { stats };
 }
