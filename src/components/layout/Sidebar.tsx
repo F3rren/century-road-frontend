@@ -58,10 +58,15 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
         {/* Inner content keeps a fixed width so it clips instead of
             reflowing/wrapping while the <aside> animates its width. */}
         <div className={cn('flex h-full flex-col', isDesktop ? 'w-60' : 'w-64')}>
-          <div className="flex h-14 items-center px-4 font-serif text-lg font-semibold shrink-0 whitespace-nowrap">
-            Century Road
+          <div className="flex h-14 shrink-0 items-center border-b border-sidebar-border px-4 whitespace-nowrap">
+            <span className="font-display text-lg font-semibold uppercase tracking-wide">
+              Century Road
+            </span>
           </div>
-          <nav className="flex-1 space-y-1 px-2 py-4">
+          {/* Index tabs, not nav pills: an active left rule in the one
+              accent color, like a tabbed directory board — not a filled
+              rounded highlight. */}
+          <nav className="flex-1 px-0 py-2">
             {navItems.map(({ label, href, icon: Icon, end, shortcut }) => (
               <NavLink
                 key={href}
@@ -74,10 +79,10 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
                 }}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center gap-3 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
+                    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 font-display text-sm font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
                     isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'hover:bg-sidebar-border',
+                      ? 'border-sidebar-accent bg-sidebar-border/40 text-sidebar-accent'
+                      : 'border-transparent text-sidebar-foreground/70 hover:border-sidebar-border hover:bg-sidebar-border/20 hover:text-sidebar-foreground',
                   )
                 }
               >

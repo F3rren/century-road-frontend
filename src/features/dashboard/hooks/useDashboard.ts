@@ -1,45 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import type { StatCard } from "../types";
+import { useMemo } from "react";
+import { MOCK_EVENTS } from "@/features/map/data/mockEvents";
+import { computeStats } from "../lib/computeStats";
 
-function fetchMockStats(): Promise<StatCard[]> {
-  // Replace with real API call: api.get<StatCard[]>('/dashboard/stats')
-  const mockStats: StatCard[] = [
-    { id: "1", label: "Utenti totali", value: 1240, change: 12 },
-    { id: "2", label: "Ricavi mensili", value: "€ 48.200", change: 8 },
-    { id: "3", label: "Ordini attivi", value: 87, change: -3 },
-  ];
-  return new Promise((resolve) => setTimeout(() => resolve(mockStats), 500));
-}
-
-function runFetch(
-  setStats: (stats: StatCard[]) => void,
-  setError: (error: string | null) => void,
-  setLoading: (loading: boolean) => void,
-) {
-  fetchMockStats()
-    .then(setStats)
-    .catch(() => setError("Impossibile caricare le statistiche."))
-    .finally(() => setLoading(false));
-}
-
+// No loading/error state: this derives from MOCK_EVENTS, already in memory,
+// so there is nothing to wait on or fail. That changes the moment this
+// reads from a real API instead (see PRODUCT.md's data constraint) — at
+// that point loading/error come back for a genuine reason, not as
+// simulated states over synchronous data.
 export function useDashboard() {
-  const [stats, setStats] = useState<StatCard[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Initial load: stats/loading/error already start in the right shape, so
-  // the effect only needs to kick off the fetch — no synchronous setState.
-  useEffect(() => {
-    runFetch(setStats, setError, setLoading);
-  }, []);
-
-  // Retry, called from a click handler (not an effect): resetting loading/
-  // error synchronously here is fine.
-  const refetch = useCallback(() => {
-    setLoading(true);
-    setError(null);
-    runFetch(setStats, setError, setLoading);
-  }, []);
-
-  return { stats, loading, error, refetch };
+  const stats = useMemo(() => computeStats(MOCK_EVENTS), []);
+  return { stats };
 }
