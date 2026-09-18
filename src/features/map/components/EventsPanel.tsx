@@ -21,7 +21,7 @@ interface SectionProps {
 function Section({ title, events, emptyMessage }: SectionProps) {
   return (
     <div>
-      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <h2 className="mb-2 text-eyebrow uppercase text-muted-foreground">
         {title}
       </h2>
       {events.length === 0 ? (
@@ -132,7 +132,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
             <div>
               <label
                 htmlFor="country-picker"
-                className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                className="mb-1.5 block text-eyebrow uppercase text-muted-foreground"
               >
                 Vai a un paese
               </label>
@@ -208,7 +208,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
         aria-hidden={!mobileOpen}
       >
         <div className="flex items-center justify-between border-b px-4 py-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-eyebrow uppercase text-muted-foreground">
             Eventi
           </span>
           <Button
