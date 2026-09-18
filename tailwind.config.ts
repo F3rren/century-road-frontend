@@ -50,6 +50,23 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontSize: {
+        // Page-level <h1>: reach for this instead of picking a size/
+        // weight/tracking combination ad hoc for a new page.
+        "page-title": [
+          "1.5rem",
+          { lineHeight: "2rem", fontWeight: "700", letterSpacing: "-0.02em" },
+        ],
+        // Small uppercase section/field label (events panel section
+        // headings, the map legend title, form labels). Same metrics as
+        // the plain `text-xs font-semibold uppercase tracking-wider`
+        // combination already in use, named so it isn't retyped per call
+        // site — text-transform and color stay separate utilities.
+        eyebrow: [
+          "0.75rem",
+          { lineHeight: "1rem", fontWeight: "600", letterSpacing: "0.05em" },
+        ],
+      },
     },
   },
   plugins: [],

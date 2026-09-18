@@ -4,7 +4,7 @@ import { HEAT_LEVELS } from '../constants/heat';
 export function HeatLegend() {
   return (
     <MapOverlayPanel className="flex flex-col gap-1.5 px-3 py-2" role="note" aria-label="Legenda intensità eventi">
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70">
+      <p className="text-eyebrow uppercase text-white/70">
         Oggi nel '900
       </p>
       {[...HEAT_LEVELS].reverse().map(({ color, label }) => (
