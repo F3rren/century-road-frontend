@@ -224,7 +224,7 @@ export function MapView({
     <div className="relative h-full w-full">
       <div
         ref={containerRef}
-        className="h-full w-full bg-slate-100"
+        className="h-full w-full bg-muted"
         aria-label="Mappa storica interattiva del Novecento"
       />
       {loadError && (
