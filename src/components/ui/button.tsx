@@ -20,9 +20,11 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-9 px-4 py-2",
-        sm: "h-8 px-3 text-xs",
-        icon: "h-9 w-9 shrink-0 p-0",
-        iconSm: "h-7 w-7 shrink-0 p-0",
+        // 44px: below this, real touch targets get missed. ghost/outline
+        // buttons have no fill at rest, so the larger box doesn't add
+        // visual weight — it only grows the hit area and the hover state.
+        sm: "h-11 px-4 text-sm",
+        icon: "h-11 w-11 shrink-0 p-0",
         pill: "rounded-full px-3 py-1.5 text-xs",
       },
     },

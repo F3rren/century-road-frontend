@@ -1,6 +1,9 @@
 import { Settings } from "lucide-react";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export function SettingsPage() {
+  usePageTitle("Impostazioni");
+
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
       <Settings className="h-8 w-8 text-muted-foreground" />

@@ -37,6 +37,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
         />
       )}
       <aside
+        aria-label="Navigazione principale"
         className={cn(
           'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300',
           isDesktop

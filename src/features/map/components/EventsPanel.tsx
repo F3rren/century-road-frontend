@@ -21,9 +21,9 @@ interface SectionProps {
 function Section({ title, events, emptyMessage }: SectionProps) {
   return (
     <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {title}
-      </p>
+      </h2>
       {events.length === 0 ? (
         <p className="text-xs text-muted-foreground italic px-1">
           {emptyMessage ?? 'Nessun evento'}
@@ -75,7 +75,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
             </span>
             <Button
               variant="ghost"
-              size="iconSm"
+              size="icon"
               onClick={onClearCountry}
               aria-label="Torna alla vista globale"
             >
@@ -176,7 +176,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
 
   if (isDesktop) {
     return (
-      <aside className="flex h-full w-72 shrink-0 flex-col border-r bg-background/95 backdrop-blur-sm">
+      <aside aria-label="Eventi storici" className="flex h-full w-72 shrink-0 flex-col border-r bg-background/95 backdrop-blur-sm">
         {panel}
       </aside>
     );
@@ -200,6 +200,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
         />
       )}
       <aside
+        aria-label="Eventi storici"
         className={cn(
           'fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-sm flex-col border-r bg-background transition-transform duration-300',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
@@ -212,7 +213,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
           </span>
           <Button
             variant="ghost"
-            size="iconSm"
+            size="icon"
             onClick={() => setMobileOpen(false)}
             aria-label="Chiudi pannello eventi"
           >

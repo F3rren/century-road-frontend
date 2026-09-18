@@ -1,9 +1,11 @@
 import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DashboardStats, useDashboard } from "@/features/dashboard";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export function DashboardPage() {
   const { stats, loading, error, refetch } = useDashboard();
+  usePageTitle("Dashboard");
 
   return (
     <div className="h-full overflow-y-auto p-6">
