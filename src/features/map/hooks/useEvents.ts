@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { MOCK_EVENTS } from '../data/mockEvents';
-import type { HistoricalEvent } from '../types';
+import type { Country, HistoricalEvent } from '../types';
 
 function todayMonthDay() {
   const d = new Date();
@@ -62,5 +62,25 @@ export function useEvents(countryCode: string | null | undefined) {
     return counts;
   }, [today]);
 
-  return { globalEvents, countryFiltered, todayEvents, today, countryHeatmap };
+  // Keyboard/screen-reader equivalent of clicking a country polygon on the
+  // map: every country that actually has data, so "select a country" is
+  // reachable without a pointer.
+  const availableCountries = useMemo<Country[]>(() => {
+    const byCode = new Map<string, Country>();
+    MOCK_EVENTS.forEach((e) => {
+      if (!byCode.has(e.countryCode)) {
+        byCode.set(e.countryCode, { code: e.countryCode, name: e.countryName });
+      }
+    });
+    return Array.from(byCode.values()).sort((a, b) => a.name.localeCompare(b.name));
+  }, []);
+
+  return {
+    globalEvents,
+    countryFiltered,
+    todayEvents,
+    today,
+    countryHeatmap,
+    availableCountries,
+  };
 }

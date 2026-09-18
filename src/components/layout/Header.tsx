@@ -1,12 +1,14 @@
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {
+  sidebarOpen: boolean;
   onMenuToggle: () => void;
   className?: string;
 }
 
-export function Header({ onMenuToggle, className }: HeaderProps) {
+export function Header({ sidebarOpen, onMenuToggle, className }: HeaderProps) {
   return (
     <header
       className={cn(
@@ -14,13 +16,15 @@ export function Header({ onMenuToggle, className }: HeaderProps) {
         className
       )}
     >
-      <button
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={onMenuToggle}
-        className="rounded-md p-1.5 hover:bg-accent transition-colors"
-        aria-label="Toggle sidebar"
+        aria-label={sidebarOpen ? "Chiudi menu" : "Apri menu"}
+        aria-pressed={sidebarOpen}
       >
-        <Menu className="h-5 w-5" />
-      </button>
+        {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
       <div className="flex-1" />
     </header>
   );
