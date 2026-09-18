@@ -1,4 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
+// "||" and not "??": an unset repository variable reaches the build as an empty
+// string, not as undefined, and "??" would happily accept it - leaving every request
+// pointed at the site root instead of the API.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 
 async function request<T>(
   endpoint: string,
