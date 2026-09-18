@@ -11,9 +11,9 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { label: 'Mappa',        href: '/',          icon: Globe,            end: true  },
-  { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true  },
-  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false },
+  { label: 'Mappa',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
+  { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
+  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '3' },
 ];
 
 export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
@@ -39,13 +39,13 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
       <aside
         aria-label="Navigazione principale"
         className={cn(
-          'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300',
+          'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 motion-reduce:duration-75',
           isDesktop
             ? open
               ? 'w-60'
               : 'w-0'
             : cn(
-                'fixed inset-y-0 left-0 z-50 w-64 transition-transform duration-300',
+                'fixed inset-y-0 left-0 z-50 w-64 transition-transform duration-300 motion-reduce:duration-75',
                 open ? 'translate-x-0' : '-translate-x-full'
               ),
           className,
@@ -58,16 +58,17 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
         {/* Inner content keeps a fixed width so it clips instead of
             reflowing/wrapping while the <aside> animates its width. */}
         <div className={cn('flex h-full flex-col', isDesktop ? 'w-60' : 'w-64')}>
-          <div className="flex h-14 items-center px-4 text-lg font-semibold shrink-0 whitespace-nowrap">
+          <div className="flex h-14 items-center px-4 font-serif text-lg font-semibold shrink-0 whitespace-nowrap">
             Century Road
           </div>
           <nav className="flex-1 space-y-1 px-2 py-4">
-            {navItems.map(({ label, href, icon: Icon, end }) => (
+            {navItems.map(({ label, href, icon: Icon, end, shortcut }) => (
               <NavLink
                 key={href}
                 to={href}
                 end={end}
                 tabIndex={!open ? -1 : undefined}
+                aria-keyshortcuts={shortcut}
                 onClick={() => {
                   if (!isDesktop) onClose();
                 }}

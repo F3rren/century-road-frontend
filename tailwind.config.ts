@@ -50,12 +50,20 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        // Only one weight is self-hosted (600) — every serif use in the
+        // app stands on that single weight, by design, rather than mixing
+        // a real weight with a browser-synthesized (faux) bold.
+        serif: ['"Source Serif 4"', "Georgia", "ui-serif", "serif"],
+      },
       fontSize: {
         // Page-level <h1>: reach for this instead of picking a size/
-        // weight/tracking combination ad hoc for a new page.
+        // weight/tracking combination ad hoc for a new page. 600, not 700
+        // — this is the font-serif weight, and 600 reads better at this
+        // size in a serif than a synthesized bold would.
         "page-title": [
           "1.5rem",
-          { lineHeight: "2rem", fontWeight: "700", letterSpacing: "-0.02em" },
+          { lineHeight: "2rem", fontWeight: "600", letterSpacing: "-0.02em" },
         ],
         // Small uppercase section/field label (events panel section
         // headings, the map legend title, form labels). Same metrics as

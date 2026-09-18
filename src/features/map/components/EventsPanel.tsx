@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { X, Globe, CalendarDays, CalendarClock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useEvents } from '../hooks/useEvents';
 import { EventCard } from './EventCard';
 import type { Country, HistoricalEvent } from '../types';
@@ -53,6 +54,15 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
   // it needs its own open state instead of always taking up map width.
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const countryPickerRef = useRef<HTMLSelectElement>(null);
+
+  // Only active when the picker is actually reachable: docked on desktop,
+  // or the mobile drawer is open. It also only exists in the DOM once a
+  // country is selected — that branch renders Section, not the picker.
+  useKeyboardShortcuts(
+    { '/': () => countryPickerRef.current?.focus() },
+    !selectedCountry && (isDesktop || mobileOpen),
+  );
 
   // Picking a country is the main way into this panel on mobile, where it
   // isn't permanently docked — surface it automatically. Adjusted during
@@ -138,6 +148,8 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
               </label>
               <select
                 id="country-picker"
+                ref={countryPickerRef}
+                aria-keyshortcuts="/"
                 className="w-full rounded-md border bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value=""
                 onChange={(e) => {
@@ -202,7 +214,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
       <aside
         aria-label="Eventi storici"
         className={cn(
-          'fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-sm flex-col border-r bg-background transition-transform duration-300',
+          'fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-sm flex-col border-r bg-background transition-transform duration-300 motion-reduce:duration-75',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
         aria-hidden={!mobileOpen}

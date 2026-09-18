@@ -69,14 +69,14 @@ export function EventCard({ event, compact = false }: EventCardProps) {
       <div className="flex items-start gap-2">
         <span
           className={cn(
-            'shrink-0 rounded-md px-1.5 py-0.5 text-xs font-bold tabular-nums',
+            'shrink-0 rounded-md px-1.5 py-0.5 text-xs font-serif font-semibold tabular-nums',
             CATEGORY_STYLES[event.category],
           )}
         >
           {event.year}
         </span>
         <div className="min-w-0 flex-1">
-          <p className={cn('text-sm font-semibold leading-tight', !expanded && 'line-clamp-2')}>
+          <p className={cn('text-sm font-serif font-semibold leading-tight', !expanded && 'line-clamp-2')}>
             {event.title}
           </p>
           <p className="mt-0.5 text-xs text-muted-foreground">
