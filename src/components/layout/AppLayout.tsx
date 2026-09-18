@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 
 export function AppLayout() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [sidebarOpen, setSidebarOpen] = useState(isDesktop);
+  const navigate = useNavigate();
+
+  useKeyboardShortcuts({
+    "1": () => navigate("/"),
+    "2": () => navigate("/dashboard"),
+    "3": () => navigate("/settings"),
+  });
 
   // Re-sync sidebarOpen whenever the breakpoint itself changes (resize/
   // rotation), so it never gets stuck closed-on-desktop or open-on-mobile.
