@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { HistoryEvents } from '@/features/history';
 import { useEvents } from '../hooks/useEvents';
 import { EventCard } from './EventCard';
 import type { Country, HistoricalEvent } from '../types';
@@ -47,7 +48,7 @@ interface EventsPanelProps {
 }
 
 export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }: EventsPanelProps) {
-  const { globalEvents, countryFiltered, today, availableCountries } = useEvents(
+  const { countryFiltered, today, availableCountries } = useEvents(
     selectedCountry?.code,
   );
   // The map/globe is pointer-only: below desktop this panel isn't docked, so
@@ -167,16 +168,11 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
                 ))}
               </select>
             </div>
-            {globalEvents.length > 0 && (
-              <Section
-                title={
-                  globalEvents.some((e) => e.month === today.month && e.day === today.day)
-                    ? `Anniversari del ${today.day} ${MONTH_NAMES[today.month]}`
-                    : 'I più importanti del Novecento'
-                }
-                events={globalEvents}
-              />
-            )}
+            <HistoryEvents
+              title={`Anniversari del ${today.day} ${MONTH_NAMES[today.month]}`}
+              month={today.month}
+              day={today.day}
+            />
             <p className="pt-2 pb-1 text-center text-xs text-muted-foreground">
               Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi
             </p>
