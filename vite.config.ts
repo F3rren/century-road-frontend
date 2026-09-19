@@ -3,13 +3,16 @@ import path from "path";
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 
-// maplibre-gl works out its worker URL at runtime rather than through a
-// static new URL("./worker.mjs", import.meta.url) that Vite's build could
-// recognise and emit for. Ported from the same fix already merged to main
-// (PR #18, "fix: emit the maplibre worker beside the bundle") so develop's
-// production builds don't regress once it catches up with main. Both files
-// are needed: the worker imports the shared chunk, and both are read from
-// the installed package so they can never drift from package-lock.json.
+// maplibre-gl works out its worker URL at runtime - a ternary picking between the dev
+// and production filename, then a template literal - rather than through a static
+// new URL("./worker.mjs", import.meta.url) that Vite could recognise. Nothing is
+// emitted for it, so in a built site the worker is fetched from next to the bundle and
+// 404s. The failure is quiet in a way that wastes an afternoon: the canvas mounts at
+// full size and no error surfaces in the page, the map simply never draws.
+//
+// Copying the files maplibre expects to find beside the bundle is what fixes it. Both
+// are needed: the worker imports the shared chunk, and both are read from the installed
+// package so they can never drift from the version in package-lock.json.
 function maplibreWorkerAssets(): Plugin {
   const files = ["maplibre-gl-worker.mjs", "maplibre-gl-shared.mjs"];
 
@@ -25,6 +28,8 @@ function maplibreWorkerAssets(): Plugin {
         );
         this.emitFile({
           type: "asset",
+          // Exact names, exact directory: maplibre builds the URL itself and will not
+          // look anywhere else.
           fileName: `assets/${file}`,
           source: fs.readFileSync(from),
         });
@@ -37,7 +42,14 @@ function maplibreWorkerAssets(): Plugin {
 // Locally (no Docker) it defaults to localhost:8080.
 const backendUrl = process.env.BACKEND_URL ?? "http://localhost:8080";
 
+// GitHub Pages serves this repository at /<repo>/, so every built asset URL needs
+// that prefix. It comes from the environment rather than being hardcoded: local dev
+// and any future custom domain at the apex both want a plain "/", and only the Pages
+// workflow sets it.
+const basePath = process.env.VITE_BASE_PATH ?? "/";
+
 export default defineConfig({
+  base: basePath,
   plugins: [react(), maplibreWorkerAssets()],
   resolve: {
     alias: {

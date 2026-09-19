@@ -5,6 +5,12 @@ import { DashboardPage } from '@/pages/DashboardPage';
 import { SettingsPage } from '@/pages/SettingsPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
+// Vite exposes whatever base it was built with as BASE_URL, so the router prefix
+// follows the build instead of being repeated here and drifting from it. The trailing
+// slash goes: react-router wants the basename without one, and "/" becomes "", which
+// it reads as no prefix at all.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -16,4 +22,4 @@ export const router = createBrowserRouter([
       { path: '*',            element: <NotFoundPage /> },
     ],
   },
-]);
+], { basename });
