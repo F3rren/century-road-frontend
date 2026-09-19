@@ -1,0 +1,29 @@
+# The frontend as Railway builds it: the compiled app, served by Caddy.
+#
+# Kept apart from Dockerfile on purpose. That one is for Compose: its nginx proxies /api/ to a
+# host called "backend", which does not exist on Railway, and nginx will not start without it.
+# Here the browser calls the gateway directly, at the address given when the image is built.
+#
+# On Railway, set these on the service:
+#
+#     RAILWAY_DOCKERFILE_PATH=Dockerfile.railway
+#     VITE_API_BASE_URL=https://<the gateway's public domain>/api
+#
+# VITE_API_BASE_URL is baked into the compiled files, so changing it means building again. Railway
+# hands service variables to the build only if the Dockerfile declares them with ARG, hence the
+# line below. Left empty, the app falls back on /api on its own origin (see src/services/api.ts).
+#
+# The gateway must allow this app's origin: FRONTEND_ORIGIN there is this service's public
+# address, exactly, with no trailing slash.
+
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+ARG VITE_API_BASE_URL
+RUN npm run build
+
+FROM caddy:2-alpine
+COPY --from=build /app/dist /srv
+COPY Caddyfile.railway /etc/caddy/Caddyfile
