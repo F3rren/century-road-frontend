@@ -11,24 +11,43 @@ export type HistorySectionKey =
   | 'deaths'
   | 'holidays';
 
-export interface ThumbnailRef {
+// A picture hosted on Wikimedia Commons. Its licence is its own, not the
+// article's: filePageUrl is the page naming the author and licence, and must
+// be shown next to the image.
+export interface ImageRef {
   url: string;
   width: number;
   height: number;
-  // Commons page naming the image's author and licence.
   filePageUrl: string;
 }
 
+// Decimal degrees: latitude north and longitude east are positive.
+export interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
+// An article linked from an entry's text: related reading, not the article
+// about the event. Its description and extract describe the article itself.
 export interface PageRef {
   title: string;
   description?: string;
+  // The article's opening paragraph, plain text.
   extract?: string;
   // CC BY-SA attribution link back to the Wikipedia article.
   url: string;
-  thumbnail?: ThumbnailRef;
+  // The same picture at two sizes: thumbnail for lists, originalImage for a
+  // detail view. Originals can be several megabytes and over 8,000px wide.
+  thumbnail?: ImageRef;
+  originalImage?: ImageRef;
+  // Where the article's subject is, when it has a place.
+  coordinates?: Coordinates;
+  // Wikidata id (Q42): the same in every language.
+  wikibaseItem?: string;
 }
 
 export interface HistoryEntry {
+  // The event itself. Holidays can contain a line break.
   text: string;
   // Absent for holidays; negative before the common era.
   year?: number;
