@@ -1,4 +1,6 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
+// `||`, not `??`: an empty VITE_API_BASE_URL in .env is "", which `??` would
+// keep, sending every call to a path without the /api prefix.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 
 async function request<T>(
   endpoint: string,
