@@ -4,6 +4,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { AlertTriangle, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { heatColor } from '../constants/heat';
+import { createProjectionAnimator, type ProjectionAnimator } from '../lib/projectionAnimator';
 import type { Country, ProjectionType } from '../types';
 
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
@@ -61,6 +62,7 @@ export function MapView({
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const projectionAnimatorRef = useRef<ProjectionAnimator | null>(null);
   // Ref avoids stale-closure issue in the once('load') callback
   const heatmapRef = useRef<Record<string, number>>(countryHeatmap ?? {});
   const [loadError, setLoadError] = useState(false);
@@ -179,20 +181,31 @@ export function MapView({
     });
 
     mapRef.current = map;
+    projectionAnimatorRef.current = createProjectionAnimator(map);
     return () => {
+      projectionAnimatorRef.current?.cancel();
+      projectionAnimatorRef.current = null;
       map.remove();
       mapRef.current = null;
     };
   }, [retryKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Sync projection
+  // Sync projection. The first application (page load, or a retried map) is
+  // instant; after that the switch between flat map and globe is animated.
+  // retryKey is a dependency because a retried map is a new instance that
+  // has to be given the projection again.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
-    const apply = () => map.setProjection({ type: projection });
+    const animator = projectionAnimatorRef.current;
+    if (!map || !animator) return;
+    const apply = () => animator.goTo(projection);
     if (map.isStyleLoaded()) apply();
     else map.once('styledata', apply);
-  }, [projection]);
+    return () => {
+      map.off('styledata', apply);
+      animator.cancel();
+    };
+  }, [projection, retryKey]);
 
   // Sync country highlight (selected)
   useEffect(() => {
