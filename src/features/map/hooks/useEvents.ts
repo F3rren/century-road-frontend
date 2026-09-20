@@ -21,24 +21,9 @@ function compareDayMonth(
 export function useEvents(countryCode: string | null | undefined) {
   const today = useMemo(() => todayMonthDay(), []);
 
-  const todayEvents = useMemo(
-    () =>
-      MOCK_EVENTS.filter(
-        (e) => e.month === today.month && e.day === today.day,
-      ).sort((a, b) => a.year - b.year),
-    [today],
-  );
-
-  const fallbackEvents = useMemo(
-    () =>
-      MOCK_EVENTS.filter((e) => e.importance === 'high')
-        .sort((a, b) => a.year - b.year)
-        .slice(0, 10),
-    [],
-  );
-
-  const globalEvents = todayEvents.length > 0 ? todayEvents : fallbackEvents;
-
+  // The global "on this day" list no longer lives here: it comes from the
+  // history API (features/history). What remains still reads MOCK_EVENTS
+  // because the API carries no country or coordinates to build it from.
   const countryFiltered = useMemo(() => {
     if (!countryCode) return null;
     const all = MOCK_EVENTS.filter((e) => e.countryCode === countryCode).sort(
@@ -76,9 +61,7 @@ export function useEvents(countryCode: string | null | undefined) {
   }, []);
 
   return {
-    globalEvents,
     countryFiltered,
-    todayEvents,
     today,
     countryHeatmap,
     availableCountries,
