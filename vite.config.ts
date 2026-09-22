@@ -44,6 +44,39 @@ function maplibreWorkerAssets(): Plugin {
 // workflow sets it.
 const basePath = process.env.VITE_BASE_PATH ?? "/";
 
+// Everything named VITE_* is compiled into the bundle every visitor downloads, so
+// a secret there is published, not hidden. Refuse to build or serve when a name
+// looks like one; real secrets belong to the backend.
+const SECRET_LOOKING_NAME =
+  /SECRET|TOKEN|PASSWORD|PASSWD|PRIVATE|CREDENTIAL|API_?KEY|ACCESS_?KEY/i;
+
+function assertNoSecretsInBundle(env: Record<string, string>): void {
+  const suspicious = Object.keys(env).filter(
+    (name) => name.startsWith("VITE_") && SECRET_LOOKING_NAME.test(name),
+  );
+  if (suspicious.length === 0) return;
+
+  throw new Error(
+    `Refusing to build: ${suspicious.join(", ")} would be compiled into the public bundle. ` +
+      "Everything named VITE_* is visible to every visitor, so keep secrets on the backend. " +
+      "If the value really is public, give the variable another name.",
+  );
+}
+
+// A page served over https may not call an http API: the browser blocks it as
+// mixed content. Catch it here, as a clear build error, instead of as every API
+// call failing silently in production. A path such as /api is fine: it takes the
+// page's own scheme.
+function assertHttpsApiBase(mode: string, value: string | undefined): void {
+  if (mode !== "production" || !value) return;
+  if (value.startsWith("/") || value.startsWith("https://")) return;
+
+  throw new Error(
+    `Refusing to build: VITE_API_BASE_URL is "${value}". In production it must start with ` +
+      "https:// (or be a path such as /api), or browsers will block every API call as mixed content.",
+  );
+}
+
 export default defineConfig(({ mode }) => {
   // BACKEND_URL is read here, not from import.meta.env: it is the dev proxy's
   // target and never reaches the browser. Vite does not put .env files into
@@ -51,6 +84,8 @@ export default defineConfig(({ mode }) => {
   // variable still wins over the file (that is how Docker dev sets it, to the
   // backend container on the Docker network). Defaults to localhost:8080.
   const env = loadEnv(mode, process.cwd(), "");
+  assertNoSecretsInBundle(env);
+  assertHttpsApiBase(mode, env.VITE_API_BASE_URL);
   const backendUrl = env.BACKEND_URL || "http://localhost:8080";
 
   return {

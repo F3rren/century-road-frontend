@@ -7,12 +7,11 @@ node_modules/
 dist/
 dist-ssr/
 
-# Environment files
+# Environment files. Vite also loads .env.[mode] (.env.production, .env.staging, ...),
+# so every variant is ignored; only the documented example is tracked.
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Editor
 .vscode/*

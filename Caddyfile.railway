@@ -11,6 +11,16 @@
 	root * /srv
 	encode gzip zstd
 
+	# Railway ends TLS at its edge and hands the request to this container as plain HTTP, with the
+	# scheme the visitor used in X-Forwarded-Proto. A request that arrived over http is sent to the
+	# same address over https. 308, not 301, so a request that is not a GET keeps its method.
+	# A request with no such header, the platform's own healthcheck for one, is served as usual.
+	#
+	# Only the first value counts: with several proxies in a row the header becomes a list, and its
+	# first entry is what the visitor used ("https, http" is a visitor on https). Case is ignored.
+	@insecure header_regexp X-Forwarded-Proto (?i)^[[:space:]]*http[[:space:]]*(,|$)
+	redir @insecure https://{host}{uri} 308
+
 	# The router lives in the browser, so /dashboard is not a file. Serve the file if there is one,
 	# and the app's entry page otherwise, and let the router take over.
 	try_files {path} /index.html
@@ -28,8 +38,12 @@
 	#
 	# No Referrer-Policy here: the map loads its tiles from another host, and the browser's
 	# default is what a tile server expects.
+	#
+	# upgrade-insecure-requests makes the browser fetch any http:// address the page mentions, in
+	# an image or a stylesheet, over https instead. It restricts nothing else.
 	header {
 		Strict-Transport-Security "max-age={$HSTS_MAX_AGE:300}; includeSubDomains"
+		Content-Security-Policy "upgrade-insecure-requests"
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 		-Server
