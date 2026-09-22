@@ -110,6 +110,21 @@
   * {
     @apply border-border;
   }
+  /* The app shell (AppLayout) is a fixed h-screen frame: every scrollable
+     area is one of its own internal panels (the events sidebar, a page's own
+     content column), never the window itself. That intent was only ever
+     enforced on a div inside <body>, not on <html>/<body> themselves — the
+     browser's actual scrolling element — so a panel taller than the viewport
+     (a long "Accadde oggi" list, the archive's results) still grew the
+     document and showed a real, functional but unwanted scrollbar on the
+     window's own edge, styled independently of every panel that was
+     deliberately built to scroll. Confirmed panels keep scrolling normally
+     with this in place — it only removes the *outer* one nothing should
+     reach. */
+  html,
+  body {
+    @apply h-full overflow-hidden;
+  }
   body {
     @apply bg-background text-foreground;
   }

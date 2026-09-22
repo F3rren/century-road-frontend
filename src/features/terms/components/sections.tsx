@@ -31,8 +31,8 @@ export function AboutSection() {
   return (
     <LegalSection title="1. Chi siamo e cosa offre il sito">
       <p>
-        Century Road è una mappa interattiva del Novecento, con l'elenco degli eventi
-        storici accaduti nel giorno di oggi. La gestisce{" "}
+        Century Road è una mappa interattiva con gli eventi storici accaduti nel giorno di
+        oggi, e un archivio che copre ogni secolo. La gestisce{" "}
         <strong>{OPERATOR_NAME}</strong> («il gestore»), che puoi contattare a{" "}
         <ContactEmail />.
       </p>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FileText, Globe, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
+import { Archive, FileText, Globe, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
@@ -13,7 +13,8 @@ interface SidebarProps {
 const navItems = [
   { label: 'Mappa',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
   { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
-  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '3' },
+  { label: 'Archivio',     href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
+  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '4' },
 ];
 
 // Legal pages: reachable from anywhere but not part of the app proper, so they

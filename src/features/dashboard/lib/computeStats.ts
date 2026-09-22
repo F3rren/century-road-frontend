@@ -1,36 +1,49 @@
-import { CATEGORY_LABELS } from '@/features/map/constants/categories';
-import type { HistoricalEvent } from '@/features/map/types';
-import type { StatCard } from '../types';
+import type { GeocodedEntry } from "@/features/map";
+import type { StatCard } from "../types";
 
-// Real facts about the events dataset, not placeholder business metrics —
-// confirmed direction (PRODUCT.md, Product Principle 4). Synchronous: this
-// derives from data already in memory, so there's no loading/error state to
-// simulate — see useDashboard.ts.
-export function computeStats(events: HistoricalEvent[]): StatCard[] {
-  if (events.length === 0) return [];
+// Real facts about today's real history-API data, not placeholder business
+// metrics — confirmed direction (PRODUCT.md, Product Principle 4). "Paesi
+// individuati"/"Paese più citato" come from the same coordinate-based
+// heuristic the map's heatmap uses (see features/map/lib/geocodeEntries) —
+// an event with no linked article that carries coordinates isn't counted
+// toward either.
+export function computeStats(geocodedEvents: readonly GeocodedEntry[]): StatCard[] {
+  if (geocodedEvents.length === 0) return [];
 
-  const countries = new Set(events.map((e) => e.countryCode));
-  const years = events.map((e) => e.year);
-  const minYear = Math.min(...years);
-  const maxYear = Math.max(...years);
+  const years = geocodedEvents
+    .map(({ entry }) => entry.year)
+    .filter((year): year is number => year !== undefined);
+  const hasYears = years.length > 0;
+  const minYear = hasYears ? Math.min(...years) : undefined;
+  const maxYear = hasYears ? Math.max(...years) : undefined;
 
-  const categoryCounts = new Map<HistoricalEvent['category'], number>();
-  for (const e of events) {
-    categoryCounts.set(e.category, (categoryCounts.get(e.category) ?? 0) + 1);
+  const countryCounts = new Map<string, { name: string; count: number }>();
+  for (const { country } of geocodedEvents) {
+    if (!country) continue;
+    const existing = countryCounts.get(country.code);
+    countryCounts.set(country.code, { name: country.name, count: (existing?.count ?? 0) + 1 });
   }
-  const [topCategory, topCategoryCount] = [...categoryCounts.entries()].sort(
-    (a, b) => b[1] - a[1],
-  )[0];
+  const geocodedCount = [...countryCounts.values()].reduce((sum, c) => sum + c.count, 0);
+  const topCountry = [...countryCounts.values()].sort((a, b) => b.count - a.count)[0];
 
   return [
-    { id: 'events', label: 'Eventi archiviati', value: String(events.length) },
-    { id: 'countries', label: 'Paesi rappresentati', value: String(countries.size) },
-    { id: 'span', label: 'Arco temporale', value: `${minYear}–${maxYear}` },
+    { id: "events", label: "Eventi di oggi", value: String(geocodedEvents.length) },
     {
-      id: 'top-category',
-      label: 'Categoria più frequente',
-      value: CATEGORY_LABELS[topCategory],
-      detail: `${topCategoryCount} eventi`,
+      id: "countries",
+      label: "Paesi individuati",
+      value: String(countryCounts.size),
+      detail: `${geocodedCount} su ${geocodedEvents.length} eventi`,
+    },
+    {
+      id: "span",
+      label: "Arco temporale",
+      value: hasYears ? `${minYear}–${maxYear}` : "—",
+    },
+    {
+      id: "top-country",
+      label: "Paese più citato",
+      value: topCountry?.name ?? "—",
+      detail: topCountry ? `${topCountry.count} ${topCountry.count === 1 ? "evento" : "eventi"}` : undefined,
     },
   ];
 }
