@@ -1,13 +1,12 @@
-import { useMemo } from "react";
-import { MOCK_EVENTS } from "@/features/map/data/mockEvents";
+import { useTodayHistory } from "@/features/map";
 import { computeStats } from "../lib/computeStats";
 
-// No loading/error state: this derives from MOCK_EVENTS, already in memory,
-// so there is nothing to wait on or fail. That changes the moment this
-// reads from a real API instead (see PRODUCT.md's data constraint) — at
-// that point loading/error come back for a genuine reason, not as
-// simulated states over synchronous data.
+// Async, backed by the same today's-history fetch (and the same
+// coordinate-based country guess) the map page uses — not a synchronous
+// in-memory mock array, so loading/error are real states here, not
+// simulated ones. See PRODUCT.md's data constraint.
 export function useDashboard() {
-  const stats = useMemo(() => computeStats(MOCK_EVENTS), []);
-  return { stats };
+  const { geocodedEvents, isLoading, error } = useTodayHistory();
+  const stats = computeStats(geocodedEvents);
+  return { stats, isLoading, error };
 }

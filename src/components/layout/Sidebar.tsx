@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Globe, LayoutDashboard, Settings } from 'lucide-react';
+import { Archive, FileText, Globe, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
@@ -13,8 +13,26 @@ interface SidebarProps {
 const navItems = [
   { label: 'Mappa',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
   { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
-  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '3' },
+  { label: 'Archivio',     href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
+  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '4' },
 ];
+
+// Legal pages: reachable from anywhere but not part of the app proper, so they
+// sit below the main links instead of taking a shortcut number.
+const legalItems = [
+  { label: 'Privacy',              href: '/privacy', icon: ShieldCheck },
+  { label: 'Termini e condizioni', href: '/terms',   icon: FileText },
+];
+
+// Index-tab look shared by the main links and the legal links below them.
+function navLinkClass({ isActive }: { isActive: boolean }): string {
+  return cn(
+    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 font-display text-sm font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
+    isActive
+      ? 'border-sidebar-accent bg-sidebar-border/40 text-sidebar-accent'
+      : 'border-transparent text-sidebar-foreground/70 hover:border-sidebar-border hover:bg-sidebar-border/20 hover:text-sidebar-foreground',
+  );
+}
 
 export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
   // Mobile drawer: Escape closes it, like any overlay.
@@ -77,20 +95,30 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
                 onClick={() => {
                   if (!isDesktop) onClose();
                 }}
-                className={({ isActive }) =>
-                  cn(
-                    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 font-display text-sm font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
-                    isActive
-                      ? 'border-sidebar-accent bg-sidebar-border/40 text-sidebar-accent'
-                      : 'border-transparent text-sidebar-foreground/70 hover:border-sidebar-border hover:bg-sidebar-border/20 hover:text-sidebar-foreground',
-                  )
-                }
+                className={navLinkClass}
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 {label}
               </NavLink>
             ))}
           </nav>
+          {/* Legal links, set apart from the sections of the app by a rule. */}
+          <div className="shrink-0 border-t border-sidebar-border py-2">
+            {legalItems.map(({ label, href, icon: Icon }) => (
+              <NavLink
+                key={href}
+                to={href}
+                tabIndex={!open ? -1 : undefined}
+                onClick={() => {
+                  if (!isDesktop) onClose();
+                }}
+                className={navLinkClass}
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                {label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       </aside>
     </>

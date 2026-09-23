@@ -4,12 +4,12 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { AlertTriangle, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { heatColor } from '../constants/heat';
+import { COUNTRIES_GEOJSON_URL } from '../constants/countries';
+import { localizedCountryName } from '../lib/countryGeometry';
 import { createProjectionAnimator, type ProjectionAnimator } from '../lib/projectionAnimator';
 import type { Country, ProjectionType } from '../types';
 
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
-const COUNTRIES_GEOJSON =
-  'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson';
 
 // ── Heat map helpers ─────────────────────────────────────────────────────────
 
@@ -25,23 +25,6 @@ function buildHeatExpression(
     ['get', 'iso_a2'],
     ...entries.flatMap(([code, count]) => [code, heatColor(count)]),
     'rgba(0,0,0,0)',
-  ] as maplibregl.ExpressionSpecification;
-}
-
-// Heat intensity must not be conveyed by color alone (WCAG 1.4.1): stamp the
-// raw event count on top of each colored country too.
-function buildHeatLabelExpression(
-  heatmap: Record<string, number>,
-): maplibregl.ExpressionSpecification {
-  const entries = Object.entries(heatmap);
-  if (!entries.length) {
-    return '' as unknown as maplibregl.ExpressionSpecification;
-  }
-  return [
-    'match',
-    ['get', 'iso_a2'],
-    ...entries.flatMap(([code, count]) => [code, String(count)]),
-    '',
   ] as maplibregl.ExpressionSpecification;
 }
 
@@ -103,7 +86,7 @@ export function MapView({
     map.once('load', () => {
       map.addSource('countries-ne', {
         type: 'geojson',
-        data: COUNTRIES_GEOJSON,
+        data: COUNTRIES_GEOJSON_URL,
       });
 
       // 1. Heatmap fill (colori verde/giallo/rosso)
@@ -114,23 +97,6 @@ export function MapView({
         paint: {
           'fill-color': buildHeatExpression(heatmapRef.current),
           'fill-opacity': 0.8,
-        },
-      });
-
-      // 1b. Event count as text so intensity isn't color-only (WCAG 1.4.1)
-      map.addLayer({
-        id: 'countries-heat-label',
-        type: 'symbol',
-        source: 'countries-ne',
-        layout: {
-          'text-field': buildHeatLabelExpression(heatmapRef.current),
-          'text-size': 11,
-          'symbol-placement': 'point',
-        },
-        paint: {
-          'text-color': '#ffffff',
-          'text-halo-color': 'rgba(0,0,0,0.75)',
-          'text-halo-width': 1.2,
         },
       });
 
@@ -168,8 +134,8 @@ export function MapView({
         if (!feature) return;
         const props = feature.properties as Record<string, string>;
         const code = props['iso_a2'] ?? '';
-        const name = props['name'] ?? props['admin'] ?? '';
-        if (code && name) onCountryClick?.({ name, code });
+        const englishName = props['name'] ?? props['admin'] ?? '';
+        if (code && englishName) onCountryClick?.({ name: localizedCountryName(code, englishName), code });
       });
 
       map.on('mouseenter', 'countries-fill', () => {
@@ -217,7 +183,7 @@ export function MapView({
     if (map.getLayer('countries-outline')) map.setFilter('countries-outline', filter);
   }, [selectedCountryCode]);
 
-  // Sync heatmap colors + count labels
+  // Sync heatmap colors
   useEffect(() => {
     heatmapRef.current = countryHeatmap ?? {};
     const map = mapRef.current;
@@ -227,13 +193,6 @@ export function MapView({
       'fill-color',
       buildHeatExpression(heatmapRef.current),
     );
-    if (map.getLayer('countries-heat-label')) {
-      map.setLayoutProperty(
-        'countries-heat-label',
-        'text-field',
-        buildHeatLabelExpression(heatmapRef.current),
-      );
-    }
   }, [countryHeatmap]);
 
   return (
@@ -241,7 +200,7 @@ export function MapView({
       <div
         ref={containerRef}
         className="h-full w-full bg-muted"
-        aria-label="Mappa storica interattiva del Novecento"
+        aria-label="Mappa storica interattiva: gli eventi di oggi nel mondo"
       />
       {loadError && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/95 p-6 text-center">

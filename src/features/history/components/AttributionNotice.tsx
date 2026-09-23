@@ -1,5 +1,5 @@
 import type { Attribution } from '../types';
-import { ExternalAnchor } from './ExternalAnchor';
+import { ExternalAnchor } from '@/components/ui/ExternalAnchor';
 
 interface AttributionNoticeProps {
   attribution: Attribution;

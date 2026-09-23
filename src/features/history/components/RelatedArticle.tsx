@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { buildImageSources } from '../lib/images';
 import type { PageRef } from '../types';
-import { ExternalAnchor } from './ExternalAnchor';
+import { ExternalAnchor } from '@/components/ui/ExternalAnchor';
 
 // Matches the image column below: 12rem from the sm breakpoint up, 6rem on a
 // phone, where a full-width portrait would push the text off the screen.

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { formatEventDate } from '@/lib/months';
 import { cleanText } from '../lib/text';
 import type { Attribution, HistoryEntry, HistoryLanguage } from '../types';
 import { AttributionNotice } from './AttributionNotice';
@@ -8,6 +9,8 @@ import { RelatedArticle } from './RelatedArticle';
 
 interface EventDialogProps {
   entry: HistoryEntry;
+  month: number;
+  day: number;
   // The edition the text really came from, which is not always the one asked for.
   language: HistoryLanguage;
   attribution: Attribution;
@@ -18,7 +21,7 @@ interface EventDialogProps {
 // rest of the page inert, closes on Escape and hands focus back to the button
 // that opened it. It also sits in the top layer, so the map panel's overflow
 // and its mobile drawer's transform cannot clip or offset it.
-export function EventDialog({ entry, language, attribution, onClose }: EventDialogProps) {
+export function EventDialog({ entry, month, day, language, attribution, onClose }: EventDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const relatedId = useId();
@@ -46,7 +49,7 @@ export function EventDialog({ entry, language, attribution, onClose }: EventDial
       <header className="flex shrink-0 items-start gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0 flex-1">
           <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-            {entry.year ?? '—'}
+            {formatEventDate(day, month, entry.year)}
           </p>
           <h2
             id={titleId}

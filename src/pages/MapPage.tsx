@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MapView, ProjectionToggle, EventsPanel } from '@/features/map';
 import { HeatLegend } from '@/features/map/components/HeatLegend';
-import { useEvents } from '@/features/map/hooks/useEvents';
+import { useTodayHistory } from '@/features/map/hooks/useTodayHistory';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import type { Country, ProjectionType } from '@/features/map';
 
@@ -10,22 +10,23 @@ export function MapPage() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   usePageTitle('Mappa');
 
-  const { countryHeatmap } = useEvents(selectedCountry?.code);
+  const history = useTodayHistory();
 
   return (
     <div className="flex h-full w-full">
-      <h1 className="sr-only">Mappa storica interattiva del Novecento</h1>
+      <h1 className="sr-only">Mappa storica interattiva: gli eventi di oggi nel mondo</h1>
       <EventsPanel
         selectedCountry={selectedCountry}
         onClearCountry={() => setSelectedCountry(null)}
         onSelectCountry={setSelectedCountry}
+        history={history}
       />
       <div className="relative flex-1">
         <MapView
           projection={projection}
           onCountryClick={setSelectedCountry}
           selectedCountryCode={selectedCountry?.code}
-          countryHeatmap={countryHeatmap}
+          countryHeatmap={history.countryHeatmap}
         />
         <div className="absolute top-4 right-4 z-10">
           <ProjectionToggle value={projection} onChange={setProjection} />

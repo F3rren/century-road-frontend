@@ -1,16 +1,6 @@
-import { useOnThisDay } from '../hooks/useOnThisDay';
-import type { HistorySectionKey } from '../types';
+import type { OnThisDayData } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { EntryList } from './EntryList';
-
-// The panel is framed as "Accadde oggi nel '900" while Wikipedia's feed spans
-// every era, so ask for the twentieth century only. Italian sections only:
-// the Italian feed has no births/deaths, and the English fallback would mix
-// languages into a list that is otherwise Italian.
-const FROM_YEAR = 1900;
-const TO_YEAR = 1999;
-// `selected` is the editors' short pick for the day; `events` is the full list.
-const TYPES: readonly HistorySectionKey[] = ['selected', 'events'];
 
 const STATUS_CLASS = 'px-0.5 py-2 text-xs italic text-muted-foreground';
 const NOTE_CLASS = 'px-0.5 pb-2 text-xs text-muted-foreground';
@@ -18,20 +8,15 @@ const SUBHEADING_CLASS = 'mb-1 font-display text-eyebrow uppercase';
 
 interface HistoryEventsProps {
   title: string;
-  month: number;
-  day: number;
+  // Fetched by the caller — usually shared with other things on the same
+  // page (the map's heatmap, its per-country lists) that need the exact
+  // same day's data, so the fetch itself isn't repeated here.
+  data: OnThisDayData | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
-export function HistoryEvents({ title, month, day }: HistoryEventsProps) {
-  const { isLoading, data, error } = useOnThisDay({
-    month,
-    day,
-    lang: 'it',
-    types: TYPES,
-    fromYear: FROM_YEAR,
-    toYear: TO_YEAR,
-  });
-
+export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsProps) {
   const featured = data?.sections.selected;
   const events = data?.sections.events;
   const hasFeatured = (featured?.items.length ?? 0) > 0;
@@ -64,13 +49,13 @@ export function HistoryEvents({ title, month, day }: HistoryEventsProps) {
       )}
 
       {data && !hasFeatured && !hasEvents && (
-        <p className={STATUS_CLASS}>Nessun evento nel Novecento per questo giorno.</p>
+        <p className={STATUS_CLASS}>Nessuna voce per questo giorno.</p>
       )}
 
       {data && featured && hasFeatured && (
         <div>
           <h3 className={`${SUBHEADING_CLASS} text-primary`}>In evidenza</h3>
-          <EntryList section={featured} attribution={data.attribution} />
+          <EntryList section={featured} month={data.date.month} day={data.date.day} attribution={data.attribution} />
         </div>
       )}
 
@@ -81,7 +66,7 @@ export function HistoryEvents({ title, month, day }: HistoryEventsProps) {
               Tutti gli eventi
             </h3>
           )}
-          <EntryList section={events} attribution={data.attribution} />
+          <EntryList section={events} month={data.date.month} day={data.date.day} attribution={data.attribution} />
         </div>
       )}
 

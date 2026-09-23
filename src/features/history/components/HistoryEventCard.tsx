@@ -1,10 +1,16 @@
 import { useRef, useState } from 'react';
+import { formatEventDate } from '@/lib/months';
 import { cleanText } from '../lib/text';
 import type { Attribution, HistoryEntry, HistoryLanguage } from '../types';
 import { EventDialog } from './EventDialog';
 
 interface HistoryEventCardProps {
   entry: HistoryEntry;
+  // The day every entry in the list shares — the API answers "on this day",
+  // one month/day at a time — paired with the entry's own (or absent) year
+  // to print a complete date instead of a bare, context-free year.
+  month: number;
+  day: number;
   // The edition the text really came from, which is not always the one asked for.
   language: HistoryLanguage;
   attribution: Attribution;
@@ -15,7 +21,7 @@ interface HistoryEventCardProps {
 // none is invented to fill those slots. `text` is the event; the linked
 // articles are related reading and are never used as its title or summary.
 // The full picture opens in a popup, so the list stays a scannable column.
-export function HistoryEventCard({ entry, language, attribution }: HistoryEventCardProps) {
+export function HistoryEventCard({ entry, month, day, language, attribution }: HistoryEventCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const relatedCount = entry.pages.length;
@@ -38,7 +44,7 @@ export function HistoryEventCard({ entry, language, attribution }: HistoryEventC
         className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span className="block font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          {entry.year ?? '—'}
+          {formatEventDate(day, month, entry.year)}
         </span>
         <span className="mt-1 line-clamp-2 block whitespace-pre-line font-display text-base font-semibold leading-tight tracking-tight transition-[color] group-hover:text-primary motion-safe:duration-150">
           {cleanText(entry.text)}
@@ -52,6 +58,8 @@ export function HistoryEventCard({ entry, language, attribution }: HistoryEventC
       {isOpen && (
         <EventDialog
           entry={entry}
+          month={month}
+          day={day}
           language={language}
           attribution={attribution}
           onClose={handleClose}

@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 type Theme = "light" | "dark";
-const STORAGE_KEY = "century-road-theme";
+// Exported so the privacy page names the exact key it describes. index.html
+// reads the same key in its pre-paint script and has to be kept in step.
+export const THEME_STORAGE_KEY = "century-road-theme";
 
 // The inline script in index.html already applied the persisted/system
 // theme to <html> before React mounted (avoids a flash of the wrong
@@ -18,7 +20,7 @@ export function useTheme() {
       const next: Theme = current === "dark" ? "light" : "dark";
       document.documentElement.classList.toggle("dark", next === "dark");
       try {
-        localStorage.setItem(STORAGE_KEY, next);
+        localStorage.setItem(THEME_STORAGE_KEY, next);
       } catch {
         // Private-browsing/storage-blocked: theme still applies for this
         // session, it just won't persist across reloads.

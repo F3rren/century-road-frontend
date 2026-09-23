@@ -13,7 +13,8 @@ export function AppLayout() {
   useKeyboardShortcuts({
     "1": () => navigate("/"),
     "2": () => navigate("/dashboard"),
-    "3": () => navigate("/settings"),
+    "3": () => navigate("/archive"),
+    "4": () => navigate("/settings"),
   });
 
   // Re-sync sidebarOpen whenever the breakpoint itself changes (resize/

@@ -4,53 +4,25 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
-import { HistoryEvents } from '@/features/history';
-import { useEvents } from '../hooks/useEvents';
-import { EventCard } from './EventCard';
-import type { Country, HistoricalEvent } from '../types';
+import { EntryList, HistoryEvents } from '@/features/history';
+import { MONTH_NAMES } from '@/lib/months';
+import type { useTodayHistory } from '../hooks/useTodayHistory';
+import type { Country } from '../types';
 
-const MONTH_NAMES = [
-  '', 'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
-  'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre',
-];
-
-interface SectionProps {
-  title: string;
-  events: HistoricalEvent[];
-  emptyMessage?: string;
-}
-
-function Section({ title, events, emptyMessage }: SectionProps) {
-  return (
-    <div>
-      <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
-        {title}
-      </h2>
-      {events.length === 0 ? (
-        <p className="px-0.5 py-2 text-xs italic text-muted-foreground">
-          {emptyMessage ?? 'Nessun evento'}
-        </p>
-      ) : (
-        <div>
-          {events.map((e) => (
-            <EventCard key={e.id} event={e} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+const STATUS_CLASS = 'px-0.5 py-2 text-xs italic text-muted-foreground';
 
 interface EventsPanelProps {
   selectedCountry: Country | null;
   onClearCountry: () => void;
   onSelectCountry: (country: Country) => void;
+  // Owned by MapPage and passed down rather than fetched again here: this
+  // panel and the map's heatmap need the exact same day's data, and a
+  // second independent fetch of it would just be wasted.
+  history: ReturnType<typeof useTodayHistory>;
 }
 
-export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }: EventsPanelProps) {
-  const { countryFiltered, today, availableCountries } = useEvents(
-    selectedCountry?.code,
-  );
+export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, history }: EventsPanelProps) {
+  const { today, data, isLoading, error, countryFeaturesError, availableCountries, eventsForCountry } = history;
   // The map/globe is pointer-only: below desktop this panel isn't docked, so
   // it needs its own open state instead of always taking up map width.
   const isDesktop = useMediaQuery('(min-width: 1024px)');
@@ -59,7 +31,8 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
 
   // Only active when the picker is actually reachable: docked on desktop,
   // or the mobile drawer is open. It also only exists in the DOM once a
-  // country is selected — that branch renders Section, not the picker.
+  // country is selected — that branch renders the per-country list, not the
+  // picker.
   useKeyboardShortcuts(
     { '/': () => countryPickerRef.current?.focus() },
     !selectedCountry && (isDesktop || mobileOpen),
@@ -73,6 +46,9 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
     setPrevSelectedCountry(selectedCountry);
     if (!isDesktop && selectedCountry) setMobileOpen(true);
   }
+
+  const events = data?.sections.events;
+  const countryEvents = selectedCountry ? eventsForCountry(selectedCountry.code) : [];
 
   const panel = (
     <>
@@ -97,7 +73,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
           <>
             <CalendarDays className="h-4 w-4 shrink-0 text-primary" />
             <div className="flex-1 min-w-0">
-              <p className="font-display text-base font-semibold tracking-tight">Accadde oggi nel '900</p>
+              <p className="font-display text-base font-semibold tracking-tight">Accadde oggi</p>
               <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
                 {today.day} {MONTH_NAMES[today.month]}
               </p>
@@ -110,11 +86,17 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
           map click, keyboard picker, or cleared back to the global view. */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6" aria-live="polite">
         {selectedCountry ? (
-          countryFiltered?.all.length === 0 ? (
+          isLoading ? (
+            <p className={STATUS_CLASS}>Caricamento…</p>
+          ) : error ? (
+            <p className="px-0.5 py-2 text-xs text-destructive">
+              Impossibile caricare gli eventi di oggi ({error}).
+            </p>
+          ) : countryEvents.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
               <Globe className="h-8 w-8 text-muted-foreground/40" />
               <p className="text-sm text-muted-foreground">
-                Nessun evento registrato per{' '}
+                Nessun evento di oggi individuato per{' '}
                 <span className="font-medium">{selectedCountry.name}</span>
               </p>
               <button
@@ -125,18 +107,19 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
               </button>
             </div>
           ) : (
-            <>
-              <Section
-                title={`Già accaduti (entro il ${today.day} ${MONTH_NAMES[today.month]})`}
-                events={countryFiltered?.past ?? []}
-                emptyMessage="Nessun evento prima di oggi in questo paese"
-              />
-              <Section
-                title="In arrivo"
-                events={countryFiltered?.upcoming ?? []}
-                emptyMessage="Nessun evento dopo oggi in questo paese"
-              />
-            </>
+            <div>
+              <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
+                Anniversari del {today.day} {MONTH_NAMES[today.month]}
+              </h2>
+              {events && data && (
+                <EntryList
+                  section={{ language: events.language, fallback: events.fallback, stale: events.stale, items: countryEvents }}
+                  month={today.month}
+                  day={today.day}
+                  attribution={data.attribution}
+                />
+              )}
+            </div>
           )
         ) : (
           <>
@@ -151,7 +134,8 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
                 id="country-picker"
                 ref={countryPickerRef}
                 aria-keyshortcuts="/"
-                className="w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                disabled={availableCountries.length === 0}
+                className="w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
                 value=""
                 onChange={(e) => {
                   const country = availableCountries.find((c) => c.code === e.target.value);
@@ -159,7 +143,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
                 }}
               >
                 <option value="" disabled>
-                  Seleziona un paese…
+                  {availableCountries.length === 0 ? 'Caricamento dei paesi…' : 'Seleziona un paese…'}
                 </option>
                 {availableCountries.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -167,11 +151,17 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry }
                   </option>
                 ))}
               </select>
+              {countryFeaturesError && (
+                <p className="mt-1 text-xs text-destructive">
+                  Impossibile caricare l'elenco dei paesi ({countryFeaturesError}).
+                </p>
+              )}
             </div>
             <HistoryEvents
               title={`Anniversari del ${today.day} ${MONTH_NAMES[today.month]}`}
-              month={today.month}
-              day={today.day}
+              data={data}
+              isLoading={isLoading}
+              error={error}
             />
             <p className="pt-2 pb-1 text-center text-xs text-muted-foreground">
               Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi
