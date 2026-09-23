@@ -1,0 +1,189 @@
+{
+  "common": {
+    "loading": "Caricamento…",
+    "unknownError": "Errore sconosciuto",
+    "opensInNewTab": " (si apre in una nuova scheda)"
+  },
+  "nav": {
+    "map": "Mappa",
+    "dashboard": "Dashboard",
+    "archive": "Archivio",
+    "settings": "Impostazioni",
+    "privacy": "Privacy",
+    "terms": "Termini e condizioni",
+    "ariaLabel": "Navigazione principale",
+    "brandTagline": "press archive"
+  },
+  "header": {
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu"
+  },
+  "map": {
+    "panelAriaLabel": "Mappa storica interattiva: gli eventi di oggi nel mondo",
+    "error": {
+      "title": "Impossibile caricare la mappa",
+      "description": "Controlla la connessione di rete e riprova.",
+      "retry": "Riprova"
+    },
+    "projection": {
+      "groupLabel": "Proiezione mappa",
+      "mercator": "Pianisfero",
+      "globe": "Globo"
+    },
+    "legend": {
+      "today": "Oggi",
+      "ariaLabel": "Legenda intensità eventi",
+      "level": {
+        "high": "≥ 6 eventi",
+        "mid": "3–5 eventi",
+        "low": "1–2 eventi"
+      },
+      "methodology": "Paese dedotto dal primo articolo collegato con coordinate"
+    },
+    "events": {
+      "backToGlobal": "Torna alla vista globale",
+      "todayTitle": "Accadde oggi",
+      "loadError": "Impossibile caricare gli eventi di oggi ({{error}}).",
+      "noEventsFor": "Nessun evento di oggi individuato per <bold>{{country}}</bold>",
+      "countryPickerLabel": "Vai a un paese",
+      "loadingCountries": "Caricamento dei paesi…",
+      "selectCountryPlaceholder": "Seleziona un paese…",
+      "countriesLoadError": "Impossibile caricare l'elenco dei paesi ({{error}}).",
+      "clickHint": "Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi",
+      "panelAriaLabel": "Eventi storici",
+      "eventsButton": "Eventi",
+      "closePanel": "Chiudi pannello eventi",
+      "anniversariesTitle": "Anniversari del {{day}} {{month}}"
+    }
+  },
+  "dashboard": {
+    "description": "Statistiche sugli eventi di oggi, con il paese dedotto dagli articoli collegati",
+    "loadError": "Impossibile caricare le statistiche ({{error}}).",
+    "stats": {
+      "noData": {
+        "title": "Nessuna statistica disponibile",
+        "description": "I dati compariranno qui non appena l'archivio conterrà eventi."
+      },
+      "events": { "label": "Eventi di oggi" },
+      "countries": {
+        "label": "Paesi individuati",
+        "detail": "{{geocoded}} su {{total}} eventi"
+      },
+      "span": { "label": "Arco temporale" },
+      "topCountry": {
+        "label": "Paese più citato",
+        "detail_one": "{{count}} evento",
+        "detail_other": "{{count}} eventi"
+      }
+    },
+    "archiveTeaser": {
+      "heading": "Archivio",
+      "description": "Queste statistiche sono sugli eventi di oggi. Per sfogliare ogni voce che Wikipedia registra per un giorno, di qualunque secolo, filtrando per anno e per tipo di voce, apri l'archivio completo.",
+      "cta": "Apri l'archivio"
+    }
+  },
+  "archive": {
+    "pageDescription": "Ogni voce che Wikipedia registra per un giorno, con anni e tipo a scelta",
+    "filters": {
+      "dayLabel": "Giorno",
+      "monthSrLabel": "Mese",
+      "daySrLabel": "Giorno del mese",
+      "yearsLabel": "Anni (opzionale)",
+      "yearFromSr": "Anno di inizio",
+      "yearToSr": "Anno di fine",
+      "yearFromPlaceholder": "Da, es. -44",
+      "yearToPlaceholder": "A",
+      "typeLegend": "Tipo di voce",
+      "languageLegend": "Lingua",
+      "languageItalian": "Italiano",
+      "languageEnglish": "Inglese",
+      "searchLabel": "Cerca nei risultati",
+      "searchPlaceholder": "Una parola nel testo o in un articolo…",
+      "reset": "Azzera i filtri"
+    },
+    "results": {
+      "loading": "Caricamento dell'archivio…",
+      "loadError": "Impossibile caricare l'archivio ({{error}}).",
+      "fallbackNote": "Alcune voci sono in inglese: la versione italiana di Wikipedia non le ha.",
+      "staleNote": "Dati non aggiornati: Wikipedia non era raggiungibile.",
+      "empty": "Nessuna voce per questo giorno con questi filtri.",
+      "noMatches": "Nessun risultato per «{{query}}»."
+    }
+  },
+  "history": {
+    "section": {
+      "selected": "In evidenza",
+      "events": "Eventi",
+      "births": "Nascite",
+      "deaths": "Morti",
+      "holidays": "Ricorrenze"
+    },
+    "subheadingAllEvents": "Tutti gli eventi",
+    "fallbackNote": "Testi in inglese: la versione italiana di Wikipedia non era disponibile.",
+    "staleNote": "Dati non aggiornati: Wikipedia non era raggiungibile.",
+    "loading": "Caricamento degli eventi…",
+    "loadError": "Impossibile caricare gli eventi di oggi ({{error}}).",
+    "empty": "Nessuna voce per questo giorno.",
+    "card": {
+      "relatedCount_one": "{{count}} articolo collegato",
+      "relatedCount_other": "{{count}} articoli collegati"
+    },
+    "dialog": {
+      "close": "Chiudi",
+      "relatedHeading": "Articoli collegati"
+    },
+    "attribution": {
+      "licenseLabel": "Licenza"
+    },
+    "relatedArticle": {
+      "imageCredit": "Autore e licenza dell'immagine"
+    }
+  },
+  "settings": {
+    "pageDescription": "Aspetto, lingua e altre preferenze, salvate solo su questo dispositivo",
+    "appearance": {
+      "title": "Aspetto",
+      "light": "Chiaro",
+      "dark": "Scuro"
+    },
+    "language": {
+      "title": "Lingua e contenuti",
+      "uiLabel": "Lingua dell'interfaccia",
+      "contentNote": "Gli articoli storici seguono questa lingua quando disponibile (solo italiano o inglese); resta comunque modificabile in Archivio o scegliendo un paese sulla Mappa.",
+      "exampleLabel": "Esempio di formato data"
+    },
+    "map": {
+      "title": "Mappa",
+      "defaultProjectionLabel": "Proiezione predefinita"
+    },
+    "accessibility": {
+      "title": "Accessibilità",
+      "reducedMotionLabel": "Animazioni",
+      "reducedMotionOff": "Segui il sistema",
+      "reducedMotionOn": "Sempre ridotte"
+    },
+    "shortcuts": {
+      "title": "Scorciatoie da tastiera",
+      "columnKey": "Tasto",
+      "columnAction": "Azione",
+      "disabledNote": "Disattivate mentre scrivi in un campo di testo.",
+      "focusCountryPicker": "Metti a fuoco il selettore di paese"
+    },
+    "data": {
+      "title": "Dati e privacy",
+      "clearButton": "Cancella dati locali",
+      "clearConfirm": "Cancellare tutte le preferenze salvate su questo dispositivo? La pagina si ricaricherà.",
+      "privacyLink": "Leggi l'informativa sulla privacy",
+      "legalNote": "Le pagine Privacy e Termini restano disponibili solo in italiano."
+    }
+  },
+  "date": {
+    "era": {
+      "bc": "a.C."
+    }
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "backToMap": "Torna alla Mappa"
+  }
+}

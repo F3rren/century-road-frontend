@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import type { GeocodedEntry } from "@/features/map";
 import type { StatCard } from "../types";
 
@@ -7,7 +8,7 @@ import type { StatCard } from "../types";
 // heuristic the map's heatmap uses (see features/map/lib/geocodeEntries) —
 // an event with no linked article that carries coordinates isn't counted
 // toward either.
-export function computeStats(geocodedEvents: readonly GeocodedEntry[]): StatCard[] {
+export function computeStats(geocodedEvents: readonly GeocodedEntry[], t: TFunction): StatCard[] {
   if (geocodedEvents.length === 0) return [];
 
   const years = geocodedEvents
@@ -27,23 +28,25 @@ export function computeStats(geocodedEvents: readonly GeocodedEntry[]): StatCard
   const topCountry = [...countryCounts.values()].sort((a, b) => b.count - a.count)[0];
 
   return [
-    { id: "events", label: "Eventi di oggi", value: String(geocodedEvents.length) },
+    { id: "events", label: t("dashboard.stats.events.label"), value: String(geocodedEvents.length) },
     {
       id: "countries",
-      label: "Paesi individuati",
+      label: t("dashboard.stats.countries.label"),
       value: String(countryCounts.size),
-      detail: `${geocodedCount} su ${geocodedEvents.length} eventi`,
+      detail: t("dashboard.stats.countries.detail", { geocoded: geocodedCount, total: geocodedEvents.length }),
     },
     {
       id: "span",
-      label: "Arco temporale",
+      label: t("dashboard.stats.span.label"),
       value: hasYears ? `${minYear}–${maxYear}` : "—",
     },
     {
       id: "top-country",
-      label: "Paese più citato",
+      label: t("dashboard.stats.topCountry.label"),
       value: topCountry?.name ?? "—",
-      detail: topCountry ? `${topCountry.count} ${topCountry.count === 1 ? "evento" : "eventi"}` : undefined,
+      detail: topCountry
+        ? t("dashboard.stats.topCountry.detail", { count: topCountry.count })
+        : undefined,
     },
   ];
 }

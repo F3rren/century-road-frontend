@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef } from 'react';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { formatEventDate } from '@/lib/months';
 import { cleanText } from '../lib/text';
@@ -22,6 +23,7 @@ interface EventDialogProps {
 // that opened it. It also sits in the top layer, so the map panel's overflow
 // and its mobile drawer's transform cannot clip or offset it.
 export function EventDialog({ entry, month, day, language, attribution, onClose }: EventDialogProps) {
+  const { t, i18n } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const relatedId = useId();
@@ -49,7 +51,7 @@ export function EventDialog({ entry, month, day, language, attribution, onClose 
       <header className="flex shrink-0 items-start gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0 flex-1">
           <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-            {formatEventDate(day, month, entry.year)}
+            {formatEventDate(day, month, entry.year, i18n.language)}
           </p>
           <h2
             id={titleId}
@@ -61,7 +63,7 @@ export function EventDialog({ entry, month, day, language, attribution, onClose 
         <Button
           variant="ghost"
           size="icon"
-          aria-label="Chiudi"
+          aria-label={t('history.dialog.close')}
           className="-mr-2 -mt-2"
           onClick={() => dialogRef.current?.close()}
         >
@@ -76,7 +78,7 @@ export function EventDialog({ entry, month, day, language, attribution, onClose 
               id={relatedId}
               className="mb-3 font-display text-eyebrow uppercase text-muted-foreground"
             >
-              Articoli collegati
+              {t('history.dialog.relatedHeading')}
             </h3>
             <ul>
               {entry.pages.map((page) => (

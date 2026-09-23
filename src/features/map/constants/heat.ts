@@ -1,16 +1,19 @@
+export type HeatLevelKey = "high" | "mid" | "low";
+
 export interface HeatLevel {
   min: number;
   color: string;
-  label: string;
+  labelKey: HeatLevelKey;
 }
 
 // Single source of truth for the heatmap thresholds/colors: consumed by both
-// the MapLibre paint expression (MapView) and the on-map legend (HeatLegend)
-// so the two can never drift apart.
+// the MapLibre paint expression (MapView) and the on-map legend (HeatLegend,
+// which resolves labelKey to translated text via map.legend.level.*) so the
+// two can never drift apart.
 export const HEAT_LEVELS: readonly HeatLevel[] = [
-  { min: 6, color: "#ef4444", label: "≥ 6 eventi" },
-  { min: 3, color: "#eab308", label: "3–5 eventi" },
-  { min: 1, color: "#22c55e", label: "1–2 eventi" },
+  { min: 6, color: "#ef4444", labelKey: "high" },
+  { min: 3, color: "#eab308", labelKey: "mid" },
+  { min: 1, color: "#22c55e", labelKey: "low" },
 ] as const;
 
 export function heatColor(count: number): string {

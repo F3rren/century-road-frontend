@@ -35,6 +35,18 @@
         } catch (e) {}
       })();
     </script>
+    <script>
+      // Same pre-paint approach as the theme script above, for the
+      // Accessibilità reduced-motion override: applied before first paint so
+      // an animation never starts and then gets cut short by React mounting.
+      (function () {
+        try {
+          if (localStorage.getItem("century-road-reduced-motion") === "true") {
+            document.documentElement.classList.add("reduce-motion");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

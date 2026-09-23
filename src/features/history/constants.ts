@@ -1,11 +1,15 @@
 import type { HistorySectionKey } from './types';
 
-export const SECTION_LABELS: Record<HistorySectionKey, string> = {
-  selected: 'In evidenza',
-  events: 'Eventi',
-  births: 'Nascite',
-  deaths: 'Morti',
-  holidays: 'Ricorrenze',
+// Translation keys, not text — callers pass these to t(). Kept in one place
+// so the mapping from section key to its label can't drift between the
+// Archive filters checkboxes, the Archive results headings, and anywhere
+// else a section list is rendered.
+export const SECTION_LABEL_KEYS: Record<HistorySectionKey, string> = {
+  selected: 'history.section.selected',
+  events: 'history.section.events',
+  births: 'history.section.births',
+  deaths: 'history.section.deaths',
+  holidays: 'history.section.holidays',
 };
 
 // The order sections are requested and shown in: the editors' picks first,

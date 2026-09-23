@@ -1,4 +1,5 @@
 import { Globe, Map as MapFlat } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { MapOverlayPanel } from '@/components/ui/MapOverlayPanel';
 import type { ProjectionType } from '../types';
@@ -8,15 +9,16 @@ interface ProjectionToggleProps {
   onChange: (projection: ProjectionType) => void;
 }
 
-const options: { value: ProjectionType; label: string; Icon: typeof Globe }[] = [
-  { value: 'mercator', label: 'Pianisfero', Icon: MapFlat },
-  { value: 'globe',    label: 'Globo',      Icon: Globe },
+const options: { value: ProjectionType; labelKey: string; Icon: typeof Globe }[] = [
+  { value: 'mercator', labelKey: 'map.projection.mercator', Icon: MapFlat },
+  { value: 'globe',    labelKey: 'map.projection.globe',    Icon: Globe },
 ];
 
 export function ProjectionToggle({ value, onChange }: ProjectionToggleProps) {
+  const { t } = useTranslation();
   return (
-    <MapOverlayPanel className="flex items-stretch divide-x divide-white/15" role="group" aria-label="Proiezione mappa">
-      {options.map(({ value: opt, label, Icon }) => (
+    <MapOverlayPanel className="flex items-stretch divide-x divide-white/15" role="group" aria-label={t('map.projection.groupLabel')}>
+      {options.map(({ value: opt, labelKey, Icon }) => (
         <Button
           key={opt}
           type="button"
@@ -29,7 +31,7 @@ export function ProjectionToggle({ value, onChange }: ProjectionToggleProps) {
           {/* Below sm: icon-only, so this control plus HeatLegend (opposite
               top corner) never crowd a narrow viewport. The label stays
               in the accessible name at every width via sr-only. */}
-          <span className="sr-only sm:not-sr-only">{label}</span>
+          <span className="sr-only sm:not-sr-only">{t(labelKey)}</span>
         </Button>
       ))}
     </MapOverlayPanel>

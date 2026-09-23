@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { StatCard } from "../types";
 
 interface DashboardStatsProps {
@@ -5,12 +6,13 @@ interface DashboardStatsProps {
 }
 
 export function DashboardStats({ stats }: DashboardStatsProps) {
+  const { t } = useTranslation();
   if (stats.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-1 border border-dashed border-border py-12 text-center">
-        <p className="text-sm font-medium">Nessuna statistica disponibile</p>
+        <p className="text-sm font-medium">{t("dashboard.stats.noData.title")}</p>
         <p className="text-xs text-muted-foreground">
-          I dati compariranno qui non appena l'archivio conterrà eventi.
+          {t("dashboard.stats.noData.description")}
         </p>
       </div>
     );

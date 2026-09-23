@@ -1,20 +1,23 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MapView, ProjectionToggle, EventsPanel } from '@/features/map';
 import { HeatLegend } from '@/features/map/components/HeatLegend';
 import { useTodayHistory } from '@/features/map/hooks/useTodayHistory';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { getStoredProjection } from '@/hooks/useMapProjection';
 import type { Country, ProjectionType } from '@/features/map';
 
 export function MapPage() {
-  const [projection, setProjection] = useState<ProjectionType>('globe');
+  const { t } = useTranslation();
+  const [projection, setProjection] = useState<ProjectionType>(getStoredProjection);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  usePageTitle('Mappa');
+  usePageTitle(t('nav.map'));
 
   const history = useTodayHistory();
 
   return (
     <div className="flex h-full w-full">
-      <h1 className="sr-only">Mappa storica interattiva: gli eventi di oggi nel mondo</h1>
+      <h1 className="sr-only">{t('map.panelAriaLabel')}</h1>
       <EventsPanel
         selectedCountry={selectedCountry}
         onClearCountry={() => setSelectedCountry(null)}

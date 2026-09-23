@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   darkMode: ["class"],
@@ -98,7 +99,22 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Settings' Accessibilità override adds/removes a `.reduce-motion` class
+    // on <html>. Redefining these two variants to also match that class
+    // means every existing motion-reduce:/motion-safe: utility honors the
+    // override for free, without touching each call site.
+    plugin(({ addVariant }) => {
+      addVariant("motion-reduce", [
+        "@media (prefers-reduced-motion: reduce)",
+        "&:where(.reduce-motion, .reduce-motion *)",
+      ]);
+      addVariant("motion-safe", [
+        "@media (prefers-reduced-motion: no-preference)",
+        "&:where(:not(.reduce-motion, .reduce-motion *))",
+      ]);
+    }),
+  ],
 };
 
 export default config;

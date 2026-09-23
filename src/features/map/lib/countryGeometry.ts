@@ -50,26 +50,40 @@ export function fetchCountryFeatures(): Promise<CountryFeature[]> {
 }
 
 // Natural Earth's own name/admin fields are English ("United States of
-// America"). The rest of this app is Italian, so the ISO A2 code is looked
-// up through the browser's own locale data instead of a hand-maintained
-// translation table — one fewer dataset to keep in sync, and it is already
-// exactly right for all 174 codes this file's country list uses. Exported so
-// MapView's own click handler (reading the same iso_a2/name/admin properties
-// straight off the rendered GeoJSON, not through this module) names a
-// clicked country the same way as everything else here.
-const REGION_NAMES = new Intl.DisplayNames(['it'], { type: 'region' });
+// America"). The rest of this app follows the active UI language, so the
+// ISO A2 code is looked up through the browser's own locale data instead of
+// a hand-maintained translation table — one fewer dataset to keep in sync,
+// and it is already exactly right for all 174 codes this file's country list
+// uses. One Intl.DisplayNames instance per language (construction isn't
+// free, and this runs once per country per render). Exported so MapView's
+// own click handler (reading the same iso_a2/name/admin properties straight
+// off the rendered GeoJSON, not through this module) names a clicked country
+// the same way as everything else here.
+const regionNamesCache = new Map<string, Intl.DisplayNames>();
 
-export function localizedCountryName(code: string, englishFallback: string): string {
+function regionNames(language: string): Intl.DisplayNames {
+  let formatter = regionNamesCache.get(language);
+  if (!formatter) {
+    formatter = new Intl.DisplayNames([language], { type: 'region' });
+    regionNamesCache.set(language, formatter);
+  }
+  return formatter;
+}
+
+export function localizedCountryName(code: string, englishFallback: string, language: string): string {
   try {
-    return REGION_NAMES.of(code) ?? englishFallback;
+    return regionNames(language).of(code) ?? englishFallback;
   } catch {
     return englishFallback;
   }
 }
 
-function toCountry(feature: CountryFeature): Country {
+function toCountry(feature: CountryFeature, language: string): Country {
   const code = feature.properties.iso_a2;
-  return { code, name: localizedCountryName(code, feature.properties.admin || feature.properties.name) };
+  return {
+    code,
+    name: localizedCountryName(code, feature.properties.admin || feature.properties.name, language),
+  };
 }
 
 // Which of these country shapes, if any, contains the given point. Natural
@@ -78,7 +92,12 @@ function toCountry(feature: CountryFeature): Country {
 // frontier) can land in the neighbouring country, and a small enough island
 // nation's shape can be missing from this resolution entirely — both true of
 // real coordinates Wikipedia supplies, not edge cases invented here.
-export function findCountryAt(lon: number, lat: number, features: readonly CountryFeature[]): Country | null {
+export function findCountryAt(
+  lon: number,
+  lat: number,
+  features: readonly CountryFeature[],
+  language: string,
+): Country | null {
   const point: [number, number] = [lon, lat];
   const hit = features.find((feature) => {
     try {
@@ -89,17 +108,17 @@ export function findCountryAt(lon: number, lat: number, features: readonly Count
       return false;
     }
   });
-  return hit ? toCountry(hit) : null;
+  return hit ? toCountry(hit, language) : null;
 }
 
 // Every real country this dataset has a shape for, sorted by name — the
 // full list the "vai a un paese" picker and the map's click targets share,
 // independent of which of them (if any) have an event attributed today.
-export function listCountries(features: readonly CountryFeature[]): Country[] {
+export function listCountries(features: readonly CountryFeature[], language: string): Country[] {
   const byCode = new Map<string, Country>();
   for (const feature of features) {
-    const country = toCountry(feature);
+    const country = toCountry(feature, language);
     if (!byCode.has(country.code)) byCode.set(country.code, country);
   }
-  return Array.from(byCode.values()).sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(byCode.values()).sort((a, b) => a.name.localeCompare(b.name, language));
 }
