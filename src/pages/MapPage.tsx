@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { MapView, ProjectionToggle, EventsPanel } from '@/features/map';
 import { HeatLegend } from '@/features/map/components/HeatLegend';
 import { useTodayHistory } from '@/features/map/hooks/useTodayHistory';
-import { usePageTitle } from '@/hooks/usePageTitle';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { getStoredProjection } from '@/hooks/useMapProjection';
 import type { Country, ProjectionType } from '@/features/map';
 
@@ -11,7 +11,7 @@ export function MapPage() {
   const { t } = useTranslation();
   const [projection, setProjection] = useState<ProjectionType>(getStoredProjection);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  usePageTitle(t('nav.map'));
+  usePageMeta(t('nav.map'), t('meta.map.description'));
 
   const history = useTodayHistory();
 

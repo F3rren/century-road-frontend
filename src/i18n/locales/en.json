@@ -197,5 +197,25 @@
       "map": "Map: © OpenStreetMap contributors · OpenFreeMap",
       "boundaries": "Boundaries: Natural Earth (public domain)"
     }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
+    },
+    "map": {
+      "description": "Explore today's historical events on an interactive world map, with anniversaries and Wikipedia articles for every country."
+    },
+    "dashboard": {
+      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Century Road archive."
+    },
+    "archive": {
+      "description": "Browse the full archive of today's events across every century, filterable by year and entry type."
+    },
+    "settings": {
+      "description": "Customize Century Road's appearance, language and default map projection."
+    },
+    "notFound": {
+      "description": "The page you're looking for doesn't exist. Head back to the map to keep exploring today in history."
+    }
   }
 }

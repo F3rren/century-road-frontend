@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DashboardStats, useDashboard } from "@/features/dashboard";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function DashboardPage() {
   const { t } = useTranslation();
   const { stats, isLoading, error } = useDashboard();
-  usePageTitle(t("nav.dashboard"));
+  usePageMeta(t("nav.dashboard"), t("meta.dashboard.description"));
 
   return (
     <div className="h-full overflow-y-auto p-6">

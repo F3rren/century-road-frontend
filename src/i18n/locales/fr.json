@@ -197,5 +197,25 @@
       "map": "Carte : © OpenStreetMap contributors · OpenFreeMap",
       "boundaries": "Frontières : Natural Earth (domaine public)"
     }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, les archives de l'histoire : découvrez ce qui s'est passé aujourd'hui au fil des siècles, avec une carte interactive, des articles Wikipédia et des photos historiques."
+    },
+    "map": {
+      "description": "Explorez sur la carte les événements historiques survenus aujourd'hui dans le monde, avec des anniversaires et des articles Wikipédia pour chaque pays."
+    },
+    "dashboard": {
+      "description": "Statistiques sur les événements du jour : combien d'articles, quels pays, la période couverte par les archives de Century Road."
+    },
+    "archive": {
+      "description": "Parcourez les archives complètes des événements du jour à travers les siècles, filtrables par année et type d'entrée."
+    },
+    "settings": {
+      "description": "Personnalisez l'apparence, la langue et la projection cartographique par défaut de Century Road."
+    },
+    "notFound": {
+      "description": "La page recherchée n'existe pas. Retournez à la carte de Century Road pour continuer à explorer l'histoire du jour."
+    }
   }
 }

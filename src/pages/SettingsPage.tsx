@@ -8,11 +8,11 @@ import {
   ShortcutsSection,
   DataSection,
 } from "@/features/settings";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function SettingsPage() {
   const { t } = useTranslation();
-  usePageTitle(t("nav.settings"));
+  usePageMeta(t("nav.settings"), t("meta.settings.description"));
 
   return (
     <div className="h-full overflow-y-auto p-6">

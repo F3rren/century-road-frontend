@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function NotFoundPage() {
   const { t } = useTranslation();
-  usePageTitle(t("notFound.title"));
+  usePageMeta(t("notFound.title"), t("meta.notFound.description"));
 
   return (
     <div className="h-full flex flex-col items-center justify-center gap-4">

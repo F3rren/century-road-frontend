@@ -10,10 +10,10 @@ import {
   ThirdPartiesSection,
 } from "@/features/privacy";
 import { LegalPage, SeeAlso } from "@/features/legal";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function PrivacyPage() {
-  usePageTitle("Privacy");
+  usePageMeta("Privacy", "Come Century Road tratta i tuoi dati");
 
   return (
     <LegalPage

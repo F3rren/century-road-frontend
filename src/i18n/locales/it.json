@@ -197,5 +197,25 @@
       "map": "Mappa: © OpenStreetMap contributors · OpenFreeMap",
       "boundaries": "Confini: Natural Earth (dominio pubblico)"
     }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, l'archivio della storia: scopri cosa è successo oggi nel corso dei secoli, con mappa interattiva, articoli Wikipedia e foto storiche."
+    },
+    "map": {
+      "description": "Esplora sulla mappa gli eventi storici accaduti oggi nel mondo, con anniversari e articoli da Wikipedia per ogni paese."
+    },
+    "dashboard": {
+      "description": "Statistiche sugli eventi di oggi: quanti articoli, quali paesi, l'arco temporale coperto dall'archivio di Century Road."
+    },
+    "archive": {
+      "description": "Sfoglia l'archivio completo degli eventi di oggi in ogni secolo, filtrando per anno e tipo di voce."
+    },
+    "settings": {
+      "description": "Personalizza aspetto, lingua e proiezione predefinita della mappa di Century Road."
+    },
+    "notFound": {
+      "description": "La pagina cercata non esiste. Torna alla mappa di Century Road per continuare a esplorare la storia di oggi."
+    }
   }
 }

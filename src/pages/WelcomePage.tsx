@@ -9,7 +9,7 @@ import {
   WIKIMEDIA_COMMONS_URL,
 } from "@/features/terms";
 import { PhotoCarousel, useHistoryPhotoCarousel } from "@/features/welcome";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { markWelcomeSeen } from "@/lib/welcomeSeen";
 
 // The threshold to the app, shown once (see IndexRoute/welcomeSeen). A wire
@@ -24,7 +24,7 @@ export function WelcomePage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { photos } = useHistoryPhotoCarousel();
-  usePageTitle(t("welcome.pageTitle"));
+  usePageMeta(t("welcome.pageTitle"), t("meta.welcome.description"));
 
   const dateline = new Intl.DateTimeFormat(i18n.language, {
     day: "numeric",

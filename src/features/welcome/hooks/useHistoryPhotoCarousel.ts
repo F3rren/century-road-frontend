@@ -25,7 +25,7 @@ const TYPES: readonly HistorySectionKey[] = ['selected', 'events'];
 // day's pool of image-bearing entries runs 35-55+ (measured directly
 // against the backend across several random days), so this is nowhere
 // near the actual ceiling.
-const MAX_PHOTOS = 24;
+const MAX_PHOTOS = 30;
 
 export interface HistoryPhoto {
   id: string;
@@ -46,6 +46,12 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
+// Wikimedia's URLs carry a query string (?utm_source=...), so the extension
+// never sits at the literal end of the string — anchoring on `$` alone
+// silently never matches anything and every check below would pass every
+// URL through unfiltered (found the hard way: shipped once, verified "clean"
+// against a pool-size count that never actually exercised the exclusion).
+
 // Wikimedia rasterises an SVG's thumbnail on request rather than serving a
 // pre-generated one — measured taking 20s+ on a cold cache, well past a
 // single filmstrip loop, which is what was showing as blank frames. SVGs on
@@ -53,7 +59,28 @@ function shuffle<T>(items: T[]): T[] {
 // photographs" per the brief, so skipping them is a fidelity win too, not
 // just a loading-speed one.
 function isSvg(url: string): boolean {
-  return /\.svg$/i.test(url);
+  return /\.svg(\?|$)/i.test(url);
+}
+
+// Wikipedia's own "thumbnail" is sometimes the unscaled original verbatim
+// (its width already under the requested size, so it skips resizing) — for
+// a lossless PNG that can still mean 1-2+ MB despite modest pixel dimensions.
+// Real photographs are practically always JPEG on Commons; PNG here is
+// almost always a map, montage, or logo — off-brief the same way SVG is.
+function isPng(url: string): boolean {
+  return /\.png(\?|$)/i.test(url);
+}
+
+// Same "unscaled thumbnail" quirk as isPng's comment, but for JPEGs, where
+// format alone can't flag it: measured 600KB-1.8MB single frames from
+// "thumbnails" reported as ~1000px on a side, versus ~200-500px for every
+// normal one sampled. buildImageSources' own 1600px cap only guards the
+// originalImage fallback, never the thumbnail field itself — this tile only
+// ever renders at 160-224 CSS px, so nothing here needs more than a few
+// hundred px to look sharp even at a high DPR.
+const MAX_TILE_SIDE = 600;
+function isOversizedForTile(image: { width: number; height: number }): boolean {
+  return Math.max(image.width, image.height) > MAX_TILE_SIDE;
 }
 
 // Real historical photography for the Welcome page's carousel — never a
@@ -84,7 +111,12 @@ export function useHistoryPhotoCarousel() {
         // crowd out every other era in the rotation.
         const page = entry.pages.find((candidate) => {
           const candidateImage = buildImageSources(candidate);
-          return candidateImage && !isSvg(candidateImage.src);
+          return (
+            candidateImage &&
+            !isSvg(candidateImage.src) &&
+            !isPng(candidateImage.src) &&
+            !isOversizedForTile(candidateImage)
+          );
         });
         const image = page && buildImageSources(page);
         if (!image || seenFiles.has(image.filePageUrl)) continue;

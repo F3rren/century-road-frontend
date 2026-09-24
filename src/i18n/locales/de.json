@@ -194,7 +194,28 @@
       "creditsLabel": "Quellen und Credits",
       "photos": "Historische Fotos: Wikimedia Commons (Lizenz bei jeder Datei angegeben)",
       "wikipedia": "Historische Texte: Wikipedia (CC BY-SA 4.0)",
-      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap"
+      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Grenzen: Natural Earth (gemeinfrei)"
+    }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, das Archiv der Geschichte: entdecke, was heute im Laufe der Jahrhunderte geschah, mit interaktiver Karte, Wikipedia-Artikeln und historischen Fotos."
+    },
+    "map": {
+      "description": "Entdecke auf der Karte die historischen Ereignisse von heute weltweit, mit Jahrestagen und Wikipedia-Artikeln für jedes Land."
+    },
+    "dashboard": {
+      "description": "Statistiken zu den heutigen Ereignissen: wie viele Artikel, welche Länder, welcher Zeitraum im Archiv von Century Road abgedeckt wird."
+    },
+    "archive": {
+      "description": "Durchsuche das vollständige Archiv der heutigen Ereignisse aus jedem Jahrhundert, filterbar nach Jahr und Eintragstyp."
+    },
+    "settings": {
+      "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Century Road an."
+    },
+    "notFound": {
+      "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Century Road zurück, um die Geschichte von heute weiter zu erkunden."
     }
   }
 }
