@@ -1,4 +1,5 @@
 import type { Map as MapLibreMap, ProjectionSpecification } from 'maplibre-gl';
+import { getReducedMotionOverride } from '@/hooks/useReducedMotion';
 import type { ProjectionType } from '../types';
 
 // MapLibre's own setProjection('mercator' | 'globe') swaps in a single frame,
@@ -34,8 +35,12 @@ function easeInOutCubic(progress: number): number {
     : 1 - (-2 * progress + 2) ** 3 / 2;
 }
 
+// Real OS preference OR Impostazioni' manual override — the CSS kill-switch
+// in globals.css only neutralizes CSS animation/transition timing, which
+// this requestAnimationFrame-driven blend never used in the first place, so
+// it has to be checked here explicitly instead.
 function prefersReducedMotion(): boolean {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches || getReducedMotionOverride();
 }
 
 export interface ProjectionAnimator {

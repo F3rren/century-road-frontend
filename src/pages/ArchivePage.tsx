@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ArchiveFilters, ArchiveResults, useArchiveFilters } from "@/features/archive";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export function ArchivePage() {
-  usePageTitle("Archivio");
+  const { t } = useTranslation();
+  usePageTitle(t("nav.archive"));
   const { filters, update, reset } = useArchiveFilters();
   // Bumped on "Azzera i filtri" so the filter form's own free-text fields
   // (the year range, which hold local state while typing) remount with the
@@ -15,8 +17,8 @@ export function ArchivePage() {
     <div className="h-full overflow-y-auto p-6">
       <div className="mx-auto max-w-4xl space-y-6">
         <PageHeader
-          title="Archivio"
-          description="Ogni voce che Wikipedia registra per un giorno, con anni e tipo a scelta"
+          title={t("nav.archive")}
+          description={t("archive.pageDescription")}
         />
         <ArchiveFilters
           key={resetToken}

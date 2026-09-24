@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { buildImageSources } from '../lib/images';
 import type { PageRef } from '../types';
@@ -15,6 +16,7 @@ interface RelatedArticleProps {
 // extract describe the article, not the event, so they sit under the
 // article's own title link, and the image (with its own credit) beside it.
 export function RelatedArticle({ page }: RelatedArticleProps) {
+  const { t } = useTranslation();
   const image = buildImageSources(page);
 
   return (
@@ -45,7 +47,7 @@ export function RelatedArticle({ page }: RelatedArticleProps) {
               href={image.filePageUrl}
               className="inline-flex min-h-11 items-center text-[11px] text-muted-foreground"
             >
-              Autore e licenza dell'immagine
+              {t('history.relatedArticle.imageCredit')}
             </ExternalAnchor>
           </figcaption>
         </figure>

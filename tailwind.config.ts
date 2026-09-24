@@ -70,6 +70,53 @@ const config: Config = {
         // direction's own "type size carries importance" principle.
         display: ['"Oswald"', "Impact", "Haettenschweiler", "sans-serif"],
       },
+      // The Welcome page's one signature interaction — a dateline typing in
+      // like a wire dispatch, then the masthead/tagline/rule/button
+      // resolving in sequence via animation-delay. Real OS-level reduced
+      // motion drops these via stock motion-safe:/motion-reduce: (unmodified
+      // — see globals.css for why the in-app override doesn't touch these
+      // variants at all and instead neutralizes timing globally).
+      keyframes: {
+        typewriter: {
+          from: { width: "0" },
+          to: { width: "100%" },
+        },
+        "caret-blink": {
+          "0%, 100%": { opacity: "0" },
+          "50%": { opacity: "1" },
+        },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(0.5rem)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "grow-x": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+        // The photo filmstrip's seamless loop: the track renders the photo
+        // pool twice back to back, so translating exactly -50% lands on a
+        // frame-for-frame duplicate of the start — no jump, no reset.
+        "filmstrip-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        typewriter: "typewriter 1.1s steps(22, end) forwards",
+        // forwards: settles on the 100% keyframe (opacity 0) once the 4
+        // blinks finish, so the caret disappears on its own even under the
+        // reduce-motion override below (near-zero duration, still forwards).
+        "caret-blink": "caret-blink 0.9s step-end 4 forwards",
+        // fill-mode "both" (not just "forwards"): with a delay, the element
+        // must sit at the from-keyframe (invisible) during that delay, or
+        // it flashes visible in its default state before its turn arrives.
+        "fade-up": "fade-up 0.6s ease-out both",
+        "grow-x": "grow-x 0.5s ease-out both",
+        // Slow and ambient on purpose — a background filmstrip, not the
+        // page's focal motion. linear, never eased: an eased infinite loop
+        // visibly surges/stalls at every repeat.
+        "filmstrip-scroll": "filmstrip-scroll 50s linear infinite",
+      },
       fontSize: {
         // Page-level <h1>, set in the display face. Oswald is already
         // condensed, so it wants little to no extra negative tracking —

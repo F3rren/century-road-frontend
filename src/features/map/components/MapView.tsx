@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { AlertTriangle, RotateCw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { heatColor } from '../constants/heat';
 import { COUNTRIES_GEOJSON_URL } from '../constants/countries';
@@ -43,11 +44,16 @@ export function MapView({
   selectedCountryCode,
   countryHeatmap,
 }: MapViewProps) {
+  const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const projectionAnimatorRef = useRef<ProjectionAnimator | null>(null);
   // Ref avoids stale-closure issue in the once('load') callback
   const heatmapRef = useRef<Record<string, number>>(countryHeatmap ?? {});
+  // Same stale-closure issue, same fix: the click handler below is bound once
+  // inside once('load') and would otherwise keep naming countries in
+  // whatever language was active when the map first loaded.
+  const languageRef = useRef(i18n.language);
   const [loadError, setLoadError] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
 
@@ -135,7 +141,9 @@ export function MapView({
         const props = feature.properties as Record<string, string>;
         const code = props['iso_a2'] ?? '';
         const englishName = props['name'] ?? props['admin'] ?? '';
-        if (code && englishName) onCountryClick?.({ name: localizedCountryName(code, englishName), code });
+        if (code && englishName) {
+          onCountryClick?.({ name: localizedCountryName(code, englishName, languageRef.current), code });
+        }
       });
 
       map.on('mouseenter', 'countries-fill', () => {
@@ -183,6 +191,11 @@ export function MapView({
     if (map.getLayer('countries-outline')) map.setFilter('countries-outline', filter);
   }, [selectedCountryCode]);
 
+  // Keep languageRef current for the click handler above.
+  useEffect(() => {
+    languageRef.current = i18n.language;
+  }, [i18n.language]);
+
   // Sync heatmap colors
   useEffect(() => {
     heatmapRef.current = countryHeatmap ?? {};
@@ -200,18 +213,18 @@ export function MapView({
       <div
         ref={containerRef}
         className="h-full w-full bg-muted"
-        aria-label="Mappa storica interattiva: gli eventi di oggi nel mondo"
+        aria-label={t('map.panelAriaLabel')}
       />
       {loadError && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/95 p-6 text-center">
           <AlertTriangle className="h-8 w-8 text-destructive" />
-          <p className="text-sm font-medium">Impossibile caricare la mappa</p>
+          <p className="text-sm font-medium">{t('map.error.title')}</p>
           <p className="max-w-xs text-xs text-muted-foreground">
-            Controlla la connessione di rete e riprova.
+            {t('map.error.description')}
           </p>
           <Button size="sm" onClick={() => setRetryKey((k) => k + 1)}>
             <RotateCw className="h-3.5 w-3.5" />
-            Riprova
+            {t('map.error.retry')}
           </Button>
         </div>
       )}

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useOnThisDay, type HistorySectionKey } from '@/features/history';
 import { todayMonthDay } from '@/lib/months';
+import { deriveContentLanguage } from '@/i18n/contentLanguage';
 import { countByCountry, geocodeEntries, type GeocodedEntry } from '../lib/geocodeEntries';
 import { fetchCountryFeatures, listCountries, type CountryFeature } from '../lib/countryGeometry';
 import type { Country } from '../types';
@@ -18,11 +20,12 @@ const TYPES: readonly HistorySectionKey[] = ['selected', 'events'];
 // shapes, reused by the heatmap, the "vai a un paese" picker and per-country
 // filtering — see geocodeEntries.ts for what "guessed" means here.
 export function useTodayHistory() {
+  const { i18n } = useTranslation();
   const today = useMemo(() => todayMonthDay(), []);
   const { data, isLoading, error } = useOnThisDay({
     month: today.month,
     day: today.day,
-    lang: 'it',
+    lang: deriveContentLanguage(i18n.language),
     types: TYPES,
   });
 
@@ -38,19 +41,19 @@ export function useTodayHistory() {
       .catch((fetchError: unknown) => {
         if (isStale) return;
         setCountryFeaturesError(
-          fetchError instanceof Error ? fetchError.message : 'Errore sconosciuto',
+          fetchError instanceof Error ? fetchError.message : i18n.t('common.unknownError'),
         );
       });
     return () => {
       isStale = true;
     };
-  }, []);
+  }, [i18n]);
 
   const geocodedEvents = useMemo<GeocodedEntry[]>(() => {
     const events = data?.sections.events;
     if (!events || !countryFeatures) return [];
-    return geocodeEntries(events.items, countryFeatures);
-  }, [data, countryFeatures]);
+    return geocodeEntries(events.items, countryFeatures, i18n.language);
+  }, [data, countryFeatures, i18n.language]);
 
   const countryHeatmap = useMemo(() => countByCountry(geocodedEvents), [geocodedEvents]);
 
@@ -58,8 +61,8 @@ export function useTodayHistory() {
   // event attributed today — picking one with none shows the panel's own
   // "no event found" state instead of only offering a curated subset.
   const availableCountries = useMemo<Country[]>(
-    () => (countryFeatures ? listCountries(countryFeatures) : []),
-    [countryFeatures],
+    () => (countryFeatures ? listCountries(countryFeatures, i18n.language) : []),
+    [countryFeatures, i18n.language],
   );
 
   function eventsForCountry(countryCode: string) {

@@ -14,10 +14,12 @@
     "@turf/boolean-point-in-polygon": "^7.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "i18next": "^26.4.2",
     "lucide-react": "^1.47.0",
     "maplibre-gl": "^6.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^17.0.15",
     "react-router-dom": "^7.18.4",
     "tailwind-merge": "2.6.1"
   },

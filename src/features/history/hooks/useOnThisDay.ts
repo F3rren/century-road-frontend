@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import i18n from '@/i18n';
 import { buildOnThisDayPath, fetchOnThisDay } from '../services/historyApi';
 import type { OnThisDayData, OnThisDayParams } from '../types';
 
@@ -7,7 +8,7 @@ type Settled =
   | { path: string; data: null; error: string };
 
 function toMessage(error: unknown): string {
-  return error instanceof Error ? error.message : 'Errore sconosciuto';
+  return error instanceof Error ? error.message : i18n.t('common.unknownError');
 }
 
 export function useOnThisDay(params: OnThisDayParams) {

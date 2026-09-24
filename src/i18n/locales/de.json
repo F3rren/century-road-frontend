@@ -1,0 +1,200 @@
+{
+  "common": {
+    "loading": "Wird geladen…",
+    "unknownError": "Unbekannter Fehler",
+    "opensInNewTab": " (öffnet in einem neuen Tab)"
+  },
+  "nav": {
+    "map": "Karte",
+    "dashboard": "Dashboard",
+    "archive": "Archiv",
+    "settings": "Einstellungen",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "ariaLabel": "Hauptnavigation",
+    "brandTagline": "press archive"
+  },
+  "header": {
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "map": {
+    "panelAriaLabel": "Interaktive historische Karte: die heutigen Ereignisse weltweit",
+    "error": {
+      "title": "Karte konnte nicht geladen werden",
+      "description": "Überprüfe deine Internetverbindung und versuche es erneut.",
+      "retry": "Erneut versuchen"
+    },
+    "projection": {
+      "groupLabel": "Kartenprojektion",
+      "mercator": "Flachkarte",
+      "globe": "Globus"
+    },
+    "legend": {
+      "today": "Heute",
+      "ariaLabel": "Legende zur Ereignisdichte",
+      "level": {
+        "high": "≥ 6 Ereignisse",
+        "mid": "3–5 Ereignisse",
+        "low": "1–2 Ereignisse"
+      },
+      "methodology": "Land aus dem ersten verlinkten Artikel mit Koordinaten abgeleitet"
+    },
+    "events": {
+      "backToGlobal": "Zurück zur globalen Ansicht",
+      "todayTitle": "Heute geschah",
+      "loadError": "Die heutigen Ereignisse konnten nicht geladen werden ({{error}}).",
+      "noEventsFor": "Für <bold>{{country}}</bold> wurden heute keine Ereignisse gefunden",
+      "countryPickerLabel": "Zu einem Land wechseln",
+      "loadingCountries": "Länder werden geladen…",
+      "selectCountryPlaceholder": "Land auswählen…",
+      "countriesLoadError": "Die Länderliste konnte nicht geladen werden ({{error}}).",
+      "clickHint": "Klicke auf ein Land auf der Karte (oder nutze das Menü oben), um seine Ereignisse zu sehen",
+      "panelAriaLabel": "Historische Ereignisse",
+      "eventsButton": "Ereignisse",
+      "closePanel": "Ereignis-Panel schließen",
+      "anniversariesTitle": "Jahrestage am {{day}}. {{month}}"
+    }
+  },
+  "dashboard": {
+    "description": "Statistiken zu den heutigen Ereignissen, mit dem aus verlinkten Artikeln abgeleiteten Land",
+    "loadError": "Die Statistiken konnten nicht geladen werden ({{error}}).",
+    "stats": {
+      "noData": {
+        "title": "Keine Statistiken verfügbar",
+        "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
+      },
+      "events": { "label": "Heutige Ereignisse" },
+      "countries": {
+        "label": "Identifizierte Länder",
+        "detail": "{{geocoded}} von {{total}} Ereignissen"
+      },
+      "span": { "label": "Zeitspanne" },
+      "topCountry": {
+        "label": "Meistgenanntes Land",
+        "detail_one": "{{count}} Ereignis",
+        "detail_other": "{{count}} Ereignisse"
+      }
+    },
+    "archiveTeaser": {
+      "heading": "Archiv",
+      "description": "Diese Statistiken beziehen sich auf die heutigen Ereignisse. Um jeden Eintrag zu durchsuchen, den Wikipedia für einen Tag verzeichnet, aus jedem Jahrhundert, gefiltert nach Jahr und Eintragstyp, öffne das vollständige Archiv.",
+      "cta": "Archiv öffnen"
+    }
+  },
+  "archive": {
+    "pageDescription": "Jeder Eintrag, den Wikipedia für einen Tag verzeichnet, mit wählbaren Jahren und Eintragstyp",
+    "filters": {
+      "dayLabel": "Tag",
+      "monthSrLabel": "Monat",
+      "daySrLabel": "Tag des Monats",
+      "yearsLabel": "Jahre (optional)",
+      "yearFromSr": "Startjahr",
+      "yearToSr": "Endjahr",
+      "yearFromPlaceholder": "Von, z. B. -44",
+      "yearToPlaceholder": "Bis",
+      "typeLegend": "Eintragstyp",
+      "languageLegend": "Sprache",
+      "languageItalian": "Italienisch",
+      "languageEnglish": "Englisch",
+      "searchLabel": "In den Ergebnissen suchen",
+      "searchPlaceholder": "Ein Wort im Text oder in einem Artikel…",
+      "reset": "Filter zurücksetzen"
+    },
+    "results": {
+      "loading": "Archiv wird geladen…",
+      "loadError": "Das Archiv konnte nicht geladen werden ({{error}}).",
+      "fallbackNote": "Einige Einträge sind auf Englisch: Die italienische Wikipedia-Ausgabe hat sie nicht.",
+      "staleNote": "Daten möglicherweise veraltet: Wikipedia war nicht erreichbar.",
+      "empty": "Keine Einträge für diesen Tag mit diesen Filtern.",
+      "noMatches": "Keine Ergebnisse für „{{query}}“."
+    }
+  },
+  "history": {
+    "section": {
+      "selected": "Ausgewählt",
+      "events": "Ereignisse",
+      "births": "Geburtstage",
+      "deaths": "Todestage",
+      "holidays": "Feiertage und Gedenktage"
+    },
+    "subheadingAllEvents": "Alle Ereignisse",
+    "fallbackNote": "Text auf Englisch: Die italienische Wikipedia-Ausgabe war nicht verfügbar.",
+    "staleNote": "Daten möglicherweise veraltet: Wikipedia war nicht erreichbar.",
+    "loading": "Ereignisse werden geladen…",
+    "loadError": "Die heutigen Ereignisse konnten nicht geladen werden ({{error}}).",
+    "empty": "Keine Einträge für diesen Tag.",
+    "card": {
+      "relatedCount_one": "{{count}} verlinkter Artikel",
+      "relatedCount_other": "{{count}} verlinkte Artikel"
+    },
+    "dialog": {
+      "close": "Schließen",
+      "relatedHeading": "Verlinkte Artikel"
+    },
+    "attribution": {
+      "licenseLabel": "Lizenz"
+    },
+    "relatedArticle": {
+      "imageCredit": "Autor und Lizenz des Bildes"
+    }
+  },
+  "settings": {
+    "pageDescription": "Erscheinungsbild, Sprache und weitere Einstellungen, nur auf diesem Gerät gespeichert",
+    "appearance": {
+      "title": "Erscheinungsbild",
+      "light": "Hell",
+      "dark": "Dunkel"
+    },
+    "language": {
+      "title": "Sprache und Inhalte",
+      "uiLabel": "Sprache der Oberfläche",
+      "contentNote": "Historische Artikel folgen dieser Sprache, sofern verfügbar (nur Italienisch oder Englisch); sie bleibt unabhängig davon im Archiv oder durch Auswahl eines Landes auf der Karte änderbar.",
+      "exampleLabel": "Beispiel für das Datumsformat"
+    },
+    "map": {
+      "title": "Karte",
+      "defaultProjectionLabel": "Standardprojektion"
+    },
+    "accessibility": {
+      "title": "Barrierefreiheit",
+      "reducedMotionLabel": "Animationen",
+      "reducedMotionOff": "Systemeinstellung folgen",
+      "reducedMotionOn": "Immer reduziert"
+    },
+    "shortcuts": {
+      "title": "Tastenkombinationen",
+      "columnKey": "Taste",
+      "columnAction": "Aktion",
+      "disabledNote": "Deaktiviert, während du in ein Textfeld schreibst.",
+      "focusCountryPicker": "Länderauswahl fokussieren"
+    },
+    "data": {
+      "title": "Daten und Datenschutz",
+      "clearButton": "Lokale Daten löschen",
+      "clearConfirm": "Alle auf diesem Gerät gespeicherten Einstellungen löschen? Die Seite wird neu geladen.",
+      "privacyLink": "Datenschutzerklärung lesen",
+      "legalNote": "Die Seiten Datenschutz und Nutzungsbedingungen sind vorerst nur auf Italienisch verfügbar."
+    }
+  },
+  "date": {
+    "era": {
+      "bc": "v. Chr."
+    }
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "backToMap": "Zurück zur Karte"
+  },
+  "welcome": {
+    "pageTitle": "Willkommen",
+    "tagline": "Das Archiv der Geschichte, einen Tag nach dem anderen",
+    "enter": "Betreten",
+    "footer": {
+      "creditsLabel": "Quellen und Credits",
+      "photos": "Historische Fotos: Wikimedia Commons (Lizenz bei jeder Datei angegeben)",
+      "wikipedia": "Historische Texte: Wikipedia (CC BY-SA 4.0)",
+      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap"
+    }
+  }
+}

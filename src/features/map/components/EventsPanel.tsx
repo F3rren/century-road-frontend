@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { X, Globe, CalendarDays, CalendarClock } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { EntryList, HistoryEvents } from '@/features/history';
-import { MONTH_NAMES } from '@/lib/months';
+import { monthNames } from '@/lib/months';
 import type { useTodayHistory } from '../hooks/useTodayHistory';
 import type { Country } from '../types';
 
@@ -22,6 +23,8 @@ interface EventsPanelProps {
 }
 
 export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, history }: EventsPanelProps) {
+  const { t, i18n } = useTranslation();
+  const months = monthNames(i18n.language);
   const { today, data, isLoading, error, countryFeaturesError, availableCountries, eventsForCountry } = history;
   // The map/globe is pointer-only: below desktop this panel isn't docked, so
   // it needs its own open state instead of always taking up map width.
@@ -64,7 +67,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
               variant="ghost"
               size="icon"
               onClick={onClearCountry}
-              aria-label="Torna alla vista globale"
+              aria-label={t('map.events.backToGlobal')}
             >
               <X className="h-4 w-4 text-muted-foreground" />
             </Button>
@@ -73,9 +76,9 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
           <>
             <CalendarDays className="h-4 w-4 shrink-0 text-primary" />
             <div className="flex-1 min-w-0">
-              <p className="font-display text-base font-semibold tracking-tight">Accadde oggi</p>
+              <p className="font-display text-base font-semibold tracking-tight">{t('map.events.todayTitle')}</p>
               <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                {today.day} {MONTH_NAMES[today.month]}
+                {today.day} {months[today.month]}
               </p>
             </div>
           </>
@@ -87,29 +90,32 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
       <div className="flex-1 overflow-y-auto p-4 space-y-6" aria-live="polite">
         {selectedCountry ? (
           isLoading ? (
-            <p className={STATUS_CLASS}>Caricamento…</p>
+            <p className={STATUS_CLASS}>{t('common.loading')}</p>
           ) : error ? (
             <p className="px-0.5 py-2 text-xs text-destructive">
-              Impossibile caricare gli eventi di oggi ({error}).
+              {t('map.events.loadError', { error })}
             </p>
           ) : countryEvents.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
               <Globe className="h-8 w-8 text-muted-foreground/40" />
               <p className="text-sm text-muted-foreground">
-                Nessun evento di oggi individuato per{' '}
-                <span className="font-medium">{selectedCountry.name}</span>
+                <Trans
+                  i18nKey="map.events.noEventsFor"
+                  values={{ country: selectedCountry.name }}
+                  components={{ bold: <span className="font-medium" /> }}
+                />
               </p>
               <button
                 onClick={onClearCountry}
                 className="mt-2 text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                Torna alla vista globale
+                {t('map.events.backToGlobal')}
               </button>
             </div>
           ) : (
             <div>
               <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
-                Anniversari del {today.day} {MONTH_NAMES[today.month]}
+                {t('map.events.anniversariesTitle', { day: today.day, month: months[today.month] })}
               </h2>
               {events && data && (
                 <EntryList
@@ -128,7 +134,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                 htmlFor="country-picker"
                 className="mb-1.5 block font-display text-eyebrow uppercase text-muted-foreground"
               >
-                Vai a un paese
+                {t('map.events.countryPickerLabel')}
               </label>
               <select
                 id="country-picker"
@@ -143,7 +149,9 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                 }}
               >
                 <option value="" disabled>
-                  {availableCountries.length === 0 ? 'Caricamento dei paesi…' : 'Seleziona un paese…'}
+                  {availableCountries.length === 0
+                    ? t('map.events.loadingCountries')
+                    : t('map.events.selectCountryPlaceholder')}
                 </option>
                 {availableCountries.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -153,18 +161,18 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
               </select>
               {countryFeaturesError && (
                 <p className="mt-1 text-xs text-destructive">
-                  Impossibile caricare l'elenco dei paesi ({countryFeaturesError}).
+                  {t('map.events.countriesLoadError', { error: countryFeaturesError })}
                 </p>
               )}
             </div>
             <HistoryEvents
-              title={`Anniversari del ${today.day} ${MONTH_NAMES[today.month]}`}
+              title={t('map.events.anniversariesTitle', { day: today.day, month: months[today.month] })}
               data={data}
               isLoading={isLoading}
               error={error}
             />
             <p className="pt-2 pb-1 text-center text-xs text-muted-foreground">
-              Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi
+              {t('map.events.clickHint')}
             </p>
           </>
         )}
@@ -174,7 +182,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
 
   if (isDesktop) {
     return (
-      <aside aria-label="Eventi storici" className="flex h-full w-80 shrink-0 flex-col border-r border-border bg-background">
+      <aside aria-label={t('map.events.panelAriaLabel')} className="flex h-full w-80 shrink-0 flex-col border-r border-border bg-background">
         {panel}
       </aside>
     );
@@ -188,7 +196,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
         onClick={() => setMobileOpen(true)}
       >
         <CalendarClock className="h-4 w-4" />
-        Eventi
+        {t('map.events.eventsButton')}
       </Button>
       {mobileOpen && (
         <div
@@ -198,7 +206,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
         />
       )}
       <aside
-        aria-label="Eventi storici"
+        aria-label={t('map.events.panelAriaLabel')}
         className={cn(
           'fixed inset-y-0 left-0 z-50 flex w-[85vw] max-w-sm flex-col border-r border-border bg-background transition-transform duration-300 motion-reduce:duration-75',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
@@ -207,13 +215,13 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-2">
           <span className="font-display text-eyebrow uppercase text-muted-foreground">
-            Eventi
+            {t('map.events.eventsButton')}
           </span>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setMobileOpen(false)}
-            aria-label="Chiudi pannello eventi"
+            aria-label={t('map.events.closePanel')}
           >
             <X className="h-4 w-4" />
           </Button>

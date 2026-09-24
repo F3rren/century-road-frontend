@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes } from 'react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
 // Every link in the history feature leaves the app (Wikipedia, Commons, the
@@ -8,6 +9,7 @@ export function ExternalAnchor({
   children,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const { t } = useTranslation();
   return (
     <a
       {...props}
@@ -19,7 +21,7 @@ export function ExternalAnchor({
       )}
     >
       {children}
-      <span className="sr-only"> (si apre in una nuova scheda)</span>
+      <span className="sr-only">{t('common.opensInNewTab')}</span>
     </a>
   );
 }

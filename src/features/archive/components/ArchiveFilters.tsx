@@ -1,7 +1,8 @@
-import { SECTION_LABELS, SECTION_ORDER, type HistoryLanguage } from '@/features/history';
+import { useTranslation } from 'react-i18next';
+import { SECTION_LABEL_KEYS, SECTION_ORDER, type HistoryLanguage } from '@/features/history';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { daysInMonth, MONTH_NAMES } from '@/lib/months';
+import { daysInMonth, monthNames } from '@/lib/months';
 import type { ArchiveFilters as ArchiveFiltersState } from '../types';
 import { YearRangeFields } from './YearRangeFields';
 
@@ -9,9 +10,12 @@ const LABEL_CLASS = 'mb-1.5 block font-display text-eyebrow uppercase text-muted
 const FIELD_CLASS =
   'min-h-11 w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
-const LANGUAGES: readonly { code: HistoryLanguage; label: string }[] = [
-  { code: 'it', label: 'Italiano' },
-  { code: 'en', label: 'Inglese' },
+// UI-chrome strings, translated per active language ("Inglese" becomes
+// "Englisch" in the German UI) — a different concept from the endonyms in
+// src/i18n/languages.ts, which never translate.
+const LANGUAGES: readonly { code: HistoryLanguage; labelKey: string }[] = [
+  { code: 'it', labelKey: 'archive.filters.languageItalian' },
+  { code: 'en', labelKey: 'archive.filters.languageEnglish' },
 ];
 
 interface ArchiveFiltersProps {
@@ -21,6 +25,8 @@ interface ArchiveFiltersProps {
 }
 
 export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersProps) {
+  const { t, i18n } = useTranslation();
+  const months = monthNames(i18n.language);
   const dayOptions = Array.from({ length: daysInMonth(filters.month) }, (_, i) => i + 1);
 
   function toggleType(key: (typeof SECTION_ORDER)[number]) {
@@ -41,12 +47,12 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <span className={LABEL_CLASS} id="archive-date-label">
-            Giorno
+            {t('archive.filters.dayLabel')}
           </span>
           <div className="grid grid-cols-[1fr_auto] gap-2" role="group" aria-labelledby="archive-date-label">
             <div>
               <label htmlFor="archive-month" className="sr-only">
-                Mese
+                {t('archive.filters.monthSrLabel')}
               </label>
               <select
                 id="archive-month"
@@ -54,7 +60,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
                 onChange={(e) => onChange({ month: Number(e.target.value) })}
                 className={FIELD_CLASS}
               >
-                {MONTH_NAMES.slice(1).map((name, index) => (
+                {months.slice(1).map((name, index) => (
                   <option key={name} value={index + 1}>
                     {name}
                   </option>
@@ -63,7 +69,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
             </div>
             <div>
               <label htmlFor="archive-day" className="sr-only">
-                Giorno del mese
+                {t('archive.filters.daySrLabel')}
               </label>
               <select
                 id="archive-day"
@@ -83,7 +89,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
 
         <div>
           <span className={LABEL_CLASS} id="archive-years-label">
-            Anni (opzionale)
+            {t('archive.filters.yearsLabel')}
           </span>
           <div aria-labelledby="archive-years-label">
             <YearRangeFields
@@ -96,7 +102,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
       </div>
 
       <fieldset>
-        <legend className={LABEL_CLASS}>Tipo di voce</legend>
+        <legend className={LABEL_CLASS}>{t('archive.filters.typeLegend')}</legend>
         <div className="flex flex-wrap gap-x-5 gap-y-1">
           {SECTION_ORDER.map((key) => (
             <label key={key} className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm">
@@ -106,7 +112,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
                 onChange={() => toggleType(key)}
                 className="h-4 w-4 accent-primary"
               />
-              {SECTION_LABELS[key]}
+              {t(SECTION_LABEL_KEYS[key])}
             </label>
           ))}
         </div>
@@ -115,14 +121,14 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className={LABEL_CLASS} id="archive-lang-label">
-            Lingua
+            {t('archive.filters.languageLegend')}
           </span>
           <div
             role="group"
             aria-labelledby="archive-lang-label"
             className="inline-flex divide-x divide-border border border-input"
           >
-            {LANGUAGES.map(({ code, label }) => (
+            {LANGUAGES.map(({ code, labelKey }) => (
               <button
                 key={code}
                 type="button"
@@ -135,7 +141,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
                     : 'bg-background text-muted-foreground hover:text-foreground',
                 )}
               >
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
@@ -143,20 +149,20 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
 
         <div className="min-w-[14rem] flex-1">
           <label htmlFor="archive-query" className={LABEL_CLASS}>
-            Cerca nei risultati
+            {t('archive.filters.searchLabel')}
           </label>
           <input
             id="archive-query"
             type="search"
             value={filters.query}
             onChange={(e) => onChange({ query: e.target.value })}
-            placeholder="Una parola nel testo o in un articolo…"
+            placeholder={t('archive.filters.searchPlaceholder')}
             className={FIELD_CLASS}
           />
         </div>
 
         <Button type="button" variant="outline" size="sm" onClick={onReset}>
-          Azzera i filtri
+          {t('archive.filters.reset')}
         </Button>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   AttributionNotice,
   EntryList,
-  SECTION_LABELS,
+  SECTION_LABEL_KEYS,
   SECTION_ORDER,
   matchesQuery,
   useOnThisDay,
@@ -28,6 +29,7 @@ interface ArchiveResultsProps {
 }
 
 export function ArchiveResults({ filters }: ArchiveResultsProps) {
+  const { t } = useTranslation();
   const fromYear = useDebouncedValue(filters.fromYear, YEAR_DEBOUNCE_MS);
   const toYear = useDebouncedValue(filters.toYear, YEAR_DEBOUNCE_MS);
 
@@ -67,36 +69,36 @@ export function ArchiveResults({ filters }: ArchiveResultsProps) {
 
   return (
     <div className="space-y-6" aria-live="polite">
-      {isLoading && <p className={STATUS_CLASS}>Caricamento dell'archivio…</p>}
+      {isLoading && <p className={STATUS_CLASS}>{t('archive.results.loading')}</p>}
 
       {error && (
         <p role="alert" className="border border-destructive p-4 text-sm text-destructive">
-          Impossibile caricare l'archivio ({error}).
+          {t('archive.results.loadError', { error })}
         </p>
       )}
 
       {data && sections.some(({ section }) => section.fallback) && (
         <p className={NOTE_CLASS}>
-          Alcune voci sono in inglese: la versione italiana di Wikipedia non le ha.
+          {t('archive.results.fallbackNote')}
         </p>
       )}
       {data && sections.some(({ section }) => section.stale) && (
-        <p className={NOTE_CLASS}>Dati non aggiornati: Wikipedia non era raggiungibile.</p>
+        <p className={NOTE_CLASS}>{t('archive.results.staleNote')}</p>
       )}
 
       {data && totalEntries === 0 && (
-        <p className={STATUS_CLASS}>Nessuna voce per questo giorno con questi filtri.</p>
+        <p className={STATUS_CLASS}>{t('archive.results.empty')}</p>
       )}
 
       {data && totalEntries > 0 && query && matchingEntries === 0 && (
-        <p className={STATUS_CLASS}>Nessun risultato per «{query}».</p>
+        <p className={STATUS_CLASS}>{t('archive.results.noMatches', { query })}</p>
       )}
 
       {data &&
         sections.map(({ key, section }) =>
           section.items.length === 0 ? null : (
             <div key={key}>
-              <h2 className={HEADING_CLASS}>{SECTION_LABELS[key]}</h2>
+              <h2 className={HEADING_CLASS}>{t(SECTION_LABEL_KEYS[key])}</h2>
               <EntryList
                 section={section}
                 month={data.date.month}

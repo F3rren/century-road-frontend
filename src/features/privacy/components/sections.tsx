@@ -1,5 +1,9 @@
 import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
 import { THEME_STORAGE_KEY } from "@/hooks/useTheme";
+import { LANGUAGE_STORAGE_KEY } from "@/i18n";
+import { MAP_PROJECTION_STORAGE_KEY } from "@/hooks/useMapProjection";
+import { REDUCED_MOTION_STORAGE_KEY } from "@/hooks/useReducedMotion";
+import { WELCOME_SEEN_STORAGE_KEY } from "@/lib/welcomeSeen";
 import {
   ContactEmail,
   LastUpdated,
@@ -15,7 +19,7 @@ const SUMMARY_ITEMS = [
   "Non serve un account e non ti chiediamo dati personali.",
   "Non usiamo cookie, strumenti di analisi né pubblicità, e non ti profiliamo.",
   "Per mostrare mappa e immagini, il tuo browser contatta alcuni servizi esterni, che vedono il tuo indirizzo IP.",
-  "Nel tuo browser salviamo una sola preferenza, il tema chiaro o scuro, e solo se lo cambi.",
+  "Nel tuo browser salviamo alcune preferenze dell'interfaccia — tema, lingua, proiezione della mappa, animazioni ridotte, se hai già visto il benvenuto — solo quelle che cambi.",
 ] as const;
 
 export function SummarySection() {
@@ -66,17 +70,50 @@ export function StorageSection() {
     <LegalSection title="3. Cookie e archiviazione nel browser">
       <p>Il sito non imposta cookie.</p>
       <p>
-        Se usi il pulsante del tema, il browser salva nel suo archivio locale
-        (localStorage) una voce chiamata{" "}
-        <code className="font-mono text-sm">{THEME_STORAGE_KEY}</code>, con valore{" "}
-        <code className="font-mono text-sm">light</code> o{" "}
-        <code className="font-mono text-sm">dark</code>. Serve solo a ricordare la tua
-        scelta, resta sul tuo dispositivo e non viene inviata a nessuno. Puoi
-        cancellarla dalle impostazioni del browser.
+        Quando usi un controllo specifico — un pulsante in Impostazioni, o il pulsante
+        «Entra» nella pagina di benvenuto — il browser salva nel suo archivio locale
+        (localStorage) solo quella scelta, con una di queste voci:
+      </p>
+      <ul className="list-inside list-disc space-y-1">
+        <li>
+          <code className="font-mono text-sm">{THEME_STORAGE_KEY}</code> — tema, con
+          valore <code className="font-mono text-sm">light</code> o{" "}
+          <code className="font-mono text-sm">dark</code>.
+        </li>
+        <li>
+          <code className="font-mono text-sm">{LANGUAGE_STORAGE_KEY}</code> — lingua
+          dell'interfaccia, con valore <code className="font-mono text-sm">it</code>,{" "}
+          <code className="font-mono text-sm">en</code>,{" "}
+          <code className="font-mono text-sm">de</code> o{" "}
+          <code className="font-mono text-sm">fr</code>.
+        </li>
+        <li>
+          <code className="font-mono text-sm">{MAP_PROJECTION_STORAGE_KEY}</code> —
+          proiezione predefinita della mappa, con valore{" "}
+          <code className="font-mono text-sm">mercator</code> o{" "}
+          <code className="font-mono text-sm">globe</code>.
+        </li>
+        <li>
+          <code className="font-mono text-sm">{REDUCED_MOTION_STORAGE_KEY}</code> —
+          animazioni ridotte, presente con valore{" "}
+          <code className="font-mono text-sm">true</code> solo se l'hai attivata.
+        </li>
+        <li>
+          <code className="font-mono text-sm">{WELCOME_SEEN_STORAGE_KEY}</code> — che hai
+          già visto la pagina di benvenuto, con valore{" "}
+          <code className="font-mono text-sm">true</code>, salvata quando premi «Entra».
+          Serve solo a non mostrartela di nuovo alle visite successive.
+        </li>
+      </ul>
+      <p>
+        Ognuna serve solo a ricordare la tua scelta, resta sul tuo dispositivo e non
+        viene inviata a nessuno. Puoi cancellarle dal pulsante «Cancella dati locali»
+        nella pagina Impostazioni, o dalle impostazioni del browser.
       </p>
       <p>
-        Se non cambi tema, il sito segue la preferenza del tuo sistema e non salva
-        nulla.
+        Se non cambi una preferenza, il sito segue quella del tuo sistema (tema,
+        lingua, animazioni ridotte) o un valore predefinito, e non salva nulla per
+        quella voce.
       </p>
     </LegalSection>
   );

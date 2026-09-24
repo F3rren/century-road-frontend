@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Archive, FileText, Globe, LayoutDashboard, Settings, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -11,18 +12,18 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { label: 'Mappa',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
-  { label: 'Dashboard',    href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
-  { label: 'Archivio',     href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
-  { label: 'Impostazioni', href: '/settings',  icon: Settings,         end: false, shortcut: '4' },
-];
+  { labelKey: 'nav.map',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
+  { labelKey: 'nav.dashboard',  href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
+  { labelKey: 'nav.archive',    href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
+  { labelKey: 'nav.settings',   href: '/settings',  icon: Settings,         end: false, shortcut: '4' },
+] as const;
 
 // Legal pages: reachable from anywhere but not part of the app proper, so they
 // sit below the main links instead of taking a shortcut number.
 const legalItems = [
-  { label: 'Privacy',              href: '/privacy', icon: ShieldCheck },
-  { label: 'Termini e condizioni', href: '/terms',   icon: FileText },
-];
+  { labelKey: 'nav.privacy', href: '/privacy', icon: ShieldCheck },
+  { labelKey: 'nav.terms',   href: '/terms',   icon: FileText },
+] as const;
 
 // Index-tab look shared by the main links and the legal links below them.
 function navLinkClass({ isActive }: { isActive: boolean }): string {
@@ -35,6 +36,7 @@ function navLinkClass({ isActive }: { isActive: boolean }): string {
 }
 
 export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
+  const { t } = useTranslation();
   // Mobile drawer: Escape closes it, like any overlay.
   useEffect(() => {
     if (isDesktop || !open) return;
@@ -55,7 +57,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
         />
       )}
       <aside
-        aria-label="Navigazione principale"
+        aria-label={t('nav.ariaLabel')}
         className={cn(
           'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 motion-reduce:duration-75',
           isDesktop
@@ -85,7 +87,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
               accent color, like a tabbed directory board — not a filled
               rounded highlight. */}
           <nav className="flex-1 px-0 py-2">
-            {navItems.map(({ label, href, icon: Icon, end, shortcut }) => (
+            {navItems.map(({ labelKey, href, icon: Icon, end, shortcut }) => (
               <NavLink
                 key={href}
                 to={href}
@@ -98,13 +100,13 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
                 className={navLinkClass}
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                {label}
+                {t(labelKey)}
               </NavLink>
             ))}
           </nav>
           {/* Legal links, set apart from the sections of the app by a rule. */}
           <div className="shrink-0 border-t border-sidebar-border py-2">
-            {legalItems.map(({ label, href, icon: Icon }) => (
+            {legalItems.map(({ labelKey, href, icon: Icon }) => (
               <NavLink
                 key={href}
                 to={href}
@@ -115,7 +117,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
                 className={navLinkClass}
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                {label}
+                {t(labelKey)}
               </NavLink>
             ))}
           </div>

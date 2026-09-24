@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { OnThisDayData } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { EntryList } from './EntryList';
@@ -17,6 +18,7 @@ interface HistoryEventsProps {
 }
 
 export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsProps) {
+  const { t } = useTranslation();
   const featured = data?.sections.selected;
   const events = data?.sections.events;
   const hasFeatured = (featured?.items.length ?? 0) > 0;
@@ -31,30 +33,30 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
 
       {received.some((s) => s.fallback) && (
         <p className={NOTE_CLASS}>
-          Testi in inglese: la versione italiana di Wikipedia non era disponibile.
+          {t('history.fallbackNote')}
         </p>
       )}
       {received.some((s) => s.stale) && (
         <p className={NOTE_CLASS}>
-          Dati non aggiornati: Wikipedia non era raggiungibile.
+          {t('history.staleNote')}
         </p>
       )}
 
-      {isLoading && <p className={STATUS_CLASS}>Caricamento degli eventi…</p>}
+      {isLoading && <p className={STATUS_CLASS}>{t('history.loading')}</p>}
 
       {error && (
         <p className="px-0.5 py-2 text-xs text-destructive">
-          Impossibile caricare gli eventi di oggi ({error}).
+          {t('history.loadError', { error })}
         </p>
       )}
 
       {data && !hasFeatured && !hasEvents && (
-        <p className={STATUS_CLASS}>Nessuna voce per questo giorno.</p>
+        <p className={STATUS_CLASS}>{t('history.empty')}</p>
       )}
 
       {data && featured && hasFeatured && (
         <div>
-          <h3 className={`${SUBHEADING_CLASS} text-primary`}>In evidenza</h3>
+          <h3 className={`${SUBHEADING_CLASS} text-primary`}>{t('history.section.selected')}</h3>
           <EntryList section={featured} month={data.date.month} day={data.date.day} attribution={data.attribution} />
         </div>
       )}
@@ -63,7 +65,7 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
         <div className={hasFeatured ? 'mt-5' : undefined}>
           {hasFeatured && (
             <h3 className={`${SUBHEADING_CLASS} text-muted-foreground`}>
-              Tutti gli eventi
+              {t('history.subheadingAllEvents')}
             </h3>
           )}
           <EntryList section={events} month={data.date.month} day={data.date.day} attribution={data.attribution} />

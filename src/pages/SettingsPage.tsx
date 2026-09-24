@@ -1,16 +1,30 @@
-import { Settings } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { PageHeader } from "@/components/ui/PageHeader";
+import {
+  AppearanceSection,
+  LanguageSection,
+  MapSection,
+  AccessibilitySection,
+  ShortcutsSection,
+  DataSection,
+} from "@/features/settings";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export function SettingsPage() {
-  usePageTitle("Impostazioni");
+  const { t } = useTranslation();
+  usePageTitle(t("nav.settings"));
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-      <Settings className="h-8 w-8 text-muted-foreground" />
-      <h1 className="font-display text-xl font-semibold uppercase tracking-wide">Impostazioni</h1>
-      <p className="max-w-sm text-sm text-muted-foreground">
-        Questa sezione è in arrivo. Torna a trovarci presto.
-      </p>
+    <div className="h-full overflow-y-auto p-6">
+      <div className="mx-auto max-w-4xl space-y-6">
+        <PageHeader title={t("nav.settings")} description={t("settings.pageDescription")} />
+        <AppearanceSection />
+        <LanguageSection />
+        <MapSection />
+        <AccessibilitySection />
+        <ShortcutsSection />
+        <DataSection />
+      </div>
     </div>
   );
 }
