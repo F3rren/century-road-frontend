@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { formatEventDate } from '@/lib/months';
 import { cleanText } from '../lib/text';
 import type { Attribution, HistoryEntry, HistoryLanguage } from '../types';
@@ -22,6 +23,7 @@ interface HistoryEventCardProps {
 // articles are related reading and are never used as its title or summary.
 // The full picture opens in a popup, so the list stays a scannable column.
 export function HistoryEventCard({ entry, month, day, language, attribution }: HistoryEventCardProps) {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const relatedCount = entry.pages.length;
@@ -44,14 +46,14 @@ export function HistoryEventCard({ entry, month, day, language, attribution }: H
         className="group block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span className="block font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          {formatEventDate(day, month, entry.year)}
+          {formatEventDate(day, month, entry.year, i18n.language)}
         </span>
         <span className="mt-1 line-clamp-2 block whitespace-pre-line font-display text-base font-semibold leading-tight tracking-tight transition-[color] group-hover:text-primary motion-safe:duration-150">
           {cleanText(entry.text)}
         </span>
         {relatedCount > 0 && (
           <span className="mt-1.5 block text-xs text-muted-foreground">
-            {relatedCount} {relatedCount === 1 ? 'articolo collegato' : 'articoli collegati'}
+            {t('history.card.relatedCount', { count: relatedCount })}
           </span>
         )}
       </button>

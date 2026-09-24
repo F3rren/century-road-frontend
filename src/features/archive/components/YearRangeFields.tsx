@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 
 const YEAR_DEBOUNCE_MS = 500;
@@ -27,6 +28,7 @@ function toInputValue(year: number | null): string {
 // number to hold as `fromYear`/`toYear` yet. Remounted (via the parent's
 // `key`) whenever filters reset from outside typing, so this never goes stale.
 export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsProps) {
+  const { t } = useTranslation();
   const [fromText, setFromText] = useState(() => toInputValue(fromYear));
   const [toText, setToText] = useState(() => toInputValue(toYear));
   const debouncedFrom = useDebouncedValue(fromText, YEAR_DEBOUNCE_MS);
@@ -52,13 +54,13 @@ export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsP
     <div className="grid grid-cols-2 gap-2">
       <div>
         <label htmlFor="archive-year-from" className="sr-only">
-          Anno di inizio
+          {t('archive.filters.yearFromSr')}
         </label>
         <input
           id="archive-year-from"
           type="text"
           inputMode="numeric"
-          placeholder="Da, es. -44"
+          placeholder={t('archive.filters.yearFromPlaceholder')}
           value={fromText}
           onChange={(e) => {
             if (!/^-?\d*$/.test(e.target.value)) return;
@@ -70,13 +72,13 @@ export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsP
       </div>
       <div>
         <label htmlFor="archive-year-to" className="sr-only">
-          Anno di fine
+          {t('archive.filters.yearToSr')}
         </label>
         <input
           id="archive-year-to"
           type="text"
           inputMode="numeric"
-          placeholder="A"
+          placeholder={t('archive.filters.yearToPlaceholder')}
           value={toText}
           onChange={(e) => {
             if (!/^-?\d*$/.test(e.target.value)) return;

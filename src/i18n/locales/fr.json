@@ -1,0 +1,221 @@
+{
+  "common": {
+    "loading": "Chargement…",
+    "unknownError": "Erreur inconnue",
+    "opensInNewTab": " (s'ouvre dans un nouvel onglet)"
+  },
+  "nav": {
+    "map": "Carte",
+    "dashboard": "Tableau de bord",
+    "archive": "Archives",
+    "settings": "Paramètres",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation",
+    "ariaLabel": "Navigation principale",
+    "brandTagline": "press archive"
+  },
+  "header": {
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "map": {
+    "panelAriaLabel": "Carte historique interactive : les événements du jour dans le monde",
+    "error": {
+      "title": "Impossible de charger la carte",
+      "description": "Vérifiez votre connexion réseau et réessayez.",
+      "retry": "Réessayer"
+    },
+    "projection": {
+      "groupLabel": "Projection de la carte",
+      "mercator": "Carte plane",
+      "globe": "Globe"
+    },
+    "legend": {
+      "today": "Aujourd'hui",
+      "ariaLabel": "Légende de densité des événements",
+      "level": {
+        "high": "≥ 6 événements",
+        "mid": "3–5 événements",
+        "low": "1–2 événements"
+      },
+      "methodology": "Pays déduit du premier article lié disposant de coordonnées"
+    },
+    "events": {
+      "backToGlobal": "Retour à la vue globale",
+      "todayTitle": "Éphéméride du jour",
+      "loadError": "Impossible de charger les événements du jour ({{error}}).",
+      "noEventsFor": "Aucun événement du jour trouvé pour <bold>{{country}}</bold>",
+      "countryPickerLabel": "Aller à un pays",
+      "loadingCountries": "Chargement des pays…",
+      "selectCountryPlaceholder": "Sélectionner un pays…",
+      "countriesLoadError": "Impossible de charger la liste des pays ({{error}}).",
+      "clickHint": "Cliquez sur un pays sur la carte (ou utilisez le menu ci-dessus) pour voir ses événements",
+      "panelAriaLabel": "Événements historiques",
+      "eventsButton": "Événements",
+      "closePanel": "Fermer le panneau des événements",
+      "anniversariesTitle": "Anniversaires du {{day}} {{month}}"
+    }
+  },
+  "dashboard": {
+    "description": "Statistiques sur les événements du jour, avec le pays déduit des articles liés",
+    "loadError": "Impossible de charger les statistiques ({{error}}).",
+    "stats": {
+      "noData": {
+        "title": "Aucune statistique disponible",
+        "description": "Les données apparaîtront ici dès que les archives contiendront des événements."
+      },
+      "events": { "label": "Événements du jour" },
+      "countries": {
+        "label": "Pays identifiés",
+        "detail": "{{geocoded}} sur {{total}} événements"
+      },
+      "span": { "label": "Période couverte" },
+      "topCountry": {
+        "label": "Pays le plus cité",
+        "detail_one": "{{count}} événement",
+        "detail_other": "{{count}} événements"
+      }
+    },
+    "archiveTeaser": {
+      "heading": "Archives",
+      "description": "Ces statistiques portent sur les événements du jour. Pour parcourir chaque entrée que Wikipédia enregistre pour un jour donné, de n'importe quel siècle, en filtrant par année et par type d'entrée, ouvrez les archives complètes.",
+      "cta": "Ouvrir les archives"
+    }
+  },
+  "archive": {
+    "pageDescription": "Chaque entrée que Wikipédia enregistre pour un jour, avec un choix d'années et de type d'entrée",
+    "filters": {
+      "dayLabel": "Jour",
+      "monthSrLabel": "Mois",
+      "daySrLabel": "Jour du mois",
+      "yearsLabel": "Années (facultatif)",
+      "yearFromSr": "Année de début",
+      "yearToSr": "Année de fin",
+      "yearFromPlaceholder": "De, ex. -44",
+      "yearToPlaceholder": "À",
+      "typeLegend": "Type d'entrée",
+      "languageLegend": "Langue",
+      "languageItalian": "Italien",
+      "languageEnglish": "Anglais",
+      "searchLabel": "Rechercher dans les résultats",
+      "searchPlaceholder": "Un mot dans le texte ou dans un article…",
+      "reset": "Réinitialiser les filtres"
+    },
+    "results": {
+      "loading": "Chargement des archives…",
+      "loadError": "Impossible de charger les archives ({{error}}).",
+      "fallbackNote": "Certaines entrées sont en anglais : l'édition italienne de Wikipédia ne les a pas.",
+      "staleNote": "Données peut-être obsolètes : Wikipédia était inaccessible.",
+      "empty": "Aucune entrée pour ce jour avec ces filtres.",
+      "noMatches": "Aucun résultat pour « {{query}} »."
+    }
+  },
+  "history": {
+    "section": {
+      "selected": "À la une",
+      "events": "Événements",
+      "births": "Naissances",
+      "deaths": "Décès",
+      "holidays": "Fêtes et commémorations"
+    },
+    "subheadingAllEvents": "Tous les événements",
+    "fallbackNote": "Texte en anglais : l'édition italienne de Wikipédia n'était pas disponible.",
+    "staleNote": "Données peut-être obsolètes : Wikipédia était inaccessible.",
+    "loading": "Chargement des événements…",
+    "loadError": "Impossible de charger les événements du jour ({{error}}).",
+    "empty": "Aucune entrée pour ce jour.",
+    "card": {
+      "relatedCount_one": "{{count}} article lié",
+      "relatedCount_other": "{{count}} articles liés"
+    },
+    "dialog": {
+      "close": "Fermer",
+      "relatedHeading": "Articles liés"
+    },
+    "attribution": {
+      "licenseLabel": "Licence"
+    },
+    "relatedArticle": {
+      "imageCredit": "Auteur et licence de l'image"
+    }
+  },
+  "settings": {
+    "pageDescription": "Apparence, langue et autres préférences, enregistrées uniquement sur cet appareil",
+    "appearance": {
+      "title": "Apparence",
+      "light": "Clair",
+      "dark": "Sombre"
+    },
+    "language": {
+      "title": "Langue et contenu",
+      "uiLabel": "Langue de l'interface",
+      "contentNote": "Les articles historiques suivent cette langue lorsqu'elle est disponible (italien ou anglais uniquement) ; elle reste modifiable indépendamment dans les Archives ou en choisissant un pays sur la Carte.",
+      "exampleLabel": "Exemple de format de date"
+    },
+    "map": {
+      "title": "Carte",
+      "defaultProjectionLabel": "Projection par défaut"
+    },
+    "accessibility": {
+      "title": "Accessibilité",
+      "reducedMotionLabel": "Animations",
+      "reducedMotionOff": "Suivre le système",
+      "reducedMotionOn": "Toujours réduites"
+    },
+    "shortcuts": {
+      "title": "Raccourcis clavier",
+      "columnKey": "Touche",
+      "columnAction": "Action",
+      "disabledNote": "Désactivés pendant la saisie dans un champ de texte.",
+      "focusCountryPicker": "Donner le focus au sélecteur de pays"
+    },
+    "data": {
+      "title": "Données et confidentialité",
+      "clearButton": "Effacer les données locales",
+      "clearConfirm": "Effacer toutes les préférences enregistrées sur cet appareil ? La page va se recharger.",
+      "privacyLink": "Lire la politique de confidentialité",
+      "legalNote": "Les pages Confidentialité et Conditions d'utilisation ne sont disponibles qu'en italien pour l'instant."
+    }
+  },
+  "date": {
+    "era": {
+      "bc": "av. J.-C."
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "backToMap": "Retour à la Carte"
+  },
+  "welcome": {
+    "pageTitle": "Bienvenue",
+    "tagline": "Les archives de l'histoire, un jour à la fois",
+    "enter": "Entrer",
+    "footer": {
+      "creditsLabel": "Sources et crédits",
+      "photos": "Photos historiques : Wikimedia Commons (licence indiquée sur chaque fichier)",
+      "wikipedia": "Textes historiques : Wikipédia (CC BY-SA 4.0)",
+      "map": "Carte : © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Frontières : Natural Earth (domaine public)"
+    }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, les archives de l'histoire : découvrez ce qui s'est passé aujourd'hui au fil des siècles, avec une carte interactive, des articles Wikipédia et des photos historiques."
+    },
+    "map": {
+      "description": "Explorez sur la carte les événements historiques survenus aujourd'hui dans le monde, avec des anniversaires et des articles Wikipédia pour chaque pays."
+    },
+    "dashboard": {
+      "description": "Statistiques sur les événements du jour : combien d'articles, quels pays, la période couverte par les archives de Century Road."
+    },
+    "archive": {
+      "description": "Parcourez les archives complètes des événements du jour à travers les siècles, filtrables par année et type d'entrée."
+    },
+    "settings": {
+      "description": "Personnalisez l'apparence, la langue et la projection cartographique par défaut de Century Road."
+    },
+    "notFound": {
+      "description": "La page recherchée n'existe pas. Retournez à la carte de Century Road pour continuer à explorer l'histoire du jour."
+    }
+  }
+}

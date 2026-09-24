@@ -12,10 +12,10 @@ import {
   SummarySection,
   UsageSection,
 } from "@/features/terms";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function TermsPage() {
-  usePageTitle("Termini e condizioni");
+  usePageMeta("Termini e condizioni", "Le regole per usare Century Road");
 
   return (
     <LegalPage

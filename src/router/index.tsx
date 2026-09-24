@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { MapPage } from '@/pages/MapPage';
+import { IndexRoute } from '@/pages/IndexRoute';
+import { WelcomePage } from '@/pages/WelcomePage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ArchivePage } from '@/pages/ArchivePage';
 import { SettingsPage } from '@/pages/SettingsPage';
@@ -15,11 +16,13 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export const router = createBrowserRouter([
+  // Outside AppLayout on purpose: a true threshold, no sidebar/header chrome.
+  { path: '/welcome', element: <WelcomePage /> },
   {
     path: '/',
     element: <AppLayout />,
     children: [
-      { index: true,          element: <MapPage /> },
+      { index: true,          element: <IndexRoute /> },
       { path: 'dashboard',    element: <DashboardPage /> },
       { path: 'archive',      element: <ArchivePage /> },
       { path: 'settings',     element: <SettingsPage /> },

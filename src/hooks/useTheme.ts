@@ -12,22 +12,31 @@ function getInitialTheme(): Theme {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
+function applyTheme(next: Theme): void {
+  document.documentElement.classList.toggle("dark", next === "dark");
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, next);
+  } catch {
+    // Private-browsing/storage-blocked: theme still applies for this
+    // session, it just won't persist across reloads.
+  }
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
+
+  const setTheme = (next: Theme) => {
+    applyTheme(next);
+    setThemeState(next);
+  };
 
   const toggleTheme = () => {
-    setTheme((current) => {
+    setThemeState((current) => {
       const next: Theme = current === "dark" ? "light" : "dark";
-      document.documentElement.classList.toggle("dark", next === "dark");
-      try {
-        localStorage.setItem(THEME_STORAGE_KEY, next);
-      } catch {
-        // Private-browsing/storage-blocked: theme still applies for this
-        // session, it just won't persist across reloads.
-      }
+      applyTheme(next);
       return next;
     });
   };
 
-  return { theme, toggleTheme };
+  return { theme, setTheme, toggleTheme };
 }

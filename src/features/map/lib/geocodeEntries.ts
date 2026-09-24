@@ -19,11 +19,12 @@ export interface GeocodedEntry {
 export function geocodeEntries(
   entries: readonly HistoryEntry[],
   features: readonly CountryFeature[],
+  language: string,
 ): GeocodedEntry[] {
   return entries.map((entry) => {
     const located = entry.pages.find((page) => page.coordinates);
     const country = located?.coordinates
-      ? findCountryAt(located.coordinates.lon, located.coordinates.lat, features)
+      ? findCountryAt(located.coordinates.lon, located.coordinates.lat, features, language)
       : null;
     return { entry, country };
   });

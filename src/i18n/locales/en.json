@@ -1,0 +1,221 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "unknownError": "Unknown error",
+    "opensInNewTab": " (opens in a new tab)"
+  },
+  "nav": {
+    "map": "Map",
+    "dashboard": "Dashboard",
+    "archive": "Archive",
+    "settings": "Settings",
+    "privacy": "Privacy",
+    "terms": "Terms and conditions",
+    "ariaLabel": "Main navigation",
+    "brandTagline": "press archive"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "map": {
+    "panelAriaLabel": "Interactive historical map: today's events around the world",
+    "error": {
+      "title": "Couldn't load the map",
+      "description": "Check your network connection and try again.",
+      "retry": "Retry"
+    },
+    "projection": {
+      "groupLabel": "Map projection",
+      "mercator": "Flat map",
+      "globe": "Globe"
+    },
+    "legend": {
+      "today": "Today",
+      "ariaLabel": "Event-density legend",
+      "level": {
+        "high": "≥ 6 events",
+        "mid": "3–5 events",
+        "low": "1–2 events"
+      },
+      "methodology": "Country inferred from the first linked article with coordinates"
+    },
+    "events": {
+      "backToGlobal": "Back to the global view",
+      "todayTitle": "On this day",
+      "loadError": "Couldn't load today's events ({{error}}).",
+      "noEventsFor": "No events found today for <bold>{{country}}</bold>",
+      "countryPickerLabel": "Go to a country",
+      "loadingCountries": "Loading countries…",
+      "selectCountryPlaceholder": "Select a country…",
+      "countriesLoadError": "Couldn't load the country list ({{error}}).",
+      "clickHint": "Click a country on the map (or use the menu above) to see its events",
+      "panelAriaLabel": "Historical events",
+      "eventsButton": "Events",
+      "closePanel": "Close events panel",
+      "anniversariesTitle": "Anniversaries for {{month}} {{day}}"
+    }
+  },
+  "dashboard": {
+    "description": "Statistics about today's events, with the country inferred from linked articles",
+    "loadError": "Couldn't load the statistics ({{error}}).",
+    "stats": {
+      "noData": {
+        "title": "No statistics available",
+        "description": "Data will show up here as soon as the archive has events."
+      },
+      "events": { "label": "Today's events" },
+      "countries": {
+        "label": "Countries identified",
+        "detail": "{{geocoded}} of {{total}} events"
+      },
+      "span": { "label": "Time span" },
+      "topCountry": {
+        "label": "Most-mentioned country",
+        "detail_one": "{{count}} event",
+        "detail_other": "{{count}} events"
+      }
+    },
+    "archiveTeaser": {
+      "heading": "Archive",
+      "description": "These statistics cover today's events. To browse every entry Wikipedia records for a day, from any century, filtering by year and entry type, open the full archive.",
+      "cta": "Open the archive"
+    }
+  },
+  "archive": {
+    "pageDescription": "Every entry Wikipedia records for a day, with a choice of years and entry type",
+    "filters": {
+      "dayLabel": "Day",
+      "monthSrLabel": "Month",
+      "daySrLabel": "Day of the month",
+      "yearsLabel": "Years (optional)",
+      "yearFromSr": "Start year",
+      "yearToSr": "End year",
+      "yearFromPlaceholder": "From, e.g. -44",
+      "yearToPlaceholder": "To",
+      "typeLegend": "Entry type",
+      "languageLegend": "Language",
+      "languageItalian": "Italian",
+      "languageEnglish": "English",
+      "searchLabel": "Search the results",
+      "searchPlaceholder": "A word in the text or in an article…",
+      "reset": "Clear filters"
+    },
+    "results": {
+      "loading": "Loading the archive…",
+      "loadError": "Couldn't load the archive ({{error}}).",
+      "fallbackNote": "Some entries are in English: the Italian edition of Wikipedia doesn't have them.",
+      "staleNote": "Data may be out of date: Wikipedia wasn't reachable.",
+      "empty": "No entries for this day with these filters.",
+      "noMatches": "No results for “{{query}}”."
+    }
+  },
+  "history": {
+    "section": {
+      "selected": "Featured",
+      "events": "Events",
+      "births": "Births",
+      "deaths": "Deaths",
+      "holidays": "Holidays and observances"
+    },
+    "subheadingAllEvents": "All events",
+    "fallbackNote": "Text in English: the Italian edition of Wikipedia wasn't available.",
+    "staleNote": "Data may be out of date: Wikipedia wasn't reachable.",
+    "loading": "Loading events…",
+    "loadError": "Couldn't load today's events ({{error}}).",
+    "empty": "No entries for this day.",
+    "card": {
+      "relatedCount_one": "{{count}} linked article",
+      "relatedCount_other": "{{count}} linked articles"
+    },
+    "dialog": {
+      "close": "Close",
+      "relatedHeading": "Linked articles"
+    },
+    "attribution": {
+      "licenseLabel": "License"
+    },
+    "relatedArticle": {
+      "imageCredit": "Image author and license"
+    }
+  },
+  "settings": {
+    "pageDescription": "Appearance, language and other preferences, saved only on this device",
+    "appearance": {
+      "title": "Appearance",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "language": {
+      "title": "Language and content",
+      "uiLabel": "Interface language",
+      "contentNote": "Historical articles follow this language when available (Italian or English only); it stays independently changeable in Archive or by picking a country on the Map.",
+      "exampleLabel": "Date format example"
+    },
+    "map": {
+      "title": "Map",
+      "defaultProjectionLabel": "Default projection"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "reducedMotionLabel": "Animations",
+      "reducedMotionOff": "Follow the system",
+      "reducedMotionOn": "Always reduced"
+    },
+    "shortcuts": {
+      "title": "Keyboard shortcuts",
+      "columnKey": "Key",
+      "columnAction": "Action",
+      "disabledNote": "Disabled while typing in a text field.",
+      "focusCountryPicker": "Focus the country picker"
+    },
+    "data": {
+      "title": "Data and privacy",
+      "clearButton": "Clear local data",
+      "clearConfirm": "Clear every preference saved on this device? The page will reload.",
+      "privacyLink": "Read the privacy policy",
+      "legalNote": "The Privacy and Terms pages are only available in Italian for now."
+    }
+  },
+  "date": {
+    "era": {
+      "bc": "BC"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "backToMap": "Back to the Map"
+  },
+  "welcome": {
+    "pageTitle": "Welcome",
+    "tagline": "The archive of history, one day at a time",
+    "enter": "Enter",
+    "footer": {
+      "creditsLabel": "Sources and credits",
+      "photos": "Historical photos: Wikimedia Commons (license noted on each file)",
+      "wikipedia": "Historical text: Wikipedia (CC BY-SA 4.0)",
+      "map": "Map: © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Boundaries: Natural Earth (public domain)"
+    }
+  },
+  "meta": {
+    "welcome": {
+      "description": "Century Road, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
+    },
+    "map": {
+      "description": "Explore today's historical events on an interactive world map, with anniversaries and Wikipedia articles for every country."
+    },
+    "dashboard": {
+      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Century Road archive."
+    },
+    "archive": {
+      "description": "Browse the full archive of today's events across every century, filterable by year and entry type."
+    },
+    "settings": {
+      "description": "Customize Century Road's appearance, language and default map projection."
+    },
+    "notFound": {
+      "description": "The page you're looking for doesn't exist. Head back to the map to keep exploring today in history."
+    }
+  }
+}
