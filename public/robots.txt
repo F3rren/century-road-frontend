@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://century-road-frontend-production.up.railway.app/sitemap.xml

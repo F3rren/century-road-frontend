@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ArchiveFilters, ArchiveResults, useArchiveFilters } from "@/features/archive";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function ArchivePage() {
   const { t } = useTranslation();
-  usePageTitle(t("nav.archive"));
+  usePageMeta(t("nav.archive"), t("meta.archive.description"));
   const { filters, update, reset } = useArchiveFilters();
   // Bumped on "Azzera i filtri" so the filter form's own free-text fields
   // (the year range, which hold local state while typing) remount with the

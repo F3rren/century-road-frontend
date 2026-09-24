@@ -26,7 +26,31 @@
     -->
     <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin />
     <link rel="preconnect" href="https://thumb.wikimedia.org" crossorigin />
-    <title>Century Road</title>
+    <!--
+      Real defaults, not placeholders: this is a client-rendered SPA, so a
+      non-JS scraper or link-preview bot only ever sees what's static here —
+      usePageMeta (src/hooks/usePageMeta.ts) updates both per route for
+      everything that does run JS.
+    -->
+    <title>Century Road — L'archivio della storia, un giorno alla volta</title>
+    <meta
+      name="description"
+      content="Century Road è l'archivio multilingue della storia: scopri gli eventi accaduti oggi nel corso dei secoli su una mappa interattiva, con statistiche e articoli da Wikipedia."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!--
+      One static card for every shared link, not a per-page one: this SPA has
+      no server-side rendering, and most link-preview bots (unlike Googlebot)
+      never execute JS, so they only ever see what's here.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Century Road — L'archivio della storia, un giorno alla volta" />
+    <meta
+      property="og:description"
+      content="Century Road è l'archivio multilingue della storia: scopri gli eventi accaduti oggi nel corso dei secoli su una mappa interattiva, con statistiche e articoli da Wikipedia."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script>
       // Applies the persisted/system theme before first paint, so there's
       // no flash of the wrong theme while React mounts and its own effect
