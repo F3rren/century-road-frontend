@@ -185,5 +185,17 @@
   "notFound": {
     "title": "Page introuvable",
     "backToMap": "Retour à la Carte"
+  },
+  "welcome": {
+    "pageTitle": "Bienvenue",
+    "tagline": "Les archives de l'histoire, un jour à la fois",
+    "enter": "Entrer",
+    "footer": {
+      "creditsLabel": "Sources et crédits",
+      "photos": "Photos historiques : Wikimedia Commons (licence indiquée sur chaque fichier)",
+      "wikipedia": "Textes historiques : Wikipédia (CC BY-SA 4.0)",
+      "map": "Carte : © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Frontières : Natural Earth (domaine public)"
+    }
   }
 }

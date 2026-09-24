@@ -185,5 +185,17 @@
   "notFound": {
     "title": "Page not found",
     "backToMap": "Back to the Map"
+  },
+  "welcome": {
+    "pageTitle": "Welcome",
+    "tagline": "The archive of history, one day at a time",
+    "enter": "Enter",
+    "footer": {
+      "creditsLabel": "Sources and credits",
+      "photos": "Historical photos: Wikimedia Commons (license noted on each file)",
+      "wikipedia": "Historical text: Wikipedia (CC BY-SA 4.0)",
+      "map": "Map: © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Boundaries: Natural Earth (public domain)"
+    }
   }
 }

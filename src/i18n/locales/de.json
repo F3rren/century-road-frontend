@@ -185,5 +185,16 @@
   "notFound": {
     "title": "Seite nicht gefunden",
     "backToMap": "Zurück zur Karte"
+  },
+  "welcome": {
+    "pageTitle": "Willkommen",
+    "tagline": "Das Archiv der Geschichte, einen Tag nach dem anderen",
+    "enter": "Betreten",
+    "footer": {
+      "creditsLabel": "Quellen und Credits",
+      "photos": "Historische Fotos: Wikimedia Commons (Lizenz bei jeder Datei angegeben)",
+      "wikipedia": "Historische Texte: Wikipedia (CC BY-SA 4.0)",
+      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap"
+    }
   }
 }

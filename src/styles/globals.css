@@ -128,4 +128,46 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Browser chrome carries the design too, not just the elements drawn by
+     hand: a wire-red selection highlight (reusing --primary/-foreground, so
+     the light/dark ink-vs-ivory swap the buttons already need stays
+     correct here too) and a hairline-toned scrollbar instead of the OS
+     default gray. */
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  html {
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border: 2px solid hsl(var(--background));
+  }
+  /* Impostazioni' Accessibilità override, independent of the real OS
+     prefers-reduced-motion media query (already respected everywhere via
+     stock motion-safe:/motion-reduce: utilities, left untouched). Rather
+     than redefining those two variants to also match this class — which
+     needs the media query AND the class combined with real AND logic no
+     Tailwind variant array expresses — every animation/transition on the
+     page is neutralized directly, regardless of which utility or component
+     set it. This is the standard reduced-motion "kill switch" pattern:
+     near-zero duration/delay, not display:none, so layout and fill-mode end
+     states still resolve correctly (an element mid fade-in still lands on
+     its final, visible state, just without the motion). */
+  .reduce-motion,
+  .reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
 }

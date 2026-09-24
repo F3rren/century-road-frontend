@@ -5,6 +5,7 @@ import { THEME_STORAGE_KEY } from "@/hooks/useTheme";
 import { LANGUAGE_STORAGE_KEY } from "@/i18n";
 import { MAP_PROJECTION_STORAGE_KEY } from "@/hooks/useMapProjection";
 import { REDUCED_MOTION_STORAGE_KEY } from "@/hooks/useReducedMotion";
+import { WELCOME_SEEN_STORAGE_KEY } from "@/lib/welcomeSeen";
 import { SettingsSection } from "./SettingsSection";
 
 const STORAGE_KEYS = [
@@ -12,6 +13,7 @@ const STORAGE_KEYS = [
   LANGUAGE_STORAGE_KEY,
   MAP_PROJECTION_STORAGE_KEY,
   REDUCED_MOTION_STORAGE_KEY,
+  WELCOME_SEEN_STORAGE_KEY,
 ];
 
 export function DataSection() {

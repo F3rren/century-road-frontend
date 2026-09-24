@@ -17,6 +17,15 @@
       type="font/woff2"
       crossorigin
     />
+    <!--
+      The Welcome page's photo filmstrip pulls its images straight from
+      Wikimedia (see thirdParties.ts) — a dozen-plus parallel requests to a
+      domain the browser has never touched yet. Preconnecting starts the
+      DNS/TLS handshake during the entrance sequence instead of on the first
+      image request, shaving a round trip off every one of them.
+    -->
+    <link rel="preconnect" href="https://upload.wikimedia.org" crossorigin />
+    <link rel="preconnect" href="https://thumb.wikimedia.org" crossorigin />
     <title>Century Road</title>
     <script>
       // Applies the persisted/system theme before first paint, so there's

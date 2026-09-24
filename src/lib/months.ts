@@ -16,6 +16,17 @@ export function todayMonthDay(): { month: number; day: number } {
   return { month: now.getMonth() + 1, day: now.getDate() };
 }
 
+// Any real calendar day, picked uniformly at random — a different day than
+// today's, so a caller sourcing "history in general" (the Welcome page's
+// photo carousel) isn't stuck re-showing the same handful of events/images
+// every visitor gets on a given date. Goes through daysInMonth so it can
+// never land on a day that doesn't exist (no 30 February).
+export function randomMonthDay(): { month: number; day: number } {
+  const month = Math.floor(Math.random() * 12) + 1;
+  const day = Math.floor(Math.random() * daysInMonth(month)) + 1;
+  return { month, day };
+}
+
 const monthNamesCache = new Map<string, readonly string[]>();
 
 // Full month names for `language`, 1-indexed with a blank [0] padding entry

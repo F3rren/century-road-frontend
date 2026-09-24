@@ -3,6 +3,7 @@ import { THEME_STORAGE_KEY } from "@/hooks/useTheme";
 import { LANGUAGE_STORAGE_KEY } from "@/i18n";
 import { MAP_PROJECTION_STORAGE_KEY } from "@/hooks/useMapProjection";
 import { REDUCED_MOTION_STORAGE_KEY } from "@/hooks/useReducedMotion";
+import { WELCOME_SEEN_STORAGE_KEY } from "@/lib/welcomeSeen";
 import {
   ContactEmail,
   LastUpdated,
@@ -18,7 +19,7 @@ const SUMMARY_ITEMS = [
   "Non serve un account e non ti chiediamo dati personali.",
   "Non usiamo cookie, strumenti di analisi né pubblicità, e non ti profiliamo.",
   "Per mostrare mappa e immagini, il tuo browser contatta alcuni servizi esterni, che vedono il tuo indirizzo IP.",
-  "Nel tuo browser salviamo alcune preferenze dell'interfaccia — tema, lingua, proiezione della mappa, animazioni ridotte — solo quelle che cambi.",
+  "Nel tuo browser salviamo alcune preferenze dell'interfaccia — tema, lingua, proiezione della mappa, animazioni ridotte, se hai già visto il benvenuto — solo quelle che cambi.",
 ] as const;
 
 export function SummarySection() {
@@ -69,8 +70,9 @@ export function StorageSection() {
     <LegalSection title="3. Cookie e archiviazione nel browser">
       <p>Il sito non imposta cookie.</p>
       <p>
-        Se cambi una preferenza nella pagina Impostazioni, il browser salva nel suo
-        archivio locale (localStorage) solo quella scelta, con una di queste voci:
+        Quando usi un controllo specifico — un pulsante in Impostazioni, o il pulsante
+        «Entra» nella pagina di benvenuto — il browser salva nel suo archivio locale
+        (localStorage) solo quella scelta, con una di queste voci:
       </p>
       <ul className="list-inside list-disc space-y-1">
         <li>
@@ -95,6 +97,12 @@ export function StorageSection() {
           <code className="font-mono text-sm">{REDUCED_MOTION_STORAGE_KEY}</code> —
           animazioni ridotte, presente con valore{" "}
           <code className="font-mono text-sm">true</code> solo se l'hai attivata.
+        </li>
+        <li>
+          <code className="font-mono text-sm">{WELCOME_SEEN_STORAGE_KEY}</code> — che hai
+          già visto la pagina di benvenuto, con valore{" "}
+          <code className="font-mono text-sm">true</code>, salvata quando premi «Entra».
+          Serve solo a non mostrartela di nuovo alle visite successive.
         </li>
       </ul>
       <p>

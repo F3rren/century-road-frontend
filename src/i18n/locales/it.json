@@ -185,5 +185,17 @@
   "notFound": {
     "title": "Pagina non trovata",
     "backToMap": "Torna alla Mappa"
+  },
+  "welcome": {
+    "pageTitle": "Benvenuto",
+    "tagline": "L'archivio della storia, un giorno alla volta",
+    "enter": "Entra",
+    "footer": {
+      "creditsLabel": "Fonti e crediti",
+      "wikipedia": "Testi storici: Wikipedia (CC BY-SA 4.0)",
+      "photos": "Foto storiche: Wikimedia Commons (licenze indicate su ogni file)",
+      "map": "Mappa: © OpenStreetMap contributors · OpenFreeMap",
+      "boundaries": "Confini: Natural Earth (dominio pubblico)"
+    }
   }
 }
