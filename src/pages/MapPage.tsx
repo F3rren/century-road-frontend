@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapView, ProjectionToggle, EventsPanel } from '@/features/map';
 import { HeatLegend } from '@/features/map/components/HeatLegend';
 import { useTodayHistory } from '@/features/map/hooks/useTodayHistory';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { getStoredProjection } from '@/hooks/useMapProjection';
+import { trackCountryView } from '@/features/history';
 import type { Country, ProjectionType } from '@/features/map';
 
 export function MapPage() {
@@ -12,6 +13,13 @@ export function MapPage() {
   const [projection, setProjection] = useState<ProjectionType>(getStoredProjection);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   usePageMeta(t('nav.map'), t('meta.map.description'));
+
+  // Anonymous, aggregate view tracking - one signal, "this country was selected", no visitor
+  // identifier attached. Both selection paths (a map click and the panel's own picker) set
+  // the same selectedCountry state, so this single effect covers both.
+  useEffect(() => {
+    if (selectedCountry) trackCountryView(selectedCountry.code);
+  }, [selectedCountry]);
 
   const history = useTodayHistory();
 

@@ -92,3 +92,17 @@ export interface OnThisDayParams {
   fromYear?: number;
   toYear?: number;
 }
+
+// Anonymous, aggregate view counters (GET /api/history/stats/*) — how many times a calendar
+// day's page or a country has been viewed, in total, most viewed first. No visitor identifier
+// anywhere in this data; see TrackingController on the backend.
+export interface DayViewStat {
+  month: number;
+  day: number;
+  viewCount: number;
+}
+
+export interface CountryViewStat {
+  countryCode: string;
+  viewCount: number;
+}

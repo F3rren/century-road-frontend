@@ -65,17 +65,35 @@
         "title": "No statistics available",
         "description": "Data will show up here as soon as the archive has events."
       },
-      "events": { "label": "Today's events" },
+      "events": {
+        "label": "Today's events"
+      },
       "countries": {
         "label": "Countries identified",
         "detail": "{{geocoded}} of {{total}} events"
       },
-      "span": { "label": "Time span" },
+      "span": {
+        "label": "Time span"
+      },
       "topCountry": {
         "label": "Most-mentioned country",
         "detail_one": "{{count}} event",
         "detail_other": "{{count}} events"
       }
+    },
+    "popularity": {
+      "heading": "Most viewed",
+      "description": "How many times each page has been viewed in total, across every visitor — no personal data, just an anonymous, aggregate count.",
+      "days": {
+        "label": "Most-viewed days"
+      },
+      "countries": {
+        "label": "Most-viewed countries"
+      },
+      "views_one": "{{count}} view",
+      "views_other": "{{count}} views",
+      "noData": "Not enough data yet.",
+      "cta": "Explore the map"
     },
     "archiveTeaser": {
       "heading": "Archive",
@@ -185,7 +203,7 @@
   },
   "notFound": {
     "title": "Page not found",
-    "backToMap": "Back to the Map",
+    "backToMap": "Explore the map",
     "typedMessage": "Searching the archive for the page you requested... result: not fou—",
     "outOfPaper": "— the typewriter ran out of paper —",
     "referenceCode": "Archive ref: N/A",

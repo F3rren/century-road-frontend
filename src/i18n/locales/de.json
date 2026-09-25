@@ -65,17 +65,35 @@
         "title": "Keine Statistiken verfügbar",
         "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
       },
-      "events": { "label": "Heutige Ereignisse" },
+      "events": {
+        "label": "Heutige Ereignisse"
+      },
       "countries": {
         "label": "Identifizierte Länder",
         "detail": "{{geocoded}} von {{total}} Ereignissen"
       },
-      "span": { "label": "Zeitspanne" },
+      "span": {
+        "label": "Zeitspanne"
+      },
       "topCountry": {
         "label": "Meistgenanntes Land",
         "detail_one": "{{count}} Ereignis",
         "detail_other": "{{count}} Ereignisse"
       }
+    },
+    "popularity": {
+      "heading": "Meistbesucht",
+      "description": "Wie oft jede Seite insgesamt von allen Besuchern aufgerufen wurde — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
+      "days": {
+        "label": "Meistbesuchte Tage"
+      },
+      "countries": {
+        "label": "Meistbesuchte Länder"
+      },
+      "views_one": "{{count}} Aufruf",
+      "views_other": "{{count}} Aufrufe",
+      "noData": "Noch nicht genügend Daten.",
+      "cta": "Karte erkunden"
     },
     "archiveTeaser": {
       "heading": "Archiv",
@@ -185,7 +203,7 @@
   },
   "notFound": {
     "title": "Seite nicht gefunden",
-    "backToMap": "Zurück zur Karte",
+    "backToMap": "Karte erkunden",
     "typedMessage": "Wir durchsuchen das Archiv nach der gesuchten Seite... Ergebnis: nicht gefund—",
     "outOfPaper": "— der Schreibmaschine ist das Papier ausgegangen —",
     "referenceCode": "Archiv-Ref.: N/V",

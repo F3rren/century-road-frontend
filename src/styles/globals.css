@@ -192,3 +192,18 @@
     transition-delay: 0s !important;
   }
 }
+
+@layer utilities {
+  /* Keeps an element scrollable (wheel, touch, keyboard) while hiding the
+     visible scrollbar track/thumb — for a panel where the themed scrollbar
+     above reads as clutter against its own short, dense content, rather than
+     the useful affordance it is on a full page. Opt-in per element, not a
+     global change: most scrollable panels keep the themed bar. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
