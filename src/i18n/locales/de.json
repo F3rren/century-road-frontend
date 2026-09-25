@@ -190,7 +190,8 @@
     "outOfPaper": "— der Schreibmaschine ist das Papier ausgegangen —",
     "referenceCode": "Archiv-Ref.: N/V",
     "goToArchive": "Archiv durchsuchen",
-    "goToDashboard": "Dashboard"
+    "goToDashboard": "Dashboard",
+    "photoCredit": "Foto: O.G. Rejlander, 1872 · Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Willkommen",

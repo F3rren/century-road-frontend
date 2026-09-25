@@ -5,6 +5,18 @@ import { cn } from "@/lib/utils";
 import { getReducedMotionOverride } from "@/hooks/useReducedMotion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
+
+// A real 1872 photograph, not a decorative illustration — O.G. Rejlander's
+// "surprise" plate from Darwin's The Expression of the Emotions in Man and
+// Animals, one of the first scientific works to use photography, chosen
+// specifically because it's a genuine historical document of someone
+// captured mid-bewilderment, the same material (real Commons photography,
+// not clip art) already used for the Welcome page's carousel. CC BY 4.0,
+// Wellcome Collection — credited below, same as every other borrowed image
+// in this app.
+const PHOTO_CREDIT_URL =
+  "https://commons.wikimedia.org/wiki/File:Surprise_and_distress_in_Darwin%27s_Expression_of_Emotions..._Wellcome_L0049511.jpg";
 
 // Per-character pace matched to the Welcome page's dateline (1.1s over an
 // ~18-character date ≈ 0.06s/char) but a touch brisker, since this string
@@ -43,7 +55,20 @@ export function NotFoundPage() {
     reduced ? undefined : { animationDelay: `${(hasRoomToType ? typeDurationS : 0.3) + afterTypingS}s` };
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-5 px-6 py-12 text-center">
+    <div className="relative flex h-full flex-col items-center justify-center gap-5 overflow-hidden px-6 py-12 text-center">
+      {/* The background: desaturated and scrimmed exactly like the Welcome
+          carousel (grayscale + contrast, never shown at full strength, a
+          solid flat scrim — not a gradient/blur — between it and the text),
+          so this reads as the same material everywhere it appears in this
+          system, not a one-off decoration. */}
+      <img
+        src="/404-surprise.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 z-0 h-full w-full object-cover object-[center_25%] grayscale contrast-125"
+      />
+      <div className="absolute inset-0 z-0 bg-background/90" />
+
       {/* The dispatch that can't finish: the machine is mid-sentence, right
           at the word "not found", when it runs out of paper. Full text is
           always in the DOM (screen readers get it immediately, cut-off and
@@ -161,6 +186,17 @@ export function NotFoundPage() {
           {t("notFound.goToDashboard")}
         </Link>
       </div>
+
+      <ExternalAnchor
+        href={PHOTO_CREDIT_URL}
+        className={cn(
+          "relative z-10 text-[11px] text-muted-foreground hover:text-foreground",
+          !reduced && "animate-fade-up",
+        )}
+        style={delay(1.8)}
+      >
+        {t("notFound.photoCredit")}
+      </ExternalAnchor>
     </div>
   );
 }
