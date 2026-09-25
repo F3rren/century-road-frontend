@@ -33,6 +33,7 @@
     "legend": {
       "today": "Today",
       "ariaLabel": "Event-density legend",
+      "close": "Close legend",
       "level": {
         "high": "≥ 6 events",
         "mid": "3–5 events",
@@ -184,7 +185,12 @@
   },
   "notFound": {
     "title": "Page not found",
-    "backToMap": "Back to the Map"
+    "backToMap": "Back to the Map",
+    "typedMessage": "Searching the archive for the page you requested... result: not fou—",
+    "outOfPaper": "— the typewriter ran out of paper —",
+    "referenceCode": "Archive ref: N/A",
+    "goToArchive": "Browse the Archive",
+    "goToDashboard": "Dashboard"
   },
   "welcome": {
     "pageTitle": "Welcome",

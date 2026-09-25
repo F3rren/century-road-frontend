@@ -33,6 +33,7 @@
     "legend": {
       "today": "Oggi",
       "ariaLabel": "Legenda intensità eventi",
+      "close": "Chiudi legenda",
       "level": {
         "high": "≥ 6 eventi",
         "mid": "3–5 eventi",
@@ -184,7 +185,12 @@
   },
   "notFound": {
     "title": "Pagina non trovata",
-    "backToMap": "Torna alla Mappa"
+    "backToMap": "Torna alla Mappa",
+    "typedMessage": "Cerchiamo la pagina richiesta nell'archivio... risultato: non tr—",
+    "outOfPaper": "— la macchina da scrivere ha finito la carta —",
+    "referenceCode": "Rif. archivio: N/D",
+    "goToArchive": "Consulta l'Archivio",
+    "goToDashboard": "Dashboard"
   },
   "welcome": {
     "pageTitle": "Benvenuto",

@@ -33,6 +33,7 @@
     "legend": {
       "today": "Heute",
       "ariaLabel": "Legende zur Ereignisdichte",
+      "close": "Legende schließen",
       "level": {
         "high": "≥ 6 Ereignisse",
         "mid": "3–5 Ereignisse",
@@ -184,7 +185,12 @@
   },
   "notFound": {
     "title": "Seite nicht gefunden",
-    "backToMap": "Zurück zur Karte"
+    "backToMap": "Zurück zur Karte",
+    "typedMessage": "Wir durchsuchen das Archiv nach der gesuchten Seite... Ergebnis: nicht gefund—",
+    "outOfPaper": "— der Schreibmaschine ist das Papier ausgegangen —",
+    "referenceCode": "Archiv-Ref.: N/V",
+    "goToArchive": "Archiv durchsuchen",
+    "goToDashboard": "Dashboard"
   },
   "welcome": {
     "pageTitle": "Willkommen",
