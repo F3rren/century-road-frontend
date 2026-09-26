@@ -87,7 +87,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
 
       {/* Content — aria-live announces the swap when a country is picked via
           map click, keyboard picker, or cleared back to the global view. */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-6" aria-live="polite">
+      <div className="flex-1 overflow-y-auto scrollbar-hidden p-4 space-y-6" aria-live="polite">
         {selectedCountry ? (
           isLoading ? (
             <p className={STATUS_CLASS}>{t('common.loading')}</p>

@@ -93,6 +93,25 @@ const config: Config = {
           from: { transform: "scaleX(0)" },
           to: { transform: "scaleX(1)" },
         },
+        // The 404 page: the carriage physically hitting the end-stop the
+        // instant the typed line runs out of room to type in — a small
+        // horizontal jolt, not a generic wobble (settles back to 0, doesn't
+        // drift).
+        "paper-jolt": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "20%": { transform: "translateX(-3px)" },
+          "40%": { transform: "translateX(2px)" },
+          "60%": { transform: "translateX(-1px)" },
+          "80%": { transform: "translateX(1px)" },
+        },
+        // Same page: the "404" itself lands like a rubber date-stamp hitting
+        // the page, not just fading up like the supporting text around it —
+        // the one moment on this page that gets its own weight.
+        "stamp-in": {
+          "0%": { opacity: "0", transform: "scale(1.15)" },
+          "60%": { opacity: "1", transform: "scale(0.97)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
         // The photo filmstrip's seamless loop: the track renders the photo
         // pool twice back to back, so translating exactly -50% lands on a
         // frame-for-frame duplicate of the start — no jump, no reset.
@@ -112,6 +131,10 @@ const config: Config = {
         // it flashes visible in its default state before its turn arrives.
         "fade-up": "fade-up 0.6s ease-out both",
         "grow-x": "grow-x 0.5s ease-out both",
+        "paper-jolt": "paper-jolt 0.4s ease-out both",
+        // A slight overshoot ("back" easing, not ease-out) is what makes a
+        // stamp read as an impact instead of just a bigger fade-up.
+        "stamp-in": "stamp-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both",
         // Slow and ambient on purpose — a background filmstrip, not the
         // page's focal motion. linear, never eased: an eased infinite loop
         // visibly surges/stalls at every repeat.

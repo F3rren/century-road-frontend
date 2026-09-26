@@ -6,11 +6,19 @@ export { useOnThisDay } from "./hooks/useOnThisDay";
 export { buildImageSources } from "./lib/images";
 export { matchesQuery } from "./lib/matchesQuery";
 export { cleanText } from "./lib/text";
-export { buildOnThisDayPath, fetchOnThisDay } from "./services/historyApi";
+export {
+  buildOnThisDayPath,
+  fetchOnThisDay,
+  fetchTopCountries,
+  fetchTopDays,
+  trackCountryView,
+} from "./services/historyApi";
 export type { ImageSources } from "./lib/images";
 export type {
   Attribution,
   Coordinates,
+  CountryViewStat,
+  DayViewStat,
   HistoryEntry,
   HistoryLanguage,
   HistorySectionKey,
