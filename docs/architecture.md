@@ -30,6 +30,8 @@ Current coverage is deliberately narrow rather than broad: a first pass targetin
 
 CI (`ci.yml`) runs `npm run test` between lint and build, so a failing test fails the pipeline the same way a lint or type error does.
 
+**Requires Node ≥22.10** (`package.json`'s `engines` field, and `ci.yml`'s `node-version: '22'`) — not a preference, a hard requirement discovered the first time this suite ran in CI. jsdom 30's bundled `undici` (^8.x) unconditionally calls `node:worker_threads.markAsUncloneable` at module-load time; that API doesn't exist before Node ~22.10, so on an older Node every single test file crashes before any test runs, with the misleading-looking error `webidl.util.markAsUncloneable is not a function`. `dev`/`build`/`lint` don't touch jsdom and work fine on Node 20 — only `npm run test` needs the newer runtime. If this resurfaces after a jsdom bump, check whether the fix landed upstream before reflexively re-pinning the Node version further.
+
 ## General architecture
 
 A single-page app, feature-folder organized. Everything under `src/features/<name>/` owns its own `components/`, `hooks/`, `lib/`, `services/`, `types/` as needed — cross-feature imports go through each feature's `index.ts` barrel, never reaching into another feature's internals directly.

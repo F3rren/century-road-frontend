@@ -43,7 +43,7 @@ Full rationale and folder structure: [docs/architecture.md](docs/architecture.md
 
 ## Getting started
 
-**Prerequisites**: Node 20+, and the [backend](https://github.com/F3rren/century-road-backend) running locally (or `VITE_API_BASE_URL` pointed at a reachable gateway).
+**Prerequisites**: Node 22.10+ (older Node 20 builds can `dev`/`build`/`lint` fine, but crash running tests — jsdom's own startup needs a `node:worker_threads` API only available from ~22.10 on), and the [backend](https://github.com/F3rren/century-road-backend) running locally (or `VITE_API_BASE_URL` pointed at a reachable gateway).
 
 ```bash
 npm install
