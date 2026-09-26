@@ -16,8 +16,19 @@
 | @turf/boolean-point-in-polygon | ^7.4.0 | Country-attribution geocoding (see below) |
 | lucide-react | latest | The only icon library — see [DESIGN.md](../DESIGN.md) |
 | ESLint | ^10 (flat config) | No Prettier |
+| Vitest / React Testing Library | ^5 / ^16 | Unit + component tests, `jsdom` environment — see Testing below |
 
-**No test framework exists** — zero test files, zero test dependencies (`vitest`, `jest`, `@testing-library/*`, `playwright` are all absent). This is a stated fact about the current codebase, not an oversight to silently "fix" by inventing a test setup unasked.
+**No E2E framework exists yet** (no Playwright/Cypress) — only unit and component-level tests. Adding E2E coverage for the 3-5 core user flows in `docs/PRD.md` is a real, not-yet-scoped gap, not an oversight to silently "fix" by inventing one unasked.
+
+## Testing
+
+`npm run test` (Vitest, `jsdom` environment) — configured in `vitest.config.ts`, deliberately separate from `vite.config.ts` since the app build's concerns (the dev proxy, the maplibre worker-asset plugin, the two production guards) are irrelevant to running tests. Global setup (`src/test/setup.ts`) extends `expect` with `@testing-library/jest-dom` matchers, wires React Testing Library's cleanup by hand into `afterEach` (this project keeps Vitest's `globals` off, so RTL's own auto-cleanup — which relies on detecting a global `afterEach` — doesn't fire on its own), and stubs `window.matchMedia`, which `jsdom` doesn't implement at all and several hooks (`useMediaQuery`, theme/reduced-motion detection) call unconditionally.
+
+Test files sit next to the code they cover (`foo.ts` → `foo.test.ts`), not in a parallel `tests/` tree. Every test file imports `describe`/`it`/`expect`/`vi` explicitly from `vitest` rather than relying on injected globals.
+
+Current coverage is deliberately narrow rather than broad: a first pass targeting the highest-value, lowest-risk surface — pure business logic with real edge cases (`src/lib/months.ts`'s date/leap-year/BCE-era handling, `src/features/archive/lib/filterParams.ts`'s URL parse/clamp/round-trip logic, `src/features/dashboard/lib/computeStats.ts`'s aggregation rules, `src/lib/welcomeSeen.ts`'s storage-failure fallback), plus one component smoke test (`ExternalAnchor`) proving the RTL/jsdom setup itself works end-to-end. Writing tests for a codebase that had none surfaced two real, if minor, findings worth knowing before extending this suite: `daysInMonth(0)` returns `0`, not the `31` fallback other out-of-range inputs get (index `0` is an in-bounds read of the array's own padding slot, not a missing index — `??` never fires); and `parseFilters`'s `Number(params.get('month')) || fallback.month` treats a URL's `month=0` as absent (falsy `0`) rather than clamping it, so it silently falls back to today's month instead. Neither is fixed here — they're pre-existing behavior, documented in the tests that found them, not defects introduced by adding tests.
+
+CI (`ci.yml`) runs `npm run test` between lint and build, so a failing test fails the pipeline the same way a lint or type error does.
 
 ## General architecture
 
@@ -93,4 +104,4 @@ Environment variables:
 - **`BACKEND_URL`** (dev only, default `http://localhost:8080`) — where the Vite dev server proxies `/api/*` requests. Never reaches the browser.
 - **`VITE_API_BASE_URL`** (production only) — baked into the bundle at build time; must end with `/api`; validated by the two build guards above.
 
-CI (`.github/workflows/`): `ci.yml` runs `npm run lint` and `npm run build` only (type-checking is folded into `build` via `tsc && vite build`; no test step exists, since no test suite does). Also present: `codeql.yml` (weekly + on push/PR), `dependency-review.yml` (PR-only, fails on `high` severity), `dependency-scan.yml` (weekly + on push/PR), and a weekly `dependabot.yml` targeting `develop`.
+CI (`.github/workflows/`): `ci.yml` runs `npm run lint`, `npm run test`, then `npm run build` (type-checking is folded into `build` via `tsc && vite build`). Also present: `codeql.yml` (weekly + on push/PR), `dependency-review.yml` (PR-only, fails on `high` severity), `dependency-scan.yml` (weekly + on push/PR), and a weekly `dependabot.yml` targeting `develop`.

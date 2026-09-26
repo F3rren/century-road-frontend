@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   frontend:
-    name: Frontend build and lint
+    name: Frontend build, lint and test
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +37,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Test
+        run: npm run test
 
       - name: Type-check and build
         run: npm run build

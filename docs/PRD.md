@@ -65,7 +65,7 @@ Derived from `PRODUCT.md`'s own already-stated constraint language, not invented
 
 | | |
 |---|---|
-| Frontend stack | React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, maplibre-gl. No test framework currently. |
+| Frontend stack | React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, maplibre-gl. Unit/component tests via Vitest + React Testing Library; no E2E framework yet. |
 | Backend stack | Spring Boot 3.3.4, Java 21, 3 independent Maven services (no reactor build), PostgreSQL with per-service schema isolation, Flyway. |
 | Hosting | Railway (primary, both frontend and backend), Docker Compose (local full-stack dev), GitHub Pages (frontend-only static fallback). |
 | External dependency | Wikipedia's "On this day" REST API — the entire event dataset originates there; the backend caches (6h fresh, 7d stale-serve) and rate-limits itself as "a good neighbour" per Wikimedia's own policy. |
