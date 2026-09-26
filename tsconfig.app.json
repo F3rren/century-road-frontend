@@ -15,8 +15,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Paths */
-    "baseUrl": ".",
+    /* Paths. No baseUrl: deprecated as of TS 5.9, removed in TS 7.0. Safe to
+       drop outright rather than suppress the warning - baseUrl was already
+       ".", and paths resolve relative to this file's own directory once
+       baseUrl is absent, so the mapping below means exactly the same thing. */
     "paths": {
       "@/*": ["./src/*"]
     },
