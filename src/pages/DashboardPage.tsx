@@ -2,12 +2,13 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { DashboardStats, useDashboard } from "@/features/dashboard";
+import { DashboardStats, MostViewedStats, useDashboard, usePopularityStats } from "@/features/dashboard";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function DashboardPage() {
   const { t } = useTranslation();
   const { stats, isLoading, error } = useDashboard();
+  const popularity = usePopularityStats();
   usePageMeta(t("nav.dashboard"), t("meta.dashboard.description"));
 
   return (
@@ -27,6 +28,13 @@ export function DashboardPage() {
           </p>
         )}
         {!isLoading && !error && <DashboardStats stats={stats} />}
+
+        <MostViewedStats
+          topDays={popularity.topDays}
+          topCountries={popularity.topCountries}
+          isLoading={popularity.isLoading}
+          error={popularity.error}
+        />
 
         <div className="flex flex-wrap items-center justify-between gap-4 border border-border p-5">
           <div>

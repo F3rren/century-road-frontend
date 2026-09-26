@@ -46,15 +46,27 @@
     --input: 41.5 25% 79.6%;
     --ring: 30 13% 9%; /* ink-based: legible against any surface, incl. wire-red */
     --radius: 0.125rem;
-    --primary: 350.1 73.9% 45.1%; /* wire-red */
+    /* wire-red — darkened from an earlier 45.1% L: --primary is also used as
+       plain text (links, ContactEmail, SeeAlso, etc. — 14 consumers), where
+       45.1% measured only 5.02:1 against the ivory background, AAA needs
+       7:1. 34% clears both that (7.54:1, with margin — the math said 36%
+       should clear exactly 7.00:1, but the real render measured 6.98:1) and
+       the button-fill pairing with --primary-foreground (comfortably
+       higher still) — the button was never the binding constraint, the
+       plain-text use was. */
+    --primary: 350.1 73.9% 34%;
     --primary-foreground: 42 55.6% 96.5%;
     --secondary: 43.2 41% 88%;
     --secondary-foreground: 30 13% 9%;
     --muted: 43.2 41% 88%;
-    --muted-foreground: 38.2 11.5% 37.6%;
+    /* Darkened from 37.6% L (5.26:1, under AAA's 7:1) to 29.9% (7.22:1)
+       against the ivory background — same hue/saturation, just deeper. */
+    --muted-foreground: 38.2 11.5% 29.9%;
     --accent: 43.2 41% 88%;
     --accent-foreground: 30 13% 9%;
-    --destructive: 12.9 68.4% 37.3%; /* rust — distinct from wire-red, same warm-ink family */
+    /* rust — distinct from wire-red, same warm-ink family. Darkened from
+       37.3% L (5.96:1 against ivory, under AAA's 7:1) to 33% (7.05:1). */
+    --destructive: 12.9 68.4% 33%;
     --destructive-foreground: 42 55.6% 96.5%;
     --success: 135 25.9% 33.3%;
     --success-foreground: 42 55.6% 96.5%;
@@ -68,9 +80,10 @@
        between the light/dark wire-red, but the sidebar never does, and the
        light-mode wire-red (45% L) measures only 2.85:1 against the sidebar's
        always-dark background — a real WCAG AA failure, not a rounding
-       error. This is a brighter wire-red, verified at 4.99:1, used only
-       inside the sidebar. */
-    --sidebar-accent: 352 74% 65%;
+       error. This is a brighter wire-red, used only inside the sidebar —
+       raised again from 65% L (5.02:1 as the active nav item's text, under
+       AAA's 7:1) to 75% (7.05:1). */
+    --sidebar-accent: 352 74% 75%;
   }
 
   .dark {
@@ -81,28 +94,36 @@
     --border: 40 11.5% 20.4%;
     --input: 40 11.5% 20.4%;
     --ring: 40 36.6% 92%;
-    /* 60% L, not the naive "brighter than light-mode" 55.5%: at 55.5%,
-       ivory-on-primary (filled buttons) measured 4.02:1, under AA. Verified
-       at 60%: 4.95:1 as text against the dark background, 4.73:1 with dark
-       ink (not ivory) as the fill's foreground below — one value can't
-       satisfy both roles with ivory text, so the foreground swaps to ink
-       here specifically. */
-    --primary: 352.2 74.4% 60%;
-    --primary-foreground: 30 13% 9%;
+    /* Raised from 60% L (4.95:1 as text against the dark background, under
+       AAA's 7:1 — the same binding constraint as the light-mode value
+       above, not the button) to 71%: 7.06:1 as text. That lightness reads
+       closer to coral than the light-mode red, an unavoidable trade-off —
+       nothing at this hue stays "wire-red"-deep and also clears 7:1 against
+       a near-black page. --primary-foreground swaps to pure black (not the
+       9%-lightness ink used everywhere else) because even black text only
+       just clears the button-fill pairing at this lightness (7.94:1); ink
+       at its usual 9% falls short (6.70:1). */
+    --primary: 352.2 74.4% 71%;
+    --primary-foreground: 30 13% 0%;
     --secondary: 38.2 18% 12%;
     --secondary-foreground: 40 36.6% 92%;
     --muted: 38.2 18% 12%;
     --muted-foreground: 40 13.3% 60.2%;
     --accent: 38.2 18% 12%;
     --accent-foreground: 40 36.6% 92%;
-    --destructive: 15 61.9% 55.7%;
+    /* Raised from 55.7% L (5.33:1 against the near-black background, under
+       AAA's 7:1) to 65% (7.06:1). */
+    --destructive: 15 61.9% 65%;
     --destructive-foreground: 30 13% 9%;
     --success: 134 22.5% 59%;
     --success-foreground: 30 13% 9%;
     --sidebar: 30 11.1% 7.1%;
     --sidebar-foreground: 40 36.6% 92%;
     --sidebar-border: 40 11.5% 20.4%;
-    --sidebar-accent: 352 74% 65%;
+    /* Redundant with :root's value above (the sidebar never themes) — kept
+       in sync rather than removed, since this block already duplicates
+       --sidebar/-foreground/-border for the same fixed reason. */
+    --sidebar-accent: 352 74% 75%;
   }
 }
 
@@ -169,5 +190,20 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
+  }
+}
+
+@layer utilities {
+  /* Keeps an element scrollable (wheel, touch, keyboard) while hiding the
+     visible scrollbar track/thumb — for a panel where the themed scrollbar
+     above reads as clutter against its own short, dense content, rather than
+     the useful affordance it is on a full page. Opt-in per element, not a
+     global change: most scrollable panels keep the themed bar. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
   }
 }

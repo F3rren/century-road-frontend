@@ -33,6 +33,7 @@
     "legend": {
       "today": "Aujourd'hui",
       "ariaLabel": "Légende de densité des événements",
+      "close": "Fermer la légende",
       "level": {
         "high": "≥ 6 événements",
         "mid": "3–5 événements",
@@ -64,17 +65,35 @@
         "title": "Aucune statistique disponible",
         "description": "Les données apparaîtront ici dès que les archives contiendront des événements."
       },
-      "events": { "label": "Événements du jour" },
+      "events": {
+        "label": "Événements du jour"
+      },
       "countries": {
         "label": "Pays identifiés",
         "detail": "{{geocoded}} sur {{total}} événements"
       },
-      "span": { "label": "Période couverte" },
+      "span": {
+        "label": "Période couverte"
+      },
       "topCountry": {
         "label": "Pays le plus cité",
         "detail_one": "{{count}} événement",
         "detail_other": "{{count}} événements"
       }
+    },
+    "popularity": {
+      "heading": "Les plus consultés",
+      "description": "Le nombre total de consultations de chaque page, tous visiteurs confondus — aucune donnée personnelle, juste un comptage agrégé et anonyme.",
+      "days": {
+        "label": "Jours les plus consultés"
+      },
+      "countries": {
+        "label": "Pays les plus consultés"
+      },
+      "views_one": "{{count}} consultation",
+      "views_other": "{{count}} consultations",
+      "noData": "Pas encore assez de données.",
+      "cta": "Explorer la carte"
     },
     "archiveTeaser": {
       "heading": "Archives",
@@ -184,7 +203,13 @@
   },
   "notFound": {
     "title": "Page introuvable",
-    "backToMap": "Retour à la Carte"
+    "backToMap": "Explorer la carte",
+    "typedMessage": "Nous recherchons la page demandée dans nos archives... résultat : introuv—",
+    "outOfPaper": "— la machine à écrire n'a plus de papier —",
+    "referenceCode": "Réf. archives : N/D",
+    "goToArchive": "Consulter les archives",
+    "goToDashboard": "Tableau de bord",
+    "photoCredit": "Photo : O.G. Rejlander, 1872 · Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Bienvenue",

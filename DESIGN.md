@@ -104,6 +104,15 @@ Warm, paper-and-ink neutrals carry the surface; wire-red is the only saturated c
 
 **The Sidebar Accent Rule.** Never use `{colors.wire-red}` for text inside the sidebar. The sidebar never themes with light/dark, but `--primary` does — in light mode, light-mode wire-red on the sidebar's fixed dark background measures 2.85:1, a real failure. Use `sidebar-accent` (`#e86475`, verified 4.99:1) instead; it exists specifically for this fixed-dark context.
 
+### Semantic
+
+Two roles, each with a themed foreground pairing (`--success-foreground`/`--destructive-foreground`) the same way `primary` has one — never assume ivory or ink works on top without checking the theme's own pairing:
+
+- **Destructive** — `rust` (`#a03a1e` light; brighter in dark mode for the same AAA-on-dark reason wire-red is). This is the system's second and *only other* permitted saturated color, reserved for genuine destructive actions (see the One Voice Rule) — never a second decorative accent.
+- **Success** — `archive-green` (`#3f6b4a` light, muted rather than a bright "confirmation" green — it stays inside this system's restrained, paper-and-ink register rather than reading as a SaaS-style status chip).
+
+No separate "warning" role exists in the system today — if one is needed, it should follow the same pattern (a themed foreground pairing, not a bare color) rather than reaching for an unreviewed hue.
+
 ## Typography
 
 **Display Font:** Oswald (with Impact, Haettenschweiler, sans-serif fallback)
@@ -147,6 +156,8 @@ Radius is functionally zero (`--radius: 0.125rem` = 2px, with `md`/`sm` steps at
 - **Primary:** Wire-red fill, ivory (light mode) or dark-ink (dark mode) text — see the Wire-Red Foreground Rule. 44px minimum height (touch target floor established before this redesign; preserved).
 - **Ghost:** Transparent, `hover:bg-accent`. Used for icon-only chrome (menu toggle, theme toggle, close buttons).
 - **Overlay / Overlay-Active:** Used only inside `MapOverlayPanel` (ProjectionToggle). Overlay-active is a wire-red fill — the same "this is the active/selected state" signal as everywhere else in the system, not a separate white/black treatment.
+- **Focus:** `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` (plus `ring-offset-2 ring-offset-background`, or `ring-offset-black` on the dark map-overlay variant) on every interactive element in the system, no exceptions — never rely on the browser's default outline, and never remove focus styling without replacing it.
+- **Disabled:** `disabled:opacity-50 disabled:pointer-events-none` — dimmed and inert, never hidden or re-colored; disabled state is signaled by opacity alone, consistent with the system's "color/size carries meaning, nothing else does" discipline.
 
 ### Cards / Containers
 - **Corner Style:** Square (1px radius) where a boundary exists at all.
@@ -158,9 +169,32 @@ Radius is functionally zero (`--radius: 0.125rem` = 2px, with `md`/`sm` steps at
 ### Navigation
 - **Sidebar:** Fixed newsroom-black background regardless of app theme (a directory board, not a themed surface). Nav items are index tabs: a 2px left border in `sidebar-accent` plus a subtle background tint marks the active route; inactive items are 70%-opacity ivory text with a hover border/background. Display-face, uppercase, tracked.
 - **Header masthead:** "CENTURY ROAD · press archive" persists in the header bar even when the sidebar is collapsed, so identity never fully drops.
+- **Focus:** same ring treatment as buttons — `focus-visible:ring-2 focus-visible:ring-ring`, never the browser default.
+- **Disabled:** not applicable — nav items are never shown in a disabled state; a route that shouldn't be reachable is simply not rendered.
 
 ### Event Clipping (signature component)
 The core content unit, replacing what was a bordered, shadowed, rounded card. Structure, top to bottom: a monospace uppercase dateline (`PLACE · DAY MON YEAR`), a display-face headline sized by importance, a small solid category-color square plus label, and (when not compact) a serif description. Rows are separated by a 1px hairline (`border-b`, last child excepted) rather than individual card boundaries — the whole list reads as one ruled column, not a stack of discrete boxes. The signature interaction: hovering or focusing an expandable clipping's headline transitions it to wire-red over 150ms (`motion-safe:duration-150`) — "the copy runs hot" — before the click/Enter/Space toggle reveals the full (un-clamped) title and description.
+
+### Modals
+One real modal exists in the system: the event detail popup (`EventDialog`), built on the native `<dialog>` element rather than a hand-rolled overlay — the browser traps focus, makes the rest of the page inert, closes on Escape, and hands focus back to the triggering button for free, and it sits in the browser's own top layer, so a parent panel's `overflow`/`transform` can never clip or offset it.
+- **Shape/surface:** follows the system exactly — square corners, hairline `border-border`, `bg-background`, **no shadow**. The only concession to "this is a layer above the page" is the native `::backdrop`, styled `bg-black/50` — not a blur, a plain scrim.
+- **Header:** dateline + display-face title on the left, a ghost icon-only close button (`X`, 16px) on the right, separated from the body by a hairline `border-b`.
+- **Body:** scrolls independently of the header (`overflow-y-auto` on the content region only), so a long entry never pushes the close button off-screen.
+- **Dismissal:** Escape, a click on the backdrop, or the header's close button — all three, always.
+- If a second modal use case appears, it should reuse this same native-`<dialog>` pattern rather than introducing a second overlay mechanism (a portal + manually-managed focus trap) for the same job.
+
+### Iconography
+[lucide-react](https://lucide.dev) is the only icon library in the system — no mixing in a second set. Icons are stroke-based (never filled), which matches the hairline/flat-by-default aesthetic — a filled icon reads as a solid shape with its own implied elevation, which this system doesn't have anywhere else. Standard inline size is **16px** (`h-4 w-4`), used next to body/label text and inside buttons; a handful of empty-state/illustrative uses go larger (`h-8 w-8`) where the icon is the primary content of a moment, not an accessory to text next to it — there's no third size in between. Icons paired with a visible text label are `aria-hidden="true"`; an icon-only control (a close button, the theme toggle) carries its own `aria-label` instead.
+
+## Accessibility
+
+This system's accessibility floor is verified, already built, and must not regress — see `PRODUCT.md`'s Accessibility & Inclusion section for the product-level commitment this implements:
+
+- **Contrast:** WCAG AA (4.5:1) minimum on every text/UI pairing; several tokens (`--primary`, `--muted-foreground`, `--sidebar-accent`) are tuned to clear the stricter **AAA 7:1** bar specifically because they double as plain body/label text, not just button fills. Two real failures were caught and fixed during the build, not assumed away — both documented as Named Rules above: ivory-on-`#e2394f` measured 4.02:1 (fixed by the Wire-Red Foreground Rule), and light-mode wire-red on the fixed-dark sidebar measured 2.85:1 (fixed by the Sidebar Accent Rule). Any new fixed-dark-on-variable-theme combination must be verified the same way — by computed contrast, not by eye.
+- **Touch targets:** 44×44px minimum on every interactive element (`size="sm"`/`"icon"` in the Button component both resolve to `h-11`, 44px) — a floor established before this redesign and preserved through it.
+- **Focus visibility:** every interactive element carries a visible `focus-visible` ring (see the Buttons and Navigation state specs above); the browser's default outline is suppressed only because it's replaced, never removed outright.
+- **Motion:** `prefers-reduced-motion` is respected automatically wherever an animation utility is used (`motion-safe:`/`motion-reduce:` variants), plus an independent manual override in Impostazioni for a user who wants reduced motion regardless of their OS setting.
+- **Keyboard operability:** every mouse-only interaction has a keyboard equivalent — most notably, country selection on the map has a full non-map path (the accessible `<select>` picker), not just a map click.
 
 ## Do's and Don'ts
 

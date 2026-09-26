@@ -18,17 +18,23 @@ permissions:
 
 jobs:
   frontend:
-    name: Frontend build and lint
+    name: Frontend build, lint and test
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      # jsdom 30's bundled undici (^8.x) unconditionally requires
+      # node:worker_threads.markAsUncloneable, which doesn't exist before
+      # Node ~22.10 - on Node 20 every test file crashes at jsdom's own
+      # module-load time with "webidl.util.markAsUncloneable is not a
+      # function", before any test even runs. 22 is the fix, not pinning
+      # jsdom backward or swapping test environments.
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
           cache-dependency-path: package-lock.json
 
@@ -37,6 +43,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Test
+        run: npm run test
 
       - name: Type-check and build
         run: npm run build

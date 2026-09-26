@@ -33,6 +33,7 @@
     "legend": {
       "today": "Oggi",
       "ariaLabel": "Legenda intensità eventi",
+      "close": "Chiudi legenda",
       "level": {
         "high": "≥ 6 eventi",
         "mid": "3–5 eventi",
@@ -64,17 +65,35 @@
         "title": "Nessuna statistica disponibile",
         "description": "I dati compariranno qui non appena l'archivio conterrà eventi."
       },
-      "events": { "label": "Eventi di oggi" },
+      "events": {
+        "label": "Eventi di oggi"
+      },
       "countries": {
         "label": "Paesi individuati",
         "detail": "{{geocoded}} su {{total}} eventi"
       },
-      "span": { "label": "Arco temporale" },
+      "span": {
+        "label": "Arco temporale"
+      },
       "topCountry": {
         "label": "Paese più citato",
         "detail_one": "{{count}} evento",
         "detail_other": "{{count}} eventi"
       }
+    },
+    "popularity": {
+      "heading": "I più visitati",
+      "description": "Quante volte ogni pagina è stata vista in totale, da tutti i visitatori — nessun dato personale, solo un conteggio aggregato e anonimo.",
+      "days": {
+        "label": "Giorni più visitati"
+      },
+      "countries": {
+        "label": "Paesi più visitati"
+      },
+      "views_one": "{{count}} visita",
+      "views_other": "{{count}} visite",
+      "noData": "Non ci sono ancora dati sufficienti.",
+      "cta": "Esplora la mappa"
     },
     "archiveTeaser": {
       "heading": "Archivio",
@@ -184,7 +203,13 @@
   },
   "notFound": {
     "title": "Pagina non trovata",
-    "backToMap": "Torna alla Mappa"
+    "backToMap": "Esplora la mappa",
+    "typedMessage": "Cerchiamo la pagina richiesta nell'archivio... risultato: non tr—",
+    "outOfPaper": "— la macchina da scrivere ha finito la carta —",
+    "referenceCode": "Rif. archivio: N/D",
+    "goToArchive": "Consulta l'Archivio",
+    "goToDashboard": "Dashboard",
+    "photoCredit": "Foto: O.G. Rejlander, 1872 · Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Benvenuto",
