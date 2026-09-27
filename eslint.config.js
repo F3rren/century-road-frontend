@@ -25,4 +25,15 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // The router intentionally defines several React.lazy(...)-wrapped route
+    // components alongside its actual (non-component) export, `router` - the
+    // whole point of this file. That mixture is exactly what this rule warns
+    // about for Fast Refresh boundaries, but it's a known false positive for
+    // route-definition files specifically, not a real HMR problem here.
+    files: ['src/router/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 )
