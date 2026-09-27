@@ -1,7 +1,7 @@
 export {
   ChangesSection,
   ControllerSection,
-  DataSection,
+  DataCollectionSection,
   LegalBasisSection,
   RetentionSection,
   RightsSection,

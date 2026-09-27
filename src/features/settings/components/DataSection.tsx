@@ -39,7 +39,10 @@ export function DataSection() {
         <Button type="button" variant="outline" size="sm" onClick={handleClear}>
           {t("settings.data.clearButton")}
         </Button>
-        <Link to="/privacy" className="text-sm text-primary hover:underline">
+        <Link
+          to="/privacy"
+          className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           {t("settings.data.privacyLink")}
         </Link>
       </div>

@@ -11,14 +11,8 @@ import {
   type OnThisDayParams,
   type SectionResult,
 } from '@/features/history';
-import { useDebouncedValue } from '@/hooks/useDebouncedValue';
+import { Alert } from '@/components/ui/Alert';
 import type { ArchiveFilters } from '../types';
-
-// Year-range changes fire on every keystroke of the filter fields; waiting a
-// beat before refetching avoids sending one request per digit typed. Every
-// other filter (date, type, language) is a discrete control (a select, a
-// checkbox, a button), so it applies immediately — only free typing needs this.
-const YEAR_DEBOUNCE_MS = 500;
 
 const STATUS_CLASS = 'px-0.5 py-2 text-sm italic text-muted-foreground';
 const NOTE_CLASS = 'px-0.5 pb-2 text-xs text-muted-foreground';
@@ -30,19 +24,21 @@ interface ArchiveResultsProps {
 
 export function ArchiveResults({ filters }: ArchiveResultsProps) {
   const { t } = useTranslation();
-  const fromYear = useDebouncedValue(filters.fromYear, YEAR_DEBOUNCE_MS);
-  const toYear = useDebouncedValue(filters.toYear, YEAR_DEBOUNCE_MS);
 
+  // No debounce here: YearRangeFields already debounces raw typed text 500ms before
+  // committing to filters.fromYear/toYear, so by the time either changes it has
+  // already been stable for 500ms — a second debounce here would only double the
+  // latency with nothing left to guard against.
   const params = useMemo<OnThisDayParams>(
     () => ({
       month: filters.month,
       day: filters.day,
       lang: filters.lang,
       types: filters.types,
-      fromYear: fromYear ?? undefined,
-      toYear: toYear ?? undefined,
+      fromYear: filters.fromYear ?? undefined,
+      toYear: filters.toYear ?? undefined,
     }),
-    [filters.month, filters.day, filters.lang, filters.types, fromYear, toYear],
+    [filters.month, filters.day, filters.lang, filters.types, filters.fromYear, filters.toYear],
   );
 
   const { isLoading, data, error } = useOnThisDay(params);
@@ -71,11 +67,7 @@ export function ArchiveResults({ filters }: ArchiveResultsProps) {
     <div className="space-y-6" aria-live="polite">
       {isLoading && <p className={STATUS_CLASS}>{t('archive.results.loading')}</p>}
 
-      {error && (
-        <p role="alert" className="border border-destructive p-4 text-sm text-destructive">
-          {t('archive.results.loadError', { error })}
-        </p>
-      )}
+      {error && <Alert>{t('archive.results.loadError', { error })}</Alert>}
 
       {data && sections.some(({ section }) => section.fallback) && (
         <p className={NOTE_CLASS}>

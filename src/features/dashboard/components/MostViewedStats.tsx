@@ -1,6 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/Card";
+import { Alert } from "@/components/ui/Alert";
 import { formatEventDate } from "@/lib/months";
 import { localizedCountryName } from "@/features/map";
 import type { CountryViewStat, DayViewStat } from "@/features/history";
@@ -48,12 +51,14 @@ function RankedList({ label, rows, emptyText }: RankedListProps) {
 }
 
 // Site-wide, all-time view counts (usePopularityStats) - a different question from
-// DashboardStats above it, which is about today's events only. Silently shows nothing
-// (rather than an error banner) when the request fails: this is a secondary, non-essential
-// panel, and the rest of the dashboard still works without it.
+// DashboardStats above it, which is about today's events only. A secondary,
+// non-essential panel: a loading pass renders nothing extra, but a failure still needs
+// to say so — the rest of the dashboard still works without it, but silence isn't the
+// same as "nothing to report".
 export function MostViewedStats({ topDays, topCountries, isLoading, error }: MostViewedStatsProps) {
   const { t, i18n } = useTranslation();
-  if (isLoading || error) return null;
+  if (isLoading) return null;
+  if (error) return <Alert variant="inline">{t("dashboard.popularity.loadError", { error })}</Alert>;
   if (topDays.length === 0 && topCountries.length === 0) return null;
 
   const dayRows = topDays.map((stat) => ({
@@ -68,7 +73,7 @@ export function MostViewedStats({ topDays, topCountries, isLoading, error }: Mos
   }));
 
   return (
-    <div className="border border-border p-5">
+    <Card>
       <h2 className="font-display text-eyebrow uppercase text-muted-foreground">
         {t("dashboard.popularity.heading")}
       </h2>
@@ -88,14 +93,13 @@ export function MostViewedStats({ topDays, topCountries, isLoading, error }: Mos
         />
       </div>
       <div className="mt-5 border-t border-border pt-4">
-        <Link
-          to="/"
-          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          {t("dashboard.popularity.cta")}
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        <Button asChild variant="link" className="px-0">
+          <Link to="/">
+            {t("dashboard.popularity.cta")}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </Button>
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,9 +1,12 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { X, Globe, CalendarDays, CalendarClock } from 'lucide-react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
+import { Select } from '@/components/ui/Select';
+import { Alert } from '@/components/ui/Alert';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useIsDesktop } from '@/hooks/useMediaQuery';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { EntryList, HistoryEvents } from '@/features/history';
 import { monthNames } from '@/lib/months';
@@ -25,10 +28,19 @@ interface EventsPanelProps {
 export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, history }: EventsPanelProps) {
   const { t, i18n } = useTranslation();
   const months = monthNames(i18n.language);
-  const { today, data, isLoading, error, countryFeaturesError, availableCountries, eventsForCountry } = history;
+  const {
+    today,
+    data,
+    isLoading,
+    error,
+    countryFeaturesLoading,
+    countryFeaturesError,
+    availableCountries,
+    eventsForCountry,
+  } = history;
   // The map/globe is pointer-only: below desktop this panel isn't docked, so
   // it needs its own open state instead of always taking up map width.
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isDesktop = useIsDesktop();
   const [mobileOpen, setMobileOpen] = useState(false);
   const countryPickerRef = useRef<HTMLSelectElement>(null);
 
@@ -36,10 +48,8 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
   // or the mobile drawer is open. It also only exists in the DOM once a
   // country is selected — that branch renders the per-country list, not the
   // picker.
-  useKeyboardShortcuts(
-    { '/': () => countryPickerRef.current?.focus() },
-    !selectedCountry && (isDesktop || mobileOpen),
-  );
+  const shortcuts = useMemo(() => ({ '/': () => countryPickerRef.current?.focus() }), []);
+  useKeyboardShortcuts(shortcuts, !selectedCountry && (isDesktop || mobileOpen));
 
   // Picking a country is the main way into this panel on mobile, where it
   // isn't permanently docked — surface it automatically. Adjusted during
@@ -92,26 +102,29 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
           isLoading ? (
             <p className={STATUS_CLASS}>{t('common.loading')}</p>
           ) : error ? (
-            <p className="px-0.5 py-2 text-xs text-destructive">
+            <Alert variant="inline" className="px-0.5 py-2">
               {t('map.events.loadError', { error })}
-            </p>
+            </Alert>
           ) : countryEvents.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
-              <Globe className="h-8 w-8 text-muted-foreground/40" />
-              <p className="text-sm text-muted-foreground">
+            <EmptyState
+              icon={Globe}
+              descriptionClassName="max-w-none text-sm"
+              description={
                 <Trans
                   i18nKey="map.events.noEventsFor"
                   values={{ country: selectedCountry.name }}
                   components={{ bold: <span className="font-medium" /> }}
                 />
-              </p>
-              <button
-                onClick={onClearCountry}
-                className="mt-2 text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {t('map.events.backToGlobal')}
-              </button>
-            </div>
+              }
+              action={
+                <button
+                  onClick={onClearCountry}
+                  className="mt-2 text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {t('map.events.backToGlobal')}
+                </button>
+              }
+            />
           ) : (
             <div>
               <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
@@ -136,12 +149,11 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
               >
                 {t('map.events.countryPickerLabel')}
               </label>
-              <select
+              <Select
                 id="country-picker"
                 ref={countryPickerRef}
                 aria-keyshortcuts="/"
-                disabled={availableCountries.length === 0}
-                className="w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+                disabled={countryFeaturesLoading || availableCountries.length === 0}
                 value=""
                 onChange={(e) => {
                   const country = availableCountries.find((c) => c.code === e.target.value);
@@ -149,7 +161,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                 }}
               >
                 <option value="" disabled>
-                  {availableCountries.length === 0
+                  {countryFeaturesLoading
                     ? t('map.events.loadingCountries')
                     : t('map.events.selectCountryPlaceholder')}
                 </option>
@@ -158,11 +170,11 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                     {c.name}
                   </option>
                 ))}
-              </select>
+              </Select>
               {countryFeaturesError && (
-                <p className="mt-1 text-xs text-destructive">
+                <Alert variant="inline" className="mt-1">
                   {t('map.events.countriesLoadError', { error: countryFeaturesError })}
-                </p>
+                </Alert>
               )}
             </div>
             <HistoryEvents

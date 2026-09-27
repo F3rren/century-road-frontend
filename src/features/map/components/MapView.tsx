@@ -4,6 +4,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { AlertTriangle, RotateCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { heatColor } from '../constants/heat';
 import { COUNTRIES_GEOJSON_URL } from '../constants/countries';
 import { localizedCountryName } from '../lib/countryGeometry';
@@ -54,6 +55,10 @@ export function MapView({
   // inside once('load') and would otherwise keep naming countries in
   // whatever language was active when the map first loaded.
   const languageRef = useRef(i18n.language);
+  // Same stale-closure issue, same fix again: the click handler below is
+  // bound once and would otherwise keep calling whichever onCountryClick was
+  // passed in on that first render, forever.
+  const onCountryClickRef = useRef(onCountryClick);
   const [loadError, setLoadError] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
 
@@ -142,7 +147,7 @@ export function MapView({
         const code = props['iso_a2'] ?? '';
         const englishName = props['name'] ?? props['admin'] ?? '';
         if (code && englishName) {
-          onCountryClick?.({ name: localizedCountryName(code, englishName, languageRef.current), code });
+          onCountryClickRef.current?.({ name: localizedCountryName(code, englishName, languageRef.current), code });
         }
       });
 
@@ -196,6 +201,11 @@ export function MapView({
     languageRef.current = i18n.language;
   }, [i18n.language]);
 
+  // Keep onCountryClickRef current for the click handler above.
+  useEffect(() => {
+    onCountryClickRef.current = onCountryClick;
+  }, [onCountryClick]);
+
   // Sync heatmap colors
   useEffect(() => {
     heatmapRef.current = countryHeatmap ?? {};
@@ -216,17 +226,19 @@ export function MapView({
         aria-label={t('map.panelAriaLabel')}
       />
       {loadError && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/95 p-6 text-center">
-          <AlertTriangle className="h-8 w-8 text-destructive" />
-          <p className="text-sm font-medium">{t('map.error.title')}</p>
-          <p className="max-w-xs text-xs text-muted-foreground">
-            {t('map.error.description')}
-          </p>
-          <Button size="sm" onClick={() => setRetryKey((k) => k + 1)}>
-            <RotateCw className="h-3.5 w-3.5" />
-            {t('map.error.retry')}
-          </Button>
-        </div>
+        <EmptyState
+          variant="overlay"
+          tone="destructive"
+          icon={AlertTriangle}
+          title={t('map.error.title')}
+          description={t('map.error.description')}
+          action={
+            <Button size="sm" onClick={() => setRetryKey((k) => k + 1)}>
+              <RotateCw className="h-3.5 w-3.5" />
+              {t('map.error.retry')}
+            </Button>
+          }
+        />
       )}
     </div>
   );

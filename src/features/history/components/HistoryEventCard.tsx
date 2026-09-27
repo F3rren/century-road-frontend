@@ -17,7 +17,7 @@ interface HistoryEventCardProps {
   attribution: Attribution;
 }
 
-// Same dateline/headline rhythm as the map's EventCard, but it shows only
+// Same dateline/headline rhythm as the map page's event listing, but it shows only
 // what the history API provides: no country, category or importance, and
 // none is invented to fill those slots. `text` is the event; the linked
 // articles are related reading and are never used as its title or summary.

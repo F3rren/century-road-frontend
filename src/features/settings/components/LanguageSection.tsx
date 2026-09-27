@@ -3,10 +3,8 @@ import { LANGUAGE_OPTIONS } from "@/i18n/languages";
 import type { UiLanguage } from "@/i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { formatEventDate, todayMonthDay } from "@/lib/months";
+import { Select } from "@/components/ui/Select";
 import { SettingsSection } from "./SettingsSection";
-
-const FIELD_CLASS =
-  "min-h-11 w-full max-w-xs border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 export function LanguageSection() {
   const { t } = useTranslation();
@@ -24,18 +22,18 @@ export function LanguageSection() {
         <label htmlFor="settings-language" className="mb-1.5 block text-sm font-medium">
           {t("settings.language.uiLabel")}
         </label>
-        <select
+        <Select
           id="settings-language"
           value={language}
           onChange={(e) => setLanguage(e.target.value as UiLanguage)}
-          className={FIELD_CLASS}
+          className="max-w-xs"
         >
           {LANGUAGE_OPTIONS.map(({ code, nativeName }) => (
             <option key={code} value={code}>
               {nativeName}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
       <p className="text-sm text-muted-foreground">{t("settings.language.contentNote")}</p>
       <div>
