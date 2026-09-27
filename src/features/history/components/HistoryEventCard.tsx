@@ -17,7 +17,7 @@ interface HistoryEventCardProps {
   attribution: Attribution;
 }
 
-// Same dateline/headline rhythm as the map's EventCard, but it shows only
+// Same dateline/headline rhythm as the map page's event listing, but it shows only
 // what the history API provides: no country, category or importance, and
 // none is invented to fill those slots. `text` is the event; the linked
 // articles are related reading and are never used as its title or summary.
@@ -37,7 +37,17 @@ export function HistoryEventCard({ entry, month, day, language, attribution }: H
   };
 
   return (
-    <article lang={language} className="border-b border-border py-3 first:pt-0 last:border-b-0">
+    <article
+      lang={language}
+      // content-visibility skips layout/paint for rows far off-screen - a
+      // real cost on a day with hundreds of entries (births/deaths sections
+      // can run that high). contain-intrinsic-size is only the placeholder
+      // height used before a row has ever been measured, so the scrollbar
+      // doesn't jump; it doesn't need to be exact. Native, so unlike a
+      // virtualization library this keeps every row in the DOM - Ctrl+F and
+      // scroll-position restoration keep working normally.
+      style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 88px' }}
+      className="border-b border-border py-3 first:pt-0 last:border-b-0">
       <button
         ref={triggerRef}
         type="button"

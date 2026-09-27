@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { RouteFallback } from "./RouteFallback";
+import { useIsDesktop } from "@/hooks/useMediaQuery";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 
 export function AppLayout() {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktop = useIsDesktop();
   const [sidebarOpen, setSidebarOpen] = useState(isDesktop);
   const navigate = useNavigate();
 
-  useKeyboardShortcuts({
-    "1": () => navigate("/"),
-    "2": () => navigate("/dashboard"),
-    "3": () => navigate("/archive"),
-    "4": () => navigate("/settings"),
-  });
+  const shortcuts = useMemo(
+    () => ({
+      "1": () => navigate("/"),
+      "2": () => navigate("/dashboard"),
+      "3": () => navigate("/archive"),
+      "4": () => navigate("/settings"),
+    }),
+    [navigate],
+  );
+  useKeyboardShortcuts(shortcuts);
 
   // Re-sync sidebarOpen whenever the breakpoint itself changes (resize/
   // rotation), so it never gets stuck closed-on-desktop or open-on-mobile.
@@ -40,7 +45,9 @@ export function AppLayout() {
           onMenuToggle={() => setSidebarOpen((v) => !v)}
         />
         <main className="flex-1 overflow-hidden">
-          <Outlet />
+          <Suspense fallback={<RouteFallback />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
     </div>

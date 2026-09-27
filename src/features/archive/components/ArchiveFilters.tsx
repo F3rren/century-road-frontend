@@ -1,14 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { SECTION_LABEL_KEYS, SECTION_ORDER, type HistoryLanguage } from '@/features/history';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Select } from '@/components/ui/Select';
+import { Input } from '@/components/ui/Input';
+import { Card } from '@/components/ui/Card';
+import { SegmentedGroup } from '@/components/ui/SegmentedGroup';
 import { daysInMonth, monthNames } from '@/lib/months';
 import type { ArchiveFilters as ArchiveFiltersState } from '../types';
 import { YearRangeFields } from './YearRangeFields';
 
 const LABEL_CLASS = 'mb-1.5 block font-display text-eyebrow uppercase text-muted-foreground';
-const FIELD_CLASS =
-  'min-h-11 w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
 // UI-chrome strings, translated per active language ("Inglese" becomes
 // "Englisch" in the German UI) — a different concept from the endonyms in
@@ -43,7 +44,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
   }
 
   return (
-    <div className="space-y-5 border border-border p-4">
+    <Card padding="sm" className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <span className={LABEL_CLASS} id="archive-date-label">
@@ -54,35 +55,34 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
               <label htmlFor="archive-month" className="sr-only">
                 {t('archive.filters.monthSrLabel')}
               </label>
-              <select
+              <Select
                 id="archive-month"
                 value={filters.month}
                 onChange={(e) => onChange({ month: Number(e.target.value) })}
-                className={FIELD_CLASS}
               >
                 {months.slice(1).map((name, index) => (
                   <option key={name} value={index + 1}>
                     {name}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
             <div>
               <label htmlFor="archive-day" className="sr-only">
                 {t('archive.filters.daySrLabel')}
               </label>
-              <select
+              <Select
                 id="archive-day"
                 value={filters.day}
                 onChange={(e) => onChange({ day: Number(e.target.value) })}
-                className={cn(FIELD_CLASS, 'w-20')}
+                className="w-20"
               >
                 {dayOptions.map((day) => (
                   <option key={day} value={day}>
                     {day}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
           </div>
         </div>
@@ -123,41 +123,24 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
           <span className={LABEL_CLASS} id="archive-lang-label">
             {t('archive.filters.languageLegend')}
           </span>
-          <div
-            role="group"
-            aria-labelledby="archive-lang-label"
-            className="inline-flex divide-x divide-border border border-input"
-          >
-            {LANGUAGES.map(({ code, labelKey }) => (
-              <button
-                key={code}
-                type="button"
-                aria-pressed={filters.lang === code}
-                onClick={() => onChange({ lang: code })}
-                className={cn(
-                  'min-h-11 px-4 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                  filters.lang === code
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-background text-muted-foreground hover:text-foreground',
-                )}
-              >
-                {t(labelKey)}
-              </button>
-            ))}
-          </div>
+          <SegmentedGroup
+            value={filters.lang}
+            onChange={(lang) => onChange({ lang })}
+            options={LANGUAGES.map(({ code, labelKey }) => ({ value: code, label: t(labelKey) }))}
+            ariaLabel={t('archive.filters.languageLegend')}
+          />
         </div>
 
         <div className="min-w-[14rem] flex-1">
           <label htmlFor="archive-query" className={LABEL_CLASS}>
             {t('archive.filters.searchLabel')}
           </label>
-          <input
+          <Input
             id="archive-query"
             type="search"
             value={filters.query}
             onChange={(e) => onChange({ query: e.target.value })}
             placeholder={t('archive.filters.searchPlaceholder')}
-            className={FIELD_CLASS}
           />
         </div>
 
@@ -165,6 +148,6 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
           {t('archive.filters.reset')}
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }

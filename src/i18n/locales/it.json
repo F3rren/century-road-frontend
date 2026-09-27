@@ -84,6 +84,7 @@
     "popularity": {
       "heading": "I più visitati",
       "description": "Quante volte ogni pagina è stata vista in totale, da tutti i visitatori — nessun dato personale, solo un conteggio aggregato e anonimo.",
+      "loadError": "Impossibile caricare le statistiche sulle visualizzazioni ({{error}}).",
       "days": {
         "label": "Giorni più visitati"
       },
@@ -200,6 +201,9 @@
     "era": {
       "bc": "a.C."
     }
+  },
+  "legal": {
+    "italianOnlyNotice": "Questa pagina è disponibile solo in italiano."
   },
   "notFound": {
     "title": "Pagina non trovata",

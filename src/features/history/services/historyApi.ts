@@ -2,6 +2,13 @@ import { api } from '@/services/api';
 import type { ApiResponse } from '@/types';
 import type { CountryViewStat, DayViewStat, OnThisDayData, OnThisDayParams } from '../types';
 
+// Prefers the backend envelope's own message (already real, whatever language the
+// backend sends) over a hardcoded client-side string, consistent with api.ts's own
+// un-localized error convention.
+function extractErrorMessage(envelope: ApiResponse<unknown>): string {
+  return envelope.message ?? 'Unexpected response shape from server';
+}
+
 // Relative to api.ts's BASE_URL, which defaults to "/api" (Vite proxies that
 // to the gateway). Keep VITE_API_BASE_URL unset, or ending in "/api".
 export function buildOnThisDayPath({
@@ -40,7 +47,7 @@ export async function fetchOnThisDay(path: string): Promise<OnThisDayData> {
   const envelope = await api.get<ApiResponse<unknown>>(path);
 
   if (!envelope.success || !isOnThisDayData(envelope.data)) {
-    throw new Error('Risposta del backend non nel formato atteso');
+    throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data;
 }
@@ -58,7 +65,7 @@ export function trackCountryView(countryCode: string): void {
 export async function fetchTopDays(limit: number): Promise<DayViewStat[]> {
   const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/days?limit=${limit}`);
   if (!envelope.success || !Array.isArray(envelope.data)) {
-    throw new Error('Risposta del backend non nel formato atteso');
+    throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data as DayViewStat[];
 }
@@ -66,7 +73,7 @@ export async function fetchTopDays(limit: number): Promise<DayViewStat[]> {
 export async function fetchTopCountries(limit: number): Promise<CountryViewStat[]> {
   const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/countries?limit=${limit}`);
   if (!envelope.success || !Array.isArray(envelope.data)) {
-    throw new Error('Risposta del backend non nel formato atteso');
+    throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data as CountryViewStat[];
 }

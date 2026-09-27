@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Alert } from '@/components/ui/Alert';
 import type { OnThisDayData } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { EntryList } from './EntryList';
@@ -44,11 +45,7 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
 
       {isLoading && <p className={STATUS_CLASS}>{t('history.loading')}</p>}
 
-      {error && (
-        <p className="px-0.5 py-2 text-xs text-destructive">
-          {t('history.loadError', { error })}
-        </p>
-      )}
+      {error && <Alert variant="inline" className="px-0.5 py-2">{t('history.loadError', { error })}</Alert>}
 
       {data && !hasFeatured && !hasEvents && (
         <p className={STATUS_CLASS}>{t('history.empty')}</p>

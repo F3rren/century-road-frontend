@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
+import { Input } from '@/components/ui/Input';
 
 const YEAR_DEBOUNCE_MS = 500;
-const FIELD_CLASS =
-  'min-h-11 w-full border border-input bg-background px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
 interface YearRangeFieldsProps {
   fromYear: number | null;
@@ -56,7 +55,7 @@ export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsP
         <label htmlFor="archive-year-from" className="sr-only">
           {t('archive.filters.yearFromSr')}
         </label>
-        <input
+        <Input
           id="archive-year-from"
           type="text"
           inputMode="numeric"
@@ -67,14 +66,13 @@ export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsP
             hasEdited.current = true;
             setFromText(e.target.value);
           }}
-          className={FIELD_CLASS}
         />
       </div>
       <div>
         <label htmlFor="archive-year-to" className="sr-only">
           {t('archive.filters.yearToSr')}
         </label>
-        <input
+        <Input
           id="archive-year-to"
           type="text"
           inputMode="numeric"
@@ -85,7 +83,6 @@ export function YearRangeFields({ fromYear, toYear, onChange }: YearRangeFieldsP
             hasEdited.current = true;
             setToText(e.target.value);
           }}
-          className={FIELD_CLASS}
         />
       </div>
     </div>

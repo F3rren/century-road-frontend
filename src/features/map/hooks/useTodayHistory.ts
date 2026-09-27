@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOnThisDay, type HistorySectionKey } from '@/features/history';
+import { useFetchOnce } from '@/hooks/useFetchState';
 import { todayMonthDay } from '@/lib/months';
 import { deriveContentLanguage } from '@/i18n/contentLanguage';
 import { countByCountry, geocodeEntries, type GeocodedEntry } from '../lib/geocodeEntries';
-import { fetchCountryFeatures, listCountries, type CountryFeature } from '../lib/countryGeometry';
+import { fetchCountryFeatures, listCountries } from '../lib/countryGeometry';
 import type { Country } from '../types';
 
 // selected: the editors' short pick for the day; events: the full list. Both
@@ -29,25 +30,11 @@ export function useTodayHistory() {
     types: TYPES,
   });
 
-  const [countryFeatures, setCountryFeatures] = useState<CountryFeature[] | null>(null);
-  const [countryFeaturesError, setCountryFeaturesError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isStale = false;
-    fetchCountryFeatures()
-      .then((features) => {
-        if (!isStale) setCountryFeatures(features);
-      })
-      .catch((fetchError: unknown) => {
-        if (isStale) return;
-        setCountryFeaturesError(
-          fetchError instanceof Error ? fetchError.message : i18n.t('common.unknownError'),
-        );
-      });
-    return () => {
-      isStale = true;
-    };
-  }, [i18n]);
+  const {
+    data: countryFeatures,
+    isLoading: countryFeaturesLoading,
+    error: countryFeaturesError,
+  } = useFetchOnce(fetchCountryFeatures);
 
   const geocodedEvents = useMemo<GeocodedEntry[]>(() => {
     const events = data?.sections.events;
@@ -76,6 +63,7 @@ export function useTodayHistory() {
     data,
     isLoading,
     error,
+    countryFeaturesLoading,
     countryFeaturesError,
     geocodedEvents,
     countryHeatmap,
