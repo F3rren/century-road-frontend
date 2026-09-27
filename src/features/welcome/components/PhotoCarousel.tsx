@@ -83,18 +83,38 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
                     <img
                       src={photo.image.src}
                       srcSet={photo.image.srcSet}
+                      // Matches the tile's actual rendered width (w-40/w-56 above).
+                      // Without this, the browser assumes the HTML default (100vw)
+                      // and, since neither srcSet candidate is "big enough" for
+                      // that, picks the larger one every time - the "reasonable
+                      // size" original (up to 1600px), not the ~330px thumbnail -
+                      // for a tile that only ever displays at 160-224 CSS px.
+                      // Measured directly: this alone was responsible for several
+                      // 700-900KB tile loads that isOversizedForTile's width/height
+                      // check never saw, because it only ever inspected the
+                      // thumbnail candidate, not which one the browser actually
+                      // picked.
+                      sizes="(min-width: 640px) 14rem, 10rem"
                       alt=""
                       // `loading="lazy"` was tried here for the duplicate half of the
                       // track (see the class comment above `track`) and reverted: this
                       // strip never stops scrolling, so "off screen right now" is a few
                       // seconds' wait, not "maybe never" — deferring the request left
                       // visible gaps once the loop reached a tile whose fetch had never
-                      // been triggered. `fetchPriority` was tried next as a non-blocking
-                      // "second copy isn't urgent" hint and also reverted: react-dom
-                      // 18.3's runtime doesn't recognize the prop yet (only its types
-                      // do), so it silently never reached the DOM — every tile just
-                      // loads eagerly now, which is what was actually being tested and
-                      // verified working all along.
+                      // been triggered. Every tile loads eagerly, all ~60 of them at
+                      // once with no priority signal between them - measured directly
+                      // with Lighthouse against production: this is the LCP element,
+                      // and its own breakdown flagged exactly this ("fetchpriority=high
+                      // should be applied", "no request is priority-hinted"). The very
+                      // first tile gets that hint below, via a ref (not the fetchPriority
+                      // JSX prop - react-dom 18.3's runtime still doesn't special-case it
+                      // into the DOM attribute, only its types recognise the prop name;
+                      // setAttribute bypasses that entirely and actually reaches the img).
+                      ref={
+                        rowIndex === 0 && i === 0
+                          ? (el) => el?.setAttribute('fetchpriority', 'high')
+                          : undefined
+                      }
                       decoding="async"
                       onLoad={(event) => event.currentTarget.classList.remove('opacity-0')}
                       className="h-full w-full object-cover opacity-0 grayscale contrast-125 transition-opacity duration-700"

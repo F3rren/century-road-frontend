@@ -83,6 +83,18 @@ function isOversizedForTile(image: { width: number; height: number }): boolean {
   return Math.max(image.width, image.height) > MAX_TILE_SIDE;
 }
 
+// isOversizedForTile isn't always enough on its own: measured directly
+// against production (Lighthouse), several tiles still landed at 326KB-920KB
+// despite passing the 600px check — Wikipedia's own reported width/height
+// for an unscaled thumbnail doesn't reliably reflect the actual file, so the
+// dimension-based filter alone can be fooled. Wikipedia's URL says so itself
+// (?...&utm_content=thumbnail_unscaled), and that marker doesn't depend on
+// metadata being accurate — check it directly rather than trusting the
+// numbers that already proved unreliable once.
+function isUnscaledThumbnail(url: string): boolean {
+  return /[?&]utm_content=thumbnail_unscaled(&|$)/i.test(url);
+}
+
 // Real historical photography for the Welcome page's carousel — never a
 // fixed "today", on purpose: today's own events already anchor the dateline
 // sequence above it, so the carousel instead mixes in a genuinely different
@@ -115,7 +127,8 @@ export function useHistoryPhotoCarousel() {
             candidateImage &&
             !isSvg(candidateImage.src) &&
             !isPng(candidateImage.src) &&
-            !isOversizedForTile(candidateImage)
+            !isOversizedForTile(candidateImage) &&
+            !isUnscaledThumbnail(candidateImage.src)
           );
         });
         const image = page && buildImageSources(page);

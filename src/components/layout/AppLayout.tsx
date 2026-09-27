@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
+import { RouteFallback } from "./RouteFallback";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 
@@ -40,7 +41,9 @@ export function AppLayout() {
           onMenuToggle={() => setSidebarOpen((v) => !v)}
         />
         <main className="flex-1 overflow-hidden">
-          <Outlet />
+          <Suspense fallback={<RouteFallback />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
     </div>
