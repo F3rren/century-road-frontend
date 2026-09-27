@@ -170,19 +170,28 @@ export function NotFoundPage() {
         className={cn("relative z-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm", !reduced && "animate-fade-up")}
         style={delay(1.6)}
       >
-        <Link to="/" className="text-primary hover:underline">
+        <Link
+          to="/"
+          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           {t("notFound.backToMap")}
         </Link>
         <span aria-hidden="true" className="text-border">
           ·
         </span>
-        <Link to="/archive" className="text-primary hover:underline">
+        <Link
+          to="/archive"
+          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           {t("notFound.goToArchive")}
         </Link>
         <span aria-hidden="true" className="text-border">
           ·
         </span>
-        <Link to="/dashboard" className="text-primary hover:underline">
+        <Link
+          to="/dashboard"
+          className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           {t("notFound.goToDashboard")}
         </Link>
       </div>

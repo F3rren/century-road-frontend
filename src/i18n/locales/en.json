@@ -84,6 +84,7 @@
     "popularity": {
       "heading": "Most viewed",
       "description": "How many times each page has been viewed in total, across every visitor — no personal data, just an anonymous, aggregate count.",
+      "loadError": "Couldn't load the view stats ({{error}}).",
       "days": {
         "label": "Most-viewed days"
       },
@@ -200,6 +201,9 @@
     "era": {
       "bc": "BC"
     }
+  },
+  "legal": {
+    "italianOnlyNotice": "This page is only available in Italian."
   },
   "notFound": {
     "title": "Page not found",

@@ -84,6 +84,7 @@
     "popularity": {
       "heading": "Meistbesucht",
       "description": "Wie oft jede Seite insgesamt von allen Besuchern aufgerufen wurde — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
+      "loadError": "Die Statistiken zu den Aufrufen konnten nicht geladen werden ({{error}}).",
       "days": {
         "label": "Meistbesuchte Tage"
       },
@@ -200,6 +201,9 @@
     "era": {
       "bc": "v. Chr."
     }
+  },
+  "legal": {
+    "italianOnlyNotice": "Diese Seite ist nur auf Italienisch verfügbar."
   },
   "notFound": {
     "title": "Seite nicht gefunden",

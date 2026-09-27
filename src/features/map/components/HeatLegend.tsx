@@ -3,7 +3,7 @@ import { Info, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { MapOverlayPanel } from '@/components/ui/MapOverlayPanel';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useIsDesktop } from '@/hooks/useMediaQuery';
 import { HEAT_LEVELS } from '../constants/heat';
 
 export function HeatLegend() {
@@ -15,7 +15,7 @@ export function HeatLegend() {
   // Desktop keeps the always-open panel (unchanged); mobile starts
   // collapsed to a single 44px icon button, matching ProjectionToggle's
   // own touch targets.
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isDesktop = useIsDesktop();
   const [expanded, setExpanded] = useState(isDesktop);
   const [prevIsDesktop, setPrevIsDesktop] = useState(isDesktop);
   if (isDesktop !== prevIsDesktop) {

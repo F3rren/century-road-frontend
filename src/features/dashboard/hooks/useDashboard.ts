@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useTodayHistory } from "@/features/map";
 import { computeStats } from "../lib/computeStats";
@@ -9,6 +10,6 @@ import { computeStats } from "../lib/computeStats";
 export function useDashboard() {
   const { t } = useTranslation();
   const { geocodedEvents, isLoading, error } = useTodayHistory();
-  const stats = computeStats(geocodedEvents, t);
+  const stats = useMemo(() => computeStats(geocodedEvents, t), [geocodedEvents, t]);
   return { stats, isLoading, error };
 }

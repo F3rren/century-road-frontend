@@ -121,17 +121,17 @@ export function useHistoryPhotoCarousel() {
       for (const entry of section.items) {
         // One photo per entry: a single richly-illustrated event shouldn't
         // crowd out every other era in the rotation.
-        const page = entry.pages.find((candidate) => {
+        let image: ImageSources | undefined;
+        entry.pages.find((candidate) => {
           const candidateImage = buildImageSources(candidate);
-          return (
-            candidateImage &&
+          const ok = !!candidateImage &&
             !isSvg(candidateImage.src) &&
             !isPng(candidateImage.src) &&
             !isOversizedForTile(candidateImage) &&
-            !isUnscaledThumbnail(candidateImage.src)
-          );
+            !isUnscaledThumbnail(candidateImage.src);
+          if (ok) image = candidateImage;
+          return ok;
         });
-        const image = page && buildImageSources(page);
         if (!image || seenFiles.has(image.filePageUrl)) continue;
         seenFiles.add(image.filePageUrl);
         found.push({

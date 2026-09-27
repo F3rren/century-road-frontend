@@ -84,6 +84,7 @@
     "popularity": {
       "heading": "Les plus consultés",
       "description": "Le nombre total de consultations de chaque page, tous visiteurs confondus — aucune donnée personnelle, juste un comptage agrégé et anonyme.",
+      "loadError": "Impossible de charger les statistiques de vues ({{error}}).",
       "days": {
         "label": "Jours les plus consultés"
       },
@@ -200,6 +201,9 @@
     "era": {
       "bc": "av. J.-C."
     }
+  },
+  "legal": {
+    "italianOnlyNotice": "Cette page n'est disponible qu'en italien."
   },
   "notFound": {
     "title": "Page introuvable",

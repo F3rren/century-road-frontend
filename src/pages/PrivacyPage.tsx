@@ -1,7 +1,7 @@
 import {
   ChangesSection,
   ControllerSection,
-  DataSection,
+  DataCollectionSection,
   LegalBasisSection,
   RetentionSection,
   RightsSection,
@@ -22,7 +22,7 @@ export function PrivacyPage() {
     >
       <SummarySection />
       <ControllerSection />
-      <DataSection />
+      <DataCollectionSection />
       <StorageSection />
       <ThirdPartiesSection />
       <LegalBasisSection />

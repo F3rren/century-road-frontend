@@ -155,6 +155,8 @@ Radius is functionally zero (`--radius: 0.125rem` = 2px, with `md`/`sm` steps at
 - **Shape:** Near-square (1px radius).
 - **Primary:** Wire-red fill, ivory (light mode) or dark-ink (dark mode) text — see the Wire-Red Foreground Rule. 44px minimum height (touch target floor established before this redesign; preserved).
 - **Ghost:** Transparent, `hover:bg-accent`. Used for icon-only chrome (menu toggle, theme toggle, close buttons).
+- **Outline:** Hairline border (`border-input`), transparent fill, `hover:bg-accent`. Used for secondary actions that shouldn't compete with a primary CTA on the same view (e.g. "Reset filters", a teaser card's CTA).
+- **Link:** No border or fill, `text-primary underline-offset-4 hover:underline` — a button that reads as inline text. Formalizes a recipe already used for text links throughout the system rather than inventing new visual language.
 - **Overlay / Overlay-Active:** Used only inside `MapOverlayPanel` (ProjectionToggle). Overlay-active is a wire-red fill — the same "this is the active/selected state" signal as everywhere else in the system, not a separate white/black treatment.
 - **Focus:** `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` (plus `ring-offset-2 ring-offset-background`, or `ring-offset-black` on the dark map-overlay variant) on every interactive element in the system, no exceptions — never rely on the browser's default outline, and never remove focus styling without replacing it.
 - **Disabled:** `disabled:opacity-50 disabled:pointer-events-none` — dimmed and inert, never hidden or re-colored; disabled state is signaled by opacity alone, consistent with the system's "color/size carries meaning, nothing else does" discipline.

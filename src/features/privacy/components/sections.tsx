@@ -37,7 +37,7 @@ export function ControllerSection() {
   );
 }
 
-export function DataSection() {
+export function DataCollectionSection() {
   return (
     <LegalSection title="2. Quali dati trattiamo">
       <p>
