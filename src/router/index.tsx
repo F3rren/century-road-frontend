@@ -17,6 +17,9 @@ const ArchivePage = lazy(() => import('@/pages/ArchivePage').then((m) => ({ defa
 const SettingsPage = lazy(() => import('@/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = lazy(() => import('@/pages/TermsPage').then((m) => ({ default: m.TermsPage })));
+const GuidePage = lazy(() => import('@/pages/GuidePage').then((m) => ({ default: m.GuidePage })));
+const MethodologyPage = lazy(() => import('@/pages/MethodologyPage').then((m) => ({ default: m.MethodologyPage })));
+const CreditsPage = lazy(() => import('@/pages/CreditsPage').then((m) => ({ default: m.CreditsPage })));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 // Vite exposes whatever base it was built with as BASE_URL, so the router prefix
@@ -46,6 +49,9 @@ export const router = createBrowserRouter([
       { path: 'settings',     element: <SettingsPage /> },
       { path: 'privacy',      element: <PrivacyPage /> },
       { path: 'terms',        element: <TermsPage /> },
+      { path: 'guide',        element: <GuidePage /> },
+      { path: 'methodology',  element: <MethodologyPage /> },
+      { path: 'credits',      element: <CreditsPage /> },
       { path: '*',            element: <NotFoundPage /> },
     ],
   },
