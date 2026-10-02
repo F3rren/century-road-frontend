@@ -9,6 +9,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 const LINKS = {
   kbd: <Kbd />,
   archive: <ProseLink to="/archive" />,
+  century: <ProseLink to="/century" />,
   methodology: <ProseLink to="/methodology" />,
   settings: <ProseLink to="/settings" />,
   privacy: <ProseLink to="/privacy" />,

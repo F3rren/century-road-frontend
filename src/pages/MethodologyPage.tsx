@@ -48,6 +48,12 @@ export function MethodologyPage() {
           <p>{t("methodology.geocoding.p3")}</p>
         </LegalSection>
 
+        <LegalSection title={t("methodology.index.title")}>
+          <p>
+            <Trans i18nKey="methodology.index.p1" components={{ century: <ProseLink to="/century" /> }} />
+          </p>
+        </LegalSection>
+
         <LegalSection title={t("methodology.errors.title")}>
           <p>{t("methodology.errors.p1")}</p>
           <p>

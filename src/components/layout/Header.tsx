@@ -15,7 +15,7 @@ export function Header({ sidebarOpen, onMenuToggle, className }: HeaderProps) {
   return (
     <header
       className={cn(
-        "flex h-14 items-center border-b bg-background px-4 gap-4",
+        "flex h-14 items-center border-b bg-background px-4 gap-4 print:hidden",
         className
       )}
     >

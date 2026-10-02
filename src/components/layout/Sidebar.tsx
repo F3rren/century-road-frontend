@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   Archive,
+  CalendarRange,
   CircleQuestionMark,
   Database,
   FileText,
@@ -25,7 +26,8 @@ const navItems = [
   { labelKey: 'nav.map',        href: '/',          icon: Globe,            end: true,  shortcut: '1' },
   { labelKey: 'nav.dashboard',  href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
   { labelKey: 'nav.archive',    href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
-  { labelKey: 'nav.settings',   href: '/settings',  icon: Settings,         end: false, shortcut: '4' },
+  { labelKey: 'nav.century',    href: '/century',   icon: CalendarRange,    end: false, shortcut: '4' },
+  { labelKey: 'nav.settings',   href: '/settings',  icon: Settings,         end: false, shortcut: '5' },
 ] as const;
 
 // Reference pages (how-to, methodology, credits, legal): reachable from anywhere
@@ -65,7 +67,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
     <>
       {!isDesktop && open && (
         <div
-          className="fixed inset-0 z-40 bg-black/50"
+          className="fixed inset-0 z-40 bg-black/50 print:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -73,7 +75,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
       <aside
         aria-label={t('nav.ariaLabel')}
         className={cn(
-          'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 motion-reduce:duration-75',
+          'flex shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-300 motion-reduce:duration-75 print:hidden',
           isDesktop
             ? open
               ? 'w-60'

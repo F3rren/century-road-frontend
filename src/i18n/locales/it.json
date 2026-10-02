@@ -8,6 +8,7 @@
     "map": "Mappa",
     "dashboard": "Dashboard",
     "archive": "Archivio",
+    "century": "Il mio secolo",
     "settings": "Impostazioni",
     "privacy": "Privacy",
     "terms": "Termini e condizioni",
@@ -133,6 +134,23 @@
       "noMatches": "Nessun risultato per «{{query}}»."
     }
   },
+  "century": {
+    "titleFor": "Il mio secolo: {{country}}",
+    "pageDescription": "Gli eventi di un paese in tutti i giorni dell'anno, in ordine di tempo",
+    "methodNote": "Sono le voci che Wikipedia elenca per ogni giorno dell'anno e che la mappa colloca in quel paese, con lo stesso metodo e gli stessi limiti: <methodology>come funziona</methodology>.",
+    "countryLabel": "Paese",
+    "countryPlaceholder": "Scegli un paese…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Anni",
+    "print": "Stampa o salva in PDF",
+    "pickCountry": "Scegli un paese per vedere i suoi eventi di tutto l'anno. Il link della pagina conserva la scelta: puoi salvarlo o condividerlo.",
+    "indexEmpty": "L'indice dei paesi è in preparazione: riprova tra qualche minuto.",
+    "empty": "Nessun evento di questo paese negli anni scelti.",
+    "loadError": "Impossibile caricare la cronologia ({{error}}).",
+    "summary_one": "Un evento, nel {{first}}.",
+    "summary_other": "{{count}} eventi, dal {{first}} al {{last}}.",
+    "indexedAt": "Indice aggiornato il {{date}}."
+  },
   "history": {
     "section": {
       "selected": "In evidenza",
@@ -246,6 +264,10 @@
       "limitIslands": "alcuni piccoli stati insulari non hanno una forma a questa scala e non vengono mai individuati.",
       "p3": "Sulla mappa contano solo gli Eventi: In evidenza ne ripete alcuni, e contarli due volte gonfierebbe i numeri."
     },
+    "index": {
+      "title": "L'indice per paese",
+      "p1": "La pagina <century>Il mio secolo</century> usa un indice che il nostro server costruisce ogni notte: legge tutti i giorni dell'anno in italiano e in inglese e colloca ogni evento in un paese con la stessa regola e gli stessi confini della mappa. Contiene solo gli Eventi con un anno e un paese individuato, ogni edizione per conto suo (senza ripiego tra le lingue), e può essere indietro di un giorno rispetto a Wikipedia."
+    },
     "errors": {
       "title": "Contraddizioni ed errori",
       "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
@@ -277,8 +299,8 @@
       "p1": "In <archive>Archivio</archive>: scegli mese e giorno, poi restringi per anni (negativi prima di Cristo, per esempio -44), per tipo di voce e per lingua. La casella di ricerca filtra le voci di quel giorno."
     },
     "theme": {
-      "title": "Posso seguire un tema su tutto l'anno?",
-      "p1": "Non con una sola ricerca: l'archivio lavora un giorno alla volta. Per un tema come la Guerra Fredda, imposta gli anni dal 1947 al 1991, cerca una parola come «Berlino» e poi cambia giorno."
+      "title": "Posso seguire un paese o un tema su tutto l'anno?",
+      "p1": "Un paese sì: <century>Il mio secolo</century> mostra tutti i suoi eventi dell'anno in ordine di tempo. Per un tema come la Guerra Fredda l'archivio lavora un giorno alla volta: imposta gli anni dal 1947 al 1991, cerca una parola come «Berlino» e poi cambia giorno."
     },
     "dashboard": {
       "title": "Cosa misura la Dashboard?",
@@ -294,7 +316,7 @@
     },
     "shortcuts": {
       "title": "Ci sono scorciatoie da tastiera?",
-      "p1": "Sì: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> e <kbd>4</kbd> aprono Mappa, Dashboard, Archivio e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
+      "p1": "Sì: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> e <kbd>5</kbd> aprono Mappa, Dashboard, Archivio, Il mio secolo e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
     },
     "prefs": {
       "title": "Dove vengono salvate le mie preferenze?",
@@ -369,6 +391,9 @@
     },
     "archive": {
       "description": "Sfoglia l'archivio completo degli eventi di oggi in ogni secolo, filtrando per anno e tipo di voce."
+    },
+    "century": {
+      "description": "Scegli un paese e scopri i suoi eventi di tutti i giorni dell'anno, in ordine di tempo: una cronologia da condividere o stampare."
     },
     "settings": {
       "description": "Personalizza aspetto, lingua e proiezione predefinita della mappa di Century Road."

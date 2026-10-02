@@ -86,6 +86,9 @@
     --sidebar-accent: 352 74% 75%;
   }
 
+  /* Screen only: paper is always printed light, whatever the theme on screen, or a dark
+     theme would print light text on white. */
+  @media screen {
   .dark {
     --background: 30 11.1% 7.1%; /* newsroom at night */
     --foreground: 40 36.6% 92%;
@@ -124,6 +127,7 @@
        in sync rather than removed, since this block already duplicates
        --sidebar/-foreground/-border for the same fixed reason. */
     --sidebar-accent: 352 74% 75%;
+  }
   }
 }
 
@@ -190,6 +194,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
+  }
+  /* On paper the fixed-height shell above lets go (AppLayout adds the same per element), so a
+     long page flows across sheets; content-visibility rows render too, or they print blank. */
+  @media print {
+    html,
+    body {
+      height: auto;
+      overflow: visible;
+    }
+    [style*="content-visibility"] {
+      content-visibility: visible !important;
+    }
   }
 }
 

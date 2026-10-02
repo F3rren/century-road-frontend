@@ -8,6 +8,7 @@
     "map": "Karte",
     "dashboard": "Dashboard",
     "archive": "Archiv",
+    "century": "Mein Jahrhundert",
     "settings": "Einstellungen",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
@@ -133,6 +134,23 @@
       "noMatches": "Keine Ergebnisse für „{{query}}“."
     }
   },
+  "century": {
+    "titleFor": "Mein Jahrhundert: {{country}}",
+    "pageDescription": "Die Ereignisse eines Landes aus allen Tagen des Jahres, in zeitlicher Reihenfolge",
+    "methodNote": "Es sind die Einträge, die Wikipedia für jeden Tag des Jahres auflistet und die die Karte diesem Land zuordnet, mit derselben Methode und denselben Grenzen: <methodology>so funktioniert es</methodology>.",
+    "countryLabel": "Land",
+    "countryPlaceholder": "Land wählen…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Jahre",
+    "print": "Drucken oder als PDF speichern",
+    "pickCountry": "Wähle ein Land, um seine Ereignisse aus dem ganzen Jahr zu sehen. Der Link der Seite behält deine Auswahl: Du kannst ihn speichern oder teilen.",
+    "indexEmpty": "Der Länderindex wird gerade erstellt: Versuch es in ein paar Minuten noch einmal.",
+    "empty": "Keine Ereignisse für dieses Land in den gewählten Jahren.",
+    "loadError": "Die Zeitleiste konnte nicht geladen werden ({{error}}).",
+    "summary_one": "Ein Ereignis, im Jahr {{first}}.",
+    "summary_other": "{{count}} Ereignisse, von {{first}} bis {{last}}.",
+    "indexedAt": "Index aktualisiert am {{date}}."
+  },
   "history": {
     "section": {
       "selected": "Ausgewählt",
@@ -246,6 +264,10 @@
       "limitIslands": "einige kleine Inselstaaten haben in diesem Maßstab keine Form und werden nie erkannt.",
       "p3": "Auf der Karte zählen nur die Ereignisse: „Ausgewählt“ wiederholt einige davon, und doppelt gezählt würden die Zahlen aufgebläht."
     },
+    "index": {
+      "title": "Der Länderindex",
+      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel und denselben Grenzen wie die Karte einem Land zu. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
+    },
     "errors": {
       "title": "Widersprüche und Fehler",
       "p1": "Bei einer einzigen Quelle gibt es nichts abzugleichen: Wir vergleichen die Einträge nicht mit anderen Archiven. Ein Fehler im Text eines Ereignisses wird auf Wikipedia korrigiert, auf der Seite zu diesem Tag des Jahres; die Korrektur erscheint hier mit der nächsten Aktualisierung.",
@@ -277,8 +299,8 @@
       "p1": "Im <archive>Archiv</archive>: Wähle Monat und Tag, dann grenze nach Jahren (negativ vor unserer Zeitrechnung, z. B. -44), Eintragsart und Sprache ein. Das Suchfeld filtert die Einträge dieses Tages."
     },
     "theme": {
-      "title": "Kann ich einem Thema übers Jahr folgen?",
-      "p1": "Nicht mit einer einzigen Suche: Das Archiv arbeitet Tag für Tag. Für ein Thema wie den Kalten Krieg stellst du die Jahre 1947 bis 1991 ein, suchst ein Wort wie „Berlin“ und wechselst dann den Tag."
+      "title": "Kann ich einem Land oder einem Thema übers Jahr folgen?",
+      "p1": "Einem Land ja: <century>Mein Jahrhundert</century> zeigt alle seine Ereignisse des Jahres in zeitlicher Reihenfolge. Für ein Thema wie den Kalten Krieg arbeitet das Archiv Tag für Tag: Stell die Jahre 1947 bis 1991 ein, such ein Wort wie „Berlin“ und wechsle dann den Tag."
     },
     "dashboard": {
       "title": "Was misst das Dashboard?",
@@ -294,7 +316,7 @@
     },
     "shortcuts": {
       "title": "Gibt es Tastenkürzel?",
-      "p1": "Ja: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> und <kbd>4</kbd> öffnen Karte, Dashboard, Archiv und Einstellungen; <kbd>/</kbd> springt zur Länderauswahl. Während du in ein Feld tippst, sind sie aus. Die Liste steht auch in den <settings>Einstellungen</settings>."
+      "p1": "Ja: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> und <kbd>5</kbd> öffnen Karte, Dashboard, Archiv, Mein Jahrhundert und Einstellungen; <kbd>/</kbd> springt zur Länderauswahl. Während du in ein Feld tippst, sind sie aus. Die Liste steht auch in den <settings>Einstellungen</settings>."
     },
     "prefs": {
       "title": "Wo werden meine Einstellungen gespeichert?",
@@ -369,6 +391,9 @@
     },
     "archive": {
       "description": "Durchsuche das vollständige Archiv der heutigen Ereignisse aus jedem Jahrhundert, filterbar nach Jahr und Eintragstyp."
+    },
+    "century": {
+      "description": "Wähle ein Land und sieh seine Ereignisse aus jedem Tag des Jahres in zeitlicher Reihenfolge: eine Zeitleiste zum Teilen oder Drucken."
     },
     "settings": {
       "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Century Road an."

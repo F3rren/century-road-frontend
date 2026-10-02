@@ -7,8 +7,11 @@ export { buildImageSources } from "./lib/images";
 export { matchesQuery } from "./lib/matchesQuery";
 export { cleanText } from "./lib/text";
 export {
+  buildCountryTimelinePath,
   buildOnThisDayPath,
+  fetchCountryTimeline,
   fetchOnThisDay,
+  fetchTimelineCountries,
   fetchTopCountries,
   fetchTopDays,
   trackCountryView,
@@ -17,6 +20,10 @@ export type { ImageSources } from "./lib/images";
 export type {
   Attribution,
   Coordinates,
+  CountryEventCount,
+  CountryTimelineData,
+  CountryTimelineEvent,
+  CountryTimelineParams,
   CountryViewStat,
   DayViewStat,
   HistoryEntry,

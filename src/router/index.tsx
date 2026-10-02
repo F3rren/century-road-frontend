@@ -14,6 +14,7 @@ const WelcomePage = lazy(() => import('@/pages/WelcomePage').then((m) => ({ defa
 const IndexRoute = lazy(() => import('@/pages/IndexRoute').then((m) => ({ default: m.IndexRoute })));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 const ArchivePage = lazy(() => import('@/pages/ArchivePage').then((m) => ({ default: m.ArchivePage })));
+const CenturyPage = lazy(() => import('@/pages/CenturyPage').then((m) => ({ default: m.CenturyPage })));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = lazy(() => import('@/pages/TermsPage').then((m) => ({ default: m.TermsPage })));
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
       { index: true,          element: <IndexRoute /> },
       { path: 'dashboard',    element: <DashboardPage /> },
       { path: 'archive',      element: <ArchivePage /> },
+      { path: 'century',      element: <CenturyPage /> },
       { path: 'settings',     element: <SettingsPage /> },
       { path: 'privacy',      element: <PrivacyPage /> },
       { path: 'terms',        element: <TermsPage /> },
