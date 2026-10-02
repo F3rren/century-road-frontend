@@ -8,6 +8,7 @@
     "map": "Carte",
     "dashboard": "Tableau de bord",
     "archive": "Archives",
+    "century": "Mon siècle",
     "settings": "Paramètres",
     "privacy": "Confidentialité",
     "terms": "Conditions d'utilisation",
@@ -133,6 +134,23 @@
       "noMatches": "Aucun résultat pour « {{query}} »."
     }
   },
+  "century": {
+    "titleFor": "Mon siècle : {{country}}",
+    "pageDescription": "Les événements d'un pays sur tous les jours de l'année, dans l'ordre chronologique",
+    "methodNote": "Ce sont les entrées que Wikipédia liste pour chaque jour de l'année et que la carte place dans ce pays, avec la même méthode et les mêmes limites : <methodology>comment ça marche</methodology>.",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "Choisir un pays…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Années",
+    "print": "Imprimer ou enregistrer en PDF",
+    "pickCountry": "Choisissez un pays pour voir ses événements de toute l'année. Le lien de la page garde votre choix : vous pouvez l'enregistrer ou le partager.",
+    "indexEmpty": "L'index des pays est en cours de construction : réessayez dans quelques minutes.",
+    "empty": "Aucun événement pour ce pays sur les années choisies.",
+    "loadError": "Impossible de charger la chronologie ({{error}}).",
+    "summary_one": "Un événement, en {{first}}.",
+    "summary_other": "{{count}} événements, de {{first}} à {{last}}.",
+    "indexedAt": "Index mis à jour le {{date}}."
+  },
   "history": {
     "section": {
       "selected": "À la une",
@@ -246,6 +264,10 @@
       "limitIslands": "certains petits États insulaires n'ont pas de forme à cette échelle et ne sont jamais identifiés.",
       "p3": "Sur la carte, seuls les Événements comptent : « À la une » en reprend certains, et les compter deux fois gonflerait les chiffres."
     },
+    "index": {
+      "title": "L'index par pays",
+      "p1": "La page <century>Mon siècle</century> utilise un index que notre serveur construit chaque nuit : il lit tous les jours de l'année en italien et en anglais et place chaque événement dans un pays avec la même règle et les mêmes frontières que la carte. Il ne contient que les Événements avec une année et un pays identifié, chaque édition séparément (sans repli entre les langues), et peut avoir un jour de retard sur Wikipédia."
+    },
     "errors": {
       "title": "Contradictions et erreurs",
       "p1": "Avec une seule source, il n'y a rien à concilier : nous ne comparons pas les entrées à d'autres archives. Une erreur dans le texte d'un événement se corrige sur Wikipédia, sur la page consacrée à ce jour de l'année ; la correction arrive ici à la mise à jour suivante.",
@@ -277,8 +299,8 @@
       "p1": "Dans les <archive>Archives</archive> : choisissez le mois et le jour, puis affinez par années (négatives avant notre ère, par exemple -44), type d'entrée et langue. La zone de recherche filtre les entrées de ce jour."
     },
     "theme": {
-      "title": "Puis-je suivre un thème toute l'année ?",
-      "p1": "Pas avec une seule recherche : les archives fonctionnent un jour à la fois. Pour un thème comme la guerre froide, réglez les années de 1947 à 1991, cherchez un mot comme « Berlin », puis changez de jour."
+      "title": "Puis-je suivre un pays ou un thème sur toute l'année ?",
+      "p1": "Un pays, oui : <century>Mon siècle</century> montre tous ses événements de l'année dans l'ordre chronologique. Pour un thème comme la guerre froide, les archives fonctionnent un jour à la fois : réglez les années de 1947 à 1991, cherchez un mot comme « Berlin », puis changez de jour."
     },
     "dashboard": {
       "title": "Que mesure le tableau de bord ?",
@@ -294,7 +316,7 @@
     },
     "shortcuts": {
       "title": "Y a-t-il des raccourcis clavier ?",
-      "p1": "Oui : <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> et <kbd>4</kbd> ouvrent Carte, Tableau de bord, Archives et Paramètres ; <kbd>/</kbd> mène au sélecteur de pays. Ils ne fonctionnent pas pendant la saisie dans un champ. La liste figure aussi dans les <settings>Paramètres</settings>."
+      "p1": "Oui : <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> et <kbd>5</kbd> ouvrent Carte, Tableau de bord, Archives, Mon siècle et Paramètres ; <kbd>/</kbd> mène au sélecteur de pays. Ils ne fonctionnent pas pendant la saisie dans un champ. La liste figure aussi dans les <settings>Paramètres</settings>."
     },
     "prefs": {
       "title": "Où sont enregistrées mes préférences ?",
@@ -369,6 +391,9 @@
     },
     "archive": {
       "description": "Parcourez les archives complètes des événements du jour à travers les siècles, filtrables par année et type d'entrée."
+    },
+    "century": {
+      "description": "Choisissez un pays et découvrez ses événements de chaque jour de l'année, dans l'ordre chronologique : une chronologie à partager ou à imprimer."
     },
     "settings": {
       "description": "Personnalisez l'apparence, la langue et la projection cartographique par défaut de Century Road."

@@ -45,6 +45,7 @@ src/
 │   ├── history/    shared "on this day" domain layer — consumed by map, dashboard, archive
 │   ├── dashboard/  real-data statistics (today's events + all-time view-popularity)
 │   ├── archive/    the standalone filterable/searchable day browser
+│   ├── century/    "Il mio secolo": one country's events across the whole year, URL-backed, printable
 │   ├── settings/   6 real settings sections
 │   ├── info/       guide/methodology/credits pages: prose links, and today's live data report
 │   ├── legal/       shared component kit for the two legal pages (LegalSection also reused by the info pages)
@@ -70,6 +71,7 @@ src/
 - **`/`** (`AppLayout`, wraps everything below as children):
   - `index: true` → `IndexRoute` — not a page itself, a gate: `!hasSeenWelcome()` redirects to `/welcome`, otherwise renders `MapPage` directly (the same "default unless a preference says otherwise" shape the app uses for theme/language/projection).
   - `dashboard`, `archive`, `settings`, `privacy`, `terms` → their respective pages.
+  - `century` → "Il mio secolo": pick a country, read its events from every day of the year in time order, grouped by decade. Fed by the backend's nightly country index (`/api/history/countries`), not by the day-at-a-time feed the other pages use. The choice lives in the URL (`?country=IT&from=1901&to=2000`; an empty `from=`/`to=` means no limit, a missing one the 1901–2000 default), so the link is the thing to share; each row opens the Archive on that day and year. Main nav after Archivio, shortcut `4` (Settings moved to `5`). Country names come from `@/features/map/data` for the same MapLibre reason as `methodology` below.
   - `guide`, `methodology`, `credits` → reference pages (how to use, where the data comes from, sources/licenses/contact), fully translated, linked from the sidebar's lower group with Privacy and Terms. `methodology` renders today's real backend response as a table via `useTodayHistory` — imported from `@/features/map/data`, not the main barrel, which would pull MapLibre (~1 MB) into a text page.
   - `*` → `NotFoundPage`.
 
@@ -81,7 +83,7 @@ None, locally. This app holds no local persistence beyond browser `localStorage`
 
 **`src/services/api.ts`** — the single shared HTTP client. `BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api"` (deliberately `||`, not `??` — an unset env var arrives as an empty string at build time, which `??` would accept and point every request at the site root). A thin `request<T>()` wrapper sets `Content-Type: application/json`, throws a plain `Error("HTTP {status}: {statusText}")` on any non-ok response, otherwise resolves `response.json()`. Exposes `api.get/post/put/patch/delete`, all generic over `<T>`. No auth headers, no retry, no interceptor layer.
 
-**`src/features/history/services/historyApi.ts`** — the only feature-level API module in the app; dashboard, map, and archive all consume backend data through it rather than each having their own. Validates every response's envelope shape at runtime (checks the expected fields exist) before trusting `.data`, and throws a plain `Error` with a **hardcoded Italian message** (`'Risposta del backend non nel formato atteso'`) on a shape mismatch — a known gap, not yet routed through i18next keys.
+**`src/features/history/services/historyApi.ts`** — the only feature-level API module in the app; dashboard, map, archive, and century all consume backend data through it rather than each having their own (century through `fetchTimelineCountries` and `fetchCountryTimeline`, with `buildCountryTimelinePath` as the fetch key). Validates every response's envelope shape at runtime (checks the expected fields exist) before trusting `.data`, and throws a plain `Error` with a **hardcoded Italian message** (`'Risposta del backend non nel formato atteso'`) on a shape mismatch — a known gap, not yet routed through i18next keys.
 
 The backend's response envelope (`ApiEnvelope<T>`, shared shape across both repos): `{ success, error?, message?, userMessage?, data?, timestamp, sessionId }`. See the backend's `architecture.md` for the authoritative definition.
 
@@ -91,6 +93,8 @@ Two build-time guards live in `vite.config.ts` and fail the *build*, not the run
 
 - **`assertNoSecretsInBundle`** — refuses to build if any `VITE_*` environment variable name looks secret-shaped (matches `/SECRET|TOKEN|PASSWORD|PASSWD|PRIVATE|CREDENTIAL|API_?KEY|ACCESS_?KEY/i`). Every `VITE_*` variable is compiled into the bundle every visitor downloads, so a secret there is published, not hidden.
 - **`assertHttpsApiBase`** — in a production build, refuses to proceed if `VITE_API_BASE_URL` isn't `https://` or a same-origin relative path. A page served over HTTPS calling an `http://` API gets silently blocked by the browser as mixed content; this turns that into a clear build-time error instead of every API call failing mysteriously in production.
+
+**Print styles are global, and so far one page uses them.** `/century` is the first page meant for paper, but what it needed is app-wide: in `globals.css` the `.dark` tokens apply under `@media screen` only, so paper is always printed light whatever the theme on screen; `html`/`body` let go of the fixed-height shell, and rows using `content-visibility` are forced visible (otherwise off-screen rows print blank). `AppLayout` releases its own `h-screen`/`overflow-hidden` frame with `print:` classes, and `Header`/`Sidebar` are `print:hidden`. A future printable page gets all of that for free and only hides its own controls (`print:hidden`) and keeps rows whole (`break-inside-avoid`).
 
 A third, unrelated Vite plugin (`maplibreWorkerAssets`) exists because maplibre-gl resolves its worker file at runtime via a relocatable relative URL that Vite's static analysis can't follow — the plugin copies the two files maplibre expects to find beside the bundle at build time, and `optimizeDeps.exclude: ["maplibre-gl"]` prevents the dev server's dependency pre-bundling from breaking the same relative-path resolution in dev.
 

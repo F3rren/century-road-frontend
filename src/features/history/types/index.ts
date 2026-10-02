@@ -106,3 +106,36 @@ export interface CountryViewStat {
   countryCode: string;
   viewCount: number;
 }
+
+// The country index (GET /api/history/countries…): every event with a year that the map's own
+// rule places in a country, across the whole year, rebuilt by the backend every night.
+export interface CountryEventCount {
+  countryCode: string;
+  eventCount: number;
+}
+
+export interface CountryTimelineEvent {
+  // Negative before the common era.
+  year: number;
+  month: number;
+  day: number;
+  text: string;
+}
+
+export interface CountryTimelineData {
+  countryCode: string;
+  language: HistoryLanguage;
+  // ISO date-time of the newest indexed event; absent when there are none.
+  indexedAt?: string;
+  attribution: Attribution;
+  // Oldest first.
+  events: CountryTimelineEvent[];
+}
+
+export interface CountryTimelineParams {
+  code: string;
+  lang: HistoryLanguage;
+  // null = no limit on that side.
+  fromYear: number | null;
+  toYear: number | null;
+}

@@ -30,6 +30,7 @@ See [docs/PRD.md](docs/PRD.md) for the full product requirements, [PRODUCT.md](P
 - **Country selection** by map click or an accessible `<select>` picker — always both, never map-only
 - **"Accadde oggi"** — today's events highlighted, with a heatmap of event density per country
 - **Archivio** — every entry across all centuries for a chosen day, filterable by year range, entry type, and language, with text search
+- **Il mio secolo** — one country's events from every day of the year, in time order and grouped by decade; the link keeps the choice, and the page prints cleanly or saves as PDF
 - **Dashboard** — real statistics from the live dataset (never filler numbers), plus anonymous all-time view-popularity by day and country
 - **4-language UI** (Italian default, English, German, French) via i18next
 - **Light/dark theme**, persisted, no load flash

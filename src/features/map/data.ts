@@ -3,3 +3,4 @@
 // today's data or the heat levels imports from here instead.
 export { useTodayHistory } from './hooks/useTodayHistory';
 export { HEAT_LEVELS } from './constants/heat';
+export { localizedCountryName } from './lib/countryGeometry';

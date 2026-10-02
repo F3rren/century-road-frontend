@@ -8,6 +8,7 @@
     "map": "Map",
     "dashboard": "Dashboard",
     "archive": "Archive",
+    "century": "My century",
     "settings": "Settings",
     "privacy": "Privacy",
     "terms": "Terms and conditions",
@@ -133,6 +134,23 @@
       "noMatches": "No results for “{{query}}”."
     }
   },
+  "century": {
+    "titleFor": "My century: {{country}}",
+    "pageDescription": "A country's events from every day of the year, in time order",
+    "methodNote": "These are the entries Wikipedia lists for each day of the year that the map places in that country, with the same method and the same limits: <methodology>how it works</methodology>.",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Choose a country…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Years",
+    "print": "Print or save as PDF",
+    "pickCountry": "Choose a country to see its events from the whole year. The page's link keeps your choice: save it or share it.",
+    "indexEmpty": "The country index is being built: try again in a few minutes.",
+    "empty": "No events for this country in the chosen years.",
+    "loadError": "Couldn't load the timeline ({{error}}).",
+    "summary_one": "One event, in {{first}}.",
+    "summary_other": "{{count}} events, from {{first}} to {{last}}.",
+    "indexedAt": "Index updated on {{date}}."
+  },
   "history": {
     "section": {
       "selected": "Featured",
@@ -246,6 +264,10 @@
       "limitIslands": "some small island states have no shape at this scale and are never identified.",
       "p3": "Only Events count on the map: Featured repeats some of them, and counting them twice would inflate the numbers."
     },
+    "index": {
+      "title": "The country index",
+      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule and the same borders as the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
+    },
     "errors": {
       "title": "Contradictions and errors",
       "p1": "With a single source there's nothing to reconcile: we don't check entries against other archives. A mistake in an event's text is fixed on Wikipedia, on the page for that day of the year; the correction reaches this site with the next update.",
@@ -277,8 +299,8 @@
       "p1": "In the <archive>Archive</archive>: choose the month and day, then narrow by years (negative before the common era, e.g. -44), entry type and language. The search box filters that day's entries."
     },
     "theme": {
-      "title": "Can I follow a topic across the year?",
-      "p1": "Not with a single search: the archive works one day at a time. For a topic such as the Cold War, set the years 1947 to 1991, search for a word like “Berlin”, then change the day."
+      "title": "Can I follow a country or a topic across the year?",
+      "p1": "A country, yes: <century>My century</century> shows all its events from the year in time order. For a topic such as the Cold War the archive works one day at a time: set the years 1947 to 1991, search for a word like “Berlin”, then change the day."
     },
     "dashboard": {
       "title": "What does the Dashboard measure?",
@@ -294,7 +316,7 @@
     },
     "shortcuts": {
       "title": "Are there keyboard shortcuts?",
-      "p1": "Yes: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> and <kbd>4</kbd> open Map, Dashboard, Archive and Settings; <kbd>/</kbd> jumps to the country picker. They don't work while you're typing in a field. The list is also in <settings>Settings</settings>."
+      "p1": "Yes: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> and <kbd>5</kbd> open Map, Dashboard, Archive, My century and Settings; <kbd>/</kbd> jumps to the country picker. They don't work while you're typing in a field. The list is also in <settings>Settings</settings>."
     },
     "prefs": {
       "title": "Where are my preferences saved?",
@@ -369,6 +391,9 @@
     },
     "archive": {
       "description": "Browse the full archive of today's events across every century, filterable by year and entry type."
+    },
+    "century": {
+      "description": "Pick a country and see its events from every day of the year, in time order: a timeline to share or print."
     },
     "settings": {
       "description": "Customize Century Road's appearance, language and default map projection."
