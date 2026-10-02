@@ -11,6 +11,9 @@
     "settings": "Impostazioni",
     "privacy": "Privacy",
     "terms": "Termini e condizioni",
+    "guide": "Come si usa",
+    "methodology": "Dietro i dati",
+    "credits": "Crediti e contatti",
     "ariaLabel": "Navigazione principale",
     "brandTagline": "press archive"
   },
@@ -197,6 +200,133 @@
       "legalNote": "Le pagine Privacy e Termini restano disponibili solo in italiano."
     }
   },
+  "methodology": {
+    "title": "Dietro i dati",
+    "description": "Da dove vengono gli eventi, come vengono mostrati e quali limiti hanno",
+    "source": {
+      "title": "Una sola fonte: Wikipedia",
+      "p1": "Ogni evento viene dal servizio «On this day» di Wikipedia, che raccoglie gli anniversari di ogni giorno. Lo interroga il nostro server, non il tuo browser. Non aggiungiamo, togliamo né riscriviamo voci: vedi quello che Wikipedia elenca per quel giorno, con i collegamenti agli articoli citati.",
+      "p2": "Le voci sono di cinque tipi: <strong>In evidenza</strong>, una breve selezione curata dai volontari di Wikipedia; <strong>Eventi</strong>; <strong>Nascite</strong>; <strong>Morti</strong>; <strong>Ricorrenze</strong>."
+    },
+    "report": {
+      "title": "Il resoconto di oggi",
+      "intro": "Quello che il nostro server ha restituito per oggi, {{date}}: dati veri, gli stessi che usano la mappa e la Dashboard.",
+      "caption": "Sezioni ricevute per oggi, {{date}}",
+      "colSection": "Sezione",
+      "colItems": "Voci",
+      "colLanguage": "Lingua",
+      "colState": "Stato",
+      "fallback": "{{language}} (ripiego)",
+      "fresh": "Aggiornata",
+      "stale": "Non aggiornata",
+      "attributed": "Eventi con un paese individuato",
+      "attributedValue": "{{attributed}} su {{total}}",
+      "countries": "Paesi individuati",
+      "warningPrimaryUnavailable": "Oggi l'edizione nella lingua richiesta non rispondeva: tutte le sezioni arrivano dall'altra.",
+      "warningFallbackUnavailable": "Oggi una sezione mancante nella lingua richiesta non è stata recuperata nemmeno dall'altra.",
+      "footnote": "Mappa e Dashboard usano solo queste due sezioni. Nascite, morti e ricorrenze si consultano in <archive>Archivio</archive>.",
+      "loadError": "Impossibile leggere i dati di oggi ({{error}})."
+    },
+    "languages": {
+      "title": "Lingue",
+      "p1": "I testi si chiedono nella lingua dell'interfaccia, se il servizio la offre: qui solo italiano e inglese. Con l'interfaccia in tedesco o in francese, i testi arrivano in inglese.",
+      "p2": "L'edizione italiana non pubblica nascite e morti: chiedendo l'italiano, queste due sezioni arrivano da quella inglese, e la pagina lo segnala. Se l'edizione richiesta non risponde, tutto arriva dall'altra. In <archive>Archivio</archive> puoi scegliere tu la lingua dei testi."
+    },
+    "freshness": {
+      "title": "Aggiornamento",
+      "p1": "La copia di un giorno viene riusata per sei ore, poi si torna a chiederla a Wikipedia. Se Wikipedia non risponde, mostriamo l'ultima copia salvata, vecchia al massimo di sette giorni, segnalata con «Dati non aggiornati»."
+    },
+    "geocoding": {
+      "title": "Il paese sulla mappa",
+      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:110 milioni.",
+      "p2": "È un'approssimazione, con limiti precisi:",
+      "limitSubject": "le coordinate descrivono il soggetto dell'articolo, non sempre il luogo dell'evento;",
+      "limitNone": "un evento senza articoli con coordinate resta senza paese: compare nell'elenco del giorno, ma non viene contato sulla mappa;",
+      "limitBorder": "un punto vicino a un confine può cadere nel paese accanto;",
+      "limitIslands": "alcuni piccoli stati insulari non hanno una forma a questa scala e non vengono mai individuati.",
+      "p3": "Sulla mappa contano solo gli Eventi: In evidenza ne ripete alcuni, e contarli due volte gonfierebbe i numeri."
+    },
+    "errors": {
+      "title": "Contraddizioni ed errori",
+      "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
+      "p2": "Per gli errori di questo sito, come un paese attribuito male, scrivici da <credits>Crediti e contatti</credits>."
+    },
+    "limits": {
+      "title": "Limiti",
+      "p1": "La copertura è quella di Wikipedia, che non è uniforme tra paesi ed epoche. Le voci vanno dall'antichità a oggi, non solo al Novecento. I numeri della mappa e della Dashboard riguardano le voci di oggi, non la storia nel suo insieme."
+    },
+    "views": {
+      "title": "Statistiche di visita",
+      "p1": "«I più visitati», nella Dashboard, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
+    }
+  },
+  "guide": {
+    "title": "Come si usa",
+    "description": "Risposte brevi per leggere la mappa, cercare un giorno e regolare il sito",
+    "map": {
+      "title": "Cosa mostra la mappa?",
+      "p1": "Gli eventi accaduti in questa data negli anni passati, paese per paese. Il colore dice quanti eventi di oggi sono stati attribuiti a ciascun paese:",
+      "p2": "Un paese senza colore non ha eventi attribuiti oggi, il che non vuol dire che lì non sia successo nulla. Come viene dedotto il paese è spiegato in <methodology>Dietro i dati</methodology>."
+    },
+    "country": {
+      "title": "Come vedo gli eventi di un paese?",
+      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, usa la X in cima al pannello."
+    },
+    "archive": {
+      "title": "Come cerco un altro giorno?",
+      "p1": "In <archive>Archivio</archive>: scegli mese e giorno, poi restringi per anni (negativi prima di Cristo, per esempio -44), per tipo di voce e per lingua. La casella di ricerca filtra le voci di quel giorno."
+    },
+    "theme": {
+      "title": "Posso seguire un tema su tutto l'anno?",
+      "p1": "Non con una sola ricerca: l'archivio lavora un giorno alla volta. Per un tema come la Guerra Fredda, imposta gli anni dal 1947 al 1991, cerca una parola come «Berlino» e poi cambia giorno."
+    },
+    "dashboard": {
+      "title": "Cosa misura la Dashboard?",
+      "p1": "Numeri calcolati sulle voci di oggi: quanti eventi, in quanti paesi, quale arco di anni coprono e qual è il paese più citato. Sotto, i giorni e i paesi più visitati, contati in forma anonima."
+    },
+    "language": {
+      "title": "Perché i testi non sono sempre nella mia lingua?",
+      "p1": "Il servizio di Wikipedia è disponibile qui solo in italiano e in inglese: con l'interfaccia in tedesco o in francese, i testi arrivano in inglese. All'edizione italiana mancano inoltre nascite e morti, che arrivano da quella inglese, segnalate. In Archivio puoi scegliere la lingua dei testi; più dettagli in <methodology>Dietro i dati</methodology>."
+    },
+    "stale": {
+      "title": "Cosa vuol dire «Dati non aggiornati»?",
+      "p1": "Che Wikipedia non era raggiungibile: stai vedendo l'ultima copia salvata, vecchia al massimo di sette giorni. Si aggiorna da sola quando Wikipedia torna a rispondere."
+    },
+    "shortcuts": {
+      "title": "Ci sono scorciatoie da tastiera?",
+      "p1": "Sì: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> e <kbd>4</kbd> aprono Mappa, Dashboard, Archivio e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
+    },
+    "prefs": {
+      "title": "Dove vengono salvate le mie preferenze?",
+      "p1": "Solo nel tuo browser: tema, lingua, proiezione della mappa, animazioni ridotte e se hai già visto la pagina di benvenuto. Puoi cancellarle da <settings>Impostazioni</settings>; i dettagli sono nella <privacy>Privacy</privacy>."
+    }
+  },
+  "credits": {
+    "title": "Crediti e contatti",
+    "description": "Le fonti dei dati, le licenze e chi contattare per correzioni o proposte",
+    "data": {
+      "title": "Dati e immagini",
+      "wikipedia": "Testi degli eventi: <wikipedia>Wikipedia</wikipedia>, con licenza <license>CC BY-SA 4.0</license>. Ogni evento rimanda agli articoli che cita.",
+      "commons": "Immagini: <commons>Wikimedia Commons</commons>. Ogni immagine ha la sua licenza, indicata nella pagina del file collegata accanto.",
+      "map": "Mappa: dati © <osm>OpenStreetMap contributors</osm>, tessere di <openfreemap>OpenFreeMap</openfreemap>.",
+      "borders": "Confini dei paesi: <naturalearth>Natural Earth</naturalearth>, di pubblico dominio.",
+      "photo": "Foto della pagina di errore 404: O.G. Rejlander, 1872, <photo>Wellcome Collection</photo>, licenza CC BY 4.0."
+    },
+    "software": {
+      "title": "Software",
+      "p1": "Il codice è open source, con licenza MIT: <frontend>l'interfaccia</frontend> e <backend>i servizi</backend> sono su GitHub. Si regge su progetti liberi come React, MapLibre GL e Spring Boot.",
+      "p2": "Caratteri: Oswald e Source Serif 4, con licenza SIL Open Font License."
+    },
+    "thanks": {
+      "title": "Ringraziamenti",
+      "p1": "Alle comunità di volontari di Wikipedia, Wikimedia Commons, OpenStreetMap e Natural Earth, che rendono questi dati liberi, e a chi mantiene il software libero su cui il sito si regge."
+    },
+    "contact": {
+      "title": "Contatti e collaborazioni",
+      "p1": "Il progetto è curato da {{name}}. Per correzioni, proposte o collaborazioni scrivi a <email/>, oppure apri una segnalazione su <github>GitHub</github>.",
+      "p2": "Un errore nel testo di un evento va corretto direttamente su Wikipedia, nella pagina dedicata a quel giorno dell'anno: la correzione arriva anche qui con l'aggiornamento successivo."
+    }
+  },
   "date": {
     "era": {
       "bc": "a.C."
@@ -242,6 +372,15 @@
     },
     "settings": {
       "description": "Personalizza aspetto, lingua e proiezione predefinita della mappa di Century Road."
+    },
+    "guide": {
+      "description": "Come leggere la mappa di oggi, cercare un giorno in archivio e usare le scorciatoie da tastiera."
+    },
+    "methodology": {
+      "description": "Da dove vengono gli eventi, come viene dedotto il paese sulla mappa e quali limiti hanno i dati."
+    },
+    "credits": {
+      "description": "Fonti dei dati, licenze e contatti per correzioni o proposte di collaborazione."
     },
     "notFound": {
       "description": "La pagina cercata non esiste. Torna alla mappa di Century Road per continuare a esplorare la storia di oggi."

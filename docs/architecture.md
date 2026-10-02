@@ -46,7 +46,8 @@ src/
 │   ├── dashboard/  real-data statistics (today's events + all-time view-popularity)
 │   ├── archive/    the standalone filterable/searchable day browser
 │   ├── settings/   6 real settings sections
-│   ├── legal/       shared component kit for the two legal pages
+│   ├── info/       guide/methodology/credits pages: prose links, and today's live data report
+│   ├── legal/       shared component kit for the two legal pages (LegalSection also reused by the info pages)
 │   ├── privacy/    content instance using the legal kit
 │   └── terms/      content instance using the legal kit
 ├── components/
@@ -69,6 +70,7 @@ src/
 - **`/`** (`AppLayout`, wraps everything below as children):
   - `index: true` → `IndexRoute` — not a page itself, a gate: `!hasSeenWelcome()` redirects to `/welcome`, otherwise renders `MapPage` directly (the same "default unless a preference says otherwise" shape the app uses for theme/language/projection).
   - `dashboard`, `archive`, `settings`, `privacy`, `terms` → their respective pages.
+  - `guide`, `methodology`, `credits` → reference pages (how to use, where the data comes from, sources/licenses/contact), fully translated, linked from the sidebar's lower group with Privacy and Terms. `methodology` renders today's real backend response as a table via `useTodayHistory` — imported from `@/features/map/data`, not the main barrel, which would pull MapLibre (~1 MB) into a text page.
   - `*` → `NotFoundPage`.
 
 ## Data model
