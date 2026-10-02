@@ -5,7 +5,8 @@ interface LegalSectionProps {
   children: ReactNode;
 }
 
-// One block of a legal page: a labelled region with a heading and its text. The
+// One block of a long-form reading page (the legal pages, and the guide,
+// methodology and credits pages): a labelled region with a heading and its text. The
 // text stays on the system sans: only one weight (600) of the serif is loaded,
 // which is too heavy for paragraphs, and the design keeps the serif for
 // headlines (see the font-face note in globals.css).

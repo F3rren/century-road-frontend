@@ -6,6 +6,7 @@ import { getReducedMotionOverride } from "@/hooks/useReducedMotion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
+import { PHOTO_404_CREDIT_URL } from "@/features/terms";
 
 // A real 1872 photograph, not a decorative illustration — O.G. Rejlander's
 // "surprise" plate from Darwin's The Expression of the Emotions in Man and
@@ -15,8 +16,6 @@ import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
 // not clip art) already used for the Welcome page's carousel. CC BY 4.0,
 // Wellcome Collection — credited below, same as every other borrowed image
 // in this app.
-const PHOTO_CREDIT_URL =
-  "https://commons.wikimedia.org/wiki/File:Surprise_and_distress_in_Darwin%27s_Expression_of_Emotions..._Wellcome_L0049511.jpg";
 
 // Per-character pace matched to the Welcome page's dateline (1.1s over an
 // ~18-character date ≈ 0.06s/char) but a touch brisker, since this string
@@ -197,7 +196,7 @@ export function NotFoundPage() {
       </div>
 
       <ExternalAnchor
-        href={PHOTO_CREDIT_URL}
+        href={PHOTO_404_CREDIT_URL}
         className={cn(
           "relative z-10 text-[11px] text-muted-foreground hover:text-foreground",
           !reduced && "animate-fade-up",

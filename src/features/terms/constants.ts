@@ -10,6 +10,12 @@ export const WIKIMEDIA_COMMONS_URL = "https://commons.wikimedia.org/";
 export const OSM_COPYRIGHT_URL = "https://www.openstreetmap.org/copyright";
 export const NATURAL_EARTH_TERMS_URL =
   "https://www.naturalearthdata.com/about/terms-of-use/";
+export const WIKIPEDIA_URL = "https://www.wikipedia.org/";
+export const OPENFREEMAP_URL = "https://openfreemap.org/";
+// The 404 page's background photo (CC BY 4.0, Wellcome Collection): credited
+// there and on the credits page.
+export const PHOTO_404_CREDIT_URL =
+  "https://commons.wikimedia.org/wiki/File:Surprise_and_distress_in_Darwin%27s_Expression_of_Emotions..._Wellcome_L0049511.jpg";
 
 export const FRONTEND_REPO_URL = "https://github.com/F3rren/century-road-frontend";
 export const BACKEND_REPO_URL = "https://github.com/F3rren/century-road-backend";

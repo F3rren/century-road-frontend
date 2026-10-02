@@ -1,6 +1,15 @@
 import { api } from '@/services/api';
 import type { ApiResponse } from '@/types';
-import type { CountryViewStat, DayViewStat, OnThisDayData, OnThisDayParams } from '../types';
+import type {
+  CountryEventCount,
+  CountryTimelineData,
+  CountryTimelineParams,
+  CountryViewStat,
+  DayViewStat,
+  HistoryLanguage,
+  OnThisDayData,
+  OnThisDayParams,
+} from '../types';
 
 // Prefers the backend envelope's own message (already real, whatever language the
 // backend sends) over a hardcoded client-side string, consistent with api.ts's own
@@ -76,4 +85,40 @@ export async function fetchTopCountries(limit: number): Promise<CountryViewStat[
     throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data as CountryViewStat[];
+}
+
+// The countries the country index has events for, with how many: empty until the backend's
+// first pass over the year has run.
+export async function fetchTimelineCountries(lang: HistoryLanguage): Promise<CountryEventCount[]> {
+  const envelope = await api.get<ApiResponse<unknown>>(`/history/countries?lang=${lang}`);
+  if (!envelope.success || !Array.isArray(envelope.data)) {
+    throw new Error(extractErrorMessage(envelope));
+  }
+  return envelope.data as CountryEventCount[];
+}
+
+export function buildCountryTimelinePath({ code, lang, fromYear, toYear }: CountryTimelineParams): string {
+  const query = new URLSearchParams({ lang });
+  if (fromYear !== null) query.set('fromYear', String(fromYear));
+  if (toYear !== null) query.set('toYear', String(toYear));
+  return `/history/countries/${encodeURIComponent(code)}/timeline?${query}`;
+}
+
+function isCountryTimelineData(value: unknown): value is CountryTimelineData {
+  if (typeof value !== 'object' || value === null) return false;
+  const { countryCode, events, attribution } = value as Record<string, unknown>;
+  return (
+    typeof countryCode === 'string' &&
+    Array.isArray(events) &&
+    typeof attribution === 'object' &&
+    attribution !== null
+  );
+}
+
+export async function fetchCountryTimeline(path: string): Promise<CountryTimelineData> {
+  const envelope = await api.get<ApiResponse<unknown>>(path);
+  if (!envelope.success || !isCountryTimelineData(envelope.data)) {
+    throw new Error(extractErrorMessage(envelope));
+  }
+  return envelope.data;
 }
