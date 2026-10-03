@@ -78,3 +78,44 @@ export function formatEventDate(
   }
   return `${dayMonth} ${year}`;
 }
+
+// Italy, Spain and Portugal moved to the Gregorian calendar in October 1582, so
+// from 1583 the weekday Intl computes (it runs the Gregorian calendar backwards
+// forever) is the one the sources use. Before that they count in the Julian
+// calendar, and a computed weekday would be wrong, so none is shown.
+// ponytail: one cut-off for every country; Britain switched in 1752 and Russia in
+// 1918, so a weekday on their dates in between follows the Gregorian count. Use a
+// per-country cut-off if the dialog ever shows the event's country.
+const FIRST_GREGORIAN_YEAR = 1583;
+
+// The full date of an event for its popup, plus how long ago it was: "domenica 3
+// ottobre 1954" and "72 anni fa", both worded by Intl in `language`. A
+// holiday (no year) has neither a weekday nor a distance in time.
+export function describeEventDate(
+  day: number,
+  month: number,
+  year: number | null | undefined,
+  language: string,
+  now: Date = new Date(),
+): { date: string; ago: string | null } {
+  if (year === null || year === undefined) return { date: formatEventDate(day, month, year, language), ago: null };
+
+  const date = new Date(Date.UTC(2000, month - 1, day));
+  date.setUTCFullYear(year);
+  // A 29 February in a year that has none rolls over to March: no weekday then.
+  const withWeekday = year >= FIRST_GREGORIAN_YEAR && date.getUTCMonth() === month - 1;
+  const text = withWeekday
+    ? new Intl.DateTimeFormat(language, {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      }).format(date)
+    : formatEventDate(day, month, year, language);
+
+  // There is no year 0: from 44 BC to AD 2026 is 2069 years, not 2070.
+  const elapsed = now.getUTCFullYear() - year - (year < 0 ? 1 : 0);
+  const ago = new Intl.RelativeTimeFormat(language, { numeric: "auto" }).format(-elapsed, "year");
+  return { date: text, ago };
+}

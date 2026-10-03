@@ -4,12 +4,13 @@ import type { OnThisDayData } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { EntryList } from './EntryList';
 
-const STATUS_CLASS = 'px-0.5 py-2 text-xs italic text-muted-foreground';
+const STATUS_CLASS = 'px-0.5 py-2 text-xs text-muted-foreground';
 const NOTE_CLASS = 'px-0.5 pb-2 text-xs text-muted-foreground';
-const SUBHEADING_CLASS = 'mb-1 font-display text-eyebrow uppercase';
+const SUBHEADING_CLASS = 'mb-1 text-eyebrow';
 
+// The map panel's list of the day: its header already names the day, so the
+// list adds no heading of its own and uses the panel's compact rows.
 interface HistoryEventsProps {
-  title: string;
   // Fetched by the caller — usually shared with other things on the same
   // page (the map's heatmap, its per-country lists) that need the exact
   // same day's data, so the fetch itself isn't repeated here.
@@ -18,7 +19,7 @@ interface HistoryEventsProps {
   error: string | null;
 }
 
-export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsProps) {
+export function HistoryEvents({ data, isLoading, error }: HistoryEventsProps) {
   const { t } = useTranslation();
   const featured = data?.sections.selected;
   const events = data?.sections.events;
@@ -28,10 +29,6 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
 
   return (
     <div>
-      <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
-        {title}
-      </h2>
-
       {received.some((s) => s.fallback) && (
         <p className={NOTE_CLASS}>
           {t('history.fallbackNote')}
@@ -54,7 +51,7 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
       {data && featured && hasFeatured && (
         <div>
           <h3 className={`${SUBHEADING_CLASS} text-primary`}>{t('history.section.selected')}</h3>
-          <EntryList section={featured} month={data.date.month} day={data.date.day} attribution={data.attribution} />
+          <EntryList section={featured} month={data.date.month} day={data.date.day} attribution={data.attribution} compact />
         </div>
       )}
 
@@ -65,7 +62,7 @@ export function HistoryEvents({ title, data, isLoading, error }: HistoryEventsPr
               {t('history.subheadingAllEvents')}
             </h3>
           )}
-          <EntryList section={events} month={data.date.month} day={data.date.day} attribution={data.attribution} />
+          <EntryList section={events} month={data.date.month} day={data.date.day} attribution={data.attribution} compact />
         </div>
       )}
 

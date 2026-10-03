@@ -1,3 +1,4 @@
+import { ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SECTION_LABEL_KEYS, SECTION_ORDER, type HistoryLanguage } from '@/features/history';
 import { Button } from '@/components/ui/button';
@@ -5,11 +6,12 @@ import { Select } from '@/components/ui/Select';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
 import { SegmentedGroup } from '@/components/ui/SegmentedGroup';
+import { useIsDesktop } from '@/hooks/useMediaQuery';
 import { daysInMonth, monthNames } from '@/lib/months';
 import type { ArchiveFilters as ArchiveFiltersState } from '../types';
 import { YearRangeFields } from './YearRangeFields';
 
-const LABEL_CLASS = 'mb-1.5 block font-display text-eyebrow uppercase text-muted-foreground';
+const LABEL_CLASS = 'mb-1.5 block text-eyebrow text-muted-foreground';
 
 // UI-chrome strings, translated per active language ("Inglese" becomes
 // "Englisch" in the German UI) — a different concept from the endonyms in
@@ -29,6 +31,12 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
   const { t, i18n } = useTranslation();
   const months = monthNames(i18n.language);
   const dayOptions = Array.from({ length: daysInMonth(filters.month) }, (_, i) => i + 1);
+  // On a phone the full set of filters fills the first screen before any
+  // result: only the day stays out, the rest folds away. It starts open on a
+  // wide screen, and whenever a year or a search is already set (a link from
+  // the dashboard or "Il mio secolo"), so an active filter is never hidden.
+  const isDesktop = useIsDesktop();
+  const extrasOpen = isDesktop || filters.fromYear !== null || filters.toYear !== null || filters.query !== '';
 
   function toggleType(key: (typeof SECTION_ORDER)[number]) {
     const active = new Set(filters.types);
@@ -45,8 +53,8 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
 
   return (
     <Card padding="sm" className="space-y-5">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
+      <div>
+        <div className="max-w-sm">
           <span className={LABEL_CLASS} id="archive-date-label">
             {t('archive.filters.dayLabel')}
           </span>
@@ -86,8 +94,15 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
             </div>
           </div>
         </div>
+      </div>
 
-        <div>
+      <details open={extrasOpen} className="group space-y-5">
+        <summary className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm font-bold text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90 motion-reduce:transition-none" aria-hidden="true" />
+          {t('archive.filters.more')}
+        </summary>
+
+        <div className="max-w-md">
           <span className={LABEL_CLASS} id="archive-years-label">
             {t('archive.filters.yearsLabel')}
           </span>
@@ -99,7 +114,6 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
             />
           </div>
         </div>
-      </div>
 
       <fieldset>
         <legend className={LABEL_CLASS}>{t('archive.filters.typeLegend')}</legend>
@@ -148,6 +162,7 @@ export function ArchiveFilters({ filters, onChange, onReset }: ArchiveFiltersPro
           {t('archive.filters.reset')}
         </Button>
       </div>
+      </details>
     </Card>
   );
 }

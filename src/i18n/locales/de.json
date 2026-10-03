@@ -2,7 +2,8 @@
   "common": {
     "loading": "Wird geladen…",
     "unknownError": "Unbekannter Fehler",
-    "opensInNewTab": " (öffnet in einem neuen Tab)"
+    "opensInNewTab": " (öffnet in einem neuen Tab)",
+    "onThisPage": "Auf dieser Seite"
   },
   "nav": {
     "map": "Karte",
@@ -16,7 +17,7 @@
     "methodology": "Hinter den Daten",
     "credits": "Quellen und Kontakt",
     "ariaLabel": "Hauptnavigation",
-    "brandTagline": "press archive"
+    "brandTagline": "Entdecke die Vergangenheit, Geschichte für Geschichte"
   },
   "header": {
     "openMenu": "Menü öffnen",
@@ -64,26 +65,24 @@
   "dashboard": {
     "description": "Statistiken zu den heutigen Ereignissen, mit dem aus verlinkten Artikeln abgeleiteten Land",
     "loadError": "Die Statistiken konnten nicht geladen werden ({{error}}).",
-    "stats": {
-      "noData": {
-        "title": "Keine Statistiken verfügbar",
-        "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
-      },
-      "events": {
-        "label": "Heutige Ereignisse"
-      },
-      "countries": {
-        "label": "Identifizierte Länder",
-        "detail": "{{geocoded}} von {{total}} Ereignissen"
-      },
-      "span": {
-        "label": "Zeitspanne"
-      },
-      "topCountry": {
-        "label": "Meistgenanntes Land",
-        "detail_one": "{{count}} Ereignis",
-        "detail_other": "{{count}} Ereignisse"
-      }
+    "summary": {
+      "lead_one": "Heute, am {{date}}, erinnert Wikipedia an ein einziges Ereignis.",
+      "lead_other": "Heute, am {{date}}, erinnert Wikipedia an {{count}} Ereignisse, von {{first}} bis {{last}}.",
+      "noneOnMap": "Keines davon hat einen Platz auf der Karte.",
+      "placedOneCountry_one": "Nur eines hat einen Platz auf der Karte: {{top}}.",
+      "placedOneCountry_other": "{{count}} haben einen Platz auf der Karte, alle im selben Land: {{top}}.",
+      "placed_one": "Nur eines hat einen Platz auf der Karte: {{top}}.",
+      "placed_other": "{{count}} haben einen Platz auf der Karte, in {{countries}} Ländern; am häufigsten genannt: {{top}}, mit {{topCount}}."
+    },
+    "centuries": {
+      "title": "Die Ereignisse von heute, Jahrhundert für Jahrhundert",
+      "hint": "Jedes Korn ist ein Ereignis. Öffne ein Jahrhundert, um seine Ereignisse im Archiv zu lesen.",
+      "column_one": "{{range}}: ein Ereignis. Im Archiv öffnen",
+      "column_other": "{{range}}: {{count}} Ereignisse. Im Archiv öffnen"
+    },
+    "empty": {
+      "title": "Keine Statistiken verfügbar",
+      "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
     },
     "popularity": {
       "heading": "Meistbesucht",
@@ -99,11 +98,6 @@
       "views_other": "{{count}} Aufrufe",
       "noData": "Noch nicht genügend Daten.",
       "cta": "Karte erkunden"
-    },
-    "archiveTeaser": {
-      "heading": "Archiv",
-      "description": "Diese Statistiken beziehen sich auf die heutigen Ereignisse. Um jeden Eintrag zu durchsuchen, den Wikipedia für einen Tag verzeichnet, aus jedem Jahrhundert, gefiltert nach Jahr und Eintragstyp, öffne das vollständige Archiv.",
-      "cta": "Archiv öffnen"
     }
   },
   "archive": {
@@ -123,7 +117,8 @@
       "languageEnglish": "Englisch",
       "searchLabel": "In den Ergebnissen suchen",
       "searchPlaceholder": "Ein Wort im Text oder in einem Artikel…",
-      "reset": "Filter zurücksetzen"
+      "reset": "Filter zurücksetzen",
+      "more": "Weitere Filter: Jahre, Art, Sprache, Suche"
     },
     "results": {
       "loading": "Archiv wird geladen…",
@@ -149,7 +144,10 @@
     "loadError": "Die Zeitleiste konnte nicht geladen werden ({{error}}).",
     "summary_one": "Ein Ereignis, im Jahr {{first}}.",
     "summary_other": "{{count}} Ereignisse, von {{first}} bis {{last}}.",
-    "indexedAt": "Index aktualisiert am {{date}}."
+    "indexedAt": "Index aktualisiert am {{date}}.",
+    "grainsHint": "Jedes Korn ist ein Ereignis. Öffne ein Jahrzehnt, um dorthin zu springen.",
+    "decadeColumn_one": "{{range}}: ein Ereignis. Zum Jahrzehnt",
+    "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt"
   },
   "history": {
     "section": {
@@ -171,7 +169,8 @@
     },
     "dialog": {
       "close": "Schließen",
-      "relatedHeading": "Verlinkte Artikel"
+      "relatedHeading": "Verlinkte Artikel",
+      "when": "{{date}}, {{ago}}"
     },
     "attribution": {
       "licenseLabel": "Lizenz"
@@ -337,7 +336,7 @@
     "software": {
       "title": "Software",
       "p1": "Der Code ist Open Source unter der MIT-Lizenz: <frontend>die Oberfläche</frontend> und <backend>die Dienste</backend> liegen auf GitHub. Er baut auf freien Projekten wie React, MapLibre GL und Spring Boot auf.",
-      "p2": "Schriften: Oswald und Source Serif 4, unter der SIL Open Font License."
+      "p2": "Schriften: Literata und Atkinson Hyperlegible, unter der SIL Open Font License."
     },
     "thanks": {
       "title": "Dank",
@@ -359,35 +358,33 @@
   },
   "notFound": {
     "title": "Seite nicht gefunden",
+    "message": "Diese Adresse führt zu keiner Seite der Website. Starte neu von hier:",
     "backToMap": "Karte erkunden",
-    "typedMessage": "Wir durchsuchen das Archiv nach der gesuchten Seite... Ergebnis: nicht gefund—",
-    "outOfPaper": "— der Schreibmaschine ist das Papier ausgegangen —",
-    "referenceCode": "Archiv-Ref.: N/V",
     "goToArchive": "Archiv durchsuchen",
     "goToDashboard": "Dashboard",
-    "photoCredit": "Foto: O.G. Rejlander, 1872 · Wellcome Collection"
+    "photoCredit": "Foto: O.G. Rejlander, 1872, Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Willkommen",
-    "tagline": "Das Archiv der Geschichte, einen Tag nach dem anderen",
+    "tagline": "Jeden Tag die Ereignisse, an die Wikipedia zu diesem Datum erinnert: auf der Karte, im Archiv, Land für Land.",
     "enter": "Betreten",
     "footer": {
       "creditsLabel": "Quellen und Credits",
       "photos": "Historische Fotos: Wikimedia Commons (Lizenz bei jeder Datei angegeben)",
       "wikipedia": "Historische Texte: Wikipedia (CC BY-SA 4.0)",
-      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap",
+      "map": "Karte: © OpenStreetMap contributors, OpenFreeMap",
       "boundaries": "Grenzen: Natural Earth (gemeinfrei)"
     }
   },
   "meta": {
     "welcome": {
-      "description": "Century Road, das Archiv der Geschichte: entdecke, was heute im Laufe der Jahrhunderte geschah, mit interaktiver Karte, Wikipedia-Artikeln und historischen Fotos."
+      "description": "Grains of History, das Archiv der Geschichte: entdecke, was heute im Laufe der Jahrhunderte geschah, mit interaktiver Karte, Wikipedia-Artikeln und historischen Fotos."
     },
     "map": {
       "description": "Entdecke auf der Karte die historischen Ereignisse von heute weltweit, mit Jahrestagen und Wikipedia-Artikeln für jedes Land."
     },
     "dashboard": {
-      "description": "Statistiken zu den heutigen Ereignissen: wie viele Artikel, welche Länder, welcher Zeitraum im Archiv von Century Road abgedeckt wird."
+      "description": "Statistiken zu den heutigen Ereignissen: wie viele Artikel, welche Länder, welcher Zeitraum im Archiv von Grains of History abgedeckt wird."
     },
     "archive": {
       "description": "Durchsuche das vollständige Archiv der heutigen Ereignisse aus jedem Jahrhundert, filterbar nach Jahr und Eintragstyp."
@@ -396,7 +393,7 @@
       "description": "Wähle ein Land und sieh seine Ereignisse aus jedem Tag des Jahres in zeitlicher Reihenfolge: eine Zeitleiste zum Teilen oder Drucken."
     },
     "settings": {
-      "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Century Road an."
+      "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Grains of History an."
     },
     "guide": {
       "description": "So liest du die heutige Karte, schlägst einen anderen Tag im Archiv nach und nutzt die Tastenkürzel."
@@ -408,7 +405,7 @@
       "description": "Datenquellen, Lizenzen und Kontakt für Korrekturen oder Vorschläge."
     },
     "notFound": {
-      "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Century Road zurück, um die Geschichte von heute weiter zu erkunden."
+      "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Grains of History zurück, um die Geschichte von heute weiter zu erkunden."
     }
   }
 }

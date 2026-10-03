@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from "react-i18next";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ReadingPage } from "@/components/layout/ReadingPage";
 import { Kbd, ProseLink } from "@/features/info";
 import { LegalSection } from "@/features/legal";
 import { HEAT_LEVELS } from "@/features/map/data";
@@ -24,17 +24,14 @@ export function GuidePage() {
   usePageMeta(t("nav.guide"), t("meta.guide.description"));
 
   return (
-    <div className="h-full overflow-y-auto p-6">
-      <div className="mx-auto max-w-prose space-y-8 pb-8">
-        <PageHeader title={t("guide.title")} description={t("guide.description")} />
-
+    <ReadingPage title={t("guide.title")} description={t("guide.description")}>
         <LegalSection title={t("guide.map.title")}>
           <p>{t("guide.map.p1")}</p>
           {/* Same thresholds, colors and labels as the map's own legend. */}
           <ul className="space-y-1">
             {[...HEAT_LEVELS].reverse().map(({ color, labelKey }) => (
               <li key={labelKey} className="flex items-center gap-2 text-sm tabular-nums">
-                <span aria-hidden="true" className="h-3 w-3 shrink-0" style={{ backgroundColor: color }} />
+                <span aria-hidden="true" className="h-3 w-3 shrink-0 border border-foreground/30" style={{ backgroundColor: color }} />
                 {t(`map.legend.level.${labelKey}`)}
               </li>
             ))}
@@ -51,7 +48,6 @@ export function GuidePage() {
             </p>
           </LegalSection>
         ))}
-      </div>
-    </div>
+    </ReadingPage>
   );
 }

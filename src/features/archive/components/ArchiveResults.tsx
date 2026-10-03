@@ -14,9 +14,9 @@ import {
 import { Alert } from '@/components/ui/Alert';
 import type { ArchiveFilters } from '../types';
 
-const STATUS_CLASS = 'px-0.5 py-2 text-sm italic text-muted-foreground';
+const STATUS_CLASS = 'px-0.5 py-2 text-sm text-muted-foreground';
 const NOTE_CLASS = 'px-0.5 pb-2 text-xs text-muted-foreground';
-const HEADING_CLASS = 'mb-1 font-display text-eyebrow uppercase text-muted-foreground';
+const HEADING_CLASS = 'mb-1 text-eyebrow text-muted-foreground';
 
 interface ArchiveResultsProps {
   filters: ArchiveFilters;

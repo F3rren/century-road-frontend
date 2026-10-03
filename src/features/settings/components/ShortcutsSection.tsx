@@ -19,7 +19,7 @@ export function ShortcutsSection() {
     <SettingsSection title={t("settings.shortcuts.title")}>
       <table className="w-full text-left text-sm">
         <thead>
-          <tr className="border-b border-border text-xs uppercase text-muted-foreground">
+          <tr className="border-b border-border text-xs font-bold text-muted-foreground">
             <th scope="col" className="w-16 py-1.5 font-medium">
               {t("settings.shortcuts.columnKey")}
             </th>

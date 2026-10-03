@@ -3,7 +3,6 @@ import { Printer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
 import { YearRangeFields } from '@/features/archive';
 import { fetchTimelineCountries, type HistoryLanguage } from '@/features/history';
@@ -11,7 +10,7 @@ import { localizedCountryName } from '@/features/map/data';
 import { useKeyedFetch } from '@/hooks/useFetchState';
 import type { CenturyParams } from '../lib/centuryParams';
 
-const LABEL_CLASS = 'mb-1.5 block font-display text-eyebrow uppercase text-muted-foreground';
+const LABEL_CLASS = 'mb-1.5 block text-eyebrow text-muted-foreground';
 
 interface CenturyFiltersProps {
   params: CenturyParams;
@@ -37,7 +36,7 @@ export function CenturyFilters({ params, language, onChange }: CenturyFiltersPro
   );
 
   return (
-    <Card padding="sm" className="space-y-4 print:hidden">
+    <div className="space-y-4 border-y border-border py-5 print:hidden">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="century-country" className={LABEL_CLASS}>
@@ -80,6 +79,6 @@ export function CenturyFilters({ params, language, onChange }: CenturyFiltersPro
         <Printer className="h-4 w-4" aria-hidden="true" />
         {t('century.print')}
       </Button>
-    </Card>
+    </div>
   );
 }

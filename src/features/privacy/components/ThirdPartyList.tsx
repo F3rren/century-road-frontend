@@ -12,7 +12,7 @@ export function ThirdPartyList({ providers }: ThirdPartyListProps) {
     <ul className="divide-y divide-border border-y border-border">
       {providers.map((provider) => (
         <li key={provider.id} className="py-4">
-          <h3 className="font-display text-base font-semibold tracking-wide">
+          <h3 className="font-display text-base font-semibold">
             {provider.name}
           </h3>
           <p className="font-mono text-[11px] text-muted-foreground">

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { daysInMonth, formatEventDate, monthNames, randomMonthDay, todayMonthDay } from "./months";
+import { daysInMonth, describeEventDate, formatEventDate, monthNames, randomMonthDay, todayMonthDay } from "./months";
 
 describe("daysInMonth", () => {
   it("returns 31 for a 31-day month", () => {
@@ -86,5 +86,34 @@ describe("formatEventDate", () => {
   it("stays valid on 29 February (2000 is used as the reference year, a leap year)", () => {
     expect(() => formatEventDate(29, 2, undefined, "en")).not.toThrow();
     expect(formatEventDate(29, 2, undefined, "en")).toBe("February 29");
+  });
+});
+
+describe("describeEventDate", () => {
+  const now = new Date(Date.UTC(2026, 9, 3));
+
+  it("spells out the weekday for a Gregorian date, and how long ago it was", () => {
+    expect(describeEventDate(3, 10, 1954, "it", now)).toEqual({ date: "domenica 3 ottobre 1954", ago: "72 anni fa" });
+  });
+
+  it("shows no weekday before 1583, when the sources count in the Julian calendar", () => {
+    expect(describeEventDate(3, 10, 1283, "it", now).date).toBe("3 ottobre 1283");
+  });
+
+  it("counts across the missing year 0 for a date before the common era", () => {
+    expect(describeEventDate(15, 3, -44, "it", now)).toEqual({ date: "15 marzo 44 a.C.", ago: "2069 anni fa" });
+  });
+
+  it("words last year and this year the way the language does", () => {
+    expect(describeEventDate(1, 1, 2025, "en", now).ago).toBe("last year");
+    expect(describeEventDate(1, 1, 2026, "en", now).ago).toBe("this year");
+  });
+
+  it("has no weekday for 29 February in a year without one", () => {
+    expect(describeEventDate(29, 2, 1900, "en", now).date).toBe(formatEventDate(29, 2, 1900, "en"));
+  });
+
+  it("gives a holiday (no year) only its day and month", () => {
+    expect(describeEventDate(25, 12, undefined, "it", now)).toEqual({ date: "25 dicembre", ago: null });
   });
 });

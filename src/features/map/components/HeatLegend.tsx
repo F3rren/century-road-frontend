@@ -42,7 +42,7 @@ export function HeatLegend() {
   return (
     <MapOverlayPanel className="flex max-w-[13rem] flex-col gap-1.5 px-3 py-2" role="note" aria-label={t('map.legend.ariaLabel')}>
       <div className="flex items-center justify-between gap-2">
-        <p className="font-display text-eyebrow uppercase text-white/70">
+        <p className="text-eyebrow text-white/70">
           {t('map.legend.today')}
         </p>
         {!isDesktop && (
@@ -59,7 +59,7 @@ export function HeatLegend() {
       {[...HEAT_LEVELS].reverse().map(({ color, labelKey }) => (
         <div key={labelKey} className="flex items-center gap-2">
           <span
-            className="h-3 w-3 shrink-0"
+            className="h-3 w-3 shrink-0 border border-white/50"
             style={{ backgroundColor: color }}
           />
           <span className="text-xs text-white/90">{t(`map.legend.level.${labelKey}`)}</span>

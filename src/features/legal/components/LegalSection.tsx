@@ -6,18 +6,16 @@ interface LegalSectionProps {
 }
 
 // One block of a long-form reading page (the legal pages, and the guide,
-// methodology and credits pages): a labelled region with a heading and its text. The
-// text stays on the system sans: only one weight (600) of the serif is loaded,
-// which is too heavy for paragraphs, and the design keeps the serif for
-// headlines (see the font-face note in globals.css).
+// methodology and credits pages): a labelled region with a Literata heading and
+// its text in the interface face, Atkinson Hyperlegible, for steady reading.
 export function LegalSection({ title, children }: LegalSectionProps) {
   const headingId = useId();
 
   return (
-    <section aria-labelledby={headingId} className="space-y-3">
+    <section aria-labelledby={headingId} className="scroll-mt-6 space-y-3">
       <h2
         id={headingId}
-        className="font-display text-lg font-semibold uppercase tracking-wide"
+        className="font-display text-xl font-semibold"
       >
         {title}
       </h2>

@@ -13,7 +13,7 @@ import { monthNames } from '@/lib/months';
 import type { useTodayHistory } from '../hooks/useTodayHistory';
 import type { Country } from '../types';
 
-const STATUS_CLASS = 'px-0.5 py-2 text-xs italic text-muted-foreground';
+const STATUS_CLASS = 'px-0.5 py-2 text-xs text-muted-foreground';
 
 interface EventsPanelProps {
   selectedCountry: Country | null;
@@ -87,7 +87,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
             <CalendarDays className="h-4 w-4 shrink-0 text-primary" />
             <div className="flex-1 min-w-0">
               <p className="font-display text-base font-semibold tracking-tight">{t('map.events.todayTitle')}</p>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 {today.day} {months[today.month]}
               </p>
             </div>
@@ -127,7 +127,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
             />
           ) : (
             <div>
-              <h2 className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
+              <h2 className="mb-1 text-eyebrow text-muted-foreground">
                 {t('map.events.anniversariesTitle', { day: today.day, month: months[today.month] })}
               </h2>
               {events && data && (
@@ -136,6 +136,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                   month={today.month}
                   day={today.day}
                   attribution={data.attribution}
+                  compact
                 />
               )}
             </div>
@@ -145,7 +146,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
             <div>
               <label
                 htmlFor="country-picker"
-                className="mb-1.5 block font-display text-eyebrow uppercase text-muted-foreground"
+                className="mb-1.5 block text-eyebrow text-muted-foreground"
               >
                 {t('map.events.countryPickerLabel')}
               </label>
@@ -178,7 +179,6 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
               )}
             </div>
             <HistoryEvents
-              title={t('map.events.anniversariesTitle', { day: today.day, month: months[today.month] })}
               data={data}
               isLoading={isLoading}
               error={error}
@@ -226,7 +226,7 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
         aria-hidden={!mobileOpen}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-2">
-          <span className="font-display text-eyebrow uppercase text-muted-foreground">
+          <span className="text-eyebrow text-muted-foreground">
             {t('map.events.eventsButton')}
           </span>
           <Button

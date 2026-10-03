@@ -13,10 +13,11 @@ interface EntryListProps {
   // Case-insensitive filter over each entry's text and its linked articles'
   // titles. Omitted or empty shows every entry.
   query?: string;
+  compact?: boolean;
 }
 
 // Oldest first, like the map's own event lists.
-export function EntryList({ section, month, day, attribution, query }: EntryListProps) {
+export function EntryList({ section, month, day, attribution, query, compact }: EntryListProps) {
   const entries = useMemo(() => {
     const sorted = [...section.items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
     return query ? sorted.filter((entry) => matchesQuery(entry, query)) : sorted;
@@ -32,6 +33,7 @@ export function EntryList({ section, month, day, attribution, query }: EntryList
           day={day}
           language={section.language}
           attribution={attribution}
+          compact={compact}
         />
       ))}
     </div>

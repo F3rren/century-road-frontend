@@ -2,7 +2,8 @@
   "common": {
     "loading": "Loading…",
     "unknownError": "Unknown error",
-    "opensInNewTab": " (opens in a new tab)"
+    "opensInNewTab": " (opens in a new tab)",
+    "onThisPage": "On this page"
   },
   "nav": {
     "map": "Map",
@@ -16,7 +17,7 @@
     "methodology": "Behind the data",
     "credits": "Credits and contact",
     "ariaLabel": "Main navigation",
-    "brandTagline": "press archive"
+    "brandTagline": "Explore the past, one story at a time"
   },
   "header": {
     "openMenu": "Open menu",
@@ -64,26 +65,24 @@
   "dashboard": {
     "description": "Statistics about today's events, with the country inferred from linked articles",
     "loadError": "Couldn't load the statistics ({{error}}).",
-    "stats": {
-      "noData": {
-        "title": "No statistics available",
-        "description": "Data will show up here as soon as the archive has events."
-      },
-      "events": {
-        "label": "Today's events"
-      },
-      "countries": {
-        "label": "Countries identified",
-        "detail": "{{geocoded}} of {{total}} events"
-      },
-      "span": {
-        "label": "Time span"
-      },
-      "topCountry": {
-        "label": "Most-mentioned country",
-        "detail_one": "{{count}} event",
-        "detail_other": "{{count}} events"
-      }
+    "summary": {
+      "lead_one": "Today, {{date}}, Wikipedia remembers a single event.",
+      "lead_other": "Today, {{date}}, Wikipedia remembers {{count}} events, from {{first}} to {{last}}.",
+      "noneOnMap": "None of them has a place on the map.",
+      "placedOneCountry_one": "Only one has a place on the map: {{top}}.",
+      "placedOneCountry_other": "{{count}} have a place on the map, all in the same country: {{top}}.",
+      "placed_one": "Only one has a place on the map: {{top}}.",
+      "placed_other": "{{count}} have a place on the map, in {{countries}} countries; the most cited is {{top}}, with {{topCount}}."
+    },
+    "centuries": {
+      "title": "Today’s events, century by century",
+      "hint": "Each grain is one event. Open a century to read its events in the archive.",
+      "column_one": "{{range}}: one event. Open in the archive",
+      "column_other": "{{range}}: {{count}} events. Open in the archive"
+    },
+    "empty": {
+      "title": "No statistics available",
+      "description": "Data will show up here as soon as the archive has events."
     },
     "popularity": {
       "heading": "Most viewed",
@@ -99,11 +98,6 @@
       "views_other": "{{count}} views",
       "noData": "Not enough data yet.",
       "cta": "Explore the map"
-    },
-    "archiveTeaser": {
-      "heading": "Archive",
-      "description": "These statistics cover today's events. To browse every entry Wikipedia records for a day, from any century, filtering by year and entry type, open the full archive.",
-      "cta": "Open the archive"
     }
   },
   "archive": {
@@ -123,7 +117,8 @@
       "languageEnglish": "English",
       "searchLabel": "Search the results",
       "searchPlaceholder": "A word in the text or in an article…",
-      "reset": "Clear filters"
+      "reset": "Clear filters",
+      "more": "More filters: years, type, language, search"
     },
     "results": {
       "loading": "Loading the archive…",
@@ -149,7 +144,10 @@
     "loadError": "Couldn't load the timeline ({{error}}).",
     "summary_one": "One event, in {{first}}.",
     "summary_other": "{{count}} events, from {{first}} to {{last}}.",
-    "indexedAt": "Index updated on {{date}}."
+    "indexedAt": "Index updated on {{date}}.",
+    "grainsHint": "Each grain is one event. Open a decade to jump to it.",
+    "decadeColumn_one": "{{range}}: one event. Go to the decade",
+    "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade"
   },
   "history": {
     "section": {
@@ -171,7 +169,8 @@
     },
     "dialog": {
       "close": "Close",
-      "relatedHeading": "Linked articles"
+      "relatedHeading": "Linked articles",
+      "when": "{{date}}, {{ago}}"
     },
     "attribution": {
       "licenseLabel": "License"
@@ -337,7 +336,7 @@
     "software": {
       "title": "Software",
       "p1": "The code is open source under the MIT license: <frontend>the interface</frontend> and <backend>the services</backend> are on GitHub. It's built on free projects such as React, MapLibre GL and Spring Boot.",
-      "p2": "Typefaces: Oswald and Source Serif 4, under the SIL Open Font License."
+      "p2": "Typefaces: Literata and Atkinson Hyperlegible, under the SIL Open Font License."
     },
     "thanks": {
       "title": "Thanks",
@@ -359,35 +358,33 @@
   },
   "notFound": {
     "title": "Page not found",
+    "message": "This address doesn’t lead to any page on the site. Start again from one of these:",
     "backToMap": "Explore the map",
-    "typedMessage": "Searching the archive for the page you requested... result: not fou—",
-    "outOfPaper": "— the typewriter ran out of paper —",
-    "referenceCode": "Archive ref: N/A",
     "goToArchive": "Browse the Archive",
     "goToDashboard": "Dashboard",
-    "photoCredit": "Photo: O.G. Rejlander, 1872 · Wellcome Collection"
+    "photoCredit": "Photo: O.G. Rejlander, 1872, Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Welcome",
-    "tagline": "The archive of history, one day at a time",
+    "tagline": "Every day, the events Wikipedia remembers for this date: on the map, in the archive, country by country.",
     "enter": "Enter",
     "footer": {
       "creditsLabel": "Sources and credits",
       "photos": "Historical photos: Wikimedia Commons (license noted on each file)",
       "wikipedia": "Historical text: Wikipedia (CC BY-SA 4.0)",
-      "map": "Map: © OpenStreetMap contributors · OpenFreeMap",
+      "map": "Map: © OpenStreetMap contributors, OpenFreeMap",
       "boundaries": "Boundaries: Natural Earth (public domain)"
     }
   },
   "meta": {
     "welcome": {
-      "description": "Century Road, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
+      "description": "Grains of History, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
     },
     "map": {
       "description": "Explore today's historical events on an interactive world map, with anniversaries and Wikipedia articles for every country."
     },
     "dashboard": {
-      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Century Road archive."
+      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Grains of History archive."
     },
     "archive": {
       "description": "Browse the full archive of today's events across every century, filterable by year and entry type."
@@ -396,7 +393,7 @@
       "description": "Pick a country and see its events from every day of the year, in time order: a timeline to share or print."
     },
     "settings": {
-      "description": "Customize Century Road's appearance, language and default map projection."
+      "description": "Customize Grains of History's appearance, language and default map projection."
     },
     "guide": {
       "description": "How to read today's map, look up another day in the archive, and use the keyboard shortcuts."

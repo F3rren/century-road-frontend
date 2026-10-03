@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { BRAND_NAME, HourglassMark } from "@/components/ui/Wordmark";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
@@ -12,26 +13,26 @@ import { PhotoCarousel, useHistoryPhotoCarousel } from "@/features/welcome";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { markWelcomeSeen } from "@/lib/welcomeSeen";
 
-// The threshold to the app, shown once (see IndexRoute/welcomeSeen). A wire
-// dispatch arriving, not a marketing hero: today's real date types in first,
-// alone, then the masthead resolves — proving "this archive is live today"
-// before any content does. Purely CSS-driven (no JS timers/state), so the
-// Enter button is focusable and clickable from the very first paint,
-// whatever the animation is doing visually. motion-safe:/motion-reduce:
-// (extended in tailwind.config.ts to also honor Impostazioni's override)
-// drop the whole sequence to its end state for anyone who asked for that.
+// The threshold to the app, shown once (see IndexRoute/welcomeSeen). One
+// moment, not a cascade: the hourglass's grains settle in while the name
+// develops from paper to Prussian, like a cyanotype under light; then
+// everything else appears at once. Today's date is already there, as a fact.
+// Purely CSS-driven (no JS timers/state), so the Enter button is focusable
+// and clickable from the very first paint, whatever the animation is doing.
+// motion-safe: and the in-app reduced-motion override drop the sequence to
+// its end state for anyone who asked for that.
 export function WelcomePage() {
-  const { t, i18n } = useTranslation();
+  const { t, /*i18n*/ } = useTranslation();
   const navigate = useNavigate();
   const { photos } = useHistoryPhotoCarousel();
   usePageMeta(t("welcome.pageTitle"), t("meta.welcome.description"));
 
-  const dateline = new Intl.DateTimeFormat(i18n.language, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date());
+  // const dateline = new Intl.DateTimeFormat(i18n.language, {
+  //   day: "numeric",
+  //   month: "long",
+  //   year: "numeric",
+  //   timeZone: "UTC",
+  // }).format(new Date());
 
   function handleEnter() {
     markWelcomeSeen();
@@ -48,47 +49,33 @@ export function WelcomePage() {
       <main className="relative flex flex-1 flex-col items-center justify-center gap-5 px-6 py-20 text-center">
         <PhotoCarousel photos={photos} />
 
-        {/* The dispatch: today's date, typed in like a wire bulletin. The
-            full string is always in the DOM (screen readers read it
-            immediately); only the visual reveal is animated. */}
-        <div className="relative z-10 flex items-baseline font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-          <span className="motion-safe:inline-block motion-safe:w-0 motion-safe:animate-typewriter motion-safe:overflow-hidden motion-safe:whitespace-nowrap">
-            {dateline}
-          </span>
-          <span
-            aria-hidden="true"
-            className="ml-0.5 motion-safe:animate-caret-blink motion-reduce:hidden"
-          >
-            ▍
-          </span>
-        </div>
+        {/* <p className="relative z-10 text-sm text-muted-foreground">{dateline}</p> */}
 
         <div className="relative z-10">
-          <h1 className="font-display text-4xl font-semibold uppercase tracking-wide motion-safe:animate-fade-up motion-safe:[animation-delay:1.05s] sm:text-6xl">
-            Century Road
+          <h1 className="flex flex-col items-center gap-4 font-display text-4xl font-semibold tracking-[-0.02em] motion-safe:animate-develop motion-safe:[animation-delay:0.3s] sm:text-6xl">
+            <HourglassMark settle className="h-12 sm:h-16" />
+            {BRAND_NAME}
           </h1>
-          <p className="mt-2 font-display text-eyebrow uppercase text-muted-foreground motion-safe:animate-fade-up motion-safe:[animation-delay:1.35s]">
+          <p className="mt-2 text-eyebrow text-muted-foreground motion-safe:animate-fade-in motion-safe:[animation-delay:1.6s]">
             {t("nav.brandTagline")}
           </p>
         </div>
 
-        <p className="relative z-10 max-w-sm font-serif text-sm text-muted-foreground motion-safe:animate-fade-up motion-safe:[animation-delay:1.55s]">
+        <p className="relative z-10 max-w-sm font-serif text-sm text-muted-foreground motion-safe:animate-fade-in motion-safe:[animation-delay:1.6s]">
           {t("welcome.tagline")}
         </p>
-
-        <div className="relative z-10 h-px w-16 origin-left bg-border motion-safe:animate-grow-x motion-safe:[animation-delay:1.8s]" />
 
         <Button
           size="sm"
           onClick={handleEnter}
-          className="relative z-10 motion-safe:animate-fade-up motion-safe:[animation-delay:2.05s]"
+          className="relative z-10 motion-safe:animate-fade-in motion-safe:[animation-delay:1.6s]"
         >
           {t("welcome.enter")}
         </Button>
       </main>
 
-      <footer className="border-t border-border px-6 py-6 text-center motion-safe:animate-fade-up motion-safe:[animation-delay:2.3s]">
-        <p className="font-display text-eyebrow uppercase text-muted-foreground">
+      <footer className="border-t border-border px-6 py-6 text-center motion-safe:animate-fade-in motion-safe:[animation-delay:1.6s]">
+        <p className="text-eyebrow text-muted-foreground">
           {t("welcome.footer.creditsLabel")}
         </p>
         <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
