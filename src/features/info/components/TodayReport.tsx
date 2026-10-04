@@ -29,7 +29,7 @@ export function TodayReport() {
   const { today, data, isLoading, error, geocodedEvents } = useTodayHistory();
   const date = formatEventDate(today.day, today.month, undefined, i18n.language);
 
-  if (isLoading) return <p className="text-sm italic text-muted-foreground">{t("common.loading")}</p>;
+  if (isLoading) return <p className="text-sm text-muted-foreground">{t("common.loading")}</p>;
   if (error) return <Alert variant="inline">{t("methodology.report.loadError", { error })}</Alert>;
   if (!data) return null;
 
@@ -43,7 +43,7 @@ export function TodayReport() {
       <table className="w-full text-left text-sm tabular-nums">
         <caption className="sr-only">{t("methodology.report.caption", { date })}</caption>
         <thead>
-          <tr className="border-b border-border text-xs uppercase text-muted-foreground">
+          <tr className="border-b border-border text-xs font-bold text-muted-foreground">
             <th scope="col" className={`${CELL} font-medium`}>{t("methodology.report.colSection")}</th>
             <th scope="col" className={`${CELL} text-right font-medium`}>{t("methodology.report.colItems")}</th>
             <th scope="col" className={`${CELL} font-medium`}>{t("methodology.report.colLanguage")}</th>

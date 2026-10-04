@@ -1,14 +1,14 @@
-# PRD — Century Road
+# PRD — Grains of History
 
 > This PRD covers the whole system (frontend + backend). Product vision, personas, and per-route UX detail already live in [PRODUCT.md](../PRODUCT.md) and aren't re-pasted here — this document adds what that one structurally can't hold: system-wide constraints, a prioritized feature list, acceptance criteria, non-functional requirements, and open questions. Visual language: [DESIGN.md](../DESIGN.md). Technical shape: this repo's [architecture.md](architecture.md) and the backend's [architecture.md](https://github.com/F3rren/century-road-backend/blob/main/docs/architecture.md).
 
 ## Overview
 
-**Century Road** is an interactive historical almanac: it places 20th-century historical events both geographically (on a globe/map) and temporally (what happened on today's date, across the century), backed by a live Wikipedia "on this day" feed proxied through a small Spring Boot backend. It's spatial-first, not list/timeline-first — most "on this day" products lead with a calendar or search box; this one leads with a globe, with the calendar/date framing layered on top via a per-country event-density heatmap.
+**Grains of History** is an interactive historical almanac: it places 20th-century historical events both geographically (on a globe/map) and temporally (what happened on today's date, across the century), backed by a live Wikipedia "on this day" feed proxied through a small Spring Boot backend. It's spatial-first, not list/timeline-first — most "on this day" products lead with a calendar or search box; this one leads with a globe, with the calendar/date framing layered on top via a per-country event-density heatmap.
 
 ## Goal and problem
 
-Most "on this day in history" products treat geography as an afterthought, if they surface it at all — a list of dates with no sense of *where*. Century Road's bet is that place and time are equally organizing axes for historical curiosity: a user browsing with no fixed goal should be able to spin a globe and stumble onto something, and a user with a precise question (a date, a country) should get there just as fast. See `PRODUCT.md`'s Product Purpose and Positioning for the full framing.
+Most "on this day in history" products treat geography as an afterthought, if they surface it at all — a list of dates with no sense of *where*. Grains of History's bet is that place and time are equally organizing axes for historical curiosity: a user browsing with no fixed goal should be able to spin a globe and stumble onto something, and a user with a precise question (a date, a country) should get there just as fast. See `PRODUCT.md`'s Product Purpose and Positioning for the full framing.
 
 ## Target users
 

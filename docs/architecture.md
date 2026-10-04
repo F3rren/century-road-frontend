@@ -1,6 +1,6 @@
-# Architecture — Century Road Frontend
+# Architecture — Grains of History Frontend
 
-> System context: this is the frontend half of Century Road. The backend (3 Spring Boot services behind a gateway) lives in a sibling repository, [github.com/F3rren/century-road-backend](https://github.com/F3rren/century-road-backend), which has its own `architecture.md`. Product context lives in [PRODUCT.md](../PRODUCT.md); visual language in [DESIGN.md](../DESIGN.md); operational guidance for AI agents in [AGENTS.md](../AGENTS.md).
+> System context: this is the frontend half of Grains of History. The backend (3 Spring Boot services behind a gateway) lives in a sibling repository, [github.com/F3rren/century-road-backend](https://github.com/F3rren/century-road-backend), which has its own `architecture.md`. Product context lives in [PRODUCT.md](../PRODUCT.md); visual language in [DESIGN.md](../DESIGN.md); operational guidance for AI agents in [AGENTS.md](../AGENTS.md).
 
 ## Tech stack
 

@@ -11,7 +11,7 @@ interface AttributionNoticeProps {
 export function AttributionNotice({ attribution }: AttributionNoticeProps) {
   const { t } = useTranslation();
   return (
-    <div className="space-y-1 text-[11px] leading-snug text-muted-foreground">
+    <div className="max-w-[65ch] space-y-1 text-xs leading-snug text-muted-foreground">
       <p>{attribution.notice}</p>
       <p>
         {t('history.attribution.licenseLabel')}:{' '}

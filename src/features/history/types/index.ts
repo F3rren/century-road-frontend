@@ -54,6 +54,14 @@ export interface HistoryEntry {
   pages: PageRef[];
 }
 
+// The country an entry is placed in, when the caller knows one (the map guesses
+// it from a linked article). Not from the API: entries carry no country.
+export interface PlaceRef {
+  // ISO 3166-1 alpha-2.
+  code: string;
+  name: string;
+}
+
 export interface SectionResult {
   // The edition that really supplied the items: not always the one asked for.
   language: HistoryLanguage;
