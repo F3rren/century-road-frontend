@@ -29,7 +29,7 @@ export function ArchivePage() {
             setResetToken((token) => token + 1);
           }}
         />
-        <ArchiveResults filters={filters} />
+        <ArchiveResults filters={filters} onClearQuery={() => update({ query: "" })} />
       </div>
     </div>
   );

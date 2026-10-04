@@ -23,7 +23,7 @@ const TYPES: readonly HistorySectionKey[] = ['selected', 'events'];
 export function useTodayHistory() {
   const { i18n } = useTranslation();
   const today = useMemo(() => todayMonthDay(), []);
-  const { data, isLoading, error } = useOnThisDay({
+  const { data, isLoading, error, retry } = useOnThisDay({
     month: today.month,
     day: today.day,
     lang: deriveContentLanguage(i18n.language),
@@ -63,6 +63,8 @@ export function useTodayHistory() {
     data,
     isLoading,
     error,
+    // Asks for today's events again after a failure.
+    retry,
     countryFeaturesLoading,
     countryFeaturesError,
     geocodedEvents,

@@ -22,8 +22,9 @@ interface Row {
 // Commons, already linked from real events — see useHistoryPhotoCarousel),
 // stacked in horizontal bands, alternating direction — user-referenced
 // against the well-known "infinite logo carousel" pattern, then extended to
-// three rows on request. Desaturated rather than shown at full color
-// (DESIGN.md's One Voice Rule reserves saturated color for wire-red alone);
+// three rows on request. Toned as cyanotype prints rather than shown in full
+// color: each greyscale photo is blended by luminosity over a Prussian frame,
+// so it keeps its light and shade and takes the blue (see DESIGN.md);
 // frames separated by hairline seams (a `gap-px` track over a `bg-border`
 // field, not individual borders — this app's HSL color tokens aren't set up
 // for Tailwind's alpha-modifier syntax, so this gets the same visual result
@@ -79,7 +80,7 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
                   // it — a real Wikimedia thumbnail can take 20s+ on a cold cache (see
                   // isSvg's comment in the hook), so some tiles will sit in this state
                   // for a while on any given visit.
-                  <div key={`${photo.id}-${i}`} className="relative h-full w-40 shrink-0 bg-muted sm:w-56">
+                  <div key={`${photo.id}-${i}`} className="relative h-full w-40 shrink-0 bg-[#0E2A47] dark:bg-[#1F4E79] sm:w-56">
                     <img
                       src={photo.image.src}
                       srcSet={photo.image.srcSet}
@@ -117,10 +118,10 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
                       }
                       decoding="async"
                       onLoad={(event) => event.currentTarget.classList.remove('opacity-0')}
-                      className="h-full w-full object-cover opacity-0 grayscale contrast-125 transition-opacity duration-700"
+                      className="h-full w-full object-cover opacity-0 mix-blend-luminosity grayscale contrast-125 transition-opacity duration-700"
                     />
                     {photo.year !== undefined && (
-                      <span className="absolute bottom-2 left-2 font-mono text-[9px] uppercase tracking-wider text-white/70">
+                      <span className="absolute bottom-2 left-2 text-xs text-white/70">
                         {photo.year}
                       </span>
                     )}
@@ -131,7 +132,7 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
           );
         })}
       </div>
-      <div className="absolute inset-0 bg-background/85" />
+      <div className="absolute inset-0 bg-background/85 dark:bg-background/75" />
     </div>
   );
 }

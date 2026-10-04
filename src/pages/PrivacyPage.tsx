@@ -13,12 +13,12 @@ import { LegalPage, SeeAlso } from "@/features/legal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function PrivacyPage() {
-  usePageMeta("Privacy", "Come Century Road tratta i tuoi dati");
+  usePageMeta("Privacy", "Come Grains of History tratta i tuoi dati");
 
   return (
     <LegalPage
       title="Informativa sulla privacy"
-      description="Come Century Road tratta i tuoi dati"
+      description="Come Grains of History tratta i tuoi dati"
     >
       <SummarySection />
       <ControllerSection />

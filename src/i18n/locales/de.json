@@ -1,18 +1,28 @@
 {
   "common": {
     "loading": "Wird geladen…",
-    "unknownError": "Unbekannter Fehler",
-    "opensInNewTab": " (öffnet in einem neuen Tab)"
+    "retry": "Erneut versuchen",
+    "opensInNewTab": " (öffnet in einem neuen Tab)",
+    "onThisPage": "Auf dieser Seite"
+  },
+  "errors": {
+    "network": "der Dienst antwortet nicht: prüfe die Verbindung und versuche es erneut",
+    "server": "der Dienst ist gerade nicht erreichbar: versuche es in ein paar Minuten erneut",
+    "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut"
   },
   "nav": {
     "map": "Karte",
     "dashboard": "Dashboard",
     "archive": "Archiv",
+    "century": "Mein Jahrhundert",
     "settings": "Einstellungen",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
+    "guide": "Bedienung",
+    "methodology": "Hinter den Daten",
+    "credits": "Quellen und Kontakt",
     "ariaLabel": "Hauptnavigation",
-    "brandTagline": "press archive"
+    "brandTagline": "Entdecke die Vergangenheit, Geschichte für Geschichte"
   },
   "header": {
     "openMenu": "Menü öffnen",
@@ -20,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Interaktive historische Karte: die heutigen Ereignisse weltweit",
+    "controls": {
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "resetBearing": "Nach Norden ausrichten",
+      "attribution": "Kartennachweise"
+    },
     "error": {
       "title": "Karte konnte nicht geladen werden",
-      "description": "Überprüfe deine Internetverbindung und versuche es erneut.",
-      "retry": "Erneut versuchen"
+      "description": "Überprüfe deine Internetverbindung und versuche es erneut."
     },
     "projection": {
       "groupLabel": "Kartenprojektion",
@@ -42,44 +57,49 @@
       "methodology": "Land aus dem ersten verlinkten Artikel mit Koordinaten abgeleitet"
     },
     "events": {
-      "backToGlobal": "Zurück zur globalen Ansicht",
       "todayTitle": "Heute geschah",
       "loadError": "Die heutigen Ereignisse konnten nicht geladen werden ({{error}}).",
       "noEventsFor": "Für <bold>{{country}}</bold> wurden heute keine Ereignisse gefunden",
       "countryPickerLabel": "Zu einem Land wechseln",
+      "clickHint": "Oder wähle eins auf der Karte.",
+      "allCountries": "Alle Länder",
+      "withEventsToday": "Mit Ereignissen heute ({{count}})",
+      "otherCountries": "Andere Länder",
+      "todayButton": "Was am {{date}} geschah",
+      "liveAll_one": "Was am {{date}} geschah: {{count}} Ereignis",
+      "liveAll_other": "Was am {{date}} geschah: {{count}} Ereignisse",
+      "liveCountry_one": "{{country}}: {{count}} Ereignis heute",
+      "liveCountry_other": "{{country}}: {{count}} Ereignisse heute",
       "loadingCountries": "Länder werden geladen…",
       "selectCountryPlaceholder": "Land auswählen…",
       "countriesLoadError": "Die Länderliste konnte nicht geladen werden ({{error}}).",
-      "clickHint": "Klicke auf ein Land auf der Karte (oder nutze das Menü oben), um seine Ereignisse zu sehen",
       "panelAriaLabel": "Historische Ereignisse",
-      "eventsButton": "Ereignisse",
       "closePanel": "Ereignis-Panel schließen",
-      "anniversariesTitle": "Jahrestage am {{day}}. {{month}}"
+      "anniversariesTitle": "Jahrestage am {{day}}. {{month}}",
+      "seeCentury": "Seine Ereignisse aus dem ganzen Jahr ansehen"
     }
   },
   "dashboard": {
     "description": "Statistiken zu den heutigen Ereignissen, mit dem aus verlinkten Artikeln abgeleiteten Land",
     "loadError": "Die Statistiken konnten nicht geladen werden ({{error}}).",
-    "stats": {
-      "noData": {
-        "title": "Keine Statistiken verfügbar",
-        "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
-      },
-      "events": {
-        "label": "Heutige Ereignisse"
-      },
-      "countries": {
-        "label": "Identifizierte Länder",
-        "detail": "{{geocoded}} von {{total}} Ereignissen"
-      },
-      "span": {
-        "label": "Zeitspanne"
-      },
-      "topCountry": {
-        "label": "Meistgenanntes Land",
-        "detail_one": "{{count}} Ereignis",
-        "detail_other": "{{count}} Ereignisse"
-      }
+    "summary": {
+      "lead_one": "Heute, am {{date}}, erinnert Wikipedia an ein einziges Ereignis.",
+      "lead_other": "Heute, am {{date}}, erinnert Wikipedia an {{count}} Ereignisse, von {{first}} bis {{last}}.",
+      "noneOnMap": "Keines davon hat einen Platz auf der Karte.",
+      "placedOneCountry_one": "Nur eines hat einen Platz auf der Karte: {{top}}.",
+      "placedOneCountry_other": "{{count}} haben einen Platz auf der Karte, alle im selben Land: {{top}}.",
+      "placed_one": "Nur eines hat einen Platz auf der Karte: {{top}}.",
+      "placed_other": "{{count}} haben einen Platz auf der Karte, in {{countries}} Ländern; am häufigsten genannt: {{top}}, mit {{topCount}}."
+    },
+    "centuries": {
+      "title": "Die Ereignisse von heute, Jahrhundert für Jahrhundert",
+      "hint": "Jedes Korn ist ein Ereignis. Öffne ein Jahrhundert, um seine Ereignisse im Archiv zu lesen.",
+      "column_one": "{{range}}: ein Ereignis. Im Archiv öffnen",
+      "column_other": "{{range}}: {{count}} Ereignisse. Im Archiv öffnen"
+    },
+    "empty": {
+      "title": "Keine Statistiken verfügbar",
+      "description": "Daten erscheinen hier, sobald das Archiv Ereignisse enthält."
     },
     "popularity": {
       "heading": "Meistbesucht",
@@ -95,11 +115,6 @@
       "views_other": "{{count}} Aufrufe",
       "noData": "Noch nicht genügend Daten.",
       "cta": "Karte erkunden"
-    },
-    "archiveTeaser": {
-      "heading": "Archiv",
-      "description": "Diese Statistiken beziehen sich auf die heutigen Ereignisse. Um jeden Eintrag zu durchsuchen, den Wikipedia für einen Tag verzeichnet, aus jedem Jahrhundert, gefiltert nach Jahr und Eintragstyp, öffne das vollständige Archiv.",
-      "cta": "Archiv öffnen"
     }
   },
   "archive": {
@@ -119,7 +134,8 @@
       "languageEnglish": "Englisch",
       "searchLabel": "In den Ergebnissen suchen",
       "searchPlaceholder": "Ein Wort im Text oder in einem Artikel…",
-      "reset": "Filter zurücksetzen"
+      "reset": "Filter zurücksetzen",
+      "more": "Weitere Filter: Jahre, Art, Sprache, Suche"
     },
     "results": {
       "loading": "Archiv wird geladen…",
@@ -127,8 +143,31 @@
       "fallbackNote": "Einige Einträge sind auf Englisch: Die italienische Wikipedia-Ausgabe hat sie nicht.",
       "staleNote": "Daten möglicherweise veraltet: Wikipedia war nicht erreichbar.",
       "empty": "Keine Einträge für diesen Tag mit diesen Filtern.",
-      "noMatches": "Keine Ergebnisse für „{{query}}“."
+      "noMatches": "Keine Ergebnisse für „{{query}}“.",
+      "clearSearch": "Suche löschen"
     }
+  },
+  "century": {
+    "titleFor": "Mein Jahrhundert: {{country}}",
+    "pageDescription": "Die Ereignisse eines Landes aus allen Tagen des Jahres, in zeitlicher Reihenfolge",
+    "methodNote": "Es sind die Einträge, die Wikipedia für jeden Tag des Jahres auflistet und die die Karte diesem Land zuordnet, mit derselben Methode und denselben Grenzen: <methodology>so funktioniert es</methodology>.",
+    "countryLabel": "Land",
+    "countryPlaceholder": "Land wählen…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Jahre",
+    "print": "Drucken oder als PDF speichern",
+    "pickCountry": "Wähle ein Land, um seine Ereignisse aus dem ganzen Jahr zu sehen. Der Link der Seite behält deine Auswahl: Du kannst ihn speichern oder teilen.",
+    "indexEmpty": "Der Länderindex wird gerade erstellt: Versuch es in ein paar Minuten noch einmal.",
+    "empty": "Keine Ereignisse für dieses Land in den gewählten Jahren.",
+    "loadError": "Die Zeitleiste konnte nicht geladen werden ({{error}}).",
+    "summary_one": "Ein Ereignis, im Jahr {{first}}.",
+    "summary_other": "{{count}} Ereignisse, von {{first}} bis {{last}}.",
+    "indexedAt": "Index aktualisiert am {{date}}.",
+    "grainsHint": "Jedes Korn ist ein Ereignis. Öffne ein Jahrzehnt, um dorthin zu springen.",
+    "decadeColumn_one": "{{range}}: ein Ereignis. Zum Jahrzehnt",
+    "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt",
+    "startWith": "Zum Einstieg",
+    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}})."
   },
   "history": {
     "section": {
@@ -150,7 +189,10 @@
     },
     "dialog": {
       "close": "Schließen",
-      "relatedHeading": "Verlinkte Artikel"
+      "relatedHeading": "Verlinkte Artikel",
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}}: das ganze Jahr",
+      "archiveDay": "Dieser Tag im Archiv"
     },
     "attribution": {
       "licenseLabel": "Lizenz"
@@ -197,6 +239,137 @@
       "legalNote": "Die Seiten Datenschutz und Nutzungsbedingungen sind vorerst nur auf Italienisch verfügbar."
     }
   },
+  "methodology": {
+    "title": "Hinter den Daten",
+    "description": "Woher die Ereignisse stammen, wie sie gezeigt werden und wo ihre Grenzen liegen",
+    "source": {
+      "title": "Eine einzige Quelle: Wikipedia",
+      "p1": "Jedes Ereignis stammt aus dem Wikipedia-Dienst „On this day“, der die Jahrestage jedes Tages sammelt. Unser Server fragt ihn ab, nicht dein Browser. Wir fügen keine Einträge hinzu, entfernen keine und schreiben keine um: Du siehst, was Wikipedia für diesen Tag auflistet, mit Links zu den erwähnten Artikeln.",
+      "p2": "Es gibt fünf Arten von Einträgen: <strong>Ausgewählt</strong>, eine kurze Auswahl der ehrenamtlichen Wikipedia-Community; <strong>Ereignisse</strong>; <strong>Geburtstage</strong>; <strong>Todestage</strong>; <strong>Feiertage und Gedenktage</strong>."
+    },
+    "report": {
+      "title": "Der heutige Bericht",
+      "intro": "Was unser Server für heute, {{date}}, geliefert hat: echte Daten, dieselben, die Karte und Dashboard verwenden.",
+      "caption": "Für heute, {{date}}, erhaltene Abschnitte",
+      "colSection": "Abschnitt",
+      "colItems": "Einträge",
+      "colLanguage": "Sprache",
+      "colState": "Status",
+      "fallback": "{{language}} (Ersatz)",
+      "fresh": "Aktuell",
+      "stale": "Veraltet",
+      "attributed": "Ereignisse mit ermitteltem Land",
+      "attributedValue": "{{attributed}} von {{total}}",
+      "countries": "Identifizierte Länder",
+      "warningPrimaryUnavailable": "Heute antwortete die Ausgabe in der angefragten Sprache nicht: Alle Abschnitte stammen aus der anderen.",
+      "warningFallbackUnavailable": "Heute konnte ein in der angefragten Sprache fehlender Abschnitt auch aus der anderen nicht ergänzt werden.",
+      "footnote": "Karte und Dashboard nutzen nur diese beiden Abschnitte. Geburtstage, Todestage sowie Feier- und Gedenktage findest du im <archive>Archiv</archive>.",
+      "loadError": "Die heutigen Daten konnten nicht gelesen werden ({{error}})."
+    },
+    "languages": {
+      "title": "Sprachen",
+      "p1": "Die Texte werden in der Sprache der Oberfläche angefragt, sofern der Dienst sie anbietet: hier nur Italienisch und Englisch. Mit deutscher oder französischer Oberfläche kommen die Texte auf Englisch.",
+      "p2": "Die italienische Ausgabe veröffentlicht keine Geburts- und Todestage: Wird Italienisch angefragt, kommen diese beiden Abschnitte aus der englischen, und die Seite weist darauf hin. Antwortet die angefragte Ausgabe nicht, kommt alles aus der anderen. Im <archive>Archiv</archive> kannst du die Textsprache selbst wählen."
+    },
+    "freshness": {
+      "title": "Aktualisierung",
+      "p1": "Die Kopie eines Tages wird sechs Stunden lang wiederverwendet, danach wird Wikipedia erneut gefragt. Antwortet Wikipedia nicht, zeigen wir die zuletzt gespeicherte Kopie, höchstens sieben Tage alt, gekennzeichnet mit „Daten möglicherweise veraltet“."
+    },
+    "geocoding": {
+      "title": "Das Land auf der Karte",
+      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:110 Millionen.",
+      "p2": "Das ist eine Annäherung mit klaren Grenzen:",
+      "limitSubject": "die Koordinaten beschreiben den Gegenstand des Artikels, nicht immer den Ort des Ereignisses;",
+      "limitNone": "ein Ereignis ohne verlinkten Artikel mit Koordinaten bleibt ohne Land: Es steht in der Liste des Tages, wird auf der Karte aber nicht gezählt;",
+      "limitBorder": "ein Punkt nahe einer Grenze kann im Nachbarland landen;",
+      "limitIslands": "einige kleine Inselstaaten haben in diesem Maßstab keine Form und werden nie erkannt.",
+      "p3": "Auf der Karte zählen nur die Ereignisse: „Ausgewählt“ wiederholt einige davon, und doppelt gezählt würden die Zahlen aufgebläht."
+    },
+    "index": {
+      "title": "Der Länderindex",
+      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel und denselben Grenzen wie die Karte einem Land zu. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
+    },
+    "errors": {
+      "title": "Widersprüche und Fehler",
+      "p1": "Bei einer einzigen Quelle gibt es nichts abzugleichen: Wir vergleichen die Einträge nicht mit anderen Archiven. Ein Fehler im Text eines Ereignisses wird auf Wikipedia korrigiert, auf der Seite zu diesem Tag des Jahres; die Korrektur erscheint hier mit der nächsten Aktualisierung.",
+      "p2": "Fehler dieser Seite, etwa ein falsch zugeordnetes Land, meldest du über <credits>Quellen und Kontakt</credits>."
+    },
+    "limits": {
+      "title": "Grenzen",
+      "p1": "Die Abdeckung ist die von Wikipedia, und die ist zwischen Ländern und Epochen ungleich verteilt. Die Einträge reichen von der Antike bis heute, nicht nur ins 20. Jahrhundert. Die Zahlen von Karte und Dashboard beschreiben die heutigen Einträge, nicht die Geschichte als Ganzes."
+    },
+    "views": {
+      "title": "Besuchsstatistik",
+      "p1": "„Meistbesucht“ im Dashboard sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+    }
+  },
+  "guide": {
+    "title": "Bedienung",
+    "description": "Kurze Antworten zum Lesen der Karte, zum Nachschlagen eines Tages und zu den Einstellungen",
+    "map": {
+      "title": "Was zeigt die Karte?",
+      "p1": "Ereignisse, die an diesem Datum in früheren Jahren stattfanden, Land für Land. Die Farbe zeigt, wie viele der heutigen Ereignisse jedem Land zugeordnet wurden:",
+      "p2": "Ein Land ohne Farbe hat heute keine zugeordneten Ereignisse, was nicht heißt, dass dort nichts geschah. Wie das Land ermittelt wird, steht unter <methodology>Hinter den Daten</methodology>."
+    },
+    "country": {
+      "title": "Wie sehe ich die Ereignisse eines Landes?",
+      "p1": "Klicke auf das Land in der Karte oder wähle es unter „Zu einem Land wechseln“ im Ereignisbereich: Die Taste <kbd>/</kbd> bringt dich direkt dorthin. Zurück zu allen heutigen Ereignissen geht es mit dem X oben im Bereich."
+    },
+    "archive": {
+      "title": "Wie schlage ich einen anderen Tag nach?",
+      "p1": "Im <archive>Archiv</archive>: Wähle Monat und Tag, dann grenze nach Jahren (negativ vor unserer Zeitrechnung, z. B. -44), Eintragsart und Sprache ein. Das Suchfeld filtert die Einträge dieses Tages."
+    },
+    "theme": {
+      "title": "Kann ich einem Land oder einem Thema übers Jahr folgen?",
+      "p1": "Einem Land ja: <century>Mein Jahrhundert</century> zeigt alle seine Ereignisse des Jahres in zeitlicher Reihenfolge. Für ein Thema wie den Kalten Krieg arbeitet das Archiv Tag für Tag: Stell die Jahre 1947 bis 1991 ein, such ein Wort wie „Berlin“ und wechsle dann den Tag."
+    },
+    "dashboard": {
+      "title": "Was misst das Dashboard?",
+      "p1": "Zahlen aus den heutigen Einträgen: wie viele Ereignisse, in wie vielen Ländern, welche Jahresspanne sie abdecken und welches Land am häufigsten vorkommt. Darunter die meistbesuchten Tage und Länder, anonym gezählt."
+    },
+    "language": {
+      "title": "Warum sind die Texte nicht immer in meiner Sprache?",
+      "p1": "Der Wikipedia-Dienst steht hier nur auf Italienisch und Englisch zur Verfügung: Mit deutscher oder französischer Oberfläche kommen die Texte auf Englisch. Der italienischen Ausgabe fehlen außerdem Geburts- und Todestage, die gekennzeichnet aus der englischen kommen. Die Textsprache wählst du im Archiv; mehr unter <methodology>Hinter den Daten</methodology>."
+    },
+    "stale": {
+      "title": "Was bedeutet „Daten möglicherweise veraltet“?",
+      "p1": "Dass Wikipedia nicht erreichbar war: Du siehst die zuletzt gespeicherte Kopie, höchstens sieben Tage alt. Sie aktualisiert sich von selbst, sobald Wikipedia wieder antwortet."
+    },
+    "shortcuts": {
+      "title": "Gibt es Tastenkürzel?",
+      "p1": "Ja: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> und <kbd>5</kbd> öffnen Karte, Dashboard, Archiv, Mein Jahrhundert und Einstellungen; <kbd>/</kbd> springt zur Länderauswahl. Während du in ein Feld tippst, sind sie aus. Die Liste steht auch in den <settings>Einstellungen</settings>."
+    },
+    "prefs": {
+      "title": "Wo werden meine Einstellungen gespeichert?",
+      "p1": "Nur in deinem Browser: Erscheinungsbild, Sprache, Kartenprojektion, reduzierte Animationen und ob du die Willkommensseite schon gesehen hast. Löschen kannst du sie in den <settings>Einstellungen</settings>; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+    }
+  },
+  "credits": {
+    "title": "Quellen und Kontakt",
+    "description": "Datenquellen, Lizenzen und wen du für Korrekturen oder Vorschläge kontaktierst",
+    "data": {
+      "title": "Daten und Bilder",
+      "wikipedia": "Texte der Ereignisse: <wikipedia>Wikipedia</wikipedia>, unter der Lizenz <license>CC BY-SA 4.0</license>. Jedes Ereignis verlinkt die erwähnten Artikel.",
+      "commons": "Bilder: <commons>Wikimedia Commons</commons>. Jedes Bild hat seine eigene Lizenz, angegeben auf der daneben verlinkten Dateiseite.",
+      "map": "Karte: Daten © <osm>OpenStreetMap-Mitwirkende</osm>, Kacheln von <openfreemap>OpenFreeMap</openfreemap>.",
+      "borders": "Ländergrenzen: <naturalearth>Natural Earth</naturalearth>, gemeinfrei.",
+      "photo": "Foto auf der Fehlerseite 404: O. G. Rejlander, 1872, <photo>Wellcome Collection</photo>, Lizenz CC BY 4.0."
+    },
+    "software": {
+      "title": "Software",
+      "p1": "Der Code ist Open Source unter der MIT-Lizenz: <frontend>die Oberfläche</frontend> und <backend>die Dienste</backend> liegen auf GitHub. Er baut auf freien Projekten wie React, MapLibre GL und Spring Boot auf.",
+      "p2": "Schriften: Literata und Atkinson Hyperlegible, unter der SIL Open Font License."
+    },
+    "thanks": {
+      "title": "Dank",
+      "p1": "An die ehrenamtlichen Gemeinschaften von Wikipedia, Wikimedia Commons, OpenStreetMap und Natural Earth, die diese Daten frei verfügbar machen, und an alle, die die freie Software pflegen, auf der diese Seite steht."
+    },
+    "contact": {
+      "title": "Kontakt und Zusammenarbeit",
+      "p1": "Das Projekt wird von {{name}} betreut. Für Korrekturen, Vorschläge oder Zusammenarbeit schreib an <email/> oder eröffne ein Issue auf <github>GitHub</github>.",
+      "p2": "Ein Fehler im Text eines Ereignisses wird direkt auf Wikipedia korrigiert, auf der Seite zu diesem Tag des Jahres; die Korrektur erscheint hier mit der nächsten Aktualisierung."
+    }
+  },
   "date": {
     "era": {
       "bc": "v. Chr."
@@ -207,44 +380,54 @@
   },
   "notFound": {
     "title": "Seite nicht gefunden",
+    "message": "Diese Adresse führt zu keiner Seite der Website. Starte neu von hier:",
     "backToMap": "Karte erkunden",
-    "typedMessage": "Wir durchsuchen das Archiv nach der gesuchten Seite... Ergebnis: nicht gefund—",
-    "outOfPaper": "— der Schreibmaschine ist das Papier ausgegangen —",
-    "referenceCode": "Archiv-Ref.: N/V",
     "goToArchive": "Archiv durchsuchen",
     "goToDashboard": "Dashboard",
-    "photoCredit": "Foto: O.G. Rejlander, 1872 · Wellcome Collection"
+    "photoCredit": "Foto: O.G. Rejlander, 1872, Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Willkommen",
-    "tagline": "Das Archiv der Geschichte, einen Tag nach dem anderen",
+    "tagline": "Jeden Tag die Ereignisse, an die Wikipedia zu diesem Datum erinnert: auf der Karte, im Archiv, Land für Land.",
     "enter": "Betreten",
     "footer": {
       "creditsLabel": "Quellen und Credits",
       "photos": "Historische Fotos: Wikimedia Commons (Lizenz bei jeder Datei angegeben)",
       "wikipedia": "Historische Texte: Wikipedia (CC BY-SA 4.0)",
-      "map": "Karte: © OpenStreetMap contributors · OpenFreeMap",
+      "map": "Karte: © OpenStreetMap contributors, OpenFreeMap",
       "boundaries": "Grenzen: Natural Earth (gemeinfrei)"
     }
   },
   "meta": {
     "welcome": {
-      "description": "Century Road, das Archiv der Geschichte: entdecke, was heute im Laufe der Jahrhunderte geschah, mit interaktiver Karte, Wikipedia-Artikeln und historischen Fotos."
+      "description": "Grains of History, das Archiv der Geschichte: entdecke, was heute im Laufe der Jahrhunderte geschah, mit interaktiver Karte, Wikipedia-Artikeln und historischen Fotos."
     },
     "map": {
       "description": "Entdecke auf der Karte die historischen Ereignisse von heute weltweit, mit Jahrestagen und Wikipedia-Artikeln für jedes Land."
     },
     "dashboard": {
-      "description": "Statistiken zu den heutigen Ereignissen: wie viele Artikel, welche Länder, welcher Zeitraum im Archiv von Century Road abgedeckt wird."
+      "description": "Statistiken zu den heutigen Ereignissen: wie viele Artikel, welche Länder, welcher Zeitraum im Archiv von Grains of History abgedeckt wird."
     },
     "archive": {
       "description": "Durchsuche das vollständige Archiv der heutigen Ereignisse aus jedem Jahrhundert, filterbar nach Jahr und Eintragstyp."
     },
+    "century": {
+      "description": "Wähle ein Land und sieh seine Ereignisse aus jedem Tag des Jahres in zeitlicher Reihenfolge: eine Zeitleiste zum Teilen oder Drucken."
+    },
     "settings": {
-      "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Century Road an."
+      "description": "Passe Erscheinungsbild, Sprache und Standard-Kartenprojektion von Grains of History an."
+    },
+    "guide": {
+      "description": "So liest du die heutige Karte, schlägst einen anderen Tag im Archiv nach und nutzt die Tastenkürzel."
+    },
+    "methodology": {
+      "description": "Woher die Ereignisse stammen, wie das Land auf der Karte ermittelt wird und wo die Daten an Grenzen stoßen."
+    },
+    "credits": {
+      "description": "Datenquellen, Lizenzen und Kontakt für Korrekturen oder Vorschläge."
     },
     "notFound": {
-      "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Century Road zurück, um die Geschichte von heute weiter zu erkunden."
+      "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Grains of History zurück, um die Geschichte von heute weiter zu erkunden."
     }
   }
 }
