@@ -2,12 +2,13 @@ import { useTranslation } from "react-i18next";
 import { SettingsSection } from "./SettingsSection";
 
 // Documents the app's real bindings — AppLayout's useKeyboardShortcuts call
-// (1/2/3/4) and EventsPanel's own ('/') — nothing invented here.
+// (1–5) and EventsPanel's own ('/') — nothing invented here.
 const SHORTCUTS: readonly { key: string; actionKey: string }[] = [
   { key: "1", actionKey: "nav.map" },
   { key: "2", actionKey: "nav.dashboard" },
   { key: "3", actionKey: "nav.archive" },
-  { key: "4", actionKey: "nav.settings" },
+  { key: "4", actionKey: "nav.century" },
+  { key: "5", actionKey: "nav.settings" },
   { key: "/", actionKey: "settings.shortcuts.focusCountryPicker" },
 ];
 
@@ -18,7 +19,7 @@ export function ShortcutsSection() {
     <SettingsSection title={t("settings.shortcuts.title")}>
       <table className="w-full text-left text-sm">
         <thead>
-          <tr className="border-b border-border text-xs uppercase text-muted-foreground">
+          <tr className="border-b border-border text-xs font-bold text-muted-foreground">
             <th scope="col" className="w-16 py-1.5 font-medium">
               {t("settings.shortcuts.columnKey")}
             </th>

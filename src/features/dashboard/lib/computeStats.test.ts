@@ -1,77 +1,72 @@
 import { describe, expect, it } from "vitest";
-import i18n from "@/i18n";
 import type { GeocodedEntry } from "@/features/map";
-import { computeStats } from "./computeStats";
+import { groupByCentury, summarizeToday } from "./computeStats";
 
-const { t } = i18n;
-
-function entry(overrides: Partial<GeocodedEntry["entry"]> = {}): GeocodedEntry["entry"] {
-  return { text: "An event.", pages: [], ...overrides };
+function event(year?: number, country: GeocodedEntry["country"] = null): GeocodedEntry {
+  return { entry: { text: "An event.", pages: [], year }, country };
 }
 
-describe("computeStats", () => {
-  it("returns an empty array when there are no geocoded events", () => {
-    expect(computeStats([], t)).toEqual([]);
+const italy = { code: "IT", name: "Italy" };
+const france = { code: "FR", name: "France" };
+
+describe("summarizeToday", () => {
+  it("returns null when there are no events", () => {
+    expect(summarizeToday([])).toBeNull();
   });
 
-  it("counts the total number of events regardless of geocoding", () => {
-    const events: GeocodedEntry[] = [
-      { entry: entry(), country: null },
-      { entry: entry(), country: { code: "IT", name: "Italy" } },
-    ];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "events")?.value).toBe("2");
+  it("counts every event, placed or not", () => {
+    expect(summarizeToday([event(), event(1990, italy)])?.total).toBe(2);
   });
 
   it("counts distinct countries, not distinct events", () => {
-    const events: GeocodedEntry[] = [
-      { entry: entry({ year: 1990 }), country: { code: "IT", name: "Italy" } },
-      { entry: entry({ year: 1991 }), country: { code: "IT", name: "Italy" } },
-      { entry: entry({ year: 1992 }), country: { code: "FR", name: "France" } },
-    ];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "countries")?.value).toBe("2");
+    const summary = summarizeToday([event(1990, italy), event(1991, italy), event(1992, france)]);
+    expect(summary?.countries).toBe(2);
+    expect(summary?.placed).toBe(3);
   });
 
-  it("never counts an ungeocoded event toward the country total", () => {
-    const events: GeocodedEntry[] = [
-      { entry: entry(), country: null },
-      { entry: entry(), country: null },
-    ];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "countries")?.value).toBe("0");
+  it("never counts an unplaced event toward the countries", () => {
+    const summary = summarizeToday([event(), event()]);
+    expect(summary?.countries).toBe(0);
+    expect(summary?.placed).toBe(0);
+    expect(summary?.topCountry).toBeNull();
   });
 
   it("reports the most-cited country by event count, not alphabetically", () => {
-    const events: GeocodedEntry[] = [
-      { entry: entry(), country: { code: "FR", name: "France" } },
-      { entry: entry(), country: { code: "IT", name: "Italy" } },
-      { entry: entry(), country: { code: "IT", name: "Italy" } },
-    ];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "top-country")?.value).toBe("Italy");
+    expect(summarizeToday([event(1, france), event(2, italy), event(3, italy)])?.topCountry).toEqual({
+      name: "Italy",
+      count: 2,
+    });
   });
 
   it("spans from the earliest to the latest year among events that have one", () => {
-    const events: GeocodedEntry[] = [
-      { entry: entry({ year: 1990 }), country: null },
-      { entry: entry(), country: null }, // no year (e.g. a holiday) - excluded from the span
-      { entry: entry({ year: 1215 }), country: null },
-    ];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "span")?.value).toBe("1215–1990");
+    const summary = summarizeToday([event(1990), event(), event(-44)]);
+    expect([summary?.firstYear, summary?.lastYear]).toEqual([-44, 1990]);
   });
 
-  it("shows an em dash for the span when no event carries a year", () => {
-    const events: GeocodedEntry[] = [{ entry: entry(), country: null }];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "span")?.value).toBe("—");
+  it("has no span when no event carries a year", () => {
+    expect(summarizeToday([event()])?.firstYear).toBeNull();
+  });
+});
+
+describe("groupByCentury", () => {
+  it("puts each year in the century starting at its multiple of 100", () => {
+    expect(groupByCentury([event(1900), event(1999), event(2000)])).toEqual([
+      { start: 1900, count: 2 },
+      { start: 2000, count: 1 },
+    ]);
   });
 
-  it("shows an em dash for the top country when nothing was geocoded", () => {
-    const events: GeocodedEntry[] = [{ entry: entry(), country: null }];
-    const stats = computeStats(events, t);
-    expect(stats.find((s) => s.id === "top-country")?.value).toBe("—");
-    expect(stats.find((s) => s.id === "top-country")?.detail).toBeUndefined();
+  it("rounds years before the common era down, so 44 BC is in 100-1 BC", () => {
+    expect(groupByCentury([event(-44), event(-100), event(-101)])).toEqual([
+      { start: -200, count: 1 },
+      { start: -100, count: 2 },
+    ]);
+  });
+
+  it("leaves out events without a year and orders centuries oldest first", () => {
+    expect(groupByCentury([event(1500), event(), event(-2333)])).toEqual([
+      { start: -2400, count: 1 },
+      { start: 1500, count: 1 },
+    ]);
   });
 });

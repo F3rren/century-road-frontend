@@ -2,128 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Self-hosted (not a Google Fonts CDN link) — single weights, latin-only
-   subsets. Reading voice: Source Serif 4 for event titles/content. Display
-   voice: Oswald, a condensed newsroom-grotesque with real early-20th-century
-   headline lineage, for headings and datelines. Everything else stays on
-   the system sans. See PRODUCT.md / .impeccable/surfaces for the direction
-   this pairing serves. */
+/* Self-hosted (no Google Fonts CDN), latin-only subsets, real weights only:
+   Literata (400/600) is the reading and title voice, Atkinson Hyperlegible
+   (400/700) the interface voice - drawn for low-vision legibility, which is
+   the point for an audience of students and teachers. See DESIGN.md. */
 @font-face {
-  font-family: "Source Serif 4";
+  font-family: "Literata";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-display: swap;
-  src: url("/fonts/source-serif-4-600.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("/fonts/literata-latin-400-normal.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Oswald";
+  font-family: "Literata";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("/fonts/oswald-600.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
-    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("/fonts/literata-latin-600-normal.woff2") format("woff2");
 }
 
-/* Wire-service newsroom archive — see .impeccable/surfaces direction
-   contract. Ground is bulletin ivory / newsroom black, not a neutral gray
-   scale; wire-red is the one committed accent (Restrained strategy: it is
-   --primary itself, not a second color layered on top of it), reserved for
-   interactive/active/"today" emphasis, never a decorative field. Radius is
-   near-zero throughout — clippings and rules, not rounded cards. */
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+}
+
+/* Cyanotype print: Prussian blue on cold white paper, the dark theme as the
+   plate's negative. One blue family carries everything; fixer yellow is kept
+   for "today" and the selected country, always as a fill under Prussian text,
+   never as text on paper. Every text pairing below clears 7:1. */
 @layer base {
   :root {
-    --background: 43.3 50% 92.9%; /* bulletin ivory */
-    --foreground: 30 13% 9%; /* newsprint ink */
-    --card: 42 55.6% 96.5%;
-    --card-foreground: 30 13% 9%;
-    --border: 41.5 25% 79.6%; /* hairline */
-    --input: 41.5 25% 79.6%;
-    --ring: 30 13% 9%; /* ink-based: legible against any surface, incl. wire-red */
-    --radius: 0.125rem;
-    /* wire-red — darkened from an earlier 45.1% L: --primary is also used as
-       plain text (links, ContactEmail, SeeAlso, etc. — 14 consumers), where
-       45.1% measured only 5.02:1 against the ivory background, AAA needs
-       7:1. 34% clears both that (7.54:1, with margin — the math said 36%
-       should clear exactly 7.00:1, but the real render measured 6.98:1) and
-       the button-fill pairing with --primary-foreground (comfortably
-       higher still) — the button was never the binding constraint, the
-       plain-text use was. */
-    --primary: 350.1 73.9% 34%;
-    --primary-foreground: 42 55.6% 96.5%;
-    --secondary: 43.2 41% 88%;
-    --secondary-foreground: 30 13% 9%;
-    --muted: 43.2 41% 88%;
-    /* Darkened from 37.6% L (5.26:1, under AAA's 7:1) to 29.9% (7.22:1)
-       against the ivory background — same hue/saturation, just deeper. */
-    --muted-foreground: 38.2 11.5% 29.9%;
-    --accent: 43.2 41% 88%;
-    --accent-foreground: 30 13% 9%;
-    /* rust — distinct from wire-red, same warm-ink family. Darkened from
-       37.3% L (5.96:1 against ivory, under AAA's 7:1) to 33% (7.05:1). */
-    --destructive: 12.9 68.4% 33%;
-    --destructive-foreground: 42 55.6% 96.5%;
-    --success: 135 25.9% 33.3%;
-    --success-foreground: 42 55.6% 96.5%;
-    /* Sidebar is a fixed newsroom-black directory board, not a themed
-       surface — it doesn't flip with light/dark (it didn't before this
-       redesign either; only its hue is changing, navy to newsroom-black). */
-    --sidebar: 30 11.1% 7.1%;
-    --sidebar-foreground: 40 36.6% 92%;
-    --sidebar-border: 40 11.5% 20.4%;
-    /* Same fixed logic applies to the active-tab accent: --primary swaps
-       between the light/dark wire-red, but the sidebar never does, and the
-       light-mode wire-red (45% L) measures only 2.85:1 against the sidebar's
-       always-dark background — a real WCAG AA failure, not a rounding
-       error. This is a brighter wire-red, used only inside the sidebar —
-       raised again from 65% L (5.02:1 as the active nav item's text, under
-       AAA's 7:1) to 75% (7.05:1). */
-    --sidebar-accent: 352 74% 75%;
+    --background: 100 14.3% 95.9%; /* paper #F4F6F3 */
+    --foreground: 210.5 67.1% 16.7%; /* Prussian #0E2A47 */
+    --card: 90 25% 98.4%; /* print #FBFCFA */
+    --card-foreground: 210.5 67.1% 16.7%;
+    --border: 208.4 19.6% 81%; /* haze line #C5CFD8 */
+    --input: 208.4 19.6% 81%;
+    --ring: 210.5 67.1% 16.7%;
+    --radius: 0.25rem;
+    --primary: 208.7 59.2% 29.8%; /* exposure #1F4E79: 8.0:1 as text on paper */
+    --primary-foreground: 100 14.3% 95.9%;
+    --secondary: 204 22.7% 91.4%; /* haze #E4EAEE */
+    --secondary-foreground: 210.5 67.1% 16.7%;
+    --muted: 204 22.7% 91.4%;
+    --muted-foreground: 210 23% 29%; /* shade #394A5B: 7.5:1 even on haze */
+    --accent: 204 22.7% 91.4%;
+    --accent-foreground: 210.5 67.1% 16.7%;
+    --destructive: 6.7 63.3% 33.1%; /* oxblood #8A2B1F */
+    --destructive-foreground: 100 14.3% 95.9%;
+    --success: 135.3 32.8% 25.7%; /* #2C5737 */
+    --success-foreground: 100 14.3% 95.9%;
+    --highlight: 41.8 72.4% 58.8%; /* fixer #E2B44A - a fill, never text on paper */
+    --highlight-foreground: 210.5 67.1% 16.7%;
+    /* The sidebar is a fixed Prussian board in both themes, so its accent is
+       its own: fixer yellow, 7.5:1 on Prussian. */
+    --sidebar: 210.5 67.1% 16.7%;
+    --sidebar-foreground: 207.3 28.2% 92.4%;
+    --sidebar-border: 210 43.9% 25.9%;
+    --sidebar-accent: 41.8 72.4% 58.8%;
   }
 
-  .dark {
-    --background: 30 11.1% 7.1%; /* newsroom at night */
-    --foreground: 40 36.6% 92%;
-    --card: 40 12% 9.8%;
-    --card-foreground: 40 36.6% 92%;
-    --border: 40 11.5% 20.4%;
-    --input: 40 11.5% 20.4%;
-    --ring: 40 36.6% 92%;
-    /* Raised from 60% L (4.95:1 as text against the dark background, under
-       AAA's 7:1 — the same binding constraint as the light-mode value
-       above, not the button) to 71%: 7.06:1 as text. That lightness reads
-       closer to coral than the light-mode red, an unavoidable trade-off —
-       nothing at this hue stays "wire-red"-deep and also clears 7:1 against
-       a near-black page. --primary-foreground swaps to pure black (not the
-       9%-lightness ink used everywhere else) because even black text only
-       just clears the button-fill pairing at this lightness (7.94:1); ink
-       at its usual 9% falls short (6.70:1). */
-    --primary: 352.2 74.4% 71%;
-    --primary-foreground: 30 13% 0%;
-    --secondary: 38.2 18% 12%;
-    --secondary-foreground: 40 36.6% 92%;
-    --muted: 38.2 18% 12%;
-    --muted-foreground: 40 13.3% 60.2%;
-    --accent: 38.2 18% 12%;
-    --accent-foreground: 40 36.6% 92%;
-    /* Raised from 55.7% L (5.33:1 against the near-black background, under
-       AAA's 7:1) to 65% (7.06:1). */
-    --destructive: 15 61.9% 65%;
-    --destructive-foreground: 30 13% 9%;
-    --success: 134 22.5% 59%;
-    --success-foreground: 30 13% 9%;
-    --sidebar: 30 11.1% 7.1%;
-    --sidebar-foreground: 40 36.6% 92%;
-    --sidebar-border: 40 11.5% 20.4%;
-    /* Redundant with :root's value above (the sidebar never themes) — kept
-       in sync rather than removed, since this block already duplicates
-       --sidebar/-foreground/-border for the same fixed reason. */
-    --sidebar-accent: 352 74% 75%;
+  /* Screen only: paper is always printed light, whatever the theme on screen, or a dark
+     theme would print light text on white. */
+  @media screen {
+    .dark {
+      --background: 212.1 58.3% 9.4%; /* negative #0A1726 */
+      --foreground: 207.3 28.2% 92.4%; /* #E6ECF1 */
+      --card: 211.7 54.5% 12.9%;
+      --card-foreground: 207.3 28.2% 92.4%;
+      --border: 210.7 37.4% 22.5%;
+      --input: 210.7 37.4% 22.5%;
+      --ring: 207.3 28.2% 92.4%;
+      --primary: 208.9 57.2% 71.6%; /* #8DB8E0: 8.7:1 as text */
+      --primary-foreground: 212.1 58.3% 9.4%;
+      --secondary: 211.4 52.5% 15.7%;
+      --secondary-foreground: 207.3 28.2% 92.4%;
+      --muted: 211.4 52.5% 15.7%;
+      --muted-foreground: 209.1 23.5% 70.8%; /* 7.2:1 even on the muted surface */
+      --accent: 211.4 52.5% 15.7%;
+      --accent-foreground: 207.3 28.2% 92.4%;
+      --destructive: 10.6 75% 74.9%;
+      --destructive-foreground: 212.1 58.3% 9.4%;
+      --success: 136.7 33.3% 68.2%;
+      --success-foreground: 212.1 58.3% 9.4%;
+      --highlight: 41.8 72.4% 58.8%;
+      --highlight-foreground: 210.5 67.1% 16.7%;
+    }
   }
 }
 
@@ -147,12 +123,11 @@
     @apply h-full overflow-hidden;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground;
   }
   /* Browser chrome carries the design too, not just the elements drawn by
-     hand: a wire-red selection highlight (reusing --primary/-foreground, so
-     the light/dark ink-vs-ivory swap the buttons already need stays
-     correct here too) and a hairline-toned scrollbar instead of the OS
+     hand: an exposure-blue selection highlight (reusing --primary/-foreground,
+     so the light/dark swap the buttons already need stays correct here too) and a hairline-toned scrollbar instead of the OS
      default gray. */
   ::selection {
     background-color: hsl(var(--primary));
@@ -191,6 +166,18 @@
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
+  /* On paper the fixed-height shell above lets go (AppLayout adds the same per element), so a
+     long page flows across sheets; content-visibility rows render too, or they print blank. */
+  @media print {
+    html,
+    body {
+      height: auto;
+      overflow: visible;
+    }
+    [style*="content-visibility"] {
+      content-visibility: visible !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -206,4 +193,56 @@
   .scrollbar-hidden::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* MapLibre's own zoom and compass buttons, restyled like the map's other plaques
+   (MapOverlayPanel): flat Prussian, square, no shadow, light icons. Outside any
+   layer and scoped under .maplibregl-map, so it outranks maplibre-gl.css, which
+   loads later with the map's chunk. */
+.maplibregl-map .maplibregl-ctrl-group:not(:empty) {
+  background-color: rgb(14 42 71 / 0.9);
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+/* Zoom and compass sit above the attribution line, level with the mobile
+   "Accadde oggi" button, instead of over the credits on a narrow map. */
+.maplibregl-map .maplibregl-ctrl-bottom-right {
+  bottom: 38px;
+}
+/* 44px like every other control here (MapLibre's are 29px). */
+.maplibregl-map .maplibregl-ctrl-group button {
+  width: 44px;
+  height: 44px;
+}
+.maplibregl-map .maplibregl-ctrl-group button + button {
+  border-top-color: rgb(255 255 255 / 0.15);
+}
+.maplibregl-map .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+.maplibregl-map .maplibregl-ctrl-group button:not(:disabled):hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+/* The focus ring of the overlay buttons on Prussian: fixer yellow, 2px off the
+   plate, in place of MapLibre's blue glow. */
+.maplibregl-map .maplibregl-ctrl-group button:focus:focus-visible,
+.maplibregl-map .maplibregl-ctrl-attrib-button:focus:focus-visible {
+  box-shadow: 0 0 0 2px #0e2a47, 0 0 0 4px hsl(var(--highlight));
+}
+.maplibregl-map .maplibregl-ctrl-attrib-button:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+/* The map itself takes the keyboard (arrows pan, +/- zoom): a Prussian frame
+   shows it has the focus, on the paper in either theme. */
+.maplibregl-map .maplibregl-canvas:focus-visible {
+  outline: 3px solid #0e2a47;
+  outline-offset: -3px;
+}
+/* Square like the rest of the system; MapLibre's own rules for the attribution
+   pill are more specific than a plain class, hence the long selectors. */
+.maplibregl-map .maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact,
+.maplibregl-map .maplibregl-ctrl-bottom-left > .maplibregl-ctrl-attrib.maplibregl-compact-show,
+.maplibregl-map .maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button {
+  border-radius: var(--radius);
 }

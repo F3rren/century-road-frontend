@@ -1,18 +1,28 @@
 {
   "common": {
     "loading": "Loading…",
-    "unknownError": "Unknown error",
-    "opensInNewTab": " (opens in a new tab)"
+    "retry": "Retry",
+    "opensInNewTab": " (opens in a new tab)",
+    "onThisPage": "On this page"
+  },
+  "errors": {
+    "network": "the service is not responding: check your connection and try again",
+    "server": "the service is unavailable right now: try again in a few minutes",
+    "unexpected": "unexpected answer from the service: try again later"
   },
   "nav": {
     "map": "Map",
     "dashboard": "Dashboard",
     "archive": "Archive",
+    "century": "My century",
     "settings": "Settings",
     "privacy": "Privacy",
     "terms": "Terms and conditions",
+    "guide": "How to use",
+    "methodology": "Behind the data",
+    "credits": "Credits and contact",
     "ariaLabel": "Main navigation",
-    "brandTagline": "press archive"
+    "brandTagline": "Explore the past, one story at a time"
   },
   "header": {
     "openMenu": "Open menu",
@@ -20,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Interactive historical map: today's events around the world",
+    "controls": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "resetBearing": "Turn north back up",
+      "attribution": "Map credits"
+    },
     "error": {
       "title": "Couldn't load the map",
-      "description": "Check your network connection and try again.",
-      "retry": "Retry"
+      "description": "Check your network connection and try again."
     },
     "projection": {
       "groupLabel": "Map projection",
@@ -42,44 +57,49 @@
       "methodology": "Country inferred from the first linked article with coordinates"
     },
     "events": {
-      "backToGlobal": "Back to the global view",
       "todayTitle": "On this day",
       "loadError": "Couldn't load today's events ({{error}}).",
       "noEventsFor": "No events found today for <bold>{{country}}</bold>",
       "countryPickerLabel": "Go to a country",
+      "clickHint": "Or pick one on the map.",
+      "allCountries": "All countries",
+      "withEventsToday": "With events today ({{count}})",
+      "otherCountries": "Other countries",
+      "todayButton": "On this day, {{date}}",
+      "liveAll_one": "On this day, {{date}}: {{count}} event",
+      "liveAll_other": "On this day, {{date}}: {{count}} events",
+      "liveCountry_one": "{{country}}: {{count}} event today",
+      "liveCountry_other": "{{country}}: {{count}} events today",
       "loadingCountries": "Loading countries…",
       "selectCountryPlaceholder": "Select a country…",
       "countriesLoadError": "Couldn't load the country list ({{error}}).",
-      "clickHint": "Click a country on the map (or use the menu above) to see its events",
       "panelAriaLabel": "Historical events",
-      "eventsButton": "Events",
       "closePanel": "Close events panel",
-      "anniversariesTitle": "Anniversaries for {{month}} {{day}}"
+      "anniversariesTitle": "Anniversaries for {{month}} {{day}}",
+      "seeCentury": "See its events from the whole year"
     }
   },
   "dashboard": {
     "description": "Statistics about today's events, with the country inferred from linked articles",
     "loadError": "Couldn't load the statistics ({{error}}).",
-    "stats": {
-      "noData": {
-        "title": "No statistics available",
-        "description": "Data will show up here as soon as the archive has events."
-      },
-      "events": {
-        "label": "Today's events"
-      },
-      "countries": {
-        "label": "Countries identified",
-        "detail": "{{geocoded}} of {{total}} events"
-      },
-      "span": {
-        "label": "Time span"
-      },
-      "topCountry": {
-        "label": "Most-mentioned country",
-        "detail_one": "{{count}} event",
-        "detail_other": "{{count}} events"
-      }
+    "summary": {
+      "lead_one": "Today, {{date}}, Wikipedia remembers a single event.",
+      "lead_other": "Today, {{date}}, Wikipedia remembers {{count}} events, from {{first}} to {{last}}.",
+      "noneOnMap": "None of them has a place on the map.",
+      "placedOneCountry_one": "Only one has a place on the map: {{top}}.",
+      "placedOneCountry_other": "{{count}} have a place on the map, all in the same country: {{top}}.",
+      "placed_one": "Only one has a place on the map: {{top}}.",
+      "placed_other": "{{count}} have a place on the map, in {{countries}} countries; the most cited is {{top}}, with {{topCount}}."
+    },
+    "centuries": {
+      "title": "Today’s events, century by century",
+      "hint": "Each grain is one event. Open a century to read its events in the archive.",
+      "column_one": "{{range}}: one event. Open in the archive",
+      "column_other": "{{range}}: {{count}} events. Open in the archive"
+    },
+    "empty": {
+      "title": "No statistics available",
+      "description": "Data will show up here as soon as the archive has events."
     },
     "popularity": {
       "heading": "Most viewed",
@@ -95,11 +115,6 @@
       "views_other": "{{count}} views",
       "noData": "Not enough data yet.",
       "cta": "Explore the map"
-    },
-    "archiveTeaser": {
-      "heading": "Archive",
-      "description": "These statistics cover today's events. To browse every entry Wikipedia records for a day, from any century, filtering by year and entry type, open the full archive.",
-      "cta": "Open the archive"
     }
   },
   "archive": {
@@ -119,7 +134,8 @@
       "languageEnglish": "English",
       "searchLabel": "Search the results",
       "searchPlaceholder": "A word in the text or in an article…",
-      "reset": "Clear filters"
+      "reset": "Clear filters",
+      "more": "More filters: years, type, language, search"
     },
     "results": {
       "loading": "Loading the archive…",
@@ -127,8 +143,31 @@
       "fallbackNote": "Some entries are in English: the Italian edition of Wikipedia doesn't have them.",
       "staleNote": "Data may be out of date: Wikipedia wasn't reachable.",
       "empty": "No entries for this day with these filters.",
-      "noMatches": "No results for “{{query}}”."
+      "noMatches": "No results for “{{query}}”.",
+      "clearSearch": "Clear the search"
     }
+  },
+  "century": {
+    "titleFor": "My century: {{country}}",
+    "pageDescription": "A country's events from every day of the year, in time order",
+    "methodNote": "These are the entries Wikipedia lists for each day of the year that the map places in that country, with the same method and the same limits: <methodology>how it works</methodology>.",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Choose a country…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Years",
+    "print": "Print or save as PDF",
+    "pickCountry": "Choose a country to see its events from the whole year. The page's link keeps your choice: save it or share it.",
+    "indexEmpty": "The country index is being built: try again in a few minutes.",
+    "empty": "No events for this country in the chosen years.",
+    "loadError": "Couldn't load the timeline ({{error}}).",
+    "summary_one": "One event, in {{first}}.",
+    "summary_other": "{{count}} events, from {{first}} to {{last}}.",
+    "indexedAt": "Index updated on {{date}}.",
+    "grainsHint": "Each grain is one event. Open a decade to jump to it.",
+    "decadeColumn_one": "{{range}}: one event. Go to the decade",
+    "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade",
+    "startWith": "To start",
+    "countriesLoadError": "The list of countries is unavailable ({{error}})."
   },
   "history": {
     "section": {
@@ -150,7 +189,10 @@
     },
     "dialog": {
       "close": "Close",
-      "relatedHeading": "Linked articles"
+      "relatedHeading": "Linked articles",
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}}: the whole year",
+      "archiveDay": "This day in the archive"
     },
     "attribution": {
       "licenseLabel": "License"
@@ -197,6 +239,137 @@
       "legalNote": "The Privacy and Terms pages are only available in Italian for now."
     }
   },
+  "methodology": {
+    "title": "Behind the data",
+    "description": "Where the events come from, how they're shown, and where they fall short",
+    "source": {
+      "title": "One source: Wikipedia",
+      "p1": "Every event comes from Wikipedia's “On this day” service, which gathers each day's anniversaries. Our server queries it, not your browser. We don't add, remove or rewrite entries: you see what Wikipedia lists for that day, with links to the articles it mentions.",
+      "p2": "Entries come in five kinds: <strong>Featured</strong>, a short selection curated by Wikipedia's volunteers; <strong>Events</strong>; <strong>Births</strong>; <strong>Deaths</strong>; <strong>Holidays and observances</strong>."
+    },
+    "report": {
+      "title": "Today's report",
+      "intro": "What our server returned for today, {{date}}: real data, the same the map and the Dashboard use.",
+      "caption": "Sections received for today, {{date}}",
+      "colSection": "Section",
+      "colItems": "Entries",
+      "colLanguage": "Language",
+      "colState": "Status",
+      "fallback": "{{language}} (fallback)",
+      "fresh": "Up to date",
+      "stale": "Out of date",
+      "attributed": "Events with a country identified",
+      "attributedValue": "{{attributed}} of {{total}}",
+      "countries": "Countries identified",
+      "warningPrimaryUnavailable": "Today the edition in the requested language didn't respond: every section comes from the other one.",
+      "warningFallbackUnavailable": "Today a section missing in the requested language couldn't be filled in from the other one either.",
+      "footnote": "The map and the Dashboard use only these two sections. Births, deaths and holidays are in the <archive>Archive</archive>.",
+      "loadError": "Couldn't read today's data ({{error}})."
+    },
+    "languages": {
+      "title": "Languages",
+      "p1": "Texts are requested in the interface language when the service offers it, which here means Italian or English only. With the interface in German or French, texts arrive in English.",
+      "p2": "The Italian edition publishes no births or deaths: when Italian is requested, those two sections come from the English one, and the page says so. If the requested edition doesn't respond, everything comes from the other. In the <archive>Archive</archive> you can pick the text language yourself."
+    },
+    "freshness": {
+      "title": "Updates",
+      "p1": "A day's copy is reused for six hours before Wikipedia is asked again. If Wikipedia doesn't respond, we show the last saved copy, at most seven days old, marked “Data may be out of date”."
+    },
+    "geocoding": {
+      "title": "The country on the map",
+      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:110 million borders.",
+      "p2": "It's an approximation, with specific limits:",
+      "limitSubject": "coordinates describe the article's subject, not always where the event took place;",
+      "limitNone": "an event with no linked article carrying coordinates gets no country: it's in the day's list, but isn't counted on the map;",
+      "limitBorder": "a point near a border can land in the neighboring country;",
+      "limitIslands": "some small island states have no shape at this scale and are never identified.",
+      "p3": "Only Events count on the map: Featured repeats some of them, and counting them twice would inflate the numbers."
+    },
+    "index": {
+      "title": "The country index",
+      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule and the same borders as the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
+    },
+    "errors": {
+      "title": "Contradictions and errors",
+      "p1": "With a single source there's nothing to reconcile: we don't check entries against other archives. A mistake in an event's text is fixed on Wikipedia, on the page for that day of the year; the correction reaches this site with the next update.",
+      "p2": "For this site's own mistakes, such as a wrongly attributed country, write to us via <credits>Credits and contact</credits>."
+    },
+    "limits": {
+      "title": "Limits",
+      "p1": "Coverage is Wikipedia's, which isn't even across countries and eras. Entries run from antiquity to the present, not just the 20th century. The numbers on the map and the Dashboard describe today's entries, not history as a whole."
+    },
+    "views": {
+      "title": "Visit statistics",
+      "p1": "“Most viewed”, on the Dashboard, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
+    }
+  },
+  "guide": {
+    "title": "How to use",
+    "description": "Short answers for reading the map, looking up a day and adjusting the site",
+    "map": {
+      "title": "What does the map show?",
+      "p1": "Events that happened on this date in past years, country by country. The color shows how many of today's events were attributed to each country:",
+      "p2": "A country without color has no events attributed today, which doesn't mean nothing happened there. How the country is inferred is explained in <methodology>Behind the data</methodology>."
+    },
+    "country": {
+      "title": "How do I see a country's events?",
+      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, use the X at the top of the panel."
+    },
+    "archive": {
+      "title": "How do I look up another day?",
+      "p1": "In the <archive>Archive</archive>: choose the month and day, then narrow by years (negative before the common era, e.g. -44), entry type and language. The search box filters that day's entries."
+    },
+    "theme": {
+      "title": "Can I follow a country or a topic across the year?",
+      "p1": "A country, yes: <century>My century</century> shows all its events from the year in time order. For a topic such as the Cold War the archive works one day at a time: set the years 1947 to 1991, search for a word like “Berlin”, then change the day."
+    },
+    "dashboard": {
+      "title": "What does the Dashboard measure?",
+      "p1": "Figures computed from today's entries: how many events, in how many countries, the span of years they cover and the most-cited country. Below, the most-viewed days and countries, counted anonymously."
+    },
+    "language": {
+      "title": "Why aren't the texts always in my language?",
+      "p1": "Wikipedia's service is available here only in Italian and English: with the interface in German or French, texts arrive in English. The Italian edition, for its part, lacks births and deaths, which come from the English one, marked as such. You can pick the text language in the Archive; more in <methodology>Behind the data</methodology>."
+    },
+    "stale": {
+      "title": "What does “Data may be out of date” mean?",
+      "p1": "That Wikipedia couldn't be reached: you're seeing the last saved copy, at most seven days old. It updates by itself once Wikipedia responds again."
+    },
+    "shortcuts": {
+      "title": "Are there keyboard shortcuts?",
+      "p1": "Yes: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> and <kbd>5</kbd> open Map, Dashboard, Archive, My century and Settings; <kbd>/</kbd> jumps to the country picker. They don't work while you're typing in a field. The list is also in <settings>Settings</settings>."
+    },
+    "prefs": {
+      "title": "Where are my preferences saved?",
+      "p1": "Only in your browser: theme, language, map projection, reduced motion, and whether you've seen the welcome page. You can clear them from <settings>Settings</settings>; details are on the <privacy>Privacy</privacy> page (in Italian)."
+    }
+  },
+  "credits": {
+    "title": "Credits and contact",
+    "description": "Data sources, licenses, and who to contact with corrections or proposals",
+    "data": {
+      "title": "Data and images",
+      "wikipedia": "Event texts: <wikipedia>Wikipedia</wikipedia>, under the <license>CC BY-SA 4.0</license> license. Every event links to the articles it mentions.",
+      "commons": "Images: <commons>Wikimedia Commons</commons>. Each image has its own license, stated on the file page linked next to it.",
+      "map": "Map: data © <osm>OpenStreetMap contributors</osm>, tiles by <openfreemap>OpenFreeMap</openfreemap>.",
+      "borders": "Country borders: <naturalearth>Natural Earth</naturalearth>, public domain.",
+      "photo": "Photo on the 404 error page: O.G. Rejlander, 1872, <photo>Wellcome Collection</photo>, CC BY 4.0 license."
+    },
+    "software": {
+      "title": "Software",
+      "p1": "The code is open source under the MIT license: <frontend>the interface</frontend> and <backend>the services</backend> are on GitHub. It's built on free projects such as React, MapLibre GL and Spring Boot.",
+      "p2": "Typefaces: Literata and Atkinson Hyperlegible, under the SIL Open Font License."
+    },
+    "thanks": {
+      "title": "Thanks",
+      "p1": "To the volunteer communities of Wikipedia, Wikimedia Commons, OpenStreetMap and Natural Earth, who make this data free, and to the maintainers of the free software this site stands on."
+    },
+    "contact": {
+      "title": "Contact and collaboration",
+      "p1": "The project is run by {{name}}. For corrections, proposals or collaborations, write to <email/>, or open an issue on <github>GitHub</github>.",
+      "p2": "A mistake in an event's text is fixed directly on Wikipedia, on the page for that day of the year; the correction reaches this site with the next update."
+    }
+  },
   "date": {
     "era": {
       "bc": "BC"
@@ -207,41 +380,51 @@
   },
   "notFound": {
     "title": "Page not found",
+    "message": "This address doesn’t lead to any page on the site. Start again from one of these:",
     "backToMap": "Explore the map",
-    "typedMessage": "Searching the archive for the page you requested... result: not fou—",
-    "outOfPaper": "— the typewriter ran out of paper —",
-    "referenceCode": "Archive ref: N/A",
     "goToArchive": "Browse the Archive",
     "goToDashboard": "Dashboard",
-    "photoCredit": "Photo: O.G. Rejlander, 1872 · Wellcome Collection"
+    "photoCredit": "Photo: O.G. Rejlander, 1872, Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Welcome",
-    "tagline": "The archive of history, one day at a time",
+    "tagline": "Every day, the events Wikipedia remembers for this date: on the map, in the archive, country by country.",
     "enter": "Enter",
     "footer": {
       "creditsLabel": "Sources and credits",
       "photos": "Historical photos: Wikimedia Commons (license noted on each file)",
       "wikipedia": "Historical text: Wikipedia (CC BY-SA 4.0)",
-      "map": "Map: © OpenStreetMap contributors · OpenFreeMap",
+      "map": "Map: © OpenStreetMap contributors, OpenFreeMap",
       "boundaries": "Boundaries: Natural Earth (public domain)"
     }
   },
   "meta": {
     "welcome": {
-      "description": "Century Road, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
+      "description": "Grains of History, the archive of history: discover what happened on this day throughout the centuries, with an interactive map, Wikipedia articles and historical photos."
     },
     "map": {
       "description": "Explore today's historical events on an interactive world map, with anniversaries and Wikipedia articles for every country."
     },
     "dashboard": {
-      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Century Road archive."
+      "description": "Today's event statistics: how many articles, which countries, and the time span covered by the Grains of History archive."
     },
     "archive": {
       "description": "Browse the full archive of today's events across every century, filterable by year and entry type."
     },
+    "century": {
+      "description": "Pick a country and see its events from every day of the year, in time order: a timeline to share or print."
+    },
     "settings": {
-      "description": "Customize Century Road's appearance, language and default map projection."
+      "description": "Customize Grains of History's appearance, language and default map projection."
+    },
+    "guide": {
+      "description": "How to read today's map, look up another day in the archive, and use the keyboard shortcuts."
+    },
+    "methodology": {
+      "description": "Where the events come from, how the country on the map is inferred, and the limits of the data."
+    },
+    "credits": {
+      "description": "Data sources, licenses, and how to get in touch with corrections or proposals."
     },
     "notFound": {
       "description": "The page you're looking for doesn't exist. Head back to the map to keep exploring today in history."

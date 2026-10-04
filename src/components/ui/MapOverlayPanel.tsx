@@ -14,7 +14,7 @@ export function MapOverlayPanel({
   return (
     <div
       className={cn(
-        "border border-white/15 bg-[#141210]/90",
+        "border border-white/15 bg-[#0E2A47]/90",
         className
       )}
       {...props}
