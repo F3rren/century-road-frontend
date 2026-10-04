@@ -39,7 +39,7 @@ function easeInOutCubic(progress: number): number {
 // in globals.css only neutralizes CSS animation/transition timing, which
 // this requestAnimationFrame-driven blend never used in the first place, so
 // it has to be checked here explicitly instead.
-function prefersReducedMotion(): boolean {
+export function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches || getReducedMotionOverride();
 }
 

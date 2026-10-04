@@ -54,6 +54,14 @@ export interface HistoryEntry {
   pages: PageRef[];
 }
 
+// The country an entry is placed in, when the caller knows one (the map guesses
+// it from a linked article). Not from the API: entries carry no country.
+export interface PlaceRef {
+  // ISO 3166-1 alpha-2.
+  code: string;
+  name: string;
+}
+
 export interface SectionResult {
   // The edition that really supplied the items: not always the one asked for.
   language: HistoryLanguage;
@@ -105,4 +113,37 @@ export interface DayViewStat {
 export interface CountryViewStat {
   countryCode: string;
   viewCount: number;
+}
+
+// The country index (GET /api/history/countries…): every event with a year that the map's own
+// rule places in a country, across the whole year, rebuilt by the backend every night.
+export interface CountryEventCount {
+  countryCode: string;
+  eventCount: number;
+}
+
+export interface CountryTimelineEvent {
+  // Negative before the common era.
+  year: number;
+  month: number;
+  day: number;
+  text: string;
+}
+
+export interface CountryTimelineData {
+  countryCode: string;
+  language: HistoryLanguage;
+  // ISO date-time of the newest indexed event; absent when there are none.
+  indexedAt?: string;
+  attribution: Attribution;
+  // Oldest first.
+  events: CountryTimelineEvent[];
+}
+
+export interface CountryTimelineParams {
+  code: string;
+  lang: HistoryLanguage;
+  // null = no limit on that side.
+  fromYear: number | null;
+  toYear: number | null;
 }

@@ -15,14 +15,15 @@ const buttonVariants = cva(
         // Formalizes an already-repeated ad hoc recipe (ContactEmail, SeeAlso, and
         // several inline text links) rather than inventing new visual language.
         link: "text-primary underline-offset-4 hover:underline focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        // Used on top of the map/globe: a solid dark plaque, not tied to
+        // Used on top of the map/globe: a solid Prussian plaque, not tied to
         // the app theme (the basemap underneath is always a light tileset).
+        // The focus ring is fixer yellow there, as in the sidebar: the
+        // theme's ring is Prussian in light mode and would vanish on it.
         overlay:
-          "text-white/80 hover:text-white hover:bg-white/10 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
-        // Active state is wire-red, same as every other "this is selected/
-        // current" moment in the app (nav, selected country) — one
-        // recognizable accent, not a separate white/black treatment here.
-        overlayActive: "bg-primary text-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+          "text-white/80 hover:text-white hover:bg-white/10 focus-visible:ring-sidebar-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        // Active state is fixer yellow, as on the sidebar and the selected
+        // country: on the Prussian plaque the exposure blue would barely show.
+        overlayActive: "bg-highlight text-highlight-foreground focus-visible:ring-sidebar-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black",
       },
       size: {
         // 44px: below this, real touch targets get missed. ghost/outline

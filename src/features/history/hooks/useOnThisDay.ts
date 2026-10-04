@@ -4,6 +4,6 @@ import type { OnThisDayParams } from '../types';
 
 export function useOnThisDay(params: OnThisDayParams) {
   const path = buildOnThisDayPath(params);
-  const { data, error, isLoading } = useKeyedFetch(path, fetchOnThisDay);
-  return { path, isLoading, data, error };
+  const { data, error, isLoading, retry } = useKeyedFetch(path, fetchOnThisDay);
+  return { path, isLoading, data, error, retry };
 }

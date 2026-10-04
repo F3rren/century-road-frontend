@@ -37,12 +37,11 @@ export function LanguageSection() {
       </div>
       <p className="text-sm text-muted-foreground">{t("settings.language.contentNote")}</p>
       <div>
-        <p className="mb-1 font-display text-eyebrow uppercase text-muted-foreground">
+        <p className="mb-1 text-eyebrow text-muted-foreground">
           {t("settings.language.exampleLabel")}
         </p>
-        <p className="text-sm tabular-nums">
-          {todayExample} · {bcExample}
-        </p>
+        <p className="text-sm tabular-nums">{todayExample}</p>
+        <p className="text-sm tabular-nums">{bcExample}</p>
       </div>
     </SettingsSection>
   );

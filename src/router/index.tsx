@@ -14,9 +14,13 @@ const WelcomePage = lazy(() => import('@/pages/WelcomePage').then((m) => ({ defa
 const IndexRoute = lazy(() => import('@/pages/IndexRoute').then((m) => ({ default: m.IndexRoute })));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 const ArchivePage = lazy(() => import('@/pages/ArchivePage').then((m) => ({ default: m.ArchivePage })));
+const CenturyPage = lazy(() => import('@/pages/CenturyPage').then((m) => ({ default: m.CenturyPage })));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = lazy(() => import('@/pages/TermsPage').then((m) => ({ default: m.TermsPage })));
+const GuidePage = lazy(() => import('@/pages/GuidePage').then((m) => ({ default: m.GuidePage })));
+const MethodologyPage = lazy(() => import('@/pages/MethodologyPage').then((m) => ({ default: m.MethodologyPage })));
+const CreditsPage = lazy(() => import('@/pages/CreditsPage').then((m) => ({ default: m.CreditsPage })));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 // Vite exposes whatever base it was built with as BASE_URL, so the router prefix
@@ -43,9 +47,13 @@ export const router = createBrowserRouter([
       { index: true,          element: <IndexRoute /> },
       { path: 'dashboard',    element: <DashboardPage /> },
       { path: 'archive',      element: <ArchivePage /> },
+      { path: 'century',      element: <CenturyPage /> },
       { path: 'settings',     element: <SettingsPage /> },
       { path: 'privacy',      element: <PrivacyPage /> },
       { path: 'terms',        element: <TermsPage /> },
+      { path: 'guide',        element: <GuidePage /> },
+      { path: 'methodology',  element: <MethodologyPage /> },
+      { path: 'credits',      element: <CreditsPage /> },
       { path: '*',            element: <NotFoundPage /> },
     ],
   },

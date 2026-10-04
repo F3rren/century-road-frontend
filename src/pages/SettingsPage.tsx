@@ -16,14 +16,16 @@ export function SettingsPage() {
 
   return (
     <div className="h-full overflow-y-auto p-6">
-      <div className="mx-auto max-w-6xl space-y-6">
+      <div className="mx-auto max-w-4xl pb-8">
         <PageHeader title={t("nav.settings")} description={t("settings.pageDescription")} />
-        <AppearanceSection />
-        <LanguageSection />
-        <MapSection />
-        <AccessibilitySection />
-        <ShortcutsSection />
-        <DataSection />
+        <div className="mt-8">
+          <AppearanceSection />
+          <LanguageSection />
+          <MapSection />
+          <AccessibilitySection />
+          <ShortcutsSection />
+          <DataSection />
+        </div>
       </div>
     </div>
   );
