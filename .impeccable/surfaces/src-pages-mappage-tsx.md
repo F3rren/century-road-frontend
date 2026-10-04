@@ -2,19 +2,27 @@
 version: 1
 slug: "src-pages-mappage-tsx"
 primary_target: "src/pages/MapPage.tsx"
-related_targets: ["src/pages/DashboardPage.tsx","src/components/layout/AppLayout.tsx","src/components/layout/Sidebar.tsx","src/components/layout/Header.tsx"]
+related_targets: ["src/features/map/components/EventsPanel.tsx","src/features/map/components/MapView.tsx","src/features/map/components/HeatLegend.tsx","src/components/layout/AppLayout.tsx"]
 ---
+
+## Scope
+
+Mode: Operate. The visitor finds and reads events by place: what happened today, and where. Audience: curious explorers, targeted lookups, students and educators, all equally primary. One of the product's two doors (the day); the other is Il mio secolo (the country), reachable from here.
 
 ## Direction contract
 
-THESIS: Century Road reads as a wire-service newsroom archive, not a library or a SaaS dashboard — every historical event is a dateline (place + date stamped together), refusing the generic "map widget + floating glass panel" arrangement most interactive-data-map apps default to.
+THESIS: The map is the day's cyanotype exposure: each country darkens with the events it received today, and a country leads on to its whole year. Refuses the default interactive-map kit of red pins, a floating glass panel and colour-coded categories.
 
-OWN-WORLD: Ground is bulletin ivory #F6F1E4 (dark: newsroom black #141210), ink #1A1714, one reserved wire-red #C81E3A used only for the today/active state. Headlines set in Oswald (a condensed newsroom-grotesque with real early-20th-century headline lineage), body/content in the already self-hosted Source Serif 4. Event cards become ruled clippings with a monospace dateline stamp, not rounded cards with drop shadow. Event importance reads from type size, never from color alone.
+OWN-WORLD: Paper and Prussian blue, Exposure blue for links and grains; fixer yellow only for the selected country and the active control on a Prussian plaque. Literata years lead every row in a margin column; Atkinson Hyperlegible for labels and controls. Flat Prussian plates over a grey basemap, hairline rules, no shadow.
 
-STORY: The visitor understands they are browsing a press archive of the century — clicking a place on the globe pulls its dispatches. Today's date is always "the wire," marked in the one reserved red; everything else stays in newsprint black and ivory.
+STORY: The visitor sees where today's history happened at a glance, picks a country by clicking or by the picker, reads its events year-first, opens one to read the whole entry, or follows the country into its whole year.
 
-FIRST VIEWPORT: Full-bleed globe at right. Left column is a ruled dispatch panel (not a floating card), headed "ACCADDE OGGI" in Oswald caps, dateline-stamped event clippings stacked below separated by hairline rules, no shadows, no rounded corners on the clippings themselves.
+FIRST VIEWPORT: Desktop: a 320px panel on the left (today's date, the country picker, today's events year-first), the globe filling the rest; the legend plate top-left of the map, the projection toggle top-right, zoom bottom-right. Mobile: the globe full-bleed, an "Eventi" button bottom-left opening the panel as a drawer.
 
-FORM: Newspaper archive / "on this day" column — candidate 3 of 7 on the ordered grounded list (atlas page, museum wayfinding, newspaper archive, nautical chart, library card catalog, classroom wall map, travel ephemera), assigned by the concept-seed roll rather than picked. Seed key 1a7f4d1c. Raised by fused challengers: committed saturated wire-red as a field, not a hairline accent (donated by the declined sd-seedbed-lobes card); type size alone carries importance hierarchy (donated by the competitive festival-lineup-poster card); the year as a hero numeral object, not a small badge (donated by the competitive nixie-tube-counter card). IMPECCABLE'S PICK (atlas/almanac page, cream+sepia+hairline cartography) was offered and declined by the user as the more obvious, less distinctive choice.
+FORM: Cyanotype print, option 1 of 3 offered in the rebrand (cyanotype print, hourglass sand, herbarium), chosen by the user. No concept-seed roll was run; seed key: none.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+
+## Unresolved decisions
+
+- On mobile the drawer shows two stacked headings ("Eventi" with its close button, then "Accadde oggi"); merging them would put two close buttons side by side in a country's view.

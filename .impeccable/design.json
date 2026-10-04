@@ -1,51 +1,421 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-18T15:00:00.000Z",
-  "title": "Design System: Century Road",
+  "generatedAt": "2026-10-04T11:29:48.314Z",
+  "title": "Design System: Grains of History",
   "extensions": {
     "colorMeta": {
-      "wire-red": {
+      "prussian-blue": {
         "role": "primary",
-        "displayName": "Wire-Red",
-        "canonical": "#c81e3a",
-        "tonalRamp": ["#430a13", "#6f1120", "#9b172d", "#c81e3a", "#e13753", "#e8647a", "#f2a6b3", "#fce9ec"]
+        "displayName": "Prussian Blue",
+        "canonical": "#0E2A47",
+        "oklch": "oklch(28.0% 0.063 251.8)",
+        "tonalRamp": [
+          "#000b1d",
+          "#0a2643",
+          "#284463",
+          "#466484",
+          "#6685a8",
+          "#88a8cc",
+          "#accdf2",
+          "#e4f0fe"
+        ]
       },
-      "bulletin-ivory": {
+      "exposure-blue": {
+        "role": "primary",
+        "displayName": "Exposure Blue",
+        "canonical": "#1F4E79",
+        "oklch": "oklch(41.4% 0.088 249.1)",
+        "tonalRamp": [
+          "#000c1b",
+          "#002646",
+          "#14446e",
+          "#366591",
+          "#5786b5",
+          "#79aada",
+          "#9fcefe",
+          "#e2f0ff"
+        ]
+      },
+      "paper": {
         "role": "neutral",
-        "displayName": "Bulletin Ivory",
-        "canonical": "#f6f1e4",
-        "tonalRamp": ["#392f13", "#604e20", "#866d2d", "#ac8c39", "#c6a653", "#d2ba79", "#e6d7b3", "#f9f5ec"]
+        "displayName": "Paper",
+        "canonical": "#F4F6F3",
+        "oklch": "oklch(97.1% 0.004 134.8)",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#242623",
+          "#414240",
+          "#60625f",
+          "#818380",
+          "#a4a6a3",
+          "#c8cac7",
+          "#edefec"
+        ]
       },
-      "newsroom-black": {
+      "print-white": {
         "role": "neutral",
-        "displayName": "Newsroom Black",
-        "canonical": "#141210",
-        "tonalRamp": ["#2a2622", "#474039", "#63594f", "#7f7366", "#998c80", "#b0a69c", "#d2ccc6", "#f4f2f1"]
+        "displayName": "Print White",
+        "canonical": "#FBFCFA",
+        "oklch": "oklch(99.0% 0.003 128.5)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252524",
+          "#414241",
+          "#616160",
+          "#828381",
+          "#a4a5a3",
+          "#c8c9c7",
+          "#eeefed"
+        ]
       },
-      "rust": {
-        "role": "tertiary",
-        "displayName": "Rust",
-        "canonical": "#a03a1e"
+      "haze": {
+        "role": "neutral",
+        "displayName": "Haze",
+        "canonical": "#E4EAEE",
+        "oklch": "oklch(93.4% 0.008 236.6)",
+        "tonalRamp": [
+          "#080c0e",
+          "#212629",
+          "#3e4346",
+          "#5d6265",
+          "#7e8387",
+          "#a0a6aa",
+          "#c4cace",
+          "#e9eff3"
+        ]
       },
-      "archive-green": {
-        "role": "tertiary",
-        "displayName": "Archive Green",
-        "canonical": "#3f6b4a"
+      "haze-line": {
+        "role": "neutral",
+        "displayName": "Haze Line",
+        "canonical": "#C5CFD8",
+        "oklch": "oklch(85.0% 0.017 245.1)",
+        "tonalRamp": [
+          "#060c12",
+          "#1e262d",
+          "#3b434a",
+          "#5a626a",
+          "#7a848c",
+          "#9da6af",
+          "#c1cbd4",
+          "#e6f0f9"
+        ]
+      },
+      "shade": {
+        "role": "neutral",
+        "displayName": "Shade",
+        "canonical": "#394A5B",
+        "oklch": "oklch(40.2% 0.036 248.7)",
+        "tonalRamp": [
+          "#010c19",
+          "#172636",
+          "#334455",
+          "#526375",
+          "#728597",
+          "#94a7bb",
+          "#b8cce0",
+          "#e3f0fe"
+        ]
+      },
+      "fixer-yellow": {
+        "role": "secondary",
+        "displayName": "Fixer Yellow",
+        "canonical": "#E2B44A",
+        "oklch": "oklch(79.2% 0.133 85.1)",
+        "tonalRamp": [
+          "#110a00",
+          "#312301",
+          "#543e02",
+          "#7b5c01",
+          "#a47b07",
+          "#cb9e2f",
+          "#f0c259",
+          "#ffedc7"
+        ]
+      },
+      "oxblood": {
+        "role": "semantic",
+        "displayName": "Oxblood",
+        "canonical": "#8A2B1F",
+        "oklch": "oklch(43.2% 0.131 30.4)",
+        "tonalRamp": [
+          "#1e0100",
+          "#4c0401",
+          "#79190f",
+          "#9e3e30",
+          "#c46051",
+          "#ec8372",
+          "#feb4a6",
+          "#fee9e5"
+        ]
+      },
+      "washed-green": {
+        "role": "semantic",
+        "displayName": "Washed Green",
+        "canonical": "#2C5737",
+        "oklch": "oklch(41.6% 0.072 150.5)",
+        "tonalRamp": [
+          "#001003",
+          "#022e12",
+          "#224d2d",
+          "#416d4c",
+          "#628f6c",
+          "#84b28e",
+          "#a8d7b1",
+          "#cdfdd6"
+        ]
+      },
+      "negative": {
+        "role": "neutral",
+        "displayName": "Negative",
+        "canonical": "#0A1726",
+        "oklch": "oklch(20.1% 0.035 253.1)",
+        "tonalRamp": [
+          "#020b1a",
+          "#182636",
+          "#354355",
+          "#536375",
+          "#748498",
+          "#96a7bb",
+          "#b9cbe0",
+          "#e4f0fe"
+        ]
+      },
+      "negative-print": {
+        "role": "neutral",
+        "displayName": "Negative Print",
+        "canonical": "#0F2033",
+        "oklch": "oklch(23.9% 0.043 252.4)",
+        "tonalRamp": [
+          "#000b1d",
+          "#15263a",
+          "#314459",
+          "#50637a",
+          "#70849c",
+          "#92a7c0",
+          "#b6cce5",
+          "#e4f0fe"
+        ]
+      },
+      "negative-haze": {
+        "role": "neutral",
+        "displayName": "Negative Haze",
+        "canonical": "#13273D",
+        "oklch": "oklch(26.8% 0.049 252.1)",
+        "tonalRamp": [
+          "#000b1d",
+          "#12263c",
+          "#2f445b",
+          "#4d637d",
+          "#6d859f",
+          "#8fa8c3",
+          "#b3cce9",
+          "#e4f0fe"
+        ]
+      },
+      "negative-line": {
+        "role": "neutral",
+        "displayName": "Negative Line",
+        "canonical": "#24394F",
+        "oklch": "oklch(33.7% 0.047 250.5)",
+        "tonalRamp": [
+          "#000c1c",
+          "#12263b",
+          "#2e445a",
+          "#4d647c",
+          "#6d859e",
+          "#8fa8c2",
+          "#b3cce8",
+          "#e3f0fe"
+        ]
+      },
+      "pale-print": {
+        "role": "neutral",
+        "displayName": "Pale Print",
+        "canonical": "#E6ECF1",
+        "oklch": "oklch(94.0% 0.009 242.8)",
+        "tonalRamp": [
+          "#080c0f",
+          "#212629",
+          "#3e4347",
+          "#5d6266",
+          "#7e8388",
+          "#a0a6aa",
+          "#c4cacf",
+          "#e9eff4"
+        ]
+      },
+      "exposure-light": {
+        "role": "primary",
+        "displayName": "Exposure Light",
+        "canonical": "#8DB8E0",
+        "oklch": "oklch(76.6% 0.074 247.0)",
+        "tonalRamp": [
+          "#000c1a",
+          "#012744",
+          "#1d4567",
+          "#3d6589",
+          "#5d87ad",
+          "#7faad1",
+          "#a3cef7",
+          "#e2f0fe"
+        ]
+      },
+      "shade-light": {
+        "role": "neutral",
+        "displayName": "Shade Light",
+        "canonical": "#A3B5C6",
+        "oklch": "oklch(76.5% 0.032 246.7)",
+        "tonalRamp": [
+          "#020c18",
+          "#182734",
+          "#344452",
+          "#536373",
+          "#748595",
+          "#96a7b8",
+          "#b9ccdd",
+          "#e2f0fe"
+        ]
+      },
+      "oxblood-light": {
+        "role": "semantic",
+        "displayName": "Oxblood Light",
+        "canonical": "#EFA08F",
+        "oklch": "oklch(77.9% 0.098 32.7)",
+        "tonalRamp": [
+          "#1d0200",
+          "#4a0800",
+          "#6d2a1d",
+          "#904a3c",
+          "#b56b5c",
+          "#db8e7d",
+          "#feb4a4",
+          "#fee9e4"
+        ]
+      },
+      "washed-green-light": {
+        "role": "semantic",
+        "displayName": "Washed Green Light",
+        "canonical": "#93C9A2",
+        "oklch": "oklch(78.8% 0.079 153.0)",
+        "tonalRamp": [
+          "#000f04",
+          "#012e14",
+          "#194e2d",
+          "#3b6e4b",
+          "#5c906c",
+          "#7fb48e",
+          "#a2d9b1",
+          "#c7ffd6"
+        ]
+      },
+      "board-line": {
+        "role": "neutral",
+        "displayName": "Board Line",
+        "canonical": "#25425F",
+        "oklch": "oklch(37.0% 0.061 249.8)",
+        "tonalRamp": [
+          "#000c1c",
+          "#092641",
+          "#274461",
+          "#466483",
+          "#6686a6",
+          "#88a9cb",
+          "#abcdf0",
+          "#e3f0fe"
+        ]
+      },
+      "heat-low": {
+        "role": "data",
+        "displayName": "Heat Low",
+        "canonical": "#9EC0DD",
+        "oklch": "oklch(79.3% 0.055 244.3)",
+        "tonalRamp": [
+          "#000c19",
+          "#08273e",
+          "#27455d",
+          "#46657f",
+          "#6686a2",
+          "#88a9c6",
+          "#abceeb",
+          "#e1f1ff"
+        ]
+      },
+      "heat-mid": {
+        "role": "data",
+        "displayName": "Heat Mid",
+        "canonical": "#3F79AE",
+        "oklch": "oklch(56.1% 0.103 248.2)",
+        "tonalRamp": [
+          "#000c1a",
+          "#002645",
+          "#024474",
+          "#2a6598",
+          "#4d87bd",
+          "#6faae3",
+          "#9dcffe",
+          "#e2f0ff"
+        ]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Oswald Display", "purpose": "Page titles, nav, section labels, headlines at high importance." },
-      "body": { "displayName": "Source Serif Reading", "purpose": "Event descriptions and other reading content." },
-      "dateline": { "displayName": "Wire Dateline", "purpose": "Place + date stamp on every event clipping — the one monospace use in the system." }
+      "display": {
+        "displayName": "Literata Display",
+        "purpose": "Page titles, the name on the Welcome, the 404 number."
+      },
+      "headline": {
+        "displayName": "Literata Headline",
+        "purpose": "Section headings, decades, settings rows."
+      },
+      "numeral": {
+        "displayName": "Literata Numeral",
+        "purpose": "The year in the margin of every event list; 3rem in the event popup."
+      },
+      "story": {
+        "displayName": "Literata Story",
+        "purpose": "An event's text; larger in the popup, smaller in the compact map panel."
+      },
+      "body": {
+        "displayName": "Atkinson Body",
+        "purpose": "Prose on reading pages, descriptions, notes (max 65ch)."
+      },
+      "label": {
+        "displayName": "Atkinson Label",
+        "purpose": "Field labels and list sub-headings, sentence case, no tracking."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "clipping-hover", "value": "color 150ms ease (motion-safe only)", "purpose": "The signature interaction: an expandable event clipping's headline transitions to wire-red on hover/focus before the click/Enter/Space toggle reveals its full text." },
-      { "name": "drawer-slide", "value": "transform/width 300ms, 75ms under prefers-reduced-motion", "purpose": "Sidebar and events-panel mobile drawers." }
+      {
+        "name": "develop",
+        "value": "1.4s ease-out both: opacity 0.15 and the border colour, to opacity 1 and the foreground colour",
+        "purpose": "The one gesture: the Welcome's name and the 404's number develop like a print."
+      },
+      {
+        "name": "grain-settle",
+        "value": "0.35s ease-out both, staggered 45ms per grain",
+        "purpose": "The hourglass grains settling in, on the Welcome only."
+      },
+      {
+        "name": "fade-in",
+        "value": "0.6s ease-out both",
+        "purpose": "Supporting elements appearing once, without travel."
+      },
+      {
+        "name": "state",
+        "value": "color, background-color 150ms",
+        "purpose": "Hover and focus colour changes; nothing moves."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "lg", "value": "1024px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "desktop",
+        "value": "1024px",
+        "purpose": "Sidebar and map events panel switch from drawers to docked columns."
+      }
     ]
   },
   "components": [
@@ -53,76 +423,137 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Filled wire-red action button. Foreground flips ivory/ink by theme — see the Wire-Red Foreground Rule.",
-      "html": "<button class=\"ds-btn-primary\">Riprova</button>",
-      "css": ".ds-btn-primary { background: #c81e3a; color: #fbf8f1; height: 2.75rem; padding: 0 1rem; border: none; border-radius: 1px; font-weight: 500; font-size: 0.875rem; transition: background-color 0.15s; } .ds-btn-primary:hover { background: rgba(200,30,58,0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #1a1714, 0 0 0 4px #f6f1e4; } @media (prefers-color-scheme: dark) { .ds-btn-primary { background: #e54d61; color: #1a1714; } }"
+      "description": "The one filled action of a view: Exposure Blue, 44px, 3px corners.",
+      "html": "<button class=\"ds-btn-primary\">Entra</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border: 0; border-radius: 3px; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font: 500 0.875rem/1 \"Atkinson Hyperlegible\", system-ui, sans-serif; cursor: pointer; transition: background-color 0.15s; } .ds-btn-primary:hover { background: hsl(var(--primary) / 0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring)); }"
     },
     {
-      "name": "Ghost Icon Button",
+      "name": "Outline Button",
       "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Icon-only chrome control (menu toggle, theme toggle, close). No fill at rest.",
-      "html": "<button class=\"ds-btn-ghost\" aria-label=\"Chiudi\">✕</button>",
-      "css": ".ds-btn-ghost { background: transparent; color: #1a1714; width: 2.75rem; height: 2.75rem; border: none; border-radius: 1px; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.15s; } .ds-btn-ghost:hover { background: #ede6d4; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px #1a1714, 0 0 0 4px #f6f1e4; }"
+      "refersTo": "button-outline",
+      "description": "Secondary actions: print, clear search, suggested countries.",
+      "html": "<button class=\"ds-btn-outline\">Stampa o salva in PDF</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border: 1px solid hsl(var(--input)); border-radius: 3px; background: hsl(var(--background)); color: hsl(var(--foreground)); font: 500 0.875rem/1 \"Atkinson Hyperlegible\", system-ui, sans-serif; cursor: pointer; transition: background-color 0.15s; } .ds-btn-outline:hover { background: hsl(var(--accent)); } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring)); }"
     },
     {
-      "name": "Event Clipping",
-      "kind": "custom",
-      "refersTo": "event-clipping",
-      "description": "The signature content unit: a wire dateline, a headline sized by importance, a category swatch + label, and a serif description — separated from siblings by a hairline rule, never boxed individually.",
-      "html": "<div class=\"ds-clipping\"><p class=\"ds-clipping-dateline\">SERBIA · 28 GIU 1914</p><p class=\"ds-clipping-title\">Assassinio di Francesco Ferdinando</p><p class=\"ds-clipping-meta\"><span class=\"ds-clipping-swatch\"></span>Guerra</p><p class=\"ds-clipping-desc\">L'assassinio dell'arciduca austriaco a Sarajevo scatena la Prima Guerra Mondiale.</p></div>",
-      "css": ".ds-clipping { border-bottom: 1px solid #d8d0be; padding: 0.75rem 0; cursor: pointer; } .ds-clipping-dateline { font-family: ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6b6355; } .ds-clipping-title { font-family: Oswald, sans-serif; font-weight: 600; font-size: 1.125rem; letter-spacing: -0.005em; margin-top: 0.25rem; transition: color 0.15s; } .ds-clipping:hover .ds-clipping-title { color: #c81e3a; } .ds-clipping-meta { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; color: #6b6355; margin-top: 0.25rem; } .ds-clipping-swatch { width: 0.5rem; height: 0.5rem; background: #dc2626; flex-shrink: 0; } .ds-clipping-desc { font-family: 'Source Serif 4', Georgia, serif; font-size: 0.875rem; line-height: 1.5; color: #6b6355; margin-top: 0.375rem; }"
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Square, hairline, 44px; the same focus ring as buttons.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Paese</span><input class=\"ds-field-input\" value=\"Italia\" /></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: \"Atkinson Hyperlegible\", system-ui, sans-serif; } .ds-field-label { font-size: 0.8125rem; font-weight: 700; color: hsl(var(--muted-foreground)); } .ds-field-input { min-height: 44px; padding: 6px 8px; border: 1px solid hsl(var(--input)); border-radius: 0; background: hsl(var(--background)); color: hsl(var(--foreground)); font-size: 0.875rem; } .ds-field-input:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--ring)); }"
     },
     {
       "name": "Sidebar Nav Item",
       "kind": "nav",
-      "refersTo": "nav-item",
-      "description": "Index-tab style nav item: a left border marks the active route, not a filled pill.",
-      "html": "<a class=\"ds-nav-item ds-nav-item--active\" href=\"#\">Mappa</a>",
-      "css": ".ds-nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 0.9375rem; border-left: 2px solid transparent; font-family: Oswald, sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(242,237,227,0.7); background: #141210; transition: color 0.15s, background-color 0.15s, border-color 0.15s; } .ds-nav-item:hover { color: #f2ede3; border-left-color: #3a362e; background: rgba(58,54,46,0.2); } .ds-nav-item--active { color: #e86475; border-left-color: #e86475; background: rgba(58,54,46,0.4); }"
+      "refersTo": "sidebar",
+      "description": "Links on the fixed Prussian board; the active one in Fixer Yellow with a left rule.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item is-active\" href=\"#\">Mappa</a><a class=\"ds-nav-item\" href=\"#\">Archivio</a><a class=\"ds-nav-item\" href=\"#\">Il mio secolo</a></nav>",
+      "css": ".ds-nav { display: grid; width: 240px; padding: 8px 0; background: hsl(var(--sidebar)); font: 700 0.875rem/1.25rem \"Atkinson Hyperlegible\", system-ui, sans-serif; } .ds-nav-item { padding: 10px 14px; border-left: 2px solid transparent; color: hsl(var(--sidebar-foreground) / 0.7); text-decoration: none; transition: color 0.15s, background-color 0.15s; } .ds-nav-item:hover { color: hsl(var(--sidebar-foreground)); background: hsl(var(--sidebar-border) / 0.2); border-left-color: hsl(var(--sidebar-border)); } .ds-nav-item.is-active { color: hsl(var(--sidebar-accent)); border-left-color: hsl(var(--sidebar-accent)); background: hsl(var(--sidebar-border) / 0.4); } .ds-nav-item:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--sidebar)), 0 0 0 4px hsl(var(--sidebar-accent)); }"
     },
     {
-      "name": "Map Overlay Plaque",
+      "name": "Map Plaque Toggle",
       "kind": "custom",
-      "refersTo": "map-overlay-panel",
-      "description": "Solid dark plaque for controls floating over the map (projection toggle, heat legend). Not theme-reactive — the basemap underneath is always light. No blur, no glass.",
-      "html": "<div class=\"ds-overlay-plaque\">OGGI NEL '900</div>",
-      "css": ".ds-overlay-plaque { background: rgba(20,18,16,0.9); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); font-family: Oswald, sans-serif; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.5rem 0.75rem; }"
+      "refersTo": "button-overlay-active",
+      "description": "Controls over the map: a Prussian plate, the active segment filled Fixer Yellow.",
+      "html": "<div class=\"ds-plaque\"><button class=\"ds-plaque-btn\">Pianisfero</button><button class=\"ds-plaque-btn is-active\">Globo</button></div>",
+      "css": ".ds-plaque { display: inline-flex; border: 1px solid rgb(255 255 255 / 0.15); background: rgb(14 42 71 / 0.9); } .ds-plaque-btn { height: 44px; padding: 0 16px; border: 0; border-radius: 3px; background: transparent; color: rgb(255 255 255 / 0.8); font: 500 0.875rem/1 \"Atkinson Hyperlegible\", system-ui, sans-serif; cursor: pointer; } .ds-plaque-btn:hover { color: #fff; background: rgb(255 255 255 / 0.1); } .ds-plaque-btn.is-active { background: hsl(var(--highlight)); color: hsl(var(--highlight-foreground)); } .ds-plaque-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px #000, 0 0 0 4px hsl(var(--sidebar-accent)); }"
+    },
+    {
+      "name": "Event Row",
+      "kind": "custom",
+      "refersTo": "story",
+      "description": "The unit of every list: the year in a Literata margin, the event beside it.",
+      "html": "<button class=\"ds-event\"><span class=\"ds-event-year\">1902</span><span><span class=\"ds-event-text\">In Piazza San Marco a Venezia crolla il Campanile.</span><span class=\"ds-event-meta\">2 articoli collegati</span></span></button>",
+      "css": ".ds-event { display: grid; grid-template-columns: 3.75rem minmax(0, 1fr); column-gap: 12px; width: 100%; padding: 12px 0; border: 0; border-bottom: 1px solid hsl(var(--border)); background: none; color: hsl(var(--foreground)); text-align: left; cursor: pointer; } .ds-event-year { font: 600 1.25rem/1.5rem Literata, Georgia, serif; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; } .ds-event-text { display: block; font: 400 1rem/1.375 Literata, Georgia, serif; transition: color 0.15s; } .ds-event-meta { display: block; margin-top: 4px; font: 400 0.75rem/1rem \"Atkinson Hyperlegible\", system-ui, sans-serif; color: hsl(var(--muted-foreground)); } .ds-event:hover .ds-event-text { color: hsl(var(--primary)); } .ds-event:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring)); }"
+    },
+    {
+      "name": "Grain Column",
+      "kind": "custom",
+      "refersTo": "grain-chart",
+      "description": "One grain per event, piled per century or decade; the column is a link.",
+      "html": "<a class=\"ds-grains\" href=\"#\"><span class=\"ds-grain-pile\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class=\"ds-grain-label\">1900</span></a>",
+      "css": ".ds-grains { display: inline-grid; justify-items: center; gap: 6px; width: 44px; text-decoration: none; } .ds-grain-pile { display: flex; flex-wrap: wrap-reverse; justify-content: center; gap: 3px; width: 17px; border-bottom: 1px solid hsl(var(--border)); padding-bottom: 2px; } .ds-grain-pile i { width: 7px; height: 7px; border-radius: 50%; background: hsl(var(--primary)); transition: background-color 0.15s; } .ds-grains:hover .ds-grain-pile i { background: hsl(var(--foreground)); } .ds-grain-label { font: 600 0.75rem/1 Literata, Georgia, serif; color: hsl(var(--muted-foreground)); font-variant-numeric: tabular-nums; } .ds-grains:focus-visible { outline: none; box-shadow: 0 0 0 2px hsl(var(--ring)); }"
+    },
+    {
+      "name": "Hourglass Wordmark",
+      "kind": "custom",
+      "refersTo": "brand",
+      "description": "20 grains in rows 4-3-2-1-1-2-3-4 beside the name in Literata.",
+      "html": "<span class=\"ds-wordmark\"><svg viewBox=\"0 0 12 21.2\" aria-hidden=\"true\"><circle cx=\"1.5\" cy=\"1.5\" r=\"1.05\"/><circle cx=\"4.5\" cy=\"1.5\" r=\"1.05\"/><circle cx=\"7.5\" cy=\"1.5\" r=\"1.05\"/><circle cx=\"10.5\" cy=\"1.5\" r=\"1.05\"/><circle cx=\"3\" cy=\"4.1\" r=\"1.05\"/><circle cx=\"6\" cy=\"4.1\" r=\"1.05\"/><circle cx=\"9\" cy=\"4.1\" r=\"1.05\"/><circle cx=\"4.5\" cy=\"6.7\" r=\"1.05\"/><circle cx=\"7.5\" cy=\"6.7\" r=\"1.05\"/><circle cx=\"6\" cy=\"9.3\" r=\"1.05\"/><circle cx=\"6\" cy=\"11.9\" r=\"1.05\"/><circle cx=\"4.5\" cy=\"14.5\" r=\"1.05\"/><circle cx=\"7.5\" cy=\"14.5\" r=\"1.05\"/><circle cx=\"3\" cy=\"17.1\" r=\"1.05\"/><circle cx=\"6\" cy=\"17.1\" r=\"1.05\"/><circle cx=\"9\" cy=\"17.1\" r=\"1.05\"/><circle cx=\"1.5\" cy=\"19.7\" r=\"1.05\"/><circle cx=\"4.5\" cy=\"19.7\" r=\"1.05\"/><circle cx=\"7.5\" cy=\"19.7\" r=\"1.05\"/><circle cx=\"10.5\" cy=\"19.7\" r=\"1.05\"/></svg>Grains of History</span>",
+      "css": ".ds-wordmark { display: inline-flex; align-items: center; gap: 8px; font: 600 1.125rem/1 Literata, Georgia, serif; color: hsl(var(--foreground)); } .ds-wordmark svg { height: 20px; width: auto; fill: currentColor; }"
     }
   ],
   "narrative": {
-    "northStar": "The Wire-Service Newsroom Archive",
-    "overview": "Century Road reads as a press archive, not a library, a museum, or a SaaS dashboard. Every historical event is a dateline — a place and a date stamped together, the way a wire bulletin's header works — and the whole interface adopts a newsroom's own working materials: bulletin-paper ivory, newsprint ink, ruled clippings instead of cards, and exactly one committed color (wire-red) reserved for the interactive and \"live\" moments. This direction was assigned by the project's concept-seed roll rather than picked by default — the obvious \"atlas/almanac\" (cream + sepia + hairline cartography) was offered and explicitly declined as the more predictable choice for a historical-cartographic product.\n\nThe system is deliberately restrained: neutrals carry the surface, one accent carries emphasis, and radius is functionally zero throughout (clippings and rules, not soft rounded cards). Nothing here is glass, blur, or gradient — depth comes from hairline rules and ruled division, never shadow.",
+    "northStar": "La stampa cianotipica",
+    "overview": "Grains of History is printed, not painted. A cyanotype turns paper Prussian blue where light reaches it, and that one chemistry carries the whole system. Text, the sidebar board and the deepest heat are Prussian blue on a cold white paper. The dark theme is the plate's negative, not a \"night mode\". Historical photographs are toned blue as prints. The one moving gesture is an image developing, paper turning to blue. History arrives in grains: every event is one, in the hourglass mark, in the charts, in the name.\n\nDensity follows the reader. Reading surfaces (the guide, the methodology, the legal pages, an event's popup) hold a 65-character column of Literata and Atkinson Hyperlegible, with a contents rail in the margin. Tool surfaces (the map panel, the Archive's filters, Settings) are compact and ruled. The year is the fact that leads every list.\n\nThe system rejects the look it replaced, confirmed with the user in the rebrand: no warm cream with a red accent, no all-caps tracked labels, no monospace datelines, no middle-dot meta strings, no boxed card kit. It is quiet everywhere except where a print develops.",
     "keyCharacteristics": [
-      "One committed accent (wire-red) — never a decorative field, always interactive/active/\"today\"",
-      "Ruled clippings, not cards — hairline dividers replace borders-plus-shadow",
-      "Type size carries importance (event headline size scales with historical importance) — not color alone",
-      "Display voice (Oswald) for headings/labels; reading voice (Source Serif 4) for event titles and body content",
-      "Near-zero radius everywhere (1–2px) — square, not soft",
-      "The sidebar is a fixed newsroom-black directory board that never themes with light/dark — everything else does"
+      "One blue family carries everything; fixer yellow is the only warm colour, and only as a fill or a ring on Prussian.",
+      "Every text pairing clears 7:1 in both themes.",
+      "Literata for what is read (titles, years, events), Atkinson Hyperlegible for what is operated (labels, controls, figures in prose).",
+      "Flat: depth comes from tonal surfaces and hairlines, never shadow.",
+      "Grains, the round dot, are the system's one recurring form: the mark, the charts.",
+      "One motion: `develop`. Everything else appears without travel."
     ],
     "rules": [
-      { "name": "The One Voice Rule", "body": "Wire-red is the only saturated color permitted in the interface. Category color-coding stays deliberately quieter — solid small squares, never filled pill backgrounds.", "section": "colors" },
-      { "name": "The Wire-Red Foreground Rule", "body": "A filled wire-red surface uses ivory text in light mode but dark ink text in dark mode — dark-mode wire-red is brighter and needs dark text, not ivory-on-ivory. Caught as a real WCAG failure during the build (4.02:1, under the 4.5:1 floor) and fixed; don't revert to one foreground for both themes.", "section": "colors" },
-      { "name": "The Sidebar Accent Rule", "body": "Never use the primary token for text inside the sidebar. The sidebar never themes with light/dark, but primary does — light-mode wire-red on the sidebar's fixed dark background measures 2.85:1, a real failure. Use sidebar-accent (verified 4.99:1) instead.", "section": "colors" },
-      { "name": "The Single-Weight Rule", "body": "Both custom faces are self-hosted at exactly one weight each (600). Nothing uses a browser-synthesized faux bold.", "section": "typography" },
-      { "name": "The Size-Carries-Importance Rule", "body": "An event's historical importance maps to headline type size, never to color — donated by a declined challenger during the direction round.", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "Every surface sits flush with no elevation. Nothing lifts on hover; only color and hairline rules communicate state.", "section": "elevation" }
+      {
+        "name": "The Fixer Rule",
+        "body": "Fixer yellow is never text on paper and never decoration. It is a fill under Prussian text, or a ring or rule on a Prussian surface. It marks exactly one thing: what is selected or focused there.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seven-to-One Rule",
+        "body": "Every text pairing holds at least 7:1 in both themes. Check a new pairing by computed contrast, not by eye. The tokens above already carry their measured ratios in `globals.css`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Grey Basemap Rule",
+        "body": "The map's tiles stay neutral grey. Blue water would read as \"1–2 events\" on the heat scale.",
+        "section": "colors"
+      },
+      {
+        "name": "The Year Leads Rule",
+        "body": "In any list of events the year is the first thing read: Literata numerals in a fixed margin column, the text beside it. A list whose rows share one day does not repeat the day.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Weights Rule",
+        "body": "Only self-hosted real weights exist: Literata 400 and 600, Atkinson 400 and 700. Nothing is bold beyond them, and nothing is italic: no italic is loaded, and a synthesized slant is banned.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "No all-caps labels and no added letter-spacing. Monospace only for code, storage keys and keyboard keys.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Rule",
+        "body": "A surface is separated by tone or by a rule, never by a shadow. Nothing lifts on hover: state shows as colour.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Grain Rule",
+        "body": "A dot means one item, an event, a grain of history. Do not use dots as bullets, status lights or decoration.",
+        "section": "shapes"
+      }
     ],
     "dos": [
-      "Do reserve wire-red for interactive/active/\"today\" moments only.",
-      "Do use sidebar-accent (never primary) for any accent color rendered inside the sidebar.",
-      "Do use dark ink (not ivory) as the foreground on a dark-mode wire-red fill.",
-      "Do let event importance drive headline type size, not a color or icon change.",
-      "Do keep both custom typefaces at their single hosted weight (600).",
-      "Do separate list content with hairline rules instead of individual card borders + shadow."
+      "**Do** set every text pairing at 7:1 or more in both themes, and verify it by computed contrast.",
+      "**Do** lead event lists with the year in Literata numerals (`YearMark`).",
+      "**Do** use Fixer Yellow only for what is selected or focused on a Prussian surface, as a fill under Prussian text or as a ring.",
+      "**Do** separate sections with a hairline rule above them, not a box around them.",
+      "**Do** keep 44px touch targets and a visible focus ring on every interactive element.",
+      "**Do** tone atmospheric photographs as cyanotypes, and keep evidence images in true colour.",
+      "**Do** write errors and empty states as direction: what happened, and what to do next."
     ],
     "donts": [
-      "Don't add box-shadow anywhere.",
-      "Don't add backdrop-blur or any glass treatment.",
-      "Don't round corners beyond the 1–2px system radius.",
-      "Don't introduce a second saturated accent color alongside wire-red — use rust for a genuine destructive/delete need.",
-      "Don't use the light-mode wire-red value inside the sidebar or any other fixed-dark surface without verifying contrast by computation."
+      "**Don't** add a box-shadow, blur, glass or gradient anywhere.",
+      "**Don't** use all-caps labels, tracked letter-spacing, middle-dot meta strings, monospace data labels, or a \"→\" appended to a link.",
+      "**Don't** apply italic or a weight that is not self-hosted (Literata 400/600, Atkinson 400/700).",
+      "**Don't** put Fixer Yellow text on paper, or a Prussian focus ring on a Prussian surface.",
+      "**Don't** colour the basemap's water blue.",
+      "**Don't** use dots for anything but grains.",
+      "**Don't** add a second motion vocabulary: no slide-up entrances, no hover lifts."
     ]
   }
 }
