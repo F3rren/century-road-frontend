@@ -1,6 +1,7 @@
 {
   "common": {
     "loading": "Chargement…",
+    "retry": "Réessayer",
     "opensInNewTab": " (s'ouvre dans un nouvel onglet)",
     "onThisPage": "Sur cette page"
   },
@@ -29,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Carte historique interactive : les événements du jour dans le monde",
+    "controls": {
+      "zoomIn": "Zoom avant",
+      "zoomOut": "Zoom arrière",
+      "resetBearing": "Réorienter vers le nord",
+      "attribution": "Crédits de la carte"
+    },
     "error": {
       "title": "Impossible de charger la carte",
-      "description": "Vérifiez votre connexion réseau et réessayez.",
-      "retry": "Réessayer"
+      "description": "Vérifiez votre connexion réseau et réessayez."
     },
     "projection": {
       "groupLabel": "Projection de la carte",
@@ -51,17 +57,23 @@
       "methodology": "Pays déduit du premier article lié disposant de coordonnées"
     },
     "events": {
-      "backToGlobal": "Retour à la vue globale",
       "todayTitle": "Éphéméride du jour",
       "loadError": "Impossible de charger les événements du jour ({{error}}).",
       "noEventsFor": "Aucun événement du jour trouvé pour <bold>{{country}}</bold>",
       "countryPickerLabel": "Aller à un pays",
+      "clickHint": "Ou choisissez-en un sur la carte.",
+      "allCountries": "Tous les pays",
+      "withEventsToday": "Avec des événements aujourd’hui ({{count}})",
+      "otherCountries": "Autres pays",
+      "todayButton": "Éphéméride du {{date}}",
+      "liveAll_one": "Éphéméride du {{date}} : {{count}} événement",
+      "liveAll_other": "Éphéméride du {{date}} : {{count}} événements",
+      "liveCountry_one": "{{country}} : {{count}} événement aujourd’hui",
+      "liveCountry_other": "{{country}} : {{count}} événements aujourd’hui",
       "loadingCountries": "Chargement des pays…",
       "selectCountryPlaceholder": "Sélectionner un pays…",
       "countriesLoadError": "Impossible de charger la liste des pays ({{error}}).",
-      "clickHint": "Cliquez sur un pays sur la carte (ou utilisez le menu ci-dessus) pour voir ses événements",
       "panelAriaLabel": "Événements historiques",
-      "eventsButton": "Événements",
       "closePanel": "Fermer le panneau des événements",
       "anniversariesTitle": "Anniversaires du {{day}} {{month}}",
       "seeCentury": "Voir ses événements de toute l’année"
@@ -178,7 +190,9 @@
     "dialog": {
       "close": "Fermer",
       "relatedHeading": "Articles liés",
-      "when": "{{date}}, {{ago}}"
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}} : toute l’année",
+      "archiveDay": "Ce jour dans les archives"
     },
     "attribution": {
       "licenseLabel": "Licence"

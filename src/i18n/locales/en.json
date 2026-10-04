@@ -1,6 +1,7 @@
 {
   "common": {
     "loading": "Loading…",
+    "retry": "Retry",
     "opensInNewTab": " (opens in a new tab)",
     "onThisPage": "On this page"
   },
@@ -29,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Interactive historical map: today's events around the world",
+    "controls": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "resetBearing": "Turn north back up",
+      "attribution": "Map credits"
+    },
     "error": {
       "title": "Couldn't load the map",
-      "description": "Check your network connection and try again.",
-      "retry": "Retry"
+      "description": "Check your network connection and try again."
     },
     "projection": {
       "groupLabel": "Map projection",
@@ -51,17 +57,23 @@
       "methodology": "Country inferred from the first linked article with coordinates"
     },
     "events": {
-      "backToGlobal": "Back to the global view",
       "todayTitle": "On this day",
       "loadError": "Couldn't load today's events ({{error}}).",
       "noEventsFor": "No events found today for <bold>{{country}}</bold>",
       "countryPickerLabel": "Go to a country",
+      "clickHint": "Or pick one on the map.",
+      "allCountries": "All countries",
+      "withEventsToday": "With events today ({{count}})",
+      "otherCountries": "Other countries",
+      "todayButton": "On this day, {{date}}",
+      "liveAll_one": "On this day, {{date}}: {{count}} event",
+      "liveAll_other": "On this day, {{date}}: {{count}} events",
+      "liveCountry_one": "{{country}}: {{count}} event today",
+      "liveCountry_other": "{{country}}: {{count}} events today",
       "loadingCountries": "Loading countries…",
       "selectCountryPlaceholder": "Select a country…",
       "countriesLoadError": "Couldn't load the country list ({{error}}).",
-      "clickHint": "Click a country on the map (or use the menu above) to see its events",
       "panelAriaLabel": "Historical events",
-      "eventsButton": "Events",
       "closePanel": "Close events panel",
       "anniversariesTitle": "Anniversaries for {{month}} {{day}}",
       "seeCentury": "See its events from the whole year"
@@ -178,7 +190,9 @@
     "dialog": {
       "close": "Close",
       "relatedHeading": "Linked articles",
-      "when": "{{date}}, {{ago}}"
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}}: the whole year",
+      "archiveDay": "This day in the archive"
     },
     "attribution": {
       "licenseLabel": "License"

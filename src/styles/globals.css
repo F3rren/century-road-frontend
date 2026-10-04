@@ -205,6 +205,16 @@
   border-radius: var(--radius);
   box-shadow: none;
 }
+/* Zoom and compass sit above the attribution line, level with the mobile
+   "Accadde oggi" button, instead of over the credits on a narrow map. */
+.maplibregl-map .maplibregl-ctrl-bottom-right {
+  bottom: 38px;
+}
+/* 44px like every other control here (MapLibre's are 29px). */
+.maplibregl-map .maplibregl-ctrl-group button {
+  width: 44px;
+  height: 44px;
+}
 .maplibregl-map .maplibregl-ctrl-group button + button {
   border-top-color: rgb(255 255 255 / 0.15);
 }
@@ -214,6 +224,25 @@
 .maplibregl-map .maplibregl-ctrl-group button:not(:disabled):hover {
   background-color: rgb(255 255 255 / 0.1);
 }
-.maplibregl-map .maplibregl-ctrl-attrib {
+/* The focus ring of the overlay buttons on Prussian: fixer yellow, 2px off the
+   plate, in place of MapLibre's blue glow. */
+.maplibregl-map .maplibregl-ctrl-group button:focus:focus-visible,
+.maplibregl-map .maplibregl-ctrl-attrib-button:focus:focus-visible {
+  box-shadow: 0 0 0 2px #0e2a47, 0 0 0 4px hsl(var(--highlight));
+}
+.maplibregl-map .maplibregl-ctrl-attrib-button:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+/* The map itself takes the keyboard (arrows pan, +/- zoom): a Prussian frame
+   shows it has the focus, on the paper in either theme. */
+.maplibregl-map .maplibregl-canvas:focus-visible {
+  outline: 3px solid #0e2a47;
+  outline-offset: -3px;
+}
+/* Square like the rest of the system; MapLibre's own rules for the attribution
+   pill are more specific than a plain class, hence the long selectors. */
+.maplibregl-map .maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact,
+.maplibregl-map .maplibregl-ctrl-bottom-left > .maplibregl-ctrl-attrib.maplibregl-compact-show,
+.maplibregl-map .maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button {
   border-radius: var(--radius);
 }

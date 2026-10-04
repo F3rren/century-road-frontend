@@ -1,6 +1,7 @@
 {
   "common": {
     "loading": "Wird geladen…",
+    "retry": "Erneut versuchen",
     "opensInNewTab": " (öffnet in einem neuen Tab)",
     "onThisPage": "Auf dieser Seite"
   },
@@ -29,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Interaktive historische Karte: die heutigen Ereignisse weltweit",
+    "controls": {
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "resetBearing": "Nach Norden ausrichten",
+      "attribution": "Kartennachweise"
+    },
     "error": {
       "title": "Karte konnte nicht geladen werden",
-      "description": "Überprüfe deine Internetverbindung und versuche es erneut.",
-      "retry": "Erneut versuchen"
+      "description": "Überprüfe deine Internetverbindung und versuche es erneut."
     },
     "projection": {
       "groupLabel": "Kartenprojektion",
@@ -51,17 +57,23 @@
       "methodology": "Land aus dem ersten verlinkten Artikel mit Koordinaten abgeleitet"
     },
     "events": {
-      "backToGlobal": "Zurück zur globalen Ansicht",
       "todayTitle": "Heute geschah",
       "loadError": "Die heutigen Ereignisse konnten nicht geladen werden ({{error}}).",
       "noEventsFor": "Für <bold>{{country}}</bold> wurden heute keine Ereignisse gefunden",
       "countryPickerLabel": "Zu einem Land wechseln",
+      "clickHint": "Oder wähle eins auf der Karte.",
+      "allCountries": "Alle Länder",
+      "withEventsToday": "Mit Ereignissen heute ({{count}})",
+      "otherCountries": "Andere Länder",
+      "todayButton": "Was am {{date}} geschah",
+      "liveAll_one": "Was am {{date}} geschah: {{count}} Ereignis",
+      "liveAll_other": "Was am {{date}} geschah: {{count}} Ereignisse",
+      "liveCountry_one": "{{country}}: {{count}} Ereignis heute",
+      "liveCountry_other": "{{country}}: {{count}} Ereignisse heute",
       "loadingCountries": "Länder werden geladen…",
       "selectCountryPlaceholder": "Land auswählen…",
       "countriesLoadError": "Die Länderliste konnte nicht geladen werden ({{error}}).",
-      "clickHint": "Klicke auf ein Land auf der Karte (oder nutze das Menü oben), um seine Ereignisse zu sehen",
       "panelAriaLabel": "Historische Ereignisse",
-      "eventsButton": "Ereignisse",
       "closePanel": "Ereignis-Panel schließen",
       "anniversariesTitle": "Jahrestage am {{day}}. {{month}}",
       "seeCentury": "Seine Ereignisse aus dem ganzen Jahr ansehen"
@@ -178,7 +190,9 @@
     "dialog": {
       "close": "Schließen",
       "relatedHeading": "Verlinkte Artikel",
-      "when": "{{date}}, {{ago}}"
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}}: das ganze Jahr",
+      "archiveDay": "Dieser Tag im Archiv"
     },
     "attribution": {
       "licenseLabel": "Lizenz"

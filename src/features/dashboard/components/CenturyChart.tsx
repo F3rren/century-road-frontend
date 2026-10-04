@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { GrainChart } from "@/components/ui/GrainChart";
+import { centuryRange } from "@/lib/months";
 import type { CenturyGrains } from "../types";
 
 interface CenturyChartProps {
@@ -15,16 +16,14 @@ interface CenturyChartProps {
 // can reach from 2333 BC to now). Each column opens the archive on today,
 // narrowed to that century.
 export function CenturyChart({ centuries, month, day, language }: CenturyChartProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const bc = t("date.era.bc");
-  const range = (start: number) =>
-    start < 0 ? `${-start}–${-(start + 99)} ${bc}` : `${start}–${start + 99}`;
 
   const columns = centuries.map((century, i) => ({
     key: century.start,
     count: century.count,
     gapBefore: i > 0 && century.start - centuries[i - 1].start > 100,
-    ariaLabel: t("dashboard.centuries.column", { count: century.count, range: range(century.start) }),
+    ariaLabel: t("dashboard.centuries.column", { count: century.count, range: centuryRange(century.start, i18n.language) }),
     href: `/archive?${new URLSearchParams({
       month: String(month),
       day: String(day),

@@ -42,24 +42,28 @@ export function HeatLegend() {
   return (
     <MapOverlayPanel className="flex max-w-[13rem] flex-col gap-1.5 px-3 py-2" role="note" aria-label={t('map.legend.ariaLabel')}>
       <div className="flex items-center justify-between gap-2">
-        <p className="text-eyebrow text-white/70">
+        <p className="text-eyebrow text-white/80">
           {t('map.legend.today')}
         </p>
         {!isDesktop && (
-          <button
+          <Button
             type="button"
+            variant="overlay"
+            size="icon"
             onClick={() => setExpanded(false)}
             aria-label={t('map.legend.close')}
-            className="-m-1.5 p-1.5 text-white/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="-my-3 -mr-3"
           >
-            <X className="h-3.5 w-3.5" />
-          </button>
+            <X className="h-4 w-4" />
+          </Button>
         )}
       </div>
       {[...HEAT_LEVELS].reverse().map(({ color, labelKey }) => (
         <div key={labelKey} className="flex items-center gap-2">
+          {/* A paper frame: each step as it prints on the map, which the
+              Prussian plate alone would swallow ("≥ 6" is the plate's own blue). */}
           <span
-            className="h-3 w-3 shrink-0 border border-white/50"
+            className="h-4 w-4 shrink-0 border-2 border-[#F4F6F3]"
             style={{ backgroundColor: color }}
           />
           <span className="text-xs text-white/90">{t(`map.legend.level.${labelKey}`)}</span>
@@ -68,7 +72,7 @@ export function HeatLegend() {
       {/* Honest about the heuristic: the API gives no country per event, only
           coordinates on some linked articles, matched against simplified
           country borders — see features/map/lib/geocodeEntries. */}
-      <p className="mt-0.5 border-t border-white/15 pt-1.5 text-xs leading-snug text-white/60">
+      <p className="mt-0.5 border-t border-white/15 pt-1.5 text-xs leading-snug text-white/80">
         {t('map.legend.methodology')}
       </p>
     </MapOverlayPanel>

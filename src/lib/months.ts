@@ -79,13 +79,22 @@ export function formatEventDate(
   return `${dayMonth} ${year}`;
 }
 
+// The years a century covers, for a column or a heading: "1900–1999", or
+// "500–401 a.C." counting down before the common era. `start` is the year
+// floored to the hundred, so -100 holds 100 to 1 BC.
+export function centuryRange(start: number, language: string): string {
+  if (start >= 0) return `${start}–${start + 99}`;
+  return `${-start}–${-(start + 99)} ${i18n.t('date.era.bc', { lng: language })}`;
+}
+
 // Italy, Spain and Portugal moved to the Gregorian calendar in October 1582, so
 // from 1583 the weekday Intl computes (it runs the Gregorian calendar backwards
 // forever) is the one the sources use. Before that they count in the Julian
 // calendar, and a computed weekday would be wrong, so none is shown.
 // ponytail: one cut-off for every country; Britain switched in 1752 and Russia in
 // 1918, so a weekday on their dates in between follows the Gregorian count. Use a
-// per-country cut-off if the dialog ever shows the event's country.
+// per-country cut-off once an event's country is known for certain: the map's is a
+// guess from a linked article, not enough to choose a calendar by.
 const FIRST_GREGORIAN_YEAR = 1583;
 
 // The full date of an event for its popup, plus how long ago it was: "domenica 3

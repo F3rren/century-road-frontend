@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import i18n from '@/i18n';
 import { describeFetchError, useKeyedFetch } from './useFetchState';
 
@@ -32,6 +32,27 @@ describe('useKeyedFetch', () => {
 
     expect(result.current.data).toBe('data for b');
     expect(result.current.key).toBe('b');
+  });
+
+  it('asks again on retry, showing loading instead of the old error meanwhile', async () => {
+    let calls = 0;
+    let resolveSecond: (value: string) => void = () => {};
+    const fetcher = vi.fn(() => {
+      calls += 1;
+      if (calls === 1) return Promise.reject(new TypeError('Failed to fetch'));
+      return new Promise<string>((resolve) => { resolveSecond = resolve; });
+    });
+
+    const { result } = renderHook(() => useKeyedFetch('day', fetcher));
+    await waitFor(() => expect(result.current.error).toBe(i18n.t('errors.network')));
+
+    act(() => result.current.retry());
+    expect(result.current.isLoading).toBe(true);
+    expect(result.current.error).toBeNull();
+
+    resolveSecond('today');
+    await waitFor(() => expect(result.current.data).toBe('today'));
+    expect(fetcher).toHaveBeenCalledTimes(2);
   });
 });
 

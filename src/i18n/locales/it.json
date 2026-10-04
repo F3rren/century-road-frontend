@@ -1,6 +1,7 @@
 {
   "common": {
     "loading": "Caricamento…",
+    "retry": "Riprova",
     "opensInNewTab": " (si apre in una nuova scheda)",
     "onThisPage": "In questa pagina"
   },
@@ -29,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Mappa storica interattiva: gli eventi di oggi nel mondo",
+    "controls": {
+      "zoomIn": "Ingrandisci",
+      "zoomOut": "Riduci",
+      "resetBearing": "Riporta il nord in alto",
+      "attribution": "Crediti della mappa"
+    },
     "error": {
       "title": "Impossibile caricare la mappa",
-      "description": "Controlla la connessione di rete e riprova.",
-      "retry": "Riprova"
+      "description": "Controlla la connessione di rete e riprova."
     },
     "projection": {
       "groupLabel": "Proiezione mappa",
@@ -51,17 +57,23 @@
       "methodology": "Paese dedotto dal primo articolo collegato con coordinate"
     },
     "events": {
-      "backToGlobal": "Torna alla vista globale",
       "todayTitle": "Accadde oggi",
       "loadError": "Impossibile caricare gli eventi di oggi ({{error}}).",
       "noEventsFor": "Nessun evento di oggi individuato per <bold>{{country}}</bold>",
       "countryPickerLabel": "Vai a un paese",
+      "clickHint": "Oppure scegli un paese sulla mappa.",
+      "allCountries": "Tutti i paesi",
+      "withEventsToday": "Con eventi oggi ({{count}})",
+      "otherCountries": "Altri paesi",
+      "todayButton": "Accadde oggi, {{date}}",
+      "liveAll_one": "Accadde oggi, {{date}}: {{count}} evento",
+      "liveAll_other": "Accadde oggi, {{date}}: {{count}} eventi",
+      "liveCountry_one": "{{country}}: {{count}} evento oggi",
+      "liveCountry_other": "{{country}}: {{count}} eventi oggi",
       "loadingCountries": "Caricamento dei paesi…",
       "selectCountryPlaceholder": "Seleziona un paese…",
       "countriesLoadError": "Impossibile caricare l'elenco dei paesi ({{error}}).",
-      "clickHint": "Clicca un paese sulla mappa (o usa il menu sopra) per vedere i suoi eventi",
       "panelAriaLabel": "Eventi storici",
-      "eventsButton": "Eventi",
       "closePanel": "Chiudi pannello eventi",
       "anniversariesTitle": "Anniversari del {{day}} {{month}}",
       "seeCentury": "Vedi i suoi eventi di tutto l’anno"
@@ -178,7 +190,9 @@
     "dialog": {
       "close": "Chiudi",
       "relatedHeading": "Articoli collegati",
-      "when": "{{date}}, {{ago}}"
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}}: tutto l’anno",
+      "archiveDay": "Questo giorno nell’archivio"
     },
     "attribution": {
       "licenseLabel": "Licenza"

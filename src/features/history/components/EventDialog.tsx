@@ -1,10 +1,11 @@
 import { useEffect, useId, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { describeEventDate } from '@/lib/months';
 import { cleanText } from '../lib/text';
-import type { Attribution, HistoryEntry, HistoryLanguage } from '../types';
+import type { Attribution, HistoryEntry, HistoryLanguage, PlaceRef } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { RelatedArticle } from './RelatedArticle';
 
@@ -15,8 +16,13 @@ interface EventDialogProps {
   // The edition the text really came from, which is not always the one asked for.
   language: HistoryLanguage;
   attribution: Attribution;
+  // Where the map places the event, when it does.
+  country?: PlaceRef;
   onClose: () => void;
 }
+
+const LINK_CLASS =
+  'inline-flex min-h-11 items-center text-sm font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
 // A native <dialog> opened as a modal: the browser traps focus, makes the
 // rest of the page inert, closes on Escape and hands focus back to the button
@@ -27,9 +33,12 @@ interface EventDialogProps {
 // else in the app, then the full date once (with the weekday where it can be
 // trusted, and how long ago it was), the event in reading type, and the
 // articles to read further. It all scrolls as one; only the close button
-// stays in its corner.
-export function EventDialog({ entry, month, day, language, attribution, onClose }: EventDialogProps) {
+// stays in its corner. Under the event, the two ways on from it: its country's
+// whole year, when the map places it, and the rest of its day in the archive.
+export function EventDialog({ entry, month, day, language, attribution, country, onClose }: EventDialogProps) {
   const { t, i18n } = useTranslation();
+  const onArchive = useLocation().pathname.startsWith('/archive');
+  const archiveDay = `/archive?${new URLSearchParams({ month: String(month), day: String(day), lang: language })}`;
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const relatedId = useId();
@@ -79,6 +88,20 @@ export function EventDialog({ entry, month, day, language, attribution, onClose 
           <h2 id={titleId} className="mt-4 whitespace-pre-line font-serif text-xl leading-snug sm:text-2xl sm:leading-snug">
             {cleanText(entry.text)}
           </h2>
+          {(country || !onArchive) && (
+            <p className="mt-3 flex flex-wrap gap-x-6">
+              {country && (
+                <Link to={`/century?country=${country.code}`} className={LINK_CLASS}>
+                  {t('history.dialog.countryYear', { country: country.name })}
+                </Link>
+              )}
+              {!onArchive && (
+                <Link to={archiveDay} className={LINK_CLASS}>
+                  {t('history.dialog.archiveDay')}
+                </Link>
+              )}
+            </p>
+          )}
         </div>
 
         {entry.pages.length > 0 && (

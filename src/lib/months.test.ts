@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { daysInMonth, describeEventDate, formatEventDate, monthNames, randomMonthDay, todayMonthDay } from "./months";
+import { centuryRange, daysInMonth, describeEventDate, formatEventDate, monthNames, randomMonthDay, todayMonthDay } from "./months";
 
 describe("daysInMonth", () => {
   it("returns 31 for a 31-day month", () => {
@@ -86,6 +86,17 @@ describe("formatEventDate", () => {
   it("stays valid on 29 February (2000 is used as the reference year, a leap year)", () => {
     expect(() => formatEventDate(29, 2, undefined, "en")).not.toThrow();
     expect(formatEventDate(29, 2, undefined, "en")).toBe("February 29");
+  });
+});
+
+describe("centuryRange", () => {
+  it("spans a hundred years from the start of the common-era century", () => {
+    expect(centuryRange(1900, "it")).toBe("1900–1999");
+  });
+
+  it("counts down before the common era, with the era suffix", () => {
+    expect(centuryRange(-100, "it")).toBe("100–1 a.C.");
+    expect(centuryRange(-500, "it")).toBe("500–401 a.C.");
   });
 });
 

@@ -34,5 +34,6 @@ export type {
   OnThisDayData,
   OnThisDayParams,
   PageRef,
+  PlaceRef,
   SectionResult,
 } from "./types";
