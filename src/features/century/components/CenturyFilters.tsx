@@ -57,9 +57,10 @@ export function CenturyFilters({ params, language, onChange }: CenturyFiltersPro
               </option>
             ))}
           </Select>
-          {error && (
+          {/* With a country chosen, the timeline below already reports the same outage. */}
+          {error && params.country === null && (
             <Alert variant="inline" className="mt-1">
-              {t('century.loadError', { error })}
+              {t('century.countriesLoadError', { error })}
             </Alert>
           )}
           {!isLoading && !error && countries.length === 0 && (

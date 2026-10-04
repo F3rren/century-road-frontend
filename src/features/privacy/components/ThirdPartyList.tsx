@@ -15,7 +15,7 @@ export function ThirdPartyList({ providers }: ThirdPartyListProps) {
           <h3 className="font-display text-base font-semibold">
             {provider.name}
           </h3>
-          <p className="font-mono text-[11px] text-muted-foreground">
+          <p className="font-mono text-xs text-muted-foreground">
             {provider.hosts.join(" · ")}
           </p>
           <dl className="mt-2 grid gap-x-4 gap-y-1 text-sm sm:grid-cols-[8rem_1fr]">

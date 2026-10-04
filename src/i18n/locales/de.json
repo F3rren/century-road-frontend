@@ -1,9 +1,13 @@
 {
   "common": {
     "loading": "Wird geladen…",
-    "unknownError": "Unbekannter Fehler",
     "opensInNewTab": " (öffnet in einem neuen Tab)",
     "onThisPage": "Auf dieser Seite"
+  },
+  "errors": {
+    "network": "der Dienst antwortet nicht: prüfe die Verbindung und versuche es erneut",
+    "server": "der Dienst ist gerade nicht erreichbar: versuche es in ein paar Minuten erneut",
+    "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut"
   },
   "nav": {
     "map": "Karte",
@@ -59,7 +63,8 @@
       "panelAriaLabel": "Historische Ereignisse",
       "eventsButton": "Ereignisse",
       "closePanel": "Ereignis-Panel schließen",
-      "anniversariesTitle": "Jahrestage am {{day}}. {{month}}"
+      "anniversariesTitle": "Jahrestage am {{day}}. {{month}}",
+      "seeCentury": "Seine Ereignisse aus dem ganzen Jahr ansehen"
     }
   },
   "dashboard": {
@@ -126,7 +131,8 @@
       "fallbackNote": "Einige Einträge sind auf Englisch: Die italienische Wikipedia-Ausgabe hat sie nicht.",
       "staleNote": "Daten möglicherweise veraltet: Wikipedia war nicht erreichbar.",
       "empty": "Keine Einträge für diesen Tag mit diesen Filtern.",
-      "noMatches": "Keine Ergebnisse für „{{query}}“."
+      "noMatches": "Keine Ergebnisse für „{{query}}“.",
+      "clearSearch": "Suche löschen"
     }
   },
   "century": {
@@ -147,7 +153,9 @@
     "indexedAt": "Index aktualisiert am {{date}}.",
     "grainsHint": "Jedes Korn ist ein Ereignis. Öffne ein Jahrzehnt, um dorthin zu springen.",
     "decadeColumn_one": "{{range}}: ein Ereignis. Zum Jahrzehnt",
-    "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt"
+    "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt",
+    "startWith": "Zum Einstieg",
+    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}})."
   },
   "history": {
     "section": {

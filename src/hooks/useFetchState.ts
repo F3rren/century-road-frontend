@@ -11,8 +11,17 @@ type Settled<K, D> =
   | { key: K; data: D; error: null }
   | { key: K; data: null; error: string };
 
-function toMessage(error: unknown): string {
-  return error instanceof Error ? error.message : i18n.t('common.unknownError');
+// What a reader needs from a failed request: what went wrong in plain words and
+// what to do, never the browser's or the server's own text ("Failed to fetch",
+// "HTTP 502: Bad Gateway"), which would also stay English in every language.
+// ponytail: a TypeError is read as "no connection" - fetch() throws one when the
+// server cannot be reached, but so would a bug in a fetcher; split them if a
+// fetcher ever does more than parse a response.
+export function describeFetchError(error: unknown): string {
+  if (error instanceof TypeError) return i18n.t('errors.network');
+  const status = error instanceof Error ? /^HTTP (\d{3})/.exec(error.message)?.[1] : undefined;
+  if (status?.startsWith('5')) return i18n.t('errors.server');
+  return i18n.t('errors.unexpected');
 }
 
 // Shared fetch+race-guard engine, generalizing useOnThisDay's original settle-by-key
@@ -34,7 +43,7 @@ export function useKeyedFetch<K, D>(
         if (!isStale) setSettled({ key, data, error: null });
       })
       .catch((error: unknown) => {
-        if (!isStale) setSettled({ key, data: null, error: toMessage(error) });
+        if (!isStale) setSettled({ key, data: null, error: describeFetchError(error) });
       });
 
     return () => {

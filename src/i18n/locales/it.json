@@ -1,9 +1,13 @@
 {
   "common": {
     "loading": "Caricamento…",
-    "unknownError": "Errore sconosciuto",
     "opensInNewTab": " (si apre in una nuova scheda)",
     "onThisPage": "In questa pagina"
+  },
+  "errors": {
+    "network": "il servizio non risponde: controlla la connessione e riprova",
+    "server": "il servizio non è disponibile in questo momento: riprova tra qualche minuto",
+    "unexpected": "risposta inattesa dal servizio: riprova più tardi"
   },
   "nav": {
     "map": "Mappa",
@@ -59,7 +63,8 @@
       "panelAriaLabel": "Eventi storici",
       "eventsButton": "Eventi",
       "closePanel": "Chiudi pannello eventi",
-      "anniversariesTitle": "Anniversari del {{day}} {{month}}"
+      "anniversariesTitle": "Anniversari del {{day}} {{month}}",
+      "seeCentury": "Vedi i suoi eventi di tutto l’anno"
     }
   },
   "dashboard": {
@@ -126,7 +131,8 @@
       "fallbackNote": "Alcune voci sono in inglese: la versione italiana di Wikipedia non le ha.",
       "staleNote": "Dati non aggiornati: Wikipedia non era raggiungibile.",
       "empty": "Nessuna voce per questo giorno con questi filtri.",
-      "noMatches": "Nessun risultato per «{{query}}»."
+      "noMatches": "Nessun risultato per «{{query}}».",
+      "clearSearch": "Cancella la ricerca"
     }
   },
   "century": {
@@ -147,7 +153,9 @@
     "indexedAt": "Indice aggiornato il {{date}}.",
     "grainsHint": "Ogni grano è un evento. Apri un decennio per andarci.",
     "decadeColumn_one": "{{range}}: un evento. Vai al decennio",
-    "decadeColumn_other": "{{range}}: {{count}} eventi. Vai al decennio"
+    "decadeColumn_other": "{{range}}: {{count}} eventi. Vai al decennio",
+    "startWith": "Per cominciare",
+    "countriesLoadError": "Elenco dei paesi non disponibile ({{error}})."
   },
   "history": {
     "section": {

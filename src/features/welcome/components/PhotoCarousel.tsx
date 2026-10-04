@@ -121,7 +121,7 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
                       className="h-full w-full object-cover opacity-0 mix-blend-luminosity grayscale contrast-125 transition-opacity duration-700"
                     />
                     {photo.year !== undefined && (
-                      <span className="absolute bottom-2 left-2 text-[11px] text-white/70">
+                      <span className="absolute bottom-2 left-2 text-xs text-white/70">
                         {photo.year}
                       </span>
                     )}

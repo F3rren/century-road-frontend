@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { X, Globe, CalendarDays, CalendarClock } from 'lucide-react';
 import { Trans, useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/Select';
 import { Alert } from '@/components/ui/Alert';
@@ -117,12 +118,21 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
                 />
               }
               action={
-                <button
-                  onClick={onClearCountry}
-                  className="mt-2 text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  {t('map.events.backToGlobal')}
-                </button>
+                // Nothing today, but the country index has its whole year.
+                <div className="mt-3 flex flex-col items-center gap-1 text-sm">
+                  <Link
+                    to={`/century?country=${selectedCountry.code}`}
+                    className="font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {t('map.events.seeCentury')}
+                  </Link>
+                  <button
+                    onClick={onClearCountry}
+                    className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {t('map.events.backToGlobal')}
+                  </button>
+                </div>
               }
             />
           ) : (

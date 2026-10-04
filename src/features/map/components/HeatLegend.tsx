@@ -68,7 +68,7 @@ export function HeatLegend() {
       {/* Honest about the heuristic: the API gives no country per event, only
           coordinates on some linked articles, matched against simplified
           country borders — see features/map/lib/geocodeEntries. */}
-      <p className="mt-0.5 border-t border-white/15 pt-1.5 text-[11px] leading-snug text-white/60">
+      <p className="mt-0.5 border-t border-white/15 pt-1.5 text-xs leading-snug text-white/60">
         {t('map.legend.methodology')}
       </p>
     </MapOverlayPanel>

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 import {
   AttributionNotice,
   EntryList,
@@ -20,9 +21,11 @@ const HEADING_CLASS = 'mb-1 text-eyebrow text-muted-foreground';
 
 interface ArchiveResultsProps {
   filters: ArchiveFilters;
+  // Empties the search box, offered when the search matches nothing.
+  onClearQuery: () => void;
 }
 
-export function ArchiveResults({ filters }: ArchiveResultsProps) {
+export function ArchiveResults({ filters, onClearQuery }: ArchiveResultsProps) {
   const { t } = useTranslation();
 
   // No debounce here: YearRangeFields already debounces raw typed text 500ms before
@@ -83,12 +86,18 @@ export function ArchiveResults({ filters }: ArchiveResultsProps) {
       )}
 
       {data && totalEntries > 0 && query && matchingEntries === 0 && (
-        <p className={STATUS_CLASS}>{t('archive.results.noMatches', { query })}</p>
+        <div className="space-y-2 py-2">
+          <p className="text-sm text-muted-foreground">{t('archive.results.noMatches', { query })}</p>
+          <Button type="button" variant="outline" size="sm" onClick={onClearQuery}>
+            {t('archive.results.clearSearch')}
+          </Button>
+        </div>
       )}
 
       {data &&
         sections.map(({ key, section }) =>
-          section.items.length === 0 ? null : (
+          // A section with nothing matching the search keeps no heading of its own.
+          section.items.length === 0 || (query && !section.items.some((entry) => matchesQuery(entry, query))) ? null : (
             <div key={key}>
               <h2 className={HEADING_CLASS}>{t(SECTION_LABEL_KEYS[key])}</h2>
               <EntryList

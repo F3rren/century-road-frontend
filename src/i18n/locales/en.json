@@ -1,9 +1,13 @@
 {
   "common": {
     "loading": "Loading…",
-    "unknownError": "Unknown error",
     "opensInNewTab": " (opens in a new tab)",
     "onThisPage": "On this page"
+  },
+  "errors": {
+    "network": "the service is not responding: check your connection and try again",
+    "server": "the service is unavailable right now: try again in a few minutes",
+    "unexpected": "unexpected answer from the service: try again later"
   },
   "nav": {
     "map": "Map",
@@ -59,7 +63,8 @@
       "panelAriaLabel": "Historical events",
       "eventsButton": "Events",
       "closePanel": "Close events panel",
-      "anniversariesTitle": "Anniversaries for {{month}} {{day}}"
+      "anniversariesTitle": "Anniversaries for {{month}} {{day}}",
+      "seeCentury": "See its events from the whole year"
     }
   },
   "dashboard": {
@@ -126,7 +131,8 @@
       "fallbackNote": "Some entries are in English: the Italian edition of Wikipedia doesn't have them.",
       "staleNote": "Data may be out of date: Wikipedia wasn't reachable.",
       "empty": "No entries for this day with these filters.",
-      "noMatches": "No results for “{{query}}”."
+      "noMatches": "No results for “{{query}}”.",
+      "clearSearch": "Clear the search"
     }
   },
   "century": {
@@ -147,7 +153,9 @@
     "indexedAt": "Index updated on {{date}}.",
     "grainsHint": "Each grain is one event. Open a decade to jump to it.",
     "decadeColumn_one": "{{range}}: one event. Go to the decade",
-    "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade"
+    "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade",
+    "startWith": "To start",
+    "countriesLoadError": "The list of countries is unavailable ({{error}})."
   },
   "history": {
     "section": {

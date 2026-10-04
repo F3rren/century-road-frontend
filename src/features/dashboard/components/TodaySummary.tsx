@@ -29,7 +29,7 @@ export function TodaySummary({ summary, month, day }: TodaySummaryProps) {
           });
 
   return (
-    <p className="max-w-3xl font-display text-2xl leading-snug sm:text-[1.75rem] sm:leading-[1.35]">
+    <p className="max-w-3xl font-display text-2xl leading-snug sm:text-3xl sm:leading-snug">
       {t("dashboard.summary.lead", {
         count: summary.total,
         date: formatEventDate(day, month, undefined, i18n.language),
