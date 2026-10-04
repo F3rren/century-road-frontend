@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T11:29:48.314Z",
+  "generatedAt": "2026-10-04T12:38:31.760Z",
   "title": "Design System: Grains of History",
   "extensions": {
     "colorMeta": {
@@ -327,33 +327,33 @@
       "heat-low": {
         "role": "data",
         "displayName": "Heat Low",
-        "canonical": "#9EC0DD",
-        "oklch": "oklch(79.3% 0.055 244.3)",
+        "canonical": "#5F8BB8",
+        "oklch": "oklch(62.3% 0.084 249.8)",
         "tonalRamp": [
-          "#000c19",
-          "#08273e",
-          "#27455d",
-          "#46657f",
-          "#6686a2",
-          "#88a9c6",
-          "#abceeb",
-          "#e1f1ff"
+          "#000c1c",
+          "#002647",
+          "#19446c",
+          "#3a648f",
+          "#5a86b3",
+          "#7ca9d8",
+          "#a0cefe",
+          "#e3f0fe"
         ]
       },
-      "heat-mid": {
+      "country-line": {
         "role": "data",
-        "displayName": "Heat Mid",
-        "canonical": "#3F79AE",
-        "oklch": "oklch(56.1% 0.103 248.2)",
+        "displayName": "Country Line",
+        "canonical": "#7A8C9E",
+        "oklch": "oklch(63.2% 0.034 248.4)",
         "tonalRamp": [
-          "#000c1a",
-          "#002645",
-          "#024474",
-          "#2a6598",
-          "#4d87bd",
-          "#6faae3",
-          "#9dcffe",
-          "#e2f0ff"
+          "#010c19",
+          "#172635",
+          "#344454",
+          "#526374",
+          "#738596",
+          "#95a7ba",
+          "#b8ccdf",
+          "#e2f0fe"
         ]
       }
     },
@@ -493,7 +493,7 @@
       "Literata for what is read (titles, years, events), Atkinson Hyperlegible for what is operated (labels, controls, figures in prose).",
       "Flat: depth comes from tonal surfaces and hairlines, never shadow.",
       "Grains, the round dot, are the system's one recurring form: the mark, the charts.",
-      "One motion: `develop`. Everything else appears without travel."
+      "One authored motion: `develop`. Everything else appears without travel, except what answers the reader's own action: a drawer, the map's camera."
     ],
     "rules": [
       {
@@ -507,8 +507,8 @@
         "section": "colors"
       },
       {
-        "name": "The Grey Basemap Rule",
-        "body": "The map's tiles stay neutral grey. Blue water would read as \"1–2 events\" on the heat scale.",
+        "name": "The Paper Map Rule",
+        "body": "The map is printed on the paper: land and sea are both Paper, countries are Country Line hairlines, and only today's countries are exposed, so nothing else on the map may be blue (blue water would read as \"1–2 events\"). Place names appear only from zoom 4, in Shade on a paper halo, in the interface's language, and never in italic.",
         "section": "colors"
       },
       {

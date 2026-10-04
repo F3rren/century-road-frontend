@@ -22,8 +22,8 @@ colors:
   oxblood-light: "#EFA08F"
   washed-green-light: "#93C9A2"
   board-line: "#25425F"
-  heat-low: "#9EC0DD"
-  heat-mid: "#3F79AE"
+  heat-low: "#5F8BB8"
+  country-line: "#7A8C9E"
 typography:
   display:
     fontFamily: "Literata, Georgia, ui-serif, serif"
@@ -118,7 +118,7 @@ The system rejects the look it replaced, confirmed with the user in the rebrand:
 - Literata for what is read (titles, years, events), Atkinson Hyperlegible for what is operated (labels, controls, figures in prose).
 - Flat: depth comes from tonal surfaces and hairlines, never shadow.
 - Grains, the round dot, are the system's one recurring form: the mark, the charts.
-- One motion: `develop`. Everything else appears without travel.
+- One authored motion: `develop`. Everything else appears without travel, except what answers the reader's own action: a drawer, the map's camera.
 
 ## Colors
 
@@ -146,15 +146,17 @@ A cold, single-hue cyanotype palette: Prussian blue on white paper by day, pale 
 - **Oxblood** (light) / **Oxblood Light** (dark): destructive actions and error text only.
 - **Washed Green** (light) / **Washed Green Light** (dark): success only.
 
-### Heat scale
-- **Heat Low → Heat Mid → Prussian Blue**: today's events per country, as exposure. A country with more events is more exposed, so it is darker. The basemap underneath stays grey.
+### Map
+- **Paper** is the map's ground, land and sea alike; **Haze** surrounds the globe, so the sphere keeps its edge.
+- **Country Line**: every country's border, a hairline on the paper. At 3.2:1 the geography stays readable and quieter than any heat step.
+- **Heat Low → Exposure Blue → Prussian Blue**: today's events per country, as exposure. A country with more events is more exposed, so it is darker. Each step is printed opaque with a 1px Prussian outline, and clears 3:1 against the paper (3.3, 8.0 and 13.4:1).
 
 ### Named Rules
 **The Fixer Rule.** Fixer yellow is never text on paper and never decoration. It is a fill under Prussian text, or a ring or rule on a Prussian surface. It marks exactly one thing: what is selected or focused there.
 
 **The Seven-to-One Rule.** Every text pairing holds at least 7:1 in both themes. Check a new pairing by computed contrast, not by eye. The tokens above already carry their measured ratios in `globals.css`.
 
-**The Grey Basemap Rule.** The map's tiles stay neutral grey. Blue water would read as "1–2 events" on the heat scale.
+**The Paper Map Rule.** The map is printed on the paper: land and sea are both Paper, countries are Country Line hairlines, and only today's countries are exposed, so nothing else on the map may be blue (blue water would read as "1–2 events"). Place names appear only from zoom 4, in Shade on a paper halo, in the interface's language, and never in italic.
 
 ## Typography
 
@@ -192,7 +194,7 @@ Content width follows the job:
 - **Tool pages:** the Archive, Settings and Il mio secolo sit in up to 4xl. Settings is a list of rows: name on the left, controls on the right.
 - **The Dashboard** uses 5xl for its chart.
 
-Spacing is Tailwind's 4px rhythm: 24px page padding, 32–40px between sections, 12px within an event row. Text stays left-aligned; only the Welcome and the 404 are centred.
+Spacing is Tailwind's 4px rhythm: 24px page padding, 32–40px between sections, 12px within an event row. Text stays left-aligned. Only the Welcome, the 404 and the empty states are centred: an empty state sits in the middle of the space its missing content leaves.
 
 ## Elevation & Depth
 
@@ -239,16 +241,17 @@ Precise and quiet, like the tools of a photographic archive.
 The unit of every list:
 - **Year:** the Numeral in a 3.75rem margin column, with the era under it before the common era.
 - **Text:** Story type beside it, clamped to three lines.
-- **Below the text:** the number of linked articles, or the day when rows come from different days (Il mio secolo).
-- **Compact variant:** used in the 320px map panel, with a 2.75rem margin and 0.875rem text.
-- **Interaction:** the whole row opens the event popup; hover and focus turn the text Exposure Blue.
+- **Below the text:** the number of linked articles, or the day when rows come from different days (Il mio secolo). An event the editors also picked for the day is marked "In evidenza" there, in Label weight and Exposure Blue, instead of being listed twice.
+- **Compact variant:** used in the 320px map panel, with a 2.75rem margin and 0.875rem text. The day's list there has a heading per century ("1900–1999"), in Literata 600 at 0.875rem, Shade.
+- **Interaction:** the whole row opens the event popup; hover and focus turn the text Exposure Blue. The focus ring is drawn inset, because the row's `content-visibility` clips anything outside it.
 
 ### Event Popup (signature)
 A native `<dialog>`, read like the caption of a print. The order is:
 1. the year at 3rem;
 2. one date line, with the weekday from 1583 on and how long ago it was;
 3. the event in Story type at 1.25–1.5rem;
-4. after a rule, "Related articles": square 5–7rem thumbnails, title link, description, extract, and the image credit in the text column.
+4. the ways on from it, as 44px text links: its country's whole year when the map places it, and its day in the Archive (not shown on the Archive itself);
+5. after a rule, "Related articles": square 5–7rem thumbnails, title link, description, extract, and the image credit in the text column.
 
 Only the close button stays put while the content scrolls. Escape, a backdrop click and the button all close it, and focus returns to the row.
 
@@ -264,10 +267,14 @@ Only the close button stays put while the content scrolls. Escape, a backdrop cl
 20 grains in rows of 4-3-2-1-1-2-3-4, beside "Grains of History" in Literata 600. The mark is Prussian on paper and Fixer Yellow on the sidebar; the favicon is Fixer Yellow grains on Prussian.
 
 ### Map Plaques
-The legend and the projection toggle are Prussian plates at 90% with a white/15% hairline. MapLibre's own zoom and compass buttons are restyled to match. Legend swatches carry a light outline, so the darkest step stays visible on the plate.
+The legend and the projection toggle are Prussian plates at 90% with a white/15% hairline. MapLibre's own zoom and compass buttons are restyled to match: 44px, with the Fixer focus ring, above the attribution line. Legend swatches sit in a 2px Paper frame, each step as it prints on the map; on the plate alone the Prussian step would vanish.
 
 ### Motion
 One gesture, `develop`: paper-coloured and faint, to full Prussian, over 1.4s. It is used for the name on the Welcome, where the hourglass grains settle one by one first, 45ms apart, and for the number on the 404. Supporting elements fade in once, without travel. Reduced motion, from the OS or the in-app override, shows the final state at once.
+
+Two movements are not gestures: they answer the reader's own action and show where something went.
+- **Drawers:** the mobile sidebar and events panel slide in from their edge, and the desktop sidebar eases its width, over 300ms (75ms with reduced motion).
+- **The map's camera:** it turns to a chosen country, or to today's events when the globe opens, and blends between globe and flat, each over 0.9s. With reduced motion it jumps.
 
 ### Photography
 Historical photographs used as atmosphere (the Welcome's filmstrip, the 404's 1872 plate) are toned as cyanotypes: greyscale blended by luminosity over Prussian (Exposure Blue in the dark theme). Article thumbnails in an event's popup keep their true colours, because a study aid must not alter its evidence.
