@@ -9,7 +9,7 @@ export function RouteFallback() {
   const { t } = useTranslation();
   return (
     <div className="flex h-full items-center justify-center">
-      <p className="text-sm italic text-muted-foreground">{t("common.loading")}</p>
+      <p className="text-sm text-muted-foreground">{t("common.loading")}</p>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 <div align="center">
 
-# Century Road
+# Grains of History
+
+> Formerly Century Road: the repository, image and storage-key names keep the old name.
 
 **An interactive historical almanac — the 20th century, placed on a globe and on a calendar.**
 
@@ -16,11 +18,11 @@
 
 </div>
 
-<img src="public/og-image.png" alt="Century Road — a wire-service newsroom archive of 20th-century history" width="100%">
+<img src="public/og-image.png" alt="Grains of History — explore the past, one story at a time" width="100%">
 
 ## What this is
 
-Century Road places historical events both **geographically** (an interactive globe) and **temporally** ("what happened today, across the century"). It's spatial-first, not list/timeline-first: the globe is the primary navigation surface, with a per-country event-density heatmap layered on top of the calendar framing. Every event comes live from Wikipedia's "On this day" feed, through a small Spring Boot backend — no mock data.
+Grains of History places historical events both **geographically** (an interactive globe) and **temporally** ("what happened today, across the century"). It's spatial-first, not list/timeline-first: the globe is the primary navigation surface, with a per-country event-density heatmap layered on top of the calendar framing. Every event comes live from Wikipedia's "On this day" feed, through a small Spring Boot backend — no mock data.
 
 See [docs/PRD.md](docs/PRD.md) for the full product requirements, [PRODUCT.md](PRODUCT.md) for user personas and per-route detail, and [DESIGN.md](DESIGN.md) for the visual language ("The Wire-Service Newsroom Archive").
 
@@ -30,6 +32,7 @@ See [docs/PRD.md](docs/PRD.md) for the full product requirements, [PRODUCT.md](P
 - **Country selection** by map click or an accessible `<select>` picker — always both, never map-only
 - **"Accadde oggi"** — today's events highlighted, with a heatmap of event density per country
 - **Archivio** — every entry across all centuries for a chosen day, filterable by year range, entry type, and language, with text search
+- **Il mio secolo** — one country's events from every day of the year, in time order and grouped by decade; the link keeps the choice, and the page prints cleanly or saves as PDF
 - **Dashboard** — real statistics from the live dataset (never filler numbers), plus anonymous all-time view-popularity by day and country
 - **4-language UI** (Italian default, English, German, French) via i18next
 - **Light/dark theme**, persisted, no load flash

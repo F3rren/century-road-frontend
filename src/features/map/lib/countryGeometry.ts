@@ -122,3 +122,48 @@ export function listCountries(features: readonly CountryFeature[], language: str
   }
   return Array.from(byCode.values()).sort((a, b) => a.name.localeCompare(b.name, language));
 }
+
+// Where the camera should look to show a country: the middle of its largest
+// shape's bounding box. The largest one, not the whole country's box, so the
+// United States centres on its mainland rather than halfway to Alaska, and a
+// country whose islands straddle the antimeridian is not centred on the far
+// side of the world.
+export function countryAnchor(feature: CountryFeature): [number, number] {
+  const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+  let best: [number, number] = [0, 0];
+  let bestArea = -1;
+  for (const polygon of polygons) {
+    const ring = polygon[0] ?? [];
+    let [minLng, minLat, maxLng, maxLat] = [Infinity, Infinity, -Infinity, -Infinity];
+    for (const [lng, lat] of ring) {
+      minLng = Math.min(minLng, lng);
+      maxLng = Math.max(maxLng, lng);
+      minLat = Math.min(minLat, lat);
+      maxLat = Math.max(maxLat, lat);
+    }
+    const area = (maxLng - minLng) * (maxLat - minLat);
+    if (ring.length && area > bestArea) {
+      bestArea = area;
+      best = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+    }
+  }
+  return best;
+}
+
+// The point a globe should face to show a set of weighted places at once: their
+// mean on the sphere, not the mean of their longitudes, which would put Japan and
+// the US (139° and -98°) on the opposite side of the world from both. Null when
+// the places cancel out (or there are none) and no side is better than another.
+export function facingCenter(points: readonly { lng: number; lat: number; weight: number }[]): [number, number] | null {
+  const rad = Math.PI / 180;
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  for (const { lng, lat, weight } of points) {
+    x += weight * Math.cos(lat * rad) * Math.cos(lng * rad);
+    y += weight * Math.cos(lat * rad) * Math.sin(lng * rad);
+    z += weight * Math.sin(lat * rad);
+  }
+  if (Math.hypot(x, y, z) < 1e-9) return null;
+  return [Math.atan2(y, x) / rad, Math.atan2(z, Math.hypot(x, y)) / rad];
+}

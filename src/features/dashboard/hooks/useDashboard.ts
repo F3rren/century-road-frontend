@@ -1,15 +1,15 @@
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { useTodayHistory } from "@/features/map";
-import { computeStats } from "../lib/computeStats";
+// The light entry: the main map barrel would pull MapLibre into this page.
+import { useTodayHistory } from "@/features/map/data";
+import { groupByCentury, summarizeToday } from "../lib/computeStats";
 
-// Async, backed by the same today's-history fetch (and the same
-// coordinate-based country guess) the map page uses — not a synchronous
-// in-memory mock array, so loading/error are real states here, not
-// simulated ones.
+// Backed by the same today's-history fetch (and the same coordinate-based
+// country guess) the map page uses, so loading and error are real states.
 export function useDashboard() {
-  const { t } = useTranslation();
-  const { geocodedEvents, isLoading, error } = useTodayHistory();
-  const stats = useMemo(() => computeStats(geocodedEvents, t), [geocodedEvents, t]);
-  return { stats, isLoading, error };
+  const { today, data, geocodedEvents, isLoading, error } = useTodayHistory();
+  const summary = useMemo(() => summarizeToday(geocodedEvents), [geocodedEvents]);
+  const centuries = useMemo(() => groupByCentury(geocodedEvents), [geocodedEvents]);
+  // The edition the events really came from, for the archive links.
+  const language = data?.sections.events?.language;
+  return { today, language, summary, centuries, isLoading, error };
 }

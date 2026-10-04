@@ -1,12 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#C81E3A" />
-  <text
-    x="16"
-    y="23"
-    text-anchor="middle"
-    font-family="Arial, Helvetica, sans-serif"
-    font-weight="900"
-    font-size="22"
-    fill="#F6F1E4"
-  >C</text>
+  <!-- The hourglass of grains (src/components/ui/Wordmark.tsx), fixer yellow on Prussian. -->
+  <rect width="32" height="32" rx="4" fill="#0E2A47" />
+  <g fill="#E2B44A">
+  <circle cx="10.38" cy="4.63" r="1.45" />
+  <circle cx="14.13" cy="4.63" r="1.45" />
+  <circle cx="17.88" cy="4.63" r="1.45" />
+  <circle cx="21.63" cy="4.63" r="1.45" />
+  <circle cx="12.25" cy="7.88" r="1.45" />
+  <circle cx="16" cy="7.88" r="1.45" />
+  <circle cx="19.75" cy="7.88" r="1.45" />
+  <circle cx="14.13" cy="11.13" r="1.45" />
+  <circle cx="17.88" cy="11.13" r="1.45" />
+  <circle cx="16" cy="14.38" r="1.45" />
+  <circle cx="16" cy="17.63" r="1.45" />
+  <circle cx="14.13" cy="20.88" r="1.45" />
+  <circle cx="17.88" cy="20.88" r="1.45" />
+  <circle cx="12.25" cy="24.13" r="1.45" />
+  <circle cx="16" cy="24.13" r="1.45" />
+  <circle cx="19.75" cy="24.13" r="1.45" />
+  <circle cx="10.38" cy="27.38" r="1.45" />
+  <circle cx="14.13" cy="27.38" r="1.45" />
+  <circle cx="17.88" cy="27.38" r="1.45" />
+  <circle cx="21.63" cy="27.38" r="1.45" />
+  </g>
 </svg>

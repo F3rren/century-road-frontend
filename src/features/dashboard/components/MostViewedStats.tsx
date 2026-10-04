@@ -1,11 +1,10 @@
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/Card";
 import { Alert } from "@/components/ui/Alert";
 import { formatEventDate } from "@/lib/months";
-import { localizedCountryName } from "@/features/map";
+// The light entry: the main map barrel would pull MapLibre into this page.
+import { localizedCountryName } from "@/features/map/data";
 import type { CountryViewStat, DayViewStat } from "@/features/history";
 
 interface MostViewedStatsProps {
@@ -26,7 +25,7 @@ function RankedList({ label, rows, emptyText }: RankedListProps) {
 
   return (
     <div>
-      <p className="font-display text-eyebrow uppercase text-muted-foreground">{label}</p>
+      <p className="text-eyebrow text-muted-foreground">{label}</p>
       {rows.length === 0 ? (
         <p className="mt-2 text-sm text-muted-foreground">{emptyText}</p>
       ) : (
@@ -34,12 +33,12 @@ function RankedList({ label, rows, emptyText }: RankedListProps) {
           {rows.map((row, index) => (
             <li key={row.id} className="flex items-baseline justify-between gap-3 py-2">
               <span className="flex items-baseline gap-3 truncate">
-                <span className="font-mono text-xs tabular-nums text-muted-foreground">
-                  {String(index + 1).padStart(2, "0")}
+                <span className="text-xs tabular-nums text-muted-foreground">
+                  {index + 1}
                 </span>
                 <span className="truncate text-sm font-medium">{row.name}</span>
               </span>
-              <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
+              <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
                 {t("dashboard.popularity.views", { count: row.viewCount })}
               </span>
             </li>
@@ -72,9 +71,10 @@ export function MostViewedStats({ topDays, topCountries, isLoading, error }: Mos
     viewCount: stat.viewCount,
   }));
 
+  // A section with a rule above, like the chart before it: no box of its own.
   return (
-    <Card>
-      <h2 className="font-display text-eyebrow uppercase text-muted-foreground">
+    <section aria-labelledby="most-viewed-title" className="border-t border-border pt-8">
+      <h2 id="most-viewed-title" className="font-display text-xl font-semibold">
         {t("dashboard.popularity.heading")}
       </h2>
       <p className="mt-1 max-w-prose text-sm text-muted-foreground">
@@ -96,10 +96,9 @@ export function MostViewedStats({ topDays, topCountries, isLoading, error }: Mos
         <Button asChild variant="link" className="px-0">
           <Link to="/">
             {t("dashboard.popularity.cta")}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </Button>
       </div>
-    </Card>
+    </section>
   );
 }

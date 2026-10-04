@@ -1,18 +1,28 @@
 {
   "common": {
     "loading": "Chargement…",
-    "unknownError": "Erreur inconnue",
-    "opensInNewTab": " (s'ouvre dans un nouvel onglet)"
+    "retry": "Réessayer",
+    "opensInNewTab": " (s'ouvre dans un nouvel onglet)",
+    "onThisPage": "Sur cette page"
+  },
+  "errors": {
+    "network": "le service ne répond pas : vérifiez la connexion et réessayez",
+    "server": "le service est indisponible pour le moment : réessayez dans quelques minutes",
+    "unexpected": "réponse inattendue du service : réessayez plus tard"
   },
   "nav": {
     "map": "Carte",
     "dashboard": "Tableau de bord",
     "archive": "Archives",
+    "century": "Mon siècle",
     "settings": "Paramètres",
     "privacy": "Confidentialité",
     "terms": "Conditions d'utilisation",
+    "guide": "Mode d'emploi",
+    "methodology": "Derrière les données",
+    "credits": "Crédits et contact",
     "ariaLabel": "Navigation principale",
-    "brandTagline": "press archive"
+    "brandTagline": "Explorez le passé, une histoire à la fois"
   },
   "header": {
     "openMenu": "Ouvrir le menu",
@@ -20,10 +30,15 @@
   },
   "map": {
     "panelAriaLabel": "Carte historique interactive : les événements du jour dans le monde",
+    "controls": {
+      "zoomIn": "Zoom avant",
+      "zoomOut": "Zoom arrière",
+      "resetBearing": "Réorienter vers le nord",
+      "attribution": "Crédits de la carte"
+    },
     "error": {
       "title": "Impossible de charger la carte",
-      "description": "Vérifiez votre connexion réseau et réessayez.",
-      "retry": "Réessayer"
+      "description": "Vérifiez votre connexion réseau et réessayez."
     },
     "projection": {
       "groupLabel": "Projection de la carte",
@@ -42,44 +57,49 @@
       "methodology": "Pays déduit du premier article lié disposant de coordonnées"
     },
     "events": {
-      "backToGlobal": "Retour à la vue globale",
       "todayTitle": "Éphéméride du jour",
       "loadError": "Impossible de charger les événements du jour ({{error}}).",
       "noEventsFor": "Aucun événement du jour trouvé pour <bold>{{country}}</bold>",
       "countryPickerLabel": "Aller à un pays",
+      "clickHint": "Ou choisissez-en un sur la carte.",
+      "allCountries": "Tous les pays",
+      "withEventsToday": "Avec des événements aujourd’hui ({{count}})",
+      "otherCountries": "Autres pays",
+      "todayButton": "Éphéméride du {{date}}",
+      "liveAll_one": "Éphéméride du {{date}} : {{count}} événement",
+      "liveAll_other": "Éphéméride du {{date}} : {{count}} événements",
+      "liveCountry_one": "{{country}} : {{count}} événement aujourd’hui",
+      "liveCountry_other": "{{country}} : {{count}} événements aujourd’hui",
       "loadingCountries": "Chargement des pays…",
       "selectCountryPlaceholder": "Sélectionner un pays…",
       "countriesLoadError": "Impossible de charger la liste des pays ({{error}}).",
-      "clickHint": "Cliquez sur un pays sur la carte (ou utilisez le menu ci-dessus) pour voir ses événements",
       "panelAriaLabel": "Événements historiques",
-      "eventsButton": "Événements",
       "closePanel": "Fermer le panneau des événements",
-      "anniversariesTitle": "Anniversaires du {{day}} {{month}}"
+      "anniversariesTitle": "Anniversaires du {{day}} {{month}}",
+      "seeCentury": "Voir ses événements de toute l’année"
     }
   },
   "dashboard": {
     "description": "Statistiques sur les événements du jour, avec le pays déduit des articles liés",
     "loadError": "Impossible de charger les statistiques ({{error}}).",
-    "stats": {
-      "noData": {
-        "title": "Aucune statistique disponible",
-        "description": "Les données apparaîtront ici dès que les archives contiendront des événements."
-      },
-      "events": {
-        "label": "Événements du jour"
-      },
-      "countries": {
-        "label": "Pays identifiés",
-        "detail": "{{geocoded}} sur {{total}} événements"
-      },
-      "span": {
-        "label": "Période couverte"
-      },
-      "topCountry": {
-        "label": "Pays le plus cité",
-        "detail_one": "{{count}} événement",
-        "detail_other": "{{count}} événements"
-      }
+    "summary": {
+      "lead_one": "Aujourd’hui, {{date}}, Wikipédia rappelle un seul événement.",
+      "lead_other": "Aujourd’hui, {{date}}, Wikipédia rappelle {{count}} événements, de {{first}} à {{last}}.",
+      "noneOnMap": "Aucun ne trouve sa place sur la carte.",
+      "placedOneCountry_one": "Un seul trouve sa place sur la carte : {{top}}.",
+      "placedOneCountry_other": "{{count}} trouvent leur place sur la carte, tous dans le même pays : {{top}}.",
+      "placed_one": "Un seul trouve sa place sur la carte : {{top}}.",
+      "placed_other": "{{count}} trouvent leur place sur la carte, dans {{countries}} pays ; le plus cité : {{top}}, avec {{topCount}}."
+    },
+    "centuries": {
+      "title": "Les événements du jour, siècle par siècle",
+      "hint": "Chaque grain est un événement. Ouvrez un siècle pour en lire les événements dans les archives.",
+      "column_one": "{{range}} : un événement. Ouvrir dans les archives",
+      "column_other": "{{range}} : {{count}} événements. Ouvrir dans les archives"
+    },
+    "empty": {
+      "title": "Aucune statistique disponible",
+      "description": "Les données apparaîtront ici dès que les archives contiendront des événements."
     },
     "popularity": {
       "heading": "Les plus consultés",
@@ -95,11 +115,6 @@
       "views_other": "{{count}} consultations",
       "noData": "Pas encore assez de données.",
       "cta": "Explorer la carte"
-    },
-    "archiveTeaser": {
-      "heading": "Archives",
-      "description": "Ces statistiques portent sur les événements du jour. Pour parcourir chaque entrée que Wikipédia enregistre pour un jour donné, de n'importe quel siècle, en filtrant par année et par type d'entrée, ouvrez les archives complètes.",
-      "cta": "Ouvrir les archives"
     }
   },
   "archive": {
@@ -119,7 +134,8 @@
       "languageEnglish": "Anglais",
       "searchLabel": "Rechercher dans les résultats",
       "searchPlaceholder": "Un mot dans le texte ou dans un article…",
-      "reset": "Réinitialiser les filtres"
+      "reset": "Réinitialiser les filtres",
+      "more": "Autres filtres : années, type, langue, recherche"
     },
     "results": {
       "loading": "Chargement des archives…",
@@ -127,8 +143,31 @@
       "fallbackNote": "Certaines entrées sont en anglais : l'édition italienne de Wikipédia ne les a pas.",
       "staleNote": "Données peut-être obsolètes : Wikipédia était inaccessible.",
       "empty": "Aucune entrée pour ce jour avec ces filtres.",
-      "noMatches": "Aucun résultat pour « {{query}} »."
+      "noMatches": "Aucun résultat pour « {{query}} ».",
+      "clearSearch": "Effacer la recherche"
     }
+  },
+  "century": {
+    "titleFor": "Mon siècle : {{country}}",
+    "pageDescription": "Les événements d'un pays sur tous les jours de l'année, dans l'ordre chronologique",
+    "methodNote": "Ce sont les entrées que Wikipédia liste pour chaque jour de l'année et que la carte place dans ce pays, avec la même méthode et les mêmes limites : <methodology>comment ça marche</methodology>.",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "Choisir un pays…",
+    "countryOption": "{{name}} ({{events}})",
+    "yearsLabel": "Années",
+    "print": "Imprimer ou enregistrer en PDF",
+    "pickCountry": "Choisissez un pays pour voir ses événements de toute l'année. Le lien de la page garde votre choix : vous pouvez l'enregistrer ou le partager.",
+    "indexEmpty": "L'index des pays est en cours de construction : réessayez dans quelques minutes.",
+    "empty": "Aucun événement pour ce pays sur les années choisies.",
+    "loadError": "Impossible de charger la chronologie ({{error}}).",
+    "summary_one": "Un événement, en {{first}}.",
+    "summary_other": "{{count}} événements, de {{first}} à {{last}}.",
+    "indexedAt": "Index mis à jour le {{date}}.",
+    "grainsHint": "Chaque grain est un événement. Ouvrez une décennie pour y aller.",
+    "decadeColumn_one": "{{range}} : un événement. Aller à la décennie",
+    "decadeColumn_other": "{{range}} : {{count}} événements. Aller à la décennie",
+    "startWith": "Pour commencer",
+    "countriesLoadError": "La liste des pays n’est pas disponible ({{error}})."
   },
   "history": {
     "section": {
@@ -150,7 +189,10 @@
     },
     "dialog": {
       "close": "Fermer",
-      "relatedHeading": "Articles liés"
+      "relatedHeading": "Articles liés",
+      "when": "{{date}}, {{ago}}",
+      "countryYear": "{{country}} : toute l’année",
+      "archiveDay": "Ce jour dans les archives"
     },
     "attribution": {
       "licenseLabel": "Licence"
@@ -197,6 +239,137 @@
       "legalNote": "Les pages Confidentialité et Conditions d'utilisation ne sont disponibles qu'en italien pour l'instant."
     }
   },
+  "methodology": {
+    "title": "Derrière les données",
+    "description": "D'où viennent les événements, comment ils sont présentés et où sont leurs limites",
+    "source": {
+      "title": "Une seule source : Wikipédia",
+      "p1": "Chaque événement provient du service « On this day » de Wikipédia, qui rassemble les anniversaires de chaque jour. C'est notre serveur qui l'interroge, pas votre navigateur. Nous n'ajoutons, ne supprimons ni ne réécrivons aucune entrée : vous voyez ce que Wikipédia liste pour ce jour, avec des liens vers les articles cités.",
+      "p2": "Les entrées sont de cinq types : <strong>À la une</strong>, une courte sélection établie par les bénévoles de Wikipédia ; <strong>Événements</strong> ; <strong>Naissances</strong> ; <strong>Décès</strong> ; <strong>Fêtes et commémorations</strong>."
+    },
+    "report": {
+      "title": "Le compte rendu du jour",
+      "intro": "Ce que notre serveur a renvoyé pour aujourd'hui, {{date}} : des données réelles, celles qu'utilisent la carte et le tableau de bord.",
+      "caption": "Sections reçues pour aujourd'hui, {{date}}",
+      "colSection": "Section",
+      "colItems": "Entrées",
+      "colLanguage": "Langue",
+      "colState": "État",
+      "fallback": "{{language}} (repli)",
+      "fresh": "À jour",
+      "stale": "Pas à jour",
+      "attributed": "Événements avec un pays identifié",
+      "attributedValue": "{{attributed}} sur {{total}}",
+      "countries": "Pays identifiés",
+      "warningPrimaryUnavailable": "Aujourd'hui, l'édition dans la langue demandée ne répondait pas : toutes les sections viennent de l'autre.",
+      "warningFallbackUnavailable": "Aujourd'hui, une section absente dans la langue demandée n'a pas pu être complétée par l'autre non plus.",
+      "footnote": "La carte et le tableau de bord n'utilisent que ces deux sections. Naissances, décès et commémorations se consultent dans les <archive>Archives</archive>.",
+      "loadError": "Impossible de lire les données du jour ({{error}})."
+    },
+    "languages": {
+      "title": "Langues",
+      "p1": "Les textes sont demandés dans la langue de l'interface quand le service la propose : ici, seulement l'italien et l'anglais. Avec l'interface en allemand ou en français, les textes arrivent en anglais.",
+      "p2": "L'édition italienne ne publie ni naissances ni décès : quand l'italien est demandé, ces deux sections viennent de l'édition anglaise, et la page le signale. Si l'édition demandée ne répond pas, tout vient de l'autre. Dans les <archive>Archives</archive>, vous pouvez choisir vous-même la langue des textes."
+    },
+    "freshness": {
+      "title": "Mise à jour",
+      "p1": "La copie d'un jour est réutilisée pendant six heures, puis Wikipédia est de nouveau interrogée. Si Wikipédia ne répond pas, nous affichons la dernière copie enregistrée, vieille de sept jours au plus, signalée par « Données peut-être obsolètes »."
+    },
+    "geocoding": {
+      "title": "Le pays sur la carte",
+      "p1": "Wikipédia n'indique pas dans quel pays un événement a eu lieu : nous le déduisons. Nous prenons le premier article lié qui possède des coordonnées et cherchons le pays qui contient ce point, sur les frontières de Natural Earth à l'échelle 1:110 millions.",
+      "p2": "C'est une approximation, avec des limites précises :",
+      "limitSubject": "les coordonnées décrivent le sujet de l'article, pas toujours le lieu de l'événement ;",
+      "limitNone": "un événement sans article lié doté de coordonnées reste sans pays : il figure dans la liste du jour, mais n'est pas compté sur la carte ;",
+      "limitBorder": "un point proche d'une frontière peut tomber dans le pays voisin ;",
+      "limitIslands": "certains petits États insulaires n'ont pas de forme à cette échelle et ne sont jamais identifiés.",
+      "p3": "Sur la carte, seuls les Événements comptent : « À la une » en reprend certains, et les compter deux fois gonflerait les chiffres."
+    },
+    "index": {
+      "title": "L'index par pays",
+      "p1": "La page <century>Mon siècle</century> utilise un index que notre serveur construit chaque nuit : il lit tous les jours de l'année en italien et en anglais et place chaque événement dans un pays avec la même règle et les mêmes frontières que la carte. Il ne contient que les Événements avec une année et un pays identifié, chaque édition séparément (sans repli entre les langues), et peut avoir un jour de retard sur Wikipédia."
+    },
+    "errors": {
+      "title": "Contradictions et erreurs",
+      "p1": "Avec une seule source, il n'y a rien à concilier : nous ne comparons pas les entrées à d'autres archives. Une erreur dans le texte d'un événement se corrige sur Wikipédia, sur la page consacrée à ce jour de l'année ; la correction arrive ici à la mise à jour suivante.",
+      "p2": "Pour les erreurs propres à ce site, comme un pays mal attribué, écrivez-nous depuis <credits>Crédits et contact</credits>."
+    },
+    "limits": {
+      "title": "Limites",
+      "p1": "La couverture est celle de Wikipédia, inégale selon les pays et les époques. Les entrées vont de l'Antiquité à nos jours, pas seulement au XXe siècle. Les chiffres de la carte et du tableau de bord portent sur les entrées du jour, pas sur l'histoire dans son ensemble."
+    },
+    "views": {
+      "title": "Statistiques de visite",
+      "p1": "« Les plus consultés », dans le tableau de bord, sont des totaux anonymes : un jour est compté chaque fois que ses événements sont demandés, un pays chaque fois qu'il est sélectionné. Aucune donnée personnelle ni identifiant de visiteur ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
+    }
+  },
+  "guide": {
+    "title": "Mode d'emploi",
+    "description": "Des réponses courtes pour lire la carte, consulter un jour et régler le site",
+    "map": {
+      "title": "Que montre la carte ?",
+      "p1": "Les événements survenus à cette date les années passées, pays par pays. La couleur indique combien d'événements du jour ont été attribués à chaque pays :",
+      "p2": "Un pays sans couleur n'a aucun événement attribué aujourd'hui, ce qui ne veut pas dire qu'il ne s'y est rien passé. La façon dont le pays est déduit est expliquée dans <methodology>Derrière les données</methodology>."
+    },
+    "country": {
+      "title": "Comment voir les événements d'un pays ?",
+      "p1": "Cliquez sur le pays dans la carte, ou choisissez-le dans « Aller à un pays » du panneau des événements : la touche <kbd>/</kbd> vous y mène directement. Pour revenir à tous les événements du jour, utilisez le X en haut du panneau."
+    },
+    "archive": {
+      "title": "Comment consulter un autre jour ?",
+      "p1": "Dans les <archive>Archives</archive> : choisissez le mois et le jour, puis affinez par années (négatives avant notre ère, par exemple -44), type d'entrée et langue. La zone de recherche filtre les entrées de ce jour."
+    },
+    "theme": {
+      "title": "Puis-je suivre un pays ou un thème sur toute l'année ?",
+      "p1": "Un pays, oui : <century>Mon siècle</century> montre tous ses événements de l'année dans l'ordre chronologique. Pour un thème comme la guerre froide, les archives fonctionnent un jour à la fois : réglez les années de 1947 à 1991, cherchez un mot comme « Berlin », puis changez de jour."
+    },
+    "dashboard": {
+      "title": "Que mesure le tableau de bord ?",
+      "p1": "Des chiffres calculés sur les entrées du jour : combien d'événements, dans combien de pays, quelle période ils couvrent et quel pays est le plus cité. En dessous, les jours et les pays les plus consultés, comptés de façon anonyme."
+    },
+    "language": {
+      "title": "Pourquoi les textes ne sont-ils pas toujours dans ma langue ?",
+      "p1": "Le service de Wikipédia n'est disponible ici qu'en italien et en anglais : avec l'interface en allemand ou en français, les textes arrivent en anglais. À l'édition italienne manquent par ailleurs les naissances et les décès, qui viennent de l'édition anglaise, signalés comme tels. Vous pouvez choisir la langue des textes dans les Archives ; plus de détails dans <methodology>Derrière les données</methodology>."
+    },
+    "stale": {
+      "title": "Que signifie « Données peut-être obsolètes » ?",
+      "p1": "Que Wikipédia était injoignable : vous voyez la dernière copie enregistrée, vieille de sept jours au plus. Elle se met à jour toute seule dès que Wikipédia répond à nouveau."
+    },
+    "shortcuts": {
+      "title": "Y a-t-il des raccourcis clavier ?",
+      "p1": "Oui : <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> et <kbd>5</kbd> ouvrent Carte, Tableau de bord, Archives, Mon siècle et Paramètres ; <kbd>/</kbd> mène au sélecteur de pays. Ils ne fonctionnent pas pendant la saisie dans un champ. La liste figure aussi dans les <settings>Paramètres</settings>."
+    },
+    "prefs": {
+      "title": "Où sont enregistrées mes préférences ?",
+      "p1": "Uniquement dans votre navigateur : apparence, langue, projection de la carte, animations réduites et le fait d'avoir déjà vu la page d'accueil. Vous pouvez les effacer depuis les <settings>Paramètres</settings> ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
+    }
+  },
+  "credits": {
+    "title": "Crédits et contact",
+    "description": "Les sources des données, les licences et qui contacter pour une correction ou une proposition",
+    "data": {
+      "title": "Données et images",
+      "wikipedia": "Textes des événements : <wikipedia>Wikipédia</wikipedia>, sous licence <license>CC BY-SA 4.0</license>. Chaque événement renvoie aux articles qu'il cite.",
+      "commons": "Images : <commons>Wikimedia Commons</commons>. Chaque image a sa propre licence, indiquée sur la page du fichier liée à côté.",
+      "map": "Carte : données © <osm>contributeurs d'OpenStreetMap</osm>, tuiles d'<openfreemap>OpenFreeMap</openfreemap>.",
+      "borders": "Frontières des pays : <naturalearth>Natural Earth</naturalearth>, domaine public.",
+      "photo": "Photo de la page d'erreur 404 : O. G. Rejlander, 1872, <photo>Wellcome Collection</photo>, licence CC BY 4.0."
+    },
+    "software": {
+      "title": "Logiciel",
+      "p1": "Le code est open source, sous licence MIT : <frontend>l'interface</frontend> et <backend>les services</backend> sont sur GitHub. Il repose sur des projets libres comme React, MapLibre GL et Spring Boot.",
+      "p2": "Polices : Literata et Atkinson Hyperlegible, sous licence SIL Open Font License."
+    },
+    "thanks": {
+      "title": "Remerciements",
+      "p1": "Aux communautés bénévoles de Wikipédia, de Wikimedia Commons, d'OpenStreetMap et de Natural Earth, qui rendent ces données libres, et à celles et ceux qui maintiennent les logiciels libres sur lesquels repose ce site."
+    },
+    "contact": {
+      "title": "Contact et collaborations",
+      "p1": "Le projet est mené par {{name}}. Pour une correction, une proposition ou une collaboration, écrivez à <email/>, ou ouvrez un ticket sur <github>GitHub</github>.",
+      "p2": "Une erreur dans le texte d'un événement se corrige directement sur Wikipédia, sur la page consacrée à ce jour de l'année ; la correction arrive ici à la mise à jour suivante."
+    }
+  },
   "date": {
     "era": {
       "bc": "av. J.-C."
@@ -207,44 +380,54 @@
   },
   "notFound": {
     "title": "Page introuvable",
+    "message": "Cette adresse ne mène à aucune page du site. Repartez d’ici :",
     "backToMap": "Explorer la carte",
-    "typedMessage": "Nous recherchons la page demandée dans nos archives... résultat : introuv—",
-    "outOfPaper": "— la machine à écrire n'a plus de papier —",
-    "referenceCode": "Réf. archives : N/D",
     "goToArchive": "Consulter les archives",
     "goToDashboard": "Tableau de bord",
-    "photoCredit": "Photo : O.G. Rejlander, 1872 · Wellcome Collection"
+    "photoCredit": "Photo : O.G. Rejlander, 1872, Wellcome Collection"
   },
   "welcome": {
     "pageTitle": "Bienvenue",
-    "tagline": "Les archives de l'histoire, un jour à la fois",
+    "tagline": "Chaque jour, les événements dont Wikipédia garde la trace à cette date : sur la carte, dans les archives, pays par pays.",
     "enter": "Entrer",
     "footer": {
       "creditsLabel": "Sources et crédits",
       "photos": "Photos historiques : Wikimedia Commons (licence indiquée sur chaque fichier)",
       "wikipedia": "Textes historiques : Wikipédia (CC BY-SA 4.0)",
-      "map": "Carte : © OpenStreetMap contributors · OpenFreeMap",
+      "map": "Carte : © OpenStreetMap contributors, OpenFreeMap",
       "boundaries": "Frontières : Natural Earth (domaine public)"
     }
   },
   "meta": {
     "welcome": {
-      "description": "Century Road, les archives de l'histoire : découvrez ce qui s'est passé aujourd'hui au fil des siècles, avec une carte interactive, des articles Wikipédia et des photos historiques."
+      "description": "Grains of History, les archives de l'histoire : découvrez ce qui s'est passé aujourd'hui au fil des siècles, avec une carte interactive, des articles Wikipédia et des photos historiques."
     },
     "map": {
       "description": "Explorez sur la carte les événements historiques survenus aujourd'hui dans le monde, avec des anniversaires et des articles Wikipédia pour chaque pays."
     },
     "dashboard": {
-      "description": "Statistiques sur les événements du jour : combien d'articles, quels pays, la période couverte par les archives de Century Road."
+      "description": "Statistiques sur les événements du jour : combien d'articles, quels pays, la période couverte par les archives de Grains of History."
     },
     "archive": {
       "description": "Parcourez les archives complètes des événements du jour à travers les siècles, filtrables par année et type d'entrée."
     },
+    "century": {
+      "description": "Choisissez un pays et découvrez ses événements de chaque jour de l'année, dans l'ordre chronologique : une chronologie à partager ou à imprimer."
+    },
     "settings": {
-      "description": "Personnalisez l'apparence, la langue et la projection cartographique par défaut de Century Road."
+      "description": "Personnalisez l'apparence, la langue et la projection cartographique par défaut de Grains of History."
+    },
+    "guide": {
+      "description": "Comment lire la carte du jour, consulter un autre jour dans les archives et utiliser les raccourcis clavier."
+    },
+    "methodology": {
+      "description": "D'où viennent les événements, comment le pays sur la carte est déduit et quelles sont les limites des données."
+    },
+    "credits": {
+      "description": "Sources des données, licences et contacts pour une correction ou une proposition."
     },
     "notFound": {
-      "description": "La page recherchée n'existe pas. Retournez à la carte de Century Road pour continuer à explorer l'histoire du jour."
+      "description": "La page recherchée n'existe pas. Retournez à la carte de Grains of History pour continuer à explorer l'histoire du jour."
     }
   }
 }

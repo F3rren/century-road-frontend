@@ -31,6 +31,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        // Fixer yellow: "today" and the selected country. A fill under
+        // highlight-foreground (Prussian), never text on the paper.
+        highlight: {
+          DEFAULT: "hsl(var(--highlight))",
+          foreground: "hsl(var(--highlight-foreground))",
+        },
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
@@ -43,74 +49,49 @@ const config: Config = {
           DEFAULT: "hsl(var(--sidebar))",
           foreground: "hsl(var(--sidebar-foreground))",
           border: "hsl(var(--sidebar-border))",
-          // Verified 4.99:1 against the sidebar background — text-primary
-          // is NOT legible here (it swaps with the app theme; the sidebar
+          // Fixer yellow, 7.5:1 on the fixed Prussian sidebar. text-primary
+          // is NOT legible there (it swaps with the app theme; the sidebar
           // doesn't). Use text-sidebar-accent for the active-tab color.
           accent: "hsl(var(--sidebar-accent))",
         },
       },
-      // --radius is 2px in this direction (clippings and rules, not soft
-      // cards) — subtracting Tailwind's usual 2px/4px steps would go
-      // negative, so the steps are 1px apart instead. Still effectively
-      // square at normal viewing distance, never literally invalid CSS.
+      // --radius is 4px: the slightly eased corner of a trimmed print, not a
+      // soft card. Steps 1px apart so the smallest never reaches zero.
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 1px)",
         sm: "calc(var(--radius) - 1px)",
       },
       fontFamily: {
-        // Reading voice. Only one weight is self-hosted (600) — every
-        // serif use stands on that real weight rather than a
-        // browser-synthesized (faux) bold.
-        serif: ['"Source Serif 4"', "Georgia", "ui-serif", "serif"],
-        // Display/headline voice — condensed newsroom-grotesque (real
-        // early-20th-century headline lineage). Also one hosted weight
-        // (600); size alone carries the hierarchy on top of it (see the
-        // eyebrow/page-title/dateline scale below), matching the
-        // direction's own "type size carries importance" principle.
-        display: ['"Oswald"', "Impact", "Haettenschweiler", "sans-serif"],
+        // Interface voice, and the default for everything: Atkinson
+        // Hyperlegible, hosted at its real 400 and 700.
+        sans: ["\"Atkinson Hyperlegible\"", "ui-sans-serif", "system-ui", "sans-serif"],
+        // Reading voice for event text and prose: Literata 400/600.
+        serif: ["\"Literata\"", "Georgia", "ui-serif", "serif"],
+        // Titles and the year numerals: the same Literata, set larger and
+        // tighter. One family for reading and display keeps the page quiet;
+        // the contrast with the interface sans does the rest.
+        display: ["\"Literata\"", "Georgia", "ui-serif", "serif"],
       },
-      // The Welcome page's one signature interaction — a dateline typing in
-      // like a wire dispatch, then the masthead/tagline/rule/button
-      // resolving in sequence via animation-delay. Real OS-level reduced
-      // motion drops these via stock motion-safe:/motion-reduce: (unmodified
-      // — see globals.css for why the in-app override doesn't touch these
-      // variants at all and instead neutralizes timing globally).
+      // One motion for the whole identity, borrowed from the cyanotype it is
+      // named after: an image is not typed or stamped, it develops, paper
+      // turning to Prussian blue. The Welcome page settles the hourglass's
+      // grains and develops the name; the 404 develops its number. OS-level
+      // reduced motion drops them via motion-safe:, and the in-app override
+      // neutralizes timing globally (see globals.css); "both" fill-mode lands
+      // either way on the final, fully visible state.
       keyframes: {
-        typewriter: {
-          from: { width: "0" },
-          to: { width: "100%" },
+        develop: {
+          from: { opacity: "0.15", color: "hsl(var(--border))" },
+          to: { opacity: "1", color: "hsl(var(--foreground))" },
         },
-        "caret-blink": {
-          "0%, 100%": { opacity: "0" },
-          "50%": { opacity: "1" },
-        },
-        "fade-up": {
-          from: { opacity: "0", transform: "translateY(0.5rem)" },
+        "grain-settle": {
+          from: { opacity: "0", transform: "translateY(-1.5px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "grow-x": {
-          from: { transform: "scaleX(0)" },
-          to: { transform: "scaleX(1)" },
-        },
-        // The 404 page: the carriage physically hitting the end-stop the
-        // instant the typed line runs out of room to type in — a small
-        // horizontal jolt, not a generic wobble (settles back to 0, doesn't
-        // drift).
-        "paper-jolt": {
-          "0%, 100%": { transform: "translateX(0)" },
-          "20%": { transform: "translateX(-3px)" },
-          "40%": { transform: "translateX(2px)" },
-          "60%": { transform: "translateX(-1px)" },
-          "80%": { transform: "translateX(1px)" },
-        },
-        // Same page: the "404" itself lands like a rubber date-stamp hitting
-        // the page, not just fading up like the supporting text around it —
-        // the one moment on this page that gets its own weight.
-        "stamp-in": {
-          "0%": { opacity: "0", transform: "scale(1.15)" },
-          "60%": { opacity: "1", transform: "scale(0.97)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
         // The photo filmstrip's seamless loop: the track renders the photo
         // pool twice back to back, so translating exactly -50% lands on a
@@ -121,51 +102,35 @@ const config: Config = {
         },
       },
       animation: {
-        typewriter: "typewriter 1.1s steps(22, end) forwards",
-        // forwards: settles on the 100% keyframe (opacity 0) once the 4
-        // blinks finish, so the caret disappears on its own even under the
-        // reduce-motion override below (near-zero duration, still forwards).
-        "caret-blink": "caret-blink 0.9s step-end 4 forwards",
-        // fill-mode "both" (not just "forwards"): with a delay, the element
-        // must sit at the from-keyframe (invisible) during that delay, or
-        // it flashes visible in its default state before its turn arrives.
-        "fade-up": "fade-up 0.6s ease-out both",
-        "grow-x": "grow-x 0.5s ease-out both",
-        "paper-jolt": "paper-jolt 0.4s ease-out both",
-        // A slight overshoot ("back" easing, not ease-out) is what makes a
-        // stamp read as an impact instead of just a bigger fade-up.
-        "stamp-in": "stamp-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both",
+        develop: "develop 1.4s ease-out both",
+        "grain-settle": "grain-settle 0.35s ease-out both",
+        "fade-in": "fade-in 0.6s ease-out both",
         // Slow and ambient on purpose — a background filmstrip, not the
         // page's focal motion. linear, never eased: an eased infinite loop
         // visibly surges/stalls at every repeat.
         "filmstrip-scroll": "filmstrip-scroll 50s linear infinite",
       },
       fontSize: {
-        // Page-level <h1>, set in the display face. Oswald is already
-        // condensed, so it wants little to no extra negative tracking —
-        // unlike a normal-width display serif, tightening it further just
-        // cramps the letterforms.
+        // Page-level <h1>, Literata 600. A text serif at display size wants
+        // a little negative tracking, the opposite of a condensed grotesk.
         "page-title": [
-          "1.75rem",
-          { lineHeight: "2rem", fontWeight: "600", letterSpacing: "-0.005em" },
+          "2rem",
+          { lineHeight: "2.375rem", fontWeight: "600", letterSpacing: "-0.015em" },
         ],
-        // The event year, set as a hero numeral object (display face,
-        // tabular figures expected at the call site) rather than a small
-        // badge — donated by the nixie-tube-counter challenger.
+        // The event year, the list's main fact: Literata numerals in the
+        // margin, tabular figures expected at the call site.
         dateline: [
-          "1.125rem",
-          { lineHeight: "1.25rem", fontWeight: "600", letterSpacing: "0em" },
+          "1.25rem",
+          { lineHeight: "1.5rem", fontWeight: "600", letterSpacing: "-0.01em" },
         ],
-        // Small uppercase section/field label (events panel section
-        // headings, the map legend title, form labels), set in the display
-        // face. Same metrics the app already used as plain utilities,
-        // named so they aren't retyped per call site — text-transform and
-        // color stay separate utilities.
+        // Small section/field label in the interface face, sentence case,
+        // no tracking: a label, not a stamp.
         eyebrow: [
-          "0.75rem",
-          { lineHeight: "1rem", fontWeight: "600", letterSpacing: "0.08em" },
+          "0.8125rem",
+          { lineHeight: "1.125rem", fontWeight: "700", letterSpacing: "0em" },
         ],
       },
+
     },
   },
   plugins: [],
