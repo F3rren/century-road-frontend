@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "react-i18next";
 import { ExternalAnchor } from "@/components/ui/ExternalAnchor";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ReadingPage } from "@/components/layout/ReadingPage";
 import { ContactEmail, LegalSection, OPERATOR_NAME } from "@/features/legal";
 import {
   BACKEND_REPO_URL,
@@ -36,10 +36,7 @@ export function CreditsPage() {
   usePageMeta(t("nav.credits"), t("meta.credits.description"));
 
   return (
-    <div className="h-full overflow-y-auto p-6">
-      <div className="mx-auto max-w-prose space-y-8 pb-8">
-        <PageHeader title={t("credits.title")} description={t("credits.description")} />
-
+    <ReadingPage title={t("credits.title")} description={t("credits.description")}>
         <LegalSection title={t("credits.data.title")}>
           <ul className="list-disc space-y-1.5 pl-5">
             {DATA_SOURCES.map((key) => (
@@ -67,7 +64,6 @@ export function CreditsPage() {
           </p>
           <p>{t("credits.contact.p2")}</p>
         </LegalSection>
-      </div>
-    </div>
+    </ReadingPage>
   );
 }

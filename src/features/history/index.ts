@@ -1,6 +1,7 @@
 export { AttributionNotice } from "./components/AttributionNotice";
 export { EntryList } from "./components/EntryList";
 export { HistoryEvents } from "./components/HistoryEvents";
+export { YearMark } from "./components/YearMark";
 export { SECTION_LABEL_KEYS, SECTION_ORDER } from "./constants";
 export { useOnThisDay } from "./hooks/useOnThisDay";
 export { buildImageSources } from "./lib/images";
@@ -33,5 +34,6 @@ export type {
   OnThisDayData,
   OnThisDayParams,
   PageRef,
+  PlaceRef,
   SectionResult,
 } from "./types";

@@ -13,7 +13,7 @@ export function LegalSummary({ items }: LegalSummaryProps) {
     <section aria-labelledby={headingId} className="border-l-2 border-primary pl-4">
       <h2
         id={headingId}
-        className="font-display text-eyebrow uppercase text-muted-foreground"
+        className="text-eyebrow text-muted-foreground"
       >
         In sintesi
       </h2>

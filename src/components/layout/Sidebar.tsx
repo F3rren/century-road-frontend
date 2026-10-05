@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Wordmark } from "@/components/ui/Wordmark";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -44,7 +45,7 @@ const referenceItems = [
 // Index-tab look shared by the main links and the reference links below them.
 function navLinkClass({ isActive }: { isActive: boolean }): string {
   return cn(
-    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 font-display text-sm font-semibold uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
+    'flex items-center gap-3 whitespace-nowrap border-l-2 px-[calc(1rem-2px)] py-2.5 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar',
     isActive
       ? 'border-sidebar-accent bg-sidebar-border/40 text-sidebar-accent'
       : 'border-transparent text-sidebar-foreground/70 hover:border-sidebar-border hover:bg-sidebar-border/20 hover:text-sidebar-foreground',
@@ -97,9 +98,7 @@ export function Sidebar({ open, isDesktop, onClose, className }: SidebarProps) {
             (a phone held sideways). */}
         <div className={cn('flex h-full flex-col overflow-y-auto', isDesktop ? 'w-60' : 'w-64')}>
           <div className="flex h-14 shrink-0 items-center border-b border-sidebar-border px-4 whitespace-nowrap">
-            <span className="font-display text-lg font-semibold uppercase tracking-wide">
-              Century Road
-            </span>
+            <Wordmark className="text-lg" markClassName="text-sidebar-accent" />
           </div>
           {/* Index tabs, not nav pills: an active left rule in the one
               accent color, like a tabbed directory board — not a filled

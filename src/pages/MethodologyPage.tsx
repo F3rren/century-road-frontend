@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from "react-i18next";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { ReadingPage } from "@/components/layout/ReadingPage";
 import { ProseLink, TodayReport } from "@/features/info";
 import { LegalSection } from "@/features/legal";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -11,10 +11,7 @@ export function MethodologyPage() {
   usePageMeta(t("nav.methodology"), t("meta.methodology.description"));
 
   return (
-    <div className="h-full overflow-y-auto p-6">
-      <div className="mx-auto max-w-prose space-y-8 pb-8">
-        <PageHeader title={t("methodology.title")} description={t("methodology.description")} />
-
+    <ReadingPage title={t("methodology.title")} description={t("methodology.description")}>
         <LegalSection title={t("methodology.source.title")}>
           <p>{t("methodology.source.p1")}</p>
           <p>
@@ -70,7 +67,6 @@ export function MethodologyPage() {
             <Trans i18nKey="methodology.views.p1" components={{ privacy: <ProseLink to="/privacy" /> }} />
           </p>
         </LegalSection>
-      </div>
-    </div>
+    </ReadingPage>
   );
 }

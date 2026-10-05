@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import { CalendarRange } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
-import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { CenturyFilters, CenturyTimeline, useCenturyParams } from "@/features/century";
+import { CenturyFilters, CenturyTimeline, CountrySuggestions, useCenturyParams } from "@/features/century";
 import { trackCountryView } from "@/features/history";
 import { ProseLink } from "@/features/info";
 import { localizedCountryName } from "@/features/map/data";
@@ -41,7 +39,7 @@ export function CenturyPage() {
             toYear={params.toYear}
           />
         ) : (
-          <EmptyState icon={CalendarRange} description={t("century.pickCountry")} />
+          <CountrySuggestions language={language} onPick={(country) => update({ country })} />
         )}
       </div>
     </div>

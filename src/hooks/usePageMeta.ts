@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BRAND_NAME } from "@/components/ui/Wordmark";
 
 const DESCRIPTION_SELECTOR = 'meta[name="description"]';
 
@@ -16,7 +17,7 @@ function getDescriptionTag(): HTMLMetaElement {
 
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
-    document.title = `${title} · Century Road`;
+    document.title = `${title} · ${BRAND_NAME}`;
     getDescriptionTag().setAttribute("content", description);
   }, [title, description]);
 }

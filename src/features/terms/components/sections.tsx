@@ -31,7 +31,7 @@ export function AboutSection() {
   return (
     <LegalSection title="1. Chi siamo e cosa offre il sito">
       <p>
-        Century Road è una mappa interattiva con gli eventi storici accaduti nel giorno di
+        Grains of History è una mappa interattiva con gli eventi storici accaduti nel giorno di
         oggi, e un archivio che copre ogni secolo. La gestisce{" "}
         <strong>{OPERATOR_NAME}</strong> («il gestore»), che puoi contattare a{" "}
         <ContactEmail />.
@@ -123,7 +123,7 @@ export function IntellectualPropertySection() {
   return (
     <LegalSection title="4. Proprietà intellettuale">
       <p>
-        Il nome «Century Road», la grafica, il software e i testi dell'interfaccia
+        Il nome «Grains of History», la grafica, il software e i testi dell'interfaccia
         appartengono al gestore, salvo i contenuti di terzi indicati sopra. Il codice
         sorgente è pubblicato su GitHub (
         <ExternalAnchor href={FRONTEND_REPO_URL} className="text-primary">
