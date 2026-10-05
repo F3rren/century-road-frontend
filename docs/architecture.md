@@ -40,8 +40,8 @@ A single-page app, feature-folder organized. Everything under `src/features/<nam
 src/
 ├── pages/          route-level components — thin, compose feature components
 ├── features/
-│   ├── welcome/    first-visit threshold screen (dateline-typing animation, historical photo carousel)
-│   ├── map/        the core surface — MapLibre globe/map, country geocoding, events side panel
+│   ├── welcome/    first-visit threshold screen (the name developing like a print, a cyanotype-toned photo filmstrip)
+│   ├── map/        the core surface — MapLibre globe/map restyled as a paper print, country geocoding, events side panel
 │   ├── history/    shared "on this day" domain layer — consumed by map, dashboard, archive
 │   ├── dashboard/  real-data statistics (today's events + all-time view-popularity)
 │   ├── archive/    the standalone filterable/searchable day browser
@@ -69,7 +69,11 @@ src/
 
 - **`/welcome`** — standalone, outside `AppLayout`. A true threshold: no sidebar/header chrome.
 - **`/`** (`AppLayout`, wraps everything below as children):
-  - `index: true` → `IndexRoute` — not a page itself, a gate: `!hasSeenWelcome()` redirects to `/welcome`, otherwise renders `MapPage` directly (the same "default unless a preference says otherwise" shape the app uses for theme/language/projection).
+  - `index: true` → `IndexRoute` — not a page itself, a gate: `!hasSeenWelcome()` redirects to `/welcome`, otherwise renders `MapPage` directly (the same "default unless a preference says otherwise" shape the app uses for theme/language/projection). The selected country lives in `?country=XX` (each choice pushes a history entry, so Back returns to the whole day); the first-visit redirect drops it.
+
+### The map
+
+`MapView` loads OpenFreeMap's Positron and repaints it on load as the paper of a cyanotype ([DESIGN.md](../DESIGN.md), The Paper Map Rule): land and sea in Paper, its own country lines from the same Natural Earth shapes the heat is counted on, place names only from zoom 4 and in the UI language. Today's countries are filled from `constants/heat.ts`, and the camera turns to them (`facingCenter`) and to a chosen country (`countryAnchor`), both in `lib/countryGeometry.ts`. `EventsPanel` holds the two doors, the day and the country; the history list it renders marks the editors' picks in place (`features/history/lib/featured.ts`) instead of listing them twice. The design critique this layout answers is kept in `.impeccable/critique/`.
   - `dashboard`, `archive`, `settings`, `privacy`, `terms` → their respective pages.
   - `century` → "Il mio secolo": pick a country, read its events from every day of the year in time order, grouped by decade. Fed by the backend's nightly country index (`/api/history/countries`), not by the day-at-a-time feed the other pages use. The choice lives in the URL (`?country=IT&from=1901&to=2000`; an empty `from=`/`to=` means no limit, a missing one the 1901–2000 default), so the link is the thing to share; each row opens the Archive on that day and year. Main nav after Archivio, shortcut `4` (Settings moved to `5`). Country names come from `@/features/map/data` for the same MapLibre reason as `methodology` below.
   - `guide`, `methodology`, `credits` → reference pages (how to use, where the data comes from, sources/licenses/contact), fully translated, linked from the sidebar's lower group with Privacy and Terms. `methodology` renders today's real backend response as a table via `useTodayHistory` — imported from `@/features/map/data`, not the main barrel, which would pull MapLibre (~1 MB) into a text page.
