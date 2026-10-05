@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Grains of History** is an interactive historical almanac: it places 20th-century historical events both geographically (on a globe/map) and temporally (what happened on today's date, across the century), backed by a live Wikipedia "on this day" feed proxied through a small Spring Boot backend. It's spatial-first, not list/timeline-first — most "on this day" products lead with a calendar or search box; this one leads with a globe, with the calendar/date framing layered on top via a per-country event-density heatmap.
+**Grains of History** is an interactive historical almanac: it places historical events from every century both geographically (on a globe/map) and temporally (what happened on today's date, from antiquity to now), backed by a live Wikipedia "on this day" feed proxied through a small Spring Boot backend. It's spatial-first, not list/timeline-first — most "on this day" products lead with a calendar or search box; this one leads with a globe, with the calendar/date framing layered on top via a per-country event-density heatmap.
 
 ## Goal and problem
 
@@ -37,7 +37,7 @@ This is a first-draft prioritization derived from what `PRODUCT.md` already call
 - 6 working Impostazioni sections (theme, language, map projection, accessibility, keyboard shortcuts reference, data/privacy controls)
 - 4-language UI i18n (IT default, EN, DE, FR)
 - Light/dark theme, persisted, no load flash
-- WCAG AA accessibility floor (see Non-Functional Requirements)
+- WCAG AAA text contrast (7:1) on an AA floor (see Non-Functional Requirements)
 - Anonymous, aggregate view tracking (day + country), with no visitor identifier
 
 **Should have** (clearly adjacent, not yet built):
@@ -58,7 +58,7 @@ Derived from `PRODUCT.md`'s own already-stated constraint language, not invented
 - **Country selection** — must be reachable both by map click and by keyboard/screen-reader via the `<select>` picker; both paths must resolve to the identical country/events result.
 - **On-this-day data** — every number shown (Dashboard, Archivio result counts) must derive from the live backend response for that exact query; no filler/placeholder values, ever (`PRODUCT.md` Product Principle #4).
 - **i18n coverage** — app chrome + all 5 functional routes fully translated in all 4 languages; Privacy/Termini may remain Italian-only, but that must be stated to the user, not silently inconsistent.
-- **Accessibility** — WCAG AA contrast on every text/badge pairing, full keyboard operability with no map-only interaction, visible focus states, `prefers-reduced-motion` respected automatically plus an independent manual override, 44×44px minimum touch targets. Already built and verified; must not regress.
+- **Accessibility** — 7:1 (WCAG AAA) contrast on every text pairing in both themes, WCAG AA as the floor for everything else, full keyboard operability with no map-only interaction, visible focus states, `prefers-reduced-motion` respected automatically plus an independent manual override, 44×44px minimum touch targets. Already built and verified; must not regress.
 - **View tracking** — a country-view POST or a day-view increment must never block, delay, or error out the page it's attached to, even if the tracking write itself fails (fire-and-forget by design).
 
 ## Technical constraints
