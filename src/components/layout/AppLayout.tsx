@@ -17,7 +17,8 @@ export function AppLayout() {
       "2": () => navigate("/dashboard"),
       "3": () => navigate("/archive"),
       "4": () => navigate("/century"),
-      "5": () => navigate("/settings"),
+      "5": () => navigate("/paths"),
+      "6": () => navigate("/settings"),
     }),
     [navigate],
   );

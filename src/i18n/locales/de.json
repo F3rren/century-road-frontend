@@ -8,7 +8,9 @@
   "errors": {
     "network": "der Dienst antwortet nicht: prüfe die Verbindung und versuche es erneut",
     "server": "der Dienst ist gerade nicht erreichbar: versuche es in ein paar Minuten erneut",
-    "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut"
+    "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut",
+    "notFound": "der gewünschte Inhalt existiert nicht",
+    "rateLimited": "zu viele Anfragen in kurzer Zeit: versuch es in einer Weile noch einmal"
   },
   "nav": {
     "map": "Karte",
@@ -22,7 +24,8 @@
     "methodology": "Hinter den Daten",
     "credits": "Quellen und Kontakt",
     "ariaLabel": "Hauptnavigation",
-    "brandTagline": "Entdecke die Vergangenheit, Geschichte für Geschichte"
+    "brandTagline": "Entdecke die Vergangenheit, Geschichte für Geschichte",
+    "paths": "Pfade"
   },
   "header": {
     "openMenu": "Menü öffnen",
@@ -77,6 +80,12 @@
       "closePanel": "Ereignis-Panel schließen",
       "anniversariesTitle": "Jahrestage am {{day}}. {{month}}",
       "seeCentury": "Seine Ereignisse aus dem ganzen Jahr ansehen"
+    },
+    "place": {
+      "ariaLabel": "Auf der Karte gezeigter Ort",
+      "heading": "Ort der Vertiefung",
+      "clear": "Markierung von der Karte entfernen",
+      "read": "Vertiefung lesen"
     }
   },
   "dashboard": {
@@ -167,7 +176,13 @@
     "decadeColumn_one": "{{range}}: ein Ereignis. Zum Jahrzehnt",
     "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt",
     "startWith": "Zum Einstieg",
-    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}})."
+    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}}).",
+    "surprise": {
+      "button": "Überrasch mich",
+      "loading": "Ich suche ein Ereignis…",
+      "none": "Kein Ereignis passt zu den aktuellen Filtern: Erweitere die Jahre oder wähle ein anderes Land.",
+      "error": "Die Suche nach einem Ereignis ist fehlgeschlagen ({{error}})."
+    }
   },
   "history": {
     "section": {
@@ -185,14 +200,16 @@
     "empty": "Keine Einträge für diesen Tag.",
     "card": {
       "relatedCount_one": "{{count}} verlinkter Artikel",
-      "relatedCount_other": "{{count}} verlinkte Artikel"
+      "relatedCount_other": "{{count}} verlinkte Artikel",
+      "insight": "Vertiefung verfügbar"
     },
     "dialog": {
       "close": "Schließen",
       "relatedHeading": "Verlinkte Artikel",
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}}: das ganze Jahr",
-      "archiveDay": "Dieser Tag im Archiv"
+      "archiveDay": "Dieser Tag im Archiv",
+      "insight": "Warum es zählt"
     },
     "attribution": {
       "licenseLabel": "Lizenz"
@@ -292,7 +309,7 @@
     "errors": {
       "title": "Widersprüche und Fehler",
       "p1": "Bei einer einzigen Quelle gibt es nichts abzugleichen: Wir vergleichen die Einträge nicht mit anderen Archiven. Ein Fehler im Text eines Ereignisses wird auf Wikipedia korrigiert, auf der Seite zu diesem Tag des Jahres; die Korrektur erscheint hier mit der nächsten Aktualisierung.",
-      "p2": "Fehler dieser Seite, etwa ein falsch zugeordnetes Land, meldest du über <credits>Quellen und Kontakt</credits>."
+      "p2": "Für Fehler dieser Seite, etwa ein falsch zugeordnetes Land, oder für einen Fehler in einem Ereignis, einer Vertiefung oder einem Pfad nutze „Einen Fehler melden“ darunter oder schreib uns über <credits>Quellen und Kontakt</credits>."
     },
     "limits": {
       "title": "Grenzen",
@@ -301,6 +318,26 @@
     "views": {
       "title": "Besuchsstatistik",
       "p1": "„Meistbesucht“ im Dashboard sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+    },
+    "sources": {
+      "title": "Quellen, Abdeckung und Grenzen",
+      "intro": "Was folgt, fragen wir jedes Mal beim Dienst ab, es kann also nicht veralten. Es sind Herkunftsangaben, kein Gütesiegel: Eine Vertiefung wurde nur dann von einer Person geprüft, wenn sie ein Prüfdatum trägt.",
+      "loadError": "Die Quellen konnten nicht geladen werden ({{error}}).",
+      "sourcesHeading": "Quellen",
+      "noLicense": "Vorerst keine Lizenz gewählt.",
+      "attributionRequired": "Muss genannt werden.",
+      "coverageHeading": "Wie viel es gibt",
+      "indexCaption": "Ereignisse im Länderindex, nach Wikipedia-Ausgabe",
+      "colEvents": "Ereignisse",
+      "colCountries": "Länder",
+      "colYears": "Jahre",
+      "colUpdated": "Aktualisiert am",
+      "indexEmpty": "Der Länderindex wird gerade aufgebaut.",
+      "paths": "Pfade",
+      "insights": "Vertiefungen",
+      "reviewed": "Von einer Person geprüfte Vertiefungen",
+      "lastReviewed": "Letzte Prüfung",
+      "limitsHeading": "Was die Inhalte nicht sind"
     }
   },
   "guide": {
@@ -337,11 +374,15 @@
     },
     "shortcuts": {
       "title": "Gibt es Tastenkürzel?",
-      "p1": "Ja: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> und <kbd>5</kbd> öffnen Karte, Dashboard, Archiv, Mein Jahrhundert und Einstellungen; <kbd>/</kbd> springt zur Länderauswahl. Während du in ein Feld tippst, sind sie aus. Die Liste steht auch in den <settings>Einstellungen</settings>."
+      "p1": "Ja: <kbd>1</kbd> bis <kbd>6</kbd> öffnen Karte, Dashboard, Archiv, Mein Jahrhundert, Pfade und Einstellungen; <kbd>/</kbd> springt zur Länderauswahl. Während du in ein Feld tippst, sind sie aus. Die Liste steht auch in den <settings>Einstellungen</settings>."
     },
     "prefs": {
       "title": "Wo werden meine Einstellungen gespeichert?",
       "p1": "Nur in deinem Browser: Erscheinungsbild, Sprache, Kartenprojektion, reduzierte Animationen und ob du die Willkommensseite schon gesehen hast. Löschen kannst du sie in den <settings>Einstellungen</settings>; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+    },
+    "paths": {
+      "title": "Was sind die Pfade?",
+      "p1": "Es sind von Hand geschriebene Routen, <paths>unter Pfade</paths>: Jede Station ist ein Ereignis mit seinem „Warum es zählt“, seinem Ort auf der Karte und seinen Quellen. Wo ein Ereignis des Tages eine Vertiefung hat, ist es in der Liste markiert. Wenn etwas nicht stimmt, steht unter jedem Ereignis und jedem Text „Einen Fehler melden“."
     }
   },
   "credits": {
@@ -428,6 +469,89 @@
     },
     "notFound": {
       "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Grains of History zurück, um die Geschichte von heute weiter zu erkunden."
+    },
+    "paths": {
+      "description": "Von Hand geschriebene Pfade durch die Geschichte: wenige Stationen, jede mit ihrem Ort auf der Karte und der Antwort, warum sie zählt."
     }
+  },
+  "editorial": {
+    "italianOnly": "Die Texte in diesem Bereich sind von Hand und nur auf Italienisch geschrieben, egal in welcher Sprache die Oberfläche steht.",
+    "approximatePlace": "Ungefähre Position: {{note}}"
+  },
+  "report": {
+    "open": "Einen Fehler melden",
+    "intro": "Sag uns, was nicht stimmt: Wir lesen es und korrigieren es. Wir fragen nicht, wer du bist.",
+    "about": "Betrifft: {{subject}}",
+    "categoryLabel": "Um was für einen Fehler geht es?",
+    "categoryPlaceholder": "Auswählen…",
+    "category": {
+      "WRONG_DATE": "Das Datum ist falsch",
+      "WRONG_PLACE": "Der Ort ist falsch",
+      "WRONG_TEXT": "Der Text enthält einen Fehler",
+      "BROKEN_LINK": "Ein Link funktioniert nicht",
+      "OTHER": "Etwas anderes"
+    },
+    "messageLabel": "Was stimmt nicht?",
+    "messageHint": "{{min}} bis {{max}} Zeichen. Bisher geschrieben: {{length}}.",
+    "contactLabel": "E-Mail (freiwillig)",
+    "contactHint": "Wird nur verwendet, um dir zu antworten, falls nötig. Du kannst das Feld leer lassen.",
+    "submit": "Meldung senden",
+    "sending": "Wird gesendet…",
+    "sent": "Danke, deine Meldung ist angekommen (Nummer {{id}}).",
+    "sentContact": "Die hinterlassene E-Mail-Adresse dient nur dazu, dir zu antworten.",
+    "error": {
+      "invalid": "Die Meldung wurde nicht angenommen. Prüfe den Text und die E-Mail-Adresse: Die Adresse kannst du auch leer lassen.",
+      "generic": "Die Meldung konnte nicht gesendet werden ({{error}})."
+    }
+  },
+  "insights": {
+    "showOnMap": "Den Ort auf der Karte ansehen",
+    "stopOf": "Station {{position}} von {{count}}: {{title}}",
+    "before": "Davor",
+    "event": "Das Ereignis",
+    "after": "Danach",
+    "notes": "Wissenswertes zu Daten und Orten",
+    "related": "Weiter entdecken",
+    "sources": "Quellen",
+    "writtenBy": "Geschrieben von {{author}}.",
+    "reviewedOn": "Am {{date}} von einer Person anhand der Quellen geprüft.",
+    "notReviewed": "Bisher hat niemand diesen Text anhand seiner Quellen geprüft.",
+    "loadError": "Die Vertiefung konnte nicht geladen werden ({{error}})."
+  },
+  "samePeriod": {
+    "title": "Im selben Zeitraum",
+    "loadError": "Der Vergleich konnte nicht geladen werden ({{error}}).",
+    "intro": "Was um {{year}} in anderen Ländern geschah, zwischen {{from}} und {{to}}.",
+    "level": {
+      "NONE": "Für diesen Zeitraum ist nichts im Index.",
+      "SPARSE": "Wenig Material: Der Vergleich sagt wenig aus.",
+      "OK": "{{events}} Ereignisse in {{countries}} Ländern."
+    },
+    "country_one": "{{country}}: ein Ereignis im Index",
+    "country_other": "{{country}}: {{count}} Ereignisse im Index",
+    "countryYears": "{{country}}: alle Ereignisse von {{from}} bis {{to}}"
+  },
+  "paths": {
+    "pageDescription": "Von Hand geschriebene Routen: wenige Stationen, jede mit ihrem Ort auf der Karte.",
+    "startHere": "Hier anfangen",
+    "all": "Alle Pfade",
+    "loadError": "Die Pfade konnten nicht geladen werden ({{error}}).",
+    "empty": "Es gibt noch keine Pfade.",
+    "kind": {
+      "path": "Pfad",
+      "insight": "Vertiefung"
+    },
+    "meta": "{{stops}}, {{minutes}}",
+    "stops_one": "{{count}} Station",
+    "stops_other": "{{count}} Stationen",
+    "minutes_one": "{{count}} Minute Lesezeit",
+    "minutes_other": "{{count}} Minuten Lesezeit",
+    "back": "Alle Pfade",
+    "pathLoadError": "Der Pfad konnte nicht geladen werden ({{error}}).",
+    "coverCredit": "Urheber und Lizenz des Bildes",
+    "stopsHeading": "Die Stationen",
+    "stopLabel": "Station {{position}} von {{count}}",
+    "readInsight": "Warum es zählt",
+    "onMap": "Auf der Karte"
   }
 }

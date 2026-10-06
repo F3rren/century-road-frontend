@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useFetchOnce, useKeyedFetch } from '@/hooks/useFetchState';
 import {
   buildInsightsPath,
@@ -7,7 +8,8 @@ import {
   fetchPaths,
   fetchStartHere,
 } from '../services/historyApi';
-import type { InsightsDayParams } from '../types';
+import { findInsight } from '../lib/editorial';
+import type { HistoryEntry, InsightDetail, InsightsDayParams, InsightSummary } from '../types';
 
 // The hand-written content (paths, "Perché conta"). It answers from the backend's memory, never
 // from Wikipedia, so these hooks keep working when the day feed does not.
@@ -35,4 +37,25 @@ export function useInsights(day?: InsightsDayParams) {
 export function useInsight(slug: string) {
   const { data, error, isLoading, retry } = useKeyedFetch(slug, fetchInsight);
   return { slug, isLoading, data, error, retry };
+}
+
+const fetchInsightIfAny = (slug: string | null): Promise<InsightDetail | null> =>
+  slug === null ? Promise.resolve(null) : fetchInsight(slug);
+
+// For a page where the insight is optional (the map, when a link names one): with no slug there
+// is nothing to ask for, and data stays null once settled.
+export function useOptionalInsight(slug: string | null) {
+  const { data, error, isLoading } = useKeyedFetch(slug, fetchInsightIfAny);
+  return { isLoading, data, error };
+}
+
+const fetchDayInsights = (path: string | null): Promise<InsightSummary[]> =>
+  path === null ? Promise.resolve([]) : fetchInsights(path);
+
+// "Approfondimento disponibile": asks for a day's insights next to the day's own events and
+// answers, for any event, which insight (if any) it has. A failure just means no event is marked:
+// the marker is an extra, never a reason to show an error over the events themselves.
+export function useInsightFinder(day: InsightsDayParams | null): (entry: HistoryEntry) => InsightSummary | undefined {
+  const { data } = useKeyedFetch(day ? buildInsightsPath(day) : null, fetchDayInsights);
+  return useCallback((entry: HistoryEntry) => findInsight(entry, data ?? []), [data]);
 }

@@ -9,6 +9,7 @@ import { fetchTimelineCountries, type HistoryLanguage } from '@/features/history
 import { localizedCountryName } from '@/features/map/data';
 import { useKeyedFetch } from '@/hooks/useFetchState';
 import type { CenturyParams } from '../lib/centuryParams';
+import { SurpriseButton } from './SurpriseButton';
 
 const LABEL_CLASS = 'mb-1.5 block text-eyebrow text-muted-foreground';
 
@@ -76,10 +77,13 @@ export function CenturyFilters({ params, language, onChange }: CenturyFiltersPro
           </div>
         </div>
       </div>
-      <Button type="button" variant="outline" disabled={params.country === null} onClick={() => window.print()}>
-        <Printer className="h-4 w-4" aria-hidden="true" />
-        {t('century.print')}
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        <SurpriseButton params={params} language={language} />
+        <Button type="button" variant="outline" disabled={params.country === null} onClick={() => window.print()}>
+          <Printer className="h-4 w-4" aria-hidden="true" />
+          {t('century.print')}
+        </Button>
+      </div>
     </div>
   );
 }

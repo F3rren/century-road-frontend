@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import i18n from '@/i18n';
-import { describeFetchError, useFetchOnce, useKeyedFetch } from './useFetchState';
+import { describeFetchError, httpStatus, useFetchOnce, useKeyedFetch } from './useFetchState';
 
 describe('useKeyedFetch', () => {
   it('settles on the latest key even when an earlier key resolves after it', async () => {
@@ -81,8 +81,22 @@ describe('describeFetchError', () => {
     expect(describeFetchError(new Error('HTTP 502: Bad Gateway'))).toBe(i18n.t('errors.server'));
   });
 
+  it('reads a 404 as content that does not exist, and a 429 as too many requests', () => {
+    expect(describeFetchError(new Error('HTTP 404: Not Found'))).toBe(i18n.t('errors.notFound'));
+    expect(describeFetchError(new Error('HTTP 429: Too Many Requests'))).toBe(i18n.t('errors.rateLimited'));
+  });
+
   it('never shows the technical text of anything else', () => {
     expect(describeFetchError(new Error('Unexpected response shape from server'))).toBe(i18n.t('errors.unexpected'));
     expect(describeFetchError('a string')).toBe(i18n.t('errors.unexpected'));
+  });
+});
+
+describe('httpStatus', () => {
+  it('reads the status api.ts puts in its error, and nothing else', () => {
+    expect(httpStatus(new Error('HTTP 400: Bad Request'))).toBe(400);
+    expect(httpStatus(new Error('Unexpected response shape from server'))).toBeUndefined();
+    expect(httpStatus(new TypeError('Failed to fetch'))).toBeUndefined();
+    expect(httpStatus('HTTP 500')).toBeUndefined();
   });
 });

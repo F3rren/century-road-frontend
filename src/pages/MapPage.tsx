@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { MapView, ProjectionToggle, EventsPanel, localizedCountryName } from '@/features/map';
+import { MapView, PlacePlaque, ProjectionToggle, EventsPanel, localizedCountryName } from '@/features/map';
 import { HeatLegend } from '@/features/map/components/HeatLegend';
 import { useTodayHistory } from '@/features/map/hooks/useTodayHistory';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { useIsDesktop } from '@/hooks/useMediaQuery';
 import { getStoredProjection } from '@/hooks/useMapProjection';
-import { trackCountryView } from '@/features/history';
-import type { Country, ProjectionType } from '@/features/map';
+import { trackCountryView, useOptionalInsight } from '@/features/history';
+import type { Country, FocusPlace, ProjectionType } from '@/features/map';
 
 const COUNTRY_CODE = /^[A-Z]{2}$/;
 
@@ -46,6 +46,16 @@ export function MapPage() {
   );
   const clearCountry = useCallback(() => selectCountry(null), [selectCountry]);
 
+  // A link can name an insight (`/?insight=sputnik-1`): the map then turns to its place and pins
+  // it. Without one nothing is asked for; a failure to load it leaves the map as it is.
+  const insightSlug = searchParams.get('insight');
+  const { data: insight } = useOptionalInsight(insightSlug);
+  const focusPlace = useMemo<FocusPlace | null>(
+    () => (insight ? { lat: insight.place.lat, lon: insight.place.lon, label: insight.place.name } : null),
+    [insight],
+  );
+  const clearInsight = useCallback(() => setSearchParams({}), [setSearchParams]);
+
   // Anonymous, aggregate view tracking - one signal, "this country was selected", no visitor
   // identifier attached. A map click, the panel's picker and a link all go through the URL,
   // so this single effect covers them all.
@@ -69,6 +79,7 @@ export function MapPage() {
           onCountryClick={selectCountry}
           selectedCountryCode={selectedCountry?.code}
           countryHeatmap={history.countryHeatmap}
+          focusPlace={focusPlace}
         />
         <div className="absolute top-4 right-4 z-10">
           <ProjectionToggle value={projection} onChange={setProjection} />
@@ -76,8 +87,9 @@ export function MapPage() {
         {/* Top-left, not bottom-right: MapLibre's own NavigationControl
             already anchors bottom-right, and bottom-left is used by the
             mobile "Accadde oggi" trigger + the map's attribution control. */}
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-4 left-4 z-10 flex flex-col items-start gap-2">
           <HeatLegend />
+          {insight && <PlacePlaque insight={insight} onClear={clearInsight} />}
         </div>
         {/* On desktop the docked panel shows the failure next to the map; on
             mobile the panel is closed, and an empty print would read as a day

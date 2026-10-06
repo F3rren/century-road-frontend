@@ -1,13 +1,27 @@
 export { AttributionNotice } from "./components/AttributionNotice";
+export { EditorialNotice } from "./components/EditorialNotice";
 export { EntryList } from "./components/EntryList";
 export { HistoryEvents } from "./components/HistoryEvents";
+export { PlaceLine } from "./components/PlaceLine";
+export { ReportForm } from "./components/ReportForm";
 export { YearMark } from "./components/YearMark";
 export { SECTION_LABEL_KEYS, SECTION_ORDER } from "./constants";
-export { useInsight, useInsights, usePath, usePaths, useStartHere } from "./hooks/useEditorial";
+export {
+  useInsight,
+  useInsightFinder,
+  useInsights,
+  useOptionalInsight,
+  usePath,
+  usePaths,
+  useStartHere,
+} from "./hooks/useEditorial";
 export { useOnThisDay } from "./hooks/useOnThisDay";
 export { useSamePeriod } from "./hooks/useSamePeriod";
 export { useSources } from "./hooks/useSources";
+export { archiveEventRoute } from "./lib/archiveRoute";
+export { findInsight, insightOnMapRoute, insightRoute, PATHS_ROUTE, pathRoute } from "./lib/editorial";
 export { buildImageSources } from "./lib/images";
+export { paragraphs } from "./lib/paragraphs";
 export { matchesQuery } from "./lib/matchesQuery";
 export { cleanText } from "./lib/text";
 export {

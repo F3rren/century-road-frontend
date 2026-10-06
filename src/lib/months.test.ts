@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { centuryRange, daysInMonth, describeEventDate, formatEventDate, monthNames, randomMonthDay, todayMonthDay } from "./months";
+import { centuryRange, daysInMonth, describeEventDate, formatEventDate, formatYear, monthNames, randomMonthDay, todayMonthDay } from "./months";
 
 describe("daysInMonth", () => {
   it("returns 31 for a 31-day month", () => {
@@ -126,5 +126,16 @@ describe("describeEventDate", () => {
 
   it("gives a holiday (no year) only its day and month", () => {
     expect(describeEventDate(25, 12, undefined, "it", now)).toEqual({ date: "25 dicembre", ago: null });
+  });
+});
+
+describe("formatYear", () => {
+  it("writes a year of the common era as it is", () => {
+    expect(formatYear(1969, "it")).toBe("1969");
+  });
+
+  it("spells a year before the common era with its era, never as a bare negative", () => {
+    expect(formatYear(-44, "it")).toBe("44 a.C.");
+    expect(formatYear(-44, "en")).toBe("44 BC");
   });
 });

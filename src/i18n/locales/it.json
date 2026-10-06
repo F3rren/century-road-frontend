@@ -8,7 +8,9 @@
   "errors": {
     "network": "il servizio non risponde: controlla la connessione e riprova",
     "server": "il servizio non è disponibile in questo momento: riprova tra qualche minuto",
-    "unexpected": "risposta inattesa dal servizio: riprova più tardi"
+    "unexpected": "risposta inattesa dal servizio: riprova più tardi",
+    "notFound": "il contenuto richiesto non esiste",
+    "rateLimited": "troppe richieste in poco tempo: riprova tra un po’"
   },
   "nav": {
     "map": "Mappa",
@@ -22,7 +24,8 @@
     "methodology": "Dietro i dati",
     "credits": "Crediti e contatti",
     "ariaLabel": "Navigazione principale",
-    "brandTagline": "Esplora il passato, una storia alla volta"
+    "brandTagline": "Esplora il passato, una storia alla volta",
+    "paths": "Percorsi"
   },
   "header": {
     "openMenu": "Apri menu",
@@ -77,6 +80,12 @@
       "closePanel": "Chiudi pannello eventi",
       "anniversariesTitle": "Anniversari del {{day}} {{month}}",
       "seeCentury": "Vedi i suoi eventi di tutto l’anno"
+    },
+    "place": {
+      "ariaLabel": "Luogo mostrato sulla mappa",
+      "heading": "Luogo dell’approfondimento",
+      "clear": "Togli il segno dalla mappa",
+      "read": "Leggi l’approfondimento"
     }
   },
   "dashboard": {
@@ -167,7 +176,13 @@
     "decadeColumn_one": "{{range}}: un evento. Vai al decennio",
     "decadeColumn_other": "{{range}}: {{count}} eventi. Vai al decennio",
     "startWith": "Per cominciare",
-    "countriesLoadError": "Elenco dei paesi non disponibile ({{error}})."
+    "countriesLoadError": "Elenco dei paesi non disponibile ({{error}}).",
+    "surprise": {
+      "button": "Sorprendimi",
+      "loading": "Cerco un evento…",
+      "none": "Nessun evento corrisponde ai filtri attuali: allarga gli anni o scegli un altro paese.",
+      "error": "Impossibile cercare un evento ({{error}})."
+    }
   },
   "history": {
     "section": {
@@ -185,14 +200,16 @@
     "empty": "Nessuna voce per questo giorno.",
     "card": {
       "relatedCount_one": "{{count}} articolo collegato",
-      "relatedCount_other": "{{count}} articoli collegati"
+      "relatedCount_other": "{{count}} articoli collegati",
+      "insight": "Approfondimento disponibile"
     },
     "dialog": {
       "close": "Chiudi",
       "relatedHeading": "Articoli collegati",
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}}: tutto l’anno",
-      "archiveDay": "Questo giorno nell’archivio"
+      "archiveDay": "Questo giorno nell’archivio",
+      "insight": "Perché conta"
     },
     "attribution": {
       "licenseLabel": "Licenza"
@@ -292,7 +309,7 @@
     "errors": {
       "title": "Contraddizioni ed errori",
       "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
-      "p2": "Per gli errori di questo sito, come un paese attribuito male, scrivici da <credits>Crediti e contatti</credits>."
+      "p2": "Per gli errori di questo sito, come un paese attribuito male, o per un errore in un evento, in un approfondimento o in un percorso, usa «Segnala un errore» che trovi sotto ciascuno, oppure scrivici da <credits>Crediti e contatti</credits>."
     },
     "limits": {
       "title": "Limiti",
@@ -301,6 +318,26 @@
     "views": {
       "title": "Statistiche di visita",
       "p1": "«I più visitati», nella Dashboard, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
+    },
+    "sources": {
+      "title": "Fonti, copertura e limiti",
+      "intro": "Quello che segue lo chiediamo al servizio ogni volta, quindi non resta indietro. Sono provenienze, non un sigillo di affidabilità: un approfondimento è stato controllato da una persona solo se ha una data di revisione.",
+      "loadError": "Impossibile caricare le fonti ({{error}}).",
+      "sourcesHeading": "Fonti",
+      "noLicense": "Nessuna licenza scelta per ora.",
+      "attributionRequired": "Va citata.",
+      "coverageHeading": "Quanto c’è",
+      "indexCaption": "Eventi nell’indice dei paesi, per edizione di Wikipedia",
+      "colEvents": "Eventi",
+      "colCountries": "Paesi",
+      "colYears": "Anni",
+      "colUpdated": "Aggiornato il",
+      "indexEmpty": "L’indice dei paesi è in preparazione.",
+      "paths": "Percorsi",
+      "insights": "Approfondimenti",
+      "reviewed": "Approfondimenti controllati da una persona",
+      "lastReviewed": "Ultimo controllo",
+      "limitsHeading": "Che cosa non sono"
     }
   },
   "guide": {
@@ -337,11 +374,15 @@
     },
     "shortcuts": {
       "title": "Ci sono scorciatoie da tastiera?",
-      "p1": "Sì: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> e <kbd>5</kbd> aprono Mappa, Dashboard, Archivio, Il mio secolo e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
+      "p1": "Sì: da <kbd>1</kbd> a <kbd>6</kbd> aprono Mappa, Dashboard, Archivio, Il mio secolo, Percorsi e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
     },
     "prefs": {
       "title": "Dove vengono salvate le mie preferenze?",
       "p1": "Solo nel tuo browser: tema, lingua, proiezione della mappa, animazioni ridotte e se hai già visto la pagina di benvenuto. Puoi cancellarle da <settings>Impostazioni</settings>; i dettagli sono nella <privacy>Privacy</privacy>."
+    },
+    "paths": {
+      "title": "Cosa sono i percorsi?",
+      "p1": "Sono itinerari scritti a mano, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
     }
   },
   "credits": {
@@ -428,6 +469,89 @@
     },
     "notFound": {
       "description": "La pagina cercata non esiste. Torna alla mappa di Grains of History per continuare a esplorare la storia di oggi."
+    },
+    "paths": {
+      "description": "Percorsi guidati scritti a mano: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
     }
+  },
+  "editorial": {
+    "italianOnly": "I testi di questa sezione sono scritti a mano e solo in italiano, qualunque sia la lingua dell’interfaccia.",
+    "approximatePlace": "Posizione indicativa: {{note}}"
+  },
+  "report": {
+    "open": "Segnala un errore",
+    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei.",
+    "about": "Riguarda: {{subject}}",
+    "categoryLabel": "Che tipo di errore è?",
+    "categoryPlaceholder": "Scegli…",
+    "category": {
+      "WRONG_DATE": "La data è sbagliata",
+      "WRONG_PLACE": "Il luogo è sbagliato",
+      "WRONG_TEXT": "Il testo contiene un errore",
+      "BROKEN_LINK": "Un link non funziona",
+      "OTHER": "Altro"
+    },
+    "messageLabel": "Che cosa non va?",
+    "messageHint": "Da {{min}} a {{max}} caratteri. Scritti finora: {{length}}.",
+    "contactLabel": "Email (facoltativa)",
+    "contactHint": "Serve solo per risponderti, se serve. Puoi lasciarla vuota.",
+    "submit": "Invia la segnalazione",
+    "sending": "Invio…",
+    "sent": "Grazie, la segnalazione è arrivata (numero {{id}}).",
+    "sentContact": "L’email che hai lasciato serve solo per risponderti.",
+    "error": {
+      "invalid": "La segnalazione non è stata accettata. Controlla il testo e l’indirizzo email: puoi anche lasciarlo vuoto.",
+      "generic": "Non è stato possibile inviare la segnalazione ({{error}})."
+    }
+  },
+  "insights": {
+    "showOnMap": "Vedi il luogo sulla mappa",
+    "stopOf": "Tappa {{position}} di {{count}}: {{title}}",
+    "before": "Prima",
+    "event": "L’evento",
+    "after": "Dopo",
+    "notes": "Da sapere su date e luoghi",
+    "related": "Continua a esplorare",
+    "sources": "Fonti",
+    "writtenBy": "Scritto da {{author}}.",
+    "reviewedOn": "Controllato da una persona sulle sue fonti il {{date}}.",
+    "notReviewed": "Nessuno ha ancora controllato questo testo sulle sue fonti.",
+    "loadError": "Impossibile caricare l’approfondimento ({{error}})."
+  },
+  "samePeriod": {
+    "title": "Nello stesso periodo",
+    "loadError": "Impossibile caricare il confronto ({{error}}).",
+    "intro": "Che cosa accadeva in altri paesi intorno al {{year}}, tra il {{from}} e il {{to}}.",
+    "level": {
+      "NONE": "Nessun materiale nell’indice per questo periodo.",
+      "SPARSE": "Poco materiale: il confronto dice poco.",
+      "OK": "{{events}} eventi in {{countries}} paesi."
+    },
+    "country_one": "{{country}}: un evento nell’indice",
+    "country_other": "{{country}}: {{count}} eventi nell’indice",
+    "countryYears": "{{country}}: tutti gli eventi dal {{from}} al {{to}}"
+  },
+  "paths": {
+    "pageDescription": "Itinerari scritti a mano: poche tappe, ognuna con il suo luogo sulla mappa.",
+    "startHere": "Inizia da qui",
+    "all": "Tutti i percorsi",
+    "loadError": "Impossibile caricare i percorsi ({{error}}).",
+    "empty": "Non ci sono ancora percorsi.",
+    "kind": {
+      "path": "Percorso",
+      "insight": "Approfondimento"
+    },
+    "meta": "{{stops}}, {{minutes}}",
+    "stops_one": "{{count}} tappa",
+    "stops_other": "{{count}} tappe",
+    "minutes_one": "{{count}} minuto di lettura",
+    "minutes_other": "{{count}} minuti di lettura",
+    "back": "Tutti i percorsi",
+    "pathLoadError": "Impossibile caricare il percorso ({{error}}).",
+    "coverCredit": "Autore e licenza dell’immagine",
+    "stopsHeading": "Le tappe",
+    "stopLabel": "Tappa {{position}} di {{count}}",
+    "readInsight": "Perché conta",
+    "onMap": "Sulla mappa"
   }
 }
