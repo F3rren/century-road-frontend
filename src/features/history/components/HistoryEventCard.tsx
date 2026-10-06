@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cleanText } from '../lib/text';
-import type { Attribution, HistoryEntry, HistoryLanguage, PlaceRef } from '../types';
+import type { Attribution, HistoryEntry, HistoryLanguage, InsightSummary, PlaceRef } from '../types';
 import { EventDialog } from './EventDialog';
 import { YearMark } from './YearMark';
 
@@ -21,6 +21,8 @@ interface HistoryEventCardProps {
   featured?: boolean;
   // Where the map places the event, when it does: its popup links to that country.
   country?: PlaceRef;
+  // The hand-written "Perché conta" for this event, when there is one.
+  insight?: InsightSummary;
 }
 
 // The year in the margin, the event beside it. It shows only what the history
@@ -28,7 +30,7 @@ interface HistoryEventCardProps {
 // none is invented to fill those slots. `text` is the event; the linked
 // articles are related reading and are never used as its title or summary.
 // The full picture opens in a popup, so the list stays a scannable column.
-export function HistoryEventCard({ entry, month, day, language, attribution, compact = false, featured = false, country }: HistoryEventCardProps) {
+export function HistoryEventCard({ entry, month, day, language, attribution, compact = false, featured = false, country, insight }: HistoryEventCardProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -68,9 +70,10 @@ export function HistoryEventCard({ entry, month, day, language, attribution, com
           <span className={`line-clamp-3 block whitespace-pre-line font-serif ${compact ? 'text-sm' : 'text-base'} leading-snug transition-[color] group-hover:text-primary motion-safe:duration-150`}>
             {cleanText(entry.text)}
           </span>
-          {(featured || relatedCount > 0) && (
+          {(featured || insight || relatedCount > 0) && (
             <span className="mt-1 flex flex-wrap gap-x-3 text-xs text-muted-foreground">
               {featured && <span className="font-bold text-primary">{t('history.section.selected')}</span>}
+              {insight && <span className="font-bold text-primary">{t('history.card.insight')}</span>}
               {relatedCount > 0 && <span>{t('history.card.relatedCount', { count: relatedCount })}</span>}
             </span>
           )}
@@ -84,6 +87,7 @@ export function HistoryEventCard({ entry, month, day, language, attribution, com
           language={language}
           attribution={attribution}
           country={country}
+          insight={insight}
           onClose={handleClose}
         />
       )}

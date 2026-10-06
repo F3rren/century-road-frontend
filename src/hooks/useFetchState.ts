@@ -21,9 +21,18 @@ type Settled<K, D> =
 // fetcher ever does more than parse a response.
 export function describeFetchError(error: unknown): string {
   if (error instanceof TypeError) return i18n.t('errors.network');
-  const status = error instanceof Error ? /^HTTP (\d{3})/.exec(error.message)?.[1] : undefined;
-  if (status?.startsWith('5')) return i18n.t('errors.server');
+  const status = httpStatus(error);
+  if (status === 404) return i18n.t('errors.notFound');
+  if (status === 429) return i18n.t('errors.rateLimited');
+  if (status !== undefined && status >= 500 && status < 600) return i18n.t('errors.server');
   return i18n.t('errors.unexpected');
+}
+
+// The status api.ts puts in the message of the Error it throws for a non-ok answer
+// ("HTTP 404: Not Found"); undefined for anything else.
+export function httpStatus(error: unknown): number | undefined {
+  const status = error instanceof Error ? /^HTTP (\d{3})/.exec(error.message)?.[1] : undefined;
+  return status === undefined ? undefined : Number(status);
 }
 
 // Shared fetch+race-guard engine, generalizing useOnThisDay's original settle-by-key
@@ -74,7 +83,7 @@ export function useKeyedFetch<K, D>(
 const ONCE_KEY = 0;
 
 // For a fetch with no meaningful key — runs once per mount, like a plain [] effect.
-export function useFetchOnce<D>(fetcher: () => Promise<D>): FetchState<D> {
-  const { data, isLoading, error } = useKeyedFetch(ONCE_KEY, fetcher);
-  return { data, isLoading, error };
+export function useFetchOnce<D>(fetcher: () => Promise<D>): FetchState<D> & { retry: () => void } {
+  const { data, isLoading, error, retry } = useKeyedFetch(ONCE_KEY, fetcher);
+  return { data, isLoading, error, retry };
 }

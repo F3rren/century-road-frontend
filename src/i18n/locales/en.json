@@ -8,7 +8,9 @@
   "errors": {
     "network": "the service is not responding: check your connection and try again",
     "server": "the service is unavailable right now: try again in a few minutes",
-    "unexpected": "unexpected answer from the service: try again later"
+    "unexpected": "unexpected answer from the service: try again later",
+    "notFound": "the content you asked for doesn't exist",
+    "rateLimited": "too many requests in a short time: try again in a while"
   },
   "nav": {
     "map": "Map",
@@ -22,7 +24,8 @@
     "methodology": "Behind the data",
     "credits": "Credits and contact",
     "ariaLabel": "Main navigation",
-    "brandTagline": "Explore the past, one story at a time"
+    "brandTagline": "Explore the past, one story at a time",
+    "paths": "Paths"
   },
   "header": {
     "openMenu": "Open menu",
@@ -77,6 +80,12 @@
       "closePanel": "Close events panel",
       "anniversariesTitle": "Anniversaries for {{month}} {{day}}",
       "seeCentury": "See its events from the whole year"
+    },
+    "place": {
+      "ariaLabel": "Place shown on the map",
+      "heading": "The insight's place",
+      "clear": "Remove the mark from the map",
+      "read": "Read the insight"
     }
   },
   "dashboard": {
@@ -167,7 +176,13 @@
     "decadeColumn_one": "{{range}}: one event. Go to the decade",
     "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade",
     "startWith": "To start",
-    "countriesLoadError": "The list of countries is unavailable ({{error}})."
+    "countriesLoadError": "The list of countries is unavailable ({{error}}).",
+    "surprise": {
+      "button": "Surprise me",
+      "loading": "Looking for an event…",
+      "none": "No event matches the current filters: widen the years or pick another country.",
+      "error": "Couldn't look for an event ({{error}})."
+    }
   },
   "history": {
     "section": {
@@ -185,14 +200,16 @@
     "empty": "No entries for this day.",
     "card": {
       "relatedCount_one": "{{count}} linked article",
-      "relatedCount_other": "{{count}} linked articles"
+      "relatedCount_other": "{{count}} linked articles",
+      "insight": "Insight available"
     },
     "dialog": {
       "close": "Close",
       "relatedHeading": "Linked articles",
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}}: the whole year",
-      "archiveDay": "This day in the archive"
+      "archiveDay": "This day in the archive",
+      "insight": "Why it matters"
     },
     "attribution": {
       "licenseLabel": "License"
@@ -292,7 +309,7 @@
     "errors": {
       "title": "Contradictions and errors",
       "p1": "With a single source there's nothing to reconcile: we don't check entries against other archives. A mistake in an event's text is fixed on Wikipedia, on the page for that day of the year; the correction reaches this site with the next update.",
-      "p2": "For this site's own mistakes, such as a wrongly attributed country, write to us via <credits>Credits and contact</credits>."
+      "p2": "For this site's own mistakes, such as a wrongly attributed country, or for a mistake in an event, an insight or a path, use \"Report a mistake\" under each one, or write to us via <credits>Credits and contact</credits>."
     },
     "limits": {
       "title": "Limits",
@@ -301,6 +318,26 @@
     "views": {
       "title": "Visit statistics",
       "p1": "“Most viewed”, on the Dashboard, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
+    },
+    "sources": {
+      "title": "Sources, coverage and limits",
+      "intro": "We ask the service for what follows every time, so it can't fall behind. These are provenances, not a seal of reliability: an insight was checked by a person only if it shows a review date.",
+      "loadError": "Couldn't load the sources ({{error}}).",
+      "sourcesHeading": "Sources",
+      "noLicense": "No licence chosen for now.",
+      "attributionRequired": "Must be credited.",
+      "coverageHeading": "How much there is",
+      "indexCaption": "Events in the country index, by Wikipedia edition",
+      "colEvents": "Events",
+      "colCountries": "Countries",
+      "colYears": "Years",
+      "colUpdated": "Updated on",
+      "indexEmpty": "The country index is being prepared.",
+      "paths": "Paths",
+      "insights": "Insights",
+      "reviewed": "Insights checked by a person",
+      "lastReviewed": "Last check",
+      "limitsHeading": "What the content is not"
     }
   },
   "guide": {
@@ -337,11 +374,15 @@
     },
     "shortcuts": {
       "title": "Are there keyboard shortcuts?",
-      "p1": "Yes: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> and <kbd>5</kbd> open Map, Dashboard, Archive, My century and Settings; <kbd>/</kbd> jumps to the country picker. They don't work while you're typing in a field. The list is also in <settings>Settings</settings>."
+      "p1": "Yes: <kbd>1</kbd> to <kbd>6</kbd> open Map, Dashboard, Archive, My century, Paths and Settings; <kbd>/</kbd> jumps to the country picker. They don't work while you're typing in a field. The list is also in <settings>Settings</settings>."
     },
     "prefs": {
       "title": "Where are my preferences saved?",
       "p1": "Only in your browser: theme, language, map projection, reduced motion, and whether you've seen the welcome page. You can clear them from <settings>Settings</settings>; details are on the <privacy>Privacy</privacy> page (in Italian)."
+    },
+    "paths": {
+      "title": "What are the paths?",
+      "p1": "They are itineraries written by hand, <paths>in Paths</paths>: each stop is an event with its \"why it matters\", its place on the map and its sources. Where one of the day's events has an insight, it is marked in the list. If something doesn't add up, \"Report a mistake\" sits under every event and every text."
     }
   },
   "credits": {
@@ -428,6 +469,87 @@
     },
     "notFound": {
       "description": "The page you're looking for doesn't exist. Head back to the map to keep exploring today in history."
+    },
+    "paths": {
+      "description": "Guided paths written by hand: a few stops, each with its place on the map and why it matters."
     }
+  },
+  "editorial": {
+    "italianOnly": "The texts in this section are written by hand and only in Italian, whatever language the interface is in.",
+    "approximatePlace": "Approximate position: {{note}}"
+  },
+  "report": {
+    "open": "Report a mistake",
+    "intro": "Tell us what doesn't add up: we read it and correct it. We don't ask who you are, so we won't be able to reply.",
+    "about": "About: {{subject}}",
+    "categoryLabel": "What kind of mistake is it?",
+    "categoryPlaceholder": "Choose…",
+    "category": {
+      "WRONG_DATE": "The date is wrong",
+      "WRONG_PLACE": "The place is wrong",
+      "WRONG_TEXT": "The text contains a mistake",
+      "BROKEN_LINK": "A link doesn't work",
+      "OTHER": "Something else"
+    },
+    "messageLabel": "What is wrong?",
+    "messageHint": "{{min}} to {{max}} characters. Written so far: {{length}}.",
+    "noPersonalData": "Don't write any personal data: we don't need it.",
+    "submit": "Send the report",
+    "sending": "Sending…",
+    "sent": "Thank you, your report has arrived (number {{id}}).",
+    "error": {
+      "invalid": "The report wasn't accepted. Check the text and the email address: you can also leave the address empty.",
+      "generic": "The report couldn't be sent ({{error}})."
+    }
+  },
+  "insights": {
+    "showOnMap": "See the place on the map",
+    "stopOf": "Stop {{position}} of {{count}}: {{title}}",
+    "before": "Before",
+    "event": "The event",
+    "after": "After",
+    "notes": "Good to know about dates and places",
+    "related": "Keep exploring",
+    "sources": "Sources",
+    "writtenBy": "Written by {{author}}.",
+    "reviewedOn": "Checked against its sources by a person on {{date}}.",
+    "notReviewed": "Nobody has checked this text against its sources yet.",
+    "loadError": "Couldn't load the insight ({{error}})."
+  },
+  "samePeriod": {
+    "title": "In the same period",
+    "loadError": "Couldn't load the comparison ({{error}}).",
+    "intro": "What was happening in other countries around {{year}}, between {{from}} and {{to}}.",
+    "level": {
+      "NONE": "Nothing in the index for this period.",
+      "SPARSE": "Little material: the comparison says little.",
+      "OK": "{{events}} events in {{countries}} countries."
+    },
+    "country_one": "{{country}}: one event in the index",
+    "country_other": "{{country}}: {{count}} events in the index",
+    "countryYears": "{{country}}: every event from {{from}} to {{to}}"
+  },
+  "paths": {
+    "pageDescription": "Itineraries written by hand: a few stops, each with its place on the map.",
+    "startHere": "Start here",
+    "all": "All paths",
+    "loadError": "Couldn't load the paths ({{error}}).",
+    "empty": "There are no paths yet.",
+    "kind": {
+      "path": "Path",
+      "insight": "Insight"
+    },
+    "meta": "{{stops}}, {{minutes}}",
+    "stops_one": "{{count}} stop",
+    "stops_other": "{{count}} stops",
+    "minutes_one": "{{count}} minute to read",
+    "minutes_other": "{{count}} minutes to read",
+    "back": "All paths",
+    "pathLoadError": "Couldn't load the path ({{error}}).",
+    "coverCredit": "Image author and licence",
+    "stopsHeading": "The stops",
+    "stopLabel": "Stop {{position}} of {{count}}",
+    "readInsight": "Why it matters",
+    "onMap": "On the map"
   }
 }

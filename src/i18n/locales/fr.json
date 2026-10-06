@@ -8,7 +8,9 @@
   "errors": {
     "network": "le service ne répond pas : vérifiez la connexion et réessayez",
     "server": "le service est indisponible pour le moment : réessayez dans quelques minutes",
-    "unexpected": "réponse inattendue du service : réessayez plus tard"
+    "unexpected": "réponse inattendue du service : réessayez plus tard",
+    "notFound": "le contenu demandé n'existe pas",
+    "rateLimited": "trop de requêtes en peu de temps : réessayez dans un moment"
   },
   "nav": {
     "map": "Carte",
@@ -22,7 +24,8 @@
     "methodology": "Derrière les données",
     "credits": "Crédits et contact",
     "ariaLabel": "Navigation principale",
-    "brandTagline": "Explorez le passé, une histoire à la fois"
+    "brandTagline": "Explorez le passé, une histoire à la fois",
+    "paths": "Parcours"
   },
   "header": {
     "openMenu": "Ouvrir le menu",
@@ -77,6 +80,12 @@
       "closePanel": "Fermer le panneau des événements",
       "anniversariesTitle": "Anniversaires du {{day}} {{month}}",
       "seeCentury": "Voir ses événements de toute l’année"
+    },
+    "place": {
+      "ariaLabel": "Lieu montré sur la carte",
+      "heading": "Lieu de l'éclairage",
+      "clear": "Retirer le repère de la carte",
+      "read": "Lire l'éclairage"
     }
   },
   "dashboard": {
@@ -167,7 +176,13 @@
     "decadeColumn_one": "{{range}} : un événement. Aller à la décennie",
     "decadeColumn_other": "{{range}} : {{count}} événements. Aller à la décennie",
     "startWith": "Pour commencer",
-    "countriesLoadError": "La liste des pays n’est pas disponible ({{error}})."
+    "countriesLoadError": "La liste des pays n’est pas disponible ({{error}}).",
+    "surprise": {
+      "button": "Surprenez-moi",
+      "loading": "Je cherche un événement…",
+      "none": "Aucun événement ne correspond aux filtres actuels : élargissez les années ou choisissez un autre pays.",
+      "error": "Impossible de chercher un événement ({{error}})."
+    }
   },
   "history": {
     "section": {
@@ -185,14 +200,16 @@
     "empty": "Aucune entrée pour ce jour.",
     "card": {
       "relatedCount_one": "{{count}} article lié",
-      "relatedCount_other": "{{count}} articles liés"
+      "relatedCount_other": "{{count}} articles liés",
+      "insight": "Éclairage disponible"
     },
     "dialog": {
       "close": "Fermer",
       "relatedHeading": "Articles liés",
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}} : toute l’année",
-      "archiveDay": "Ce jour dans les archives"
+      "archiveDay": "Ce jour dans les archives",
+      "insight": "Pourquoi c'est important"
     },
     "attribution": {
       "licenseLabel": "Licence"
@@ -292,7 +309,7 @@
     "errors": {
       "title": "Contradictions et erreurs",
       "p1": "Avec une seule source, il n'y a rien à concilier : nous ne comparons pas les entrées à d'autres archives. Une erreur dans le texte d'un événement se corrige sur Wikipédia, sur la page consacrée à ce jour de l'année ; la correction arrive ici à la mise à jour suivante.",
-      "p2": "Pour les erreurs propres à ce site, comme un pays mal attribué, écrivez-nous depuis <credits>Crédits et contact</credits>."
+      "p2": "Pour les erreurs propres à ce site, comme un pays mal attribué, ou pour une erreur dans un événement, un éclairage ou un parcours, utilisez « Signaler une erreur » sous chacun, ou écrivez-nous depuis <credits>Crédits et contact</credits>."
     },
     "limits": {
       "title": "Limites",
@@ -301,6 +318,26 @@
     "views": {
       "title": "Statistiques de visite",
       "p1": "« Les plus consultés », dans le tableau de bord, sont des totaux anonymes : un jour est compté chaque fois que ses événements sont demandés, un pays chaque fois qu'il est sélectionné. Aucune donnée personnelle ni identifiant de visiteur ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
+    },
+    "sources": {
+      "title": "Sources, couverture et limites",
+      "intro": "Ce qui suit est demandé au service à chaque fois : cela ne peut donc pas prendre de retard. Ce sont des provenances, pas un gage de fiabilité : un éclairage n'a été vérifié par une personne que s'il porte une date de relecture.",
+      "loadError": "Impossible de charger les sources ({{error}}).",
+      "sourcesHeading": "Sources",
+      "noLicense": "Aucune licence choisie pour l'instant.",
+      "attributionRequired": "Doit être citée.",
+      "coverageHeading": "Ce qu'il y a",
+      "indexCaption": "Événements de l'index des pays, par édition de Wikipédia",
+      "colEvents": "Événements",
+      "colCountries": "Pays",
+      "colYears": "Années",
+      "colUpdated": "Mis à jour le",
+      "indexEmpty": "L'index des pays est en préparation.",
+      "paths": "Parcours",
+      "insights": "Éclairages",
+      "reviewed": "Éclairages vérifiés par une personne",
+      "lastReviewed": "Dernière vérification",
+      "limitsHeading": "Ce que le contenu n'est pas"
     }
   },
   "guide": {
@@ -337,11 +374,15 @@
     },
     "shortcuts": {
       "title": "Y a-t-il des raccourcis clavier ?",
-      "p1": "Oui : <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> et <kbd>5</kbd> ouvrent Carte, Tableau de bord, Archives, Mon siècle et Paramètres ; <kbd>/</kbd> mène au sélecteur de pays. Ils ne fonctionnent pas pendant la saisie dans un champ. La liste figure aussi dans les <settings>Paramètres</settings>."
+      "p1": "Oui : de <kbd>1</kbd> à <kbd>6</kbd> ouvrent Carte, Tableau de bord, Archives, Mon siècle, Parcours et Paramètres ; <kbd>/</kbd> mène au sélecteur de pays. Ils ne fonctionnent pas pendant la saisie dans un champ. La liste figure aussi dans les <settings>Paramètres</settings>."
     },
     "prefs": {
       "title": "Où sont enregistrées mes préférences ?",
       "p1": "Uniquement dans votre navigateur : apparence, langue, projection de la carte, animations réduites et le fait d'avoir déjà vu la page d'accueil. Vous pouvez les effacer depuis les <settings>Paramètres</settings> ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
+    },
+    "paths": {
+      "title": "Que sont les parcours ?",
+      "p1": "Ce sont des itinéraires écrits à la main, <paths>dans Parcours</paths> : chaque étape est un événement avec son « pourquoi c'est important », son lieu sur la carte et ses sources. Quand un événement du jour a un éclairage, il est signalé dans la liste. Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement et chaque texte."
     }
   },
   "credits": {
@@ -428,6 +469,87 @@
     },
     "notFound": {
       "description": "La page recherchée n'existe pas. Retournez à la carte de Grains of History pour continuer à explorer l'histoire du jour."
+    },
+    "paths": {
+      "description": "Des parcours guidés écrits à la main : quelques étapes, chacune avec son lieu sur la carte et ce qui la rend importante."
     }
+  },
+  "editorial": {
+    "italianOnly": "Les textes de cette section sont écrits à la main et seulement en italien, quelle que soit la langue de l'interface.",
+    "approximatePlace": "Position approximative : {{note}}"
+  },
+  "report": {
+    "open": "Signaler une erreur",
+    "intro": "Dites-nous ce qui ne va pas : nous le lisons et nous corrigeons. Nous ne vous demandons pas qui vous êtes, nous ne pourrons donc pas vous répondre.",
+    "about": "Concerne : {{subject}}",
+    "categoryLabel": "De quel type d'erreur s'agit-il ?",
+    "categoryPlaceholder": "Choisir…",
+    "category": {
+      "WRONG_DATE": "La date est fausse",
+      "WRONG_PLACE": "Le lieu est faux",
+      "WRONG_TEXT": "Le texte contient une erreur",
+      "BROKEN_LINK": "Un lien ne fonctionne pas",
+      "OTHER": "Autre chose"
+    },
+    "messageLabel": "Qu'est-ce qui ne va pas ?",
+    "messageHint": "De {{min}} à {{max}} caractères. Écrits jusqu'ici : {{length}}.",
+    "noPersonalData": "N'écrivez aucune donnée personnelle : nous n'en avons pas besoin.",
+    "submit": "Envoyer le signalement",
+    "sending": "Envoi…",
+    "sent": "Merci, votre signalement est bien arrivé (numéro {{id}}).",
+    "error": {
+      "invalid": "Le signalement n'a pas été accepté. Vérifiez le texte et l'adresse e-mail : vous pouvez aussi laisser l'adresse vide.",
+      "generic": "Le signalement n'a pas pu être envoyé ({{error}})."
+    }
+  },
+  "insights": {
+    "showOnMap": "Voir le lieu sur la carte",
+    "stopOf": "Étape {{position}} sur {{count}} : {{title}}",
+    "before": "Avant",
+    "event": "L'événement",
+    "after": "Après",
+    "notes": "À savoir sur les dates et les lieux",
+    "related": "Continuer à explorer",
+    "sources": "Sources",
+    "writtenBy": "Écrit par {{author}}.",
+    "reviewedOn": "Vérifié par une personne sur ses sources le {{date}}.",
+    "notReviewed": "Personne n'a encore vérifié ce texte sur ses sources.",
+    "loadError": "Impossible de charger l'éclairage ({{error}})."
+  },
+  "samePeriod": {
+    "title": "À la même époque",
+    "loadError": "Impossible de charger la comparaison ({{error}}).",
+    "intro": "Ce qui se passait dans d'autres pays vers {{year}}, entre {{from}} et {{to}}.",
+    "level": {
+      "NONE": "Rien dans l'index pour cette période.",
+      "SPARSE": "Peu de matière : la comparaison dit peu de chose.",
+      "OK": "{{events}} événements dans {{countries}} pays."
+    },
+    "country_one": "{{country}} : un événement dans l'index",
+    "country_other": "{{country}} : {{count}} événements dans l'index",
+    "countryYears": "{{country}} : tous les événements de {{from}} à {{to}}"
+  },
+  "paths": {
+    "pageDescription": "Des itinéraires écrits à la main : quelques étapes, chacune avec son lieu sur la carte.",
+    "startHere": "Commencer ici",
+    "all": "Tous les parcours",
+    "loadError": "Impossible de charger les parcours ({{error}}).",
+    "empty": "Il n'y a pas encore de parcours.",
+    "kind": {
+      "path": "Parcours",
+      "insight": "Éclairage"
+    },
+    "meta": "{{stops}}, {{minutes}}",
+    "stops_one": "{{count}} étape",
+    "stops_other": "{{count}} étapes",
+    "minutes_one": "{{count}} minute de lecture",
+    "minutes_other": "{{count}} minutes de lecture",
+    "back": "Tous les parcours",
+    "pathLoadError": "Impossible de charger le parcours ({{error}}).",
+    "coverCredit": "Auteur et licence de l'image",
+    "stopsHeading": "Les étapes",
+    "stopLabel": "Étape {{position}} sur {{count}}",
+    "readInsight": "Pourquoi c'est important",
+    "onMap": "Sur la carte"
   }
 }

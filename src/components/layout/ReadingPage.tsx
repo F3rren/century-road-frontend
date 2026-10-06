@@ -12,6 +12,8 @@ interface ContentsItem {
 interface ReadingPageProps {
   title: string;
   description: string;
+  // The language of the title and description, when it is not the interface's.
+  lang?: string;
   children: ReactNode;
 }
 
@@ -24,7 +26,7 @@ interface ReadingPageProps {
 // rather than passed in: the legal pages write their headings by hand, and a
 // second copy of each title would drift. A section without an id gets one, so it
 // can be linked to.
-export function ReadingPage({ title, description, children }: ReadingPageProps) {
+export function ReadingPage({ title, description, lang, children }: ReadingPageProps) {
   const { t } = useTranslation();
   const isDesktop = useIsDesktop();
   const textRef = useRef<HTMLDivElement>(null);
@@ -50,7 +52,7 @@ export function ReadingPage({ title, description, children }: ReadingPageProps) 
     <div className="h-full overflow-y-auto p-6">
       <div className="mx-auto max-w-5xl pb-8 lg:grid lg:grid-cols-[12rem_minmax(0,65ch)] lg:gap-x-12">
         <div className="lg:col-start-2">
-          <PageHeader title={title} description={description} />
+          <PageHeader title={title} description={description} lang={lang} />
         </div>
 
         {contents.length > 0 && (

@@ -147,3 +147,8 @@ export interface CountryTimelineParams {
   fromYear: number | null;
   toYear: number | null;
 }
+
+// The content layer added on top of the day feed, one file per part of the contract.
+export type * from './editorial';
+export type * from './discovery';
+export type * from './transparency';

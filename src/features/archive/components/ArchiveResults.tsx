@@ -7,6 +7,7 @@ import {
   SECTION_LABEL_KEYS,
   SECTION_ORDER,
   matchesQuery,
+  useInsightFinder,
   useOnThisDay,
   type HistorySectionKey,
   type OnThisDayParams,
@@ -45,6 +46,8 @@ export function ArchiveResults({ filters, onClearQuery }: ArchiveResultsProps) {
   );
 
   const { isLoading, data, error } = useOnThisDay(params);
+  // "Approfondimento disponibile" on the events that have one, matched on the year.
+  const insightFor = useInsightFinder(data?.date ?? null);
 
   const sections = useMemo(() => {
     if (!data) return [];
@@ -106,6 +109,8 @@ export function ArchiveResults({ filters, onClearQuery }: ArchiveResultsProps) {
                 day={data.date.day}
                 attribution={data.attribution}
                 query={filters.query}
+                // Births, deaths and holidays share a year with an event, not its insight.
+                insightFor={key === 'events' || key === 'selected' ? insightFor : undefined}
               />
             </div>
           ),

@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "react-i18next";
 import { ReadingPage } from "@/components/layout/ReadingPage";
-import { ProseLink, TodayReport } from "@/features/info";
+import { ProseLink, SourcesReport, TodayReport } from "@/features/info";
 import { LegalSection } from "@/features/legal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
@@ -21,6 +21,10 @@ export function MethodologyPage() {
 
         <LegalSection title={t("methodology.report.title")}>
           <TodayReport />
+        </LegalSection>
+
+        <LegalSection title={t("methodology.sources.title")}>
+          <SourcesReport />
         </LegalSection>
 
         <LegalSection title={t("methodology.languages.title")}>

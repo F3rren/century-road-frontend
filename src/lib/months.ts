@@ -79,6 +79,12 @@ export function formatEventDate(
   return `${dayMonth} ${year}`;
 }
 
+// A year for a sentence or a heading: "1969", or "44 a.C." before the common era, never the bare
+// "-44" the API sends. The era is a translated string for the reason formatEventDate gives.
+export function formatYear(year: number, language: string): string {
+  return year < 0 ? `${-year} ${i18n.t('date.era.bc', { lng: language })}` : String(year);
+}
+
 // The years a century covers, for a column or a heading: "1900–1999", or
 // "500–401 a.C." counting down before the common era. `start` is the year
 // floored to the hundred, so -100 holds 100 to 1 BC.

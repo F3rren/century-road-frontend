@@ -3,6 +3,7 @@ import { RotateCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/button';
+import { useInsightFinder } from '../hooks/useEditorial';
 import { splitFeatured } from '../lib/featured';
 import type { HistoryEntry, OnThisDayData, PlaceRef } from '../types';
 import { AttributionNotice } from './AttributionNotice';
@@ -37,6 +38,8 @@ export function HistoryEvents({ data, isLoading, error, onRetry, countryFor }: H
     () => splitFeatured(selected?.items ?? [], events?.items ?? []),
     [selected, events],
   );
+  // "Approfondimento disponibile" on the events that have one, matched on the year.
+  const insightFor = useInsightFinder(data?.date ?? null);
   const hasPicks = onlySelected.length > 0;
   const hasEvents = (events?.items.length ?? 0) > 0;
   const received = [selected, events].filter((s) => s !== undefined);
@@ -79,6 +82,7 @@ export function HistoryEvents({ data, isLoading, error, onRetry, countryFor }: H
             day={data.date.day}
             attribution={data.attribution}
             compact
+            insightFor={insightFor}
           />
         </div>
       )}
@@ -99,6 +103,7 @@ export function HistoryEvents({ data, isLoading, error, onRetry, countryFor }: H
             centuryHeadings={hasPicks ? 'h4' : 'h3'}
             featured={featured}
             countryFor={countryFor}
+            insightFor={insightFor}
           />
         </div>
       )}
