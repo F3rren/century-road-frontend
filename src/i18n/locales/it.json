@@ -176,13 +176,7 @@
     "decadeColumn_one": "{{range}}: un evento. Vai al decennio",
     "decadeColumn_other": "{{range}}: {{count}} eventi. Vai al decennio",
     "startWith": "Per cominciare",
-    "countriesLoadError": "Elenco dei paesi non disponibile ({{error}}).",
-    "surprise": {
-      "button": "Sorprendimi",
-      "loading": "Cerco un evento…",
-      "none": "Nessun evento corrisponde ai filtri attuali: allarga gli anni o scegli un altro paese.",
-      "error": "Impossibile cercare un evento ({{error}})."
-    }
+    "countriesLoadError": "Elenco dei paesi non disponibile ({{error}})."
   },
   "history": {
     "section": {
@@ -338,6 +332,14 @@
       "reviewed": "Approfondimenti controllati da una persona",
       "lastReviewed": "Ultimo controllo",
       "limitsHeading": "Che cosa non sono"
+    },
+    "editorial": {
+      "title": "Percorsi e approfondimenti: come nascono",
+      "p1": "Grains of History ti mostra quello che Wikipedia registra per ogni giorno e per ogni paese. I percorsi e gli approfondimenti «Perché conta» sono un'aggiunta diversa: punti di partenza scritti a mano, per chi non sa da dove cominciare. Non sono una classifica di ciò che conta di più nella storia e non pretendono di esserlo.",
+      "p2": "Ogni approfondimento racconta un evento in tre parti, prima, l'evento e dopo, dice dove metterlo sulla mappa e rimanda alle fonti in cui si può controllare ogni affermazione. I testi sono scritti in italiano e vivono nel codice del progetto: cambiano solo con una nuova versione del sito, riletta come il codice, e non da un momento all'altro.",
+      "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una prima stesura e va letta come tale, anche se è scritta con cura. Qui sotto trovi quanti approfondimenti sono stati riletti.",
+      "p4": "Dove una data dipende dal fuso orario, o il punto sulla mappa è solo un luogo di partenza (come il sito di lancio di una missione sulla Luna), la scheda lo dice.",
+      "p5": "Se qualcosa non torna, «Segnala un errore» sta sotto ogni evento, approfondimento e percorso. Non ti chiediamo chi sei, quindi non possiamo risponderti: leggiamo la segnalazione e, se serve, correggiamo."
     }
   },
   "guide": {
@@ -527,7 +529,10 @@
     },
     "country_one": "{{country}}: un evento nell’indice",
     "country_other": "{{country}}: {{count}} eventi nell’indice",
-    "countryYears": "{{country}}: tutti gli eventi dal {{from}} al {{to}}"
+    "countryYears": "{{country}}: tutti gli eventi dal {{from}} al {{to}}",
+    "yearLabel": "Anno al centro del confronto",
+    "yearHint": "Si confrontano gli anni intorno a questo.",
+    "yearInvalid": "Scrivi un anno tra -9999 e 9999 (negativo prima di Cristo)."
   },
   "paths": {
     "pageDescription": "Itinerari scritti a mano: poche tappe, ognuna con il suo luogo sulla mappa.",
@@ -551,5 +556,16 @@
     "stopLabel": "Tappa {{position}} di {{count}}",
     "readInsight": "Perché conta",
     "onMap": "Sulla mappa"
+  },
+  "discovery": {
+    "surprise": {
+      "button": "Sorprendimi",
+      "another": "Un altro evento",
+      "loading": "Cerco un evento…",
+      "none": "Nessun evento corrisponde ai filtri attuali: allarga gli anni o scegli un altro paese.",
+      "error": "Impossibile cercare un evento ({{error}}).",
+      "dateAndCountry": "{{date}}, {{country}}",
+      "onMap": "{{country}} sulla mappa"
+    }
   }
 }

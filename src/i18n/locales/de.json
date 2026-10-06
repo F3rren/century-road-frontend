@@ -176,13 +176,7 @@
     "decadeColumn_one": "{{range}}: ein Ereignis. Zum Jahrzehnt",
     "decadeColumn_other": "{{range}}: {{count}} Ereignisse. Zum Jahrzehnt",
     "startWith": "Zum Einstieg",
-    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}}).",
-    "surprise": {
-      "button": "Überrasch mich",
-      "loading": "Ich suche ein Ereignis…",
-      "none": "Kein Ereignis passt zu den aktuellen Filtern: Erweitere die Jahre oder wähle ein anderes Land.",
-      "error": "Die Suche nach einem Ereignis ist fehlgeschlagen ({{error}})."
-    }
+    "countriesLoadError": "Die Länderliste ist nicht verfügbar ({{error}})."
   },
   "history": {
     "section": {
@@ -338,6 +332,14 @@
       "reviewed": "Von einer Person geprüfte Vertiefungen",
       "lastReviewed": "Letzte Prüfung",
       "limitsHeading": "Was die Inhalte nicht sind"
+    },
+    "editorial": {
+      "title": "Pfade und Vertiefungen: wie sie entstehen",
+      "p1": "Grains of History zeigt dir, was Wikipedia für jeden Tag und jedes Land verzeichnet. Die Pfade und die Vertiefungen „Warum es zählt“ sind etwas anderes: von Hand geschriebene Ausgangspunkte für alle, die nicht wissen, wo sie anfangen sollen. Sie sind keine Rangliste dessen, was in der Geschichte am meisten zählt, und erheben auch keinen solchen Anspruch.",
+      "p2": "Jede Vertiefung erzählt ein Ereignis in drei Teilen, davor, das Ereignis und danach, sagt, wo es auf der Karte liegt, und verweist auf die Quellen, in denen sich jede Aussage prüfen lässt. Die Texte sind auf Italienisch geschrieben und liegen im Code des Projekts: Sie ändern sich nur mit einer neuen Version der Seite, die wie Code gegengelesen wird, und nicht von einem Moment zum anderen.",
+      "p3": "Ein Prüfdatum erscheint nur, wenn eine Person den Text wirklich anhand seiner Quellen gelesen hat. Fehlt es, hat das noch niemand getan: Es ist ein erster Entwurf und sollte auch so gelesen werden, so sorgfältig er auch geschrieben ist. Unten siehst du, wie viele Vertiefungen geprüft wurden.",
+      "p4": "Wo ein Datum von der Zeitzone abhängt oder der Punkt auf der Karte nur ein Ausgangsort ist (etwa der Startplatz einer Mondmission), sagt die Karte es.",
+      "p5": "Wenn etwas nicht stimmt, steht „Einen Fehler melden“ unter jedem Ereignis, jeder Vertiefung und jedem Pfad. Wir fragen nicht, wer du bist, und können deshalb nicht antworten: Wir lesen die Meldung und korrigieren, falls nötig."
     }
   },
   "guide": {
@@ -527,7 +529,10 @@
     },
     "country_one": "{{country}}: ein Ereignis im Index",
     "country_other": "{{country}}: {{count}} Ereignisse im Index",
-    "countryYears": "{{country}}: alle Ereignisse von {{from}} bis {{to}}"
+    "countryYears": "{{country}}: alle Ereignisse von {{from}} bis {{to}}",
+    "yearLabel": "Jahr in der Mitte des Vergleichs",
+    "yearHint": "Verglichen werden die Jahre um dieses herum.",
+    "yearInvalid": "Schreib ein Jahr zwischen -9999 und 9999 (negativ vor unserer Zeitrechnung)."
   },
   "paths": {
     "pageDescription": "Von Hand geschriebene Routen: wenige Stationen, jede mit ihrem Ort auf der Karte.",
@@ -551,5 +556,16 @@
     "stopLabel": "Station {{position}} von {{count}}",
     "readInsight": "Warum es zählt",
     "onMap": "Auf der Karte"
+  },
+  "discovery": {
+    "surprise": {
+      "button": "Überrasch mich",
+      "another": "Noch ein Ereignis",
+      "loading": "Ich suche ein Ereignis…",
+      "none": "Kein Ereignis passt zu den aktuellen Filtern: Erweitere die Jahre oder wähle ein anderes Land.",
+      "error": "Die Suche nach einem Ereignis ist fehlgeschlagen ({{error}}).",
+      "dateAndCountry": "{{date}}, {{country}}",
+      "onMap": "{{country}} auf der Karte"
+    }
   }
 }

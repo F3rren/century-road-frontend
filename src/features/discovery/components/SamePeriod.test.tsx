@@ -73,6 +73,17 @@ describe('SamePeriod', () => {
     expect(firstYears).toHaveAttribute('href', '/century?country=FR&from=1964&to=1974');
   });
 
+  it('asks nothing while there is no year, and still shows what the page put under the heading', () => {
+    render(
+      <MemoryRouter>
+        <SamePeriod year={null} controls={<p>campo dell'anno</p>} />
+      </MemoryRouter>,
+    );
+    expect(screen.getByRole('heading', { name: t('samePeriod.title') })).toBeInTheDocument();
+    expect(screen.getByText("campo dell'anno")).toBeInTheDocument();
+    expect(api.get).not.toHaveBeenCalled();
+  });
+
   it('asks without the excluded country when there is none', async () => {
     vi.mocked(api.get).mockResolvedValue({ success: true, data: answer({}) });
     render(

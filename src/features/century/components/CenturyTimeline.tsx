@@ -14,6 +14,7 @@ import {
   YearMark,
 } from '@/features/history';
 import { useKeyedFetch } from '@/hooks/useFetchState';
+import { CenturySamePeriod } from './CenturySamePeriod';
 import { formatEventDate } from '@/lib/months';
 
 const STATUS_CLASS = 'px-0.5 py-2 text-sm text-muted-foreground';
@@ -125,6 +126,13 @@ export function CenturyTimeline({ country, language, fromYear, toYear }: Century
           </ol>
         </section>
       ))}
+
+      {/* Keyed on the country: another country starts again from its own middle year. */}
+      <CenturySamePeriod
+        key={country}
+        country={country}
+        initialYear={data.events[Math.floor(data.events.length / 2)].year}
+      />
 
       <div className="border-t border-border pt-3">
         <AttributionNotice attribution={data.attribution} />

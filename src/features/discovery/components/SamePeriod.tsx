@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { RotateCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -16,26 +17,29 @@ import { deriveContentLanguage } from '@/i18n/contentLanguage';
 import { formatEventDate, formatYear } from '@/lib/months';
 
 interface SamePeriodProps {
-  // The year at the centre of the window.
-  year: number;
+  // The year at the centre of the window; null while there is none to ask for (an empty field).
+  year: number | null;
   // The country being looked at: the comparison is with the others.
   excludeCountry?: string;
+  // Controls the page puts under the heading (Il mio secolo lets the reader choose the year).
+  controls?: ReactNode;
 }
 
 // "Nello stesso periodo": what the country index has for the years around an event, in other
 // countries. A comparison in time and nothing more, and it says how thin the data can be: the
 // backend's own notice and coverage note are shown at every level, and a window with little in
 // it is "poco materiale", never "nothing happened".
-export function SamePeriod({ year, excludeCountry }: SamePeriodProps) {
+export function SamePeriod({ year, excludeCountry, controls }: SamePeriodProps) {
   const { t, i18n } = useTranslation();
   const language = deriveContentLanguage(i18n.language);
-  const { data, isLoading, error, retry } = useSamePeriod({ year, lang: language, excludeCountry });
+  const { data, isLoading, error, retry } = useSamePeriod(year === null ? null : { year, lang: language, excludeCountry });
 
   return (
     <LegalSection title={t('samePeriod.title')}>
-      {isLoading && <p className="text-sm text-muted-foreground">{t('common.loading')}</p>}
+      {controls}
+      {year !== null && isLoading && <p className="text-sm text-muted-foreground">{t('common.loading')}</p>}
 
-      {error && (
+      {year !== null && error && (
         <div className="space-y-3">
           <Alert variant="inline">{t('samePeriod.loadError', { error })}</Alert>
           <Button size="sm" variant="outline" onClick={retry}>
@@ -45,7 +49,7 @@ export function SamePeriod({ year, excludeCountry }: SamePeriodProps) {
         </div>
       )}
 
-      {data && (
+      {year !== null && data && (
         <>
           <p>
             {t('samePeriod.intro', {
