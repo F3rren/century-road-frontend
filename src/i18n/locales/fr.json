@@ -176,13 +176,7 @@
     "decadeColumn_one": "{{range}} : un événement. Aller à la décennie",
     "decadeColumn_other": "{{range}} : {{count}} événements. Aller à la décennie",
     "startWith": "Pour commencer",
-    "countriesLoadError": "La liste des pays n’est pas disponible ({{error}}).",
-    "surprise": {
-      "button": "Surprenez-moi",
-      "loading": "Je cherche un événement…",
-      "none": "Aucun événement ne correspond aux filtres actuels : élargissez les années ou choisissez un autre pays.",
-      "error": "Impossible de chercher un événement ({{error}})."
-    }
+    "countriesLoadError": "La liste des pays n’est pas disponible ({{error}})."
   },
   "history": {
     "section": {
@@ -338,6 +332,14 @@
       "reviewed": "Éclairages vérifiés par une personne",
       "lastReviewed": "Dernière vérification",
       "limitsHeading": "Ce que le contenu n'est pas"
+    },
+    "editorial": {
+      "title": "Parcours et éclairages : comment ils naissent",
+      "p1": "Grains of History vous montre ce que Wikipédia enregistre pour chaque jour et chaque pays. Les parcours et les éclairages « Pourquoi c'est important » sont un ajout différent : des points de départ écrits à la main, pour qui ne sait pas par où commencer. Ils ne forment pas un classement de ce qui compte le plus dans l'histoire et ne prétendent pas en être un.",
+      "p2": "Chaque éclairage raconte un événement en trois parties, avant, l'événement et après, dit où le placer sur la carte et renvoie aux sources où l'on peut vérifier chaque affirmation. Les textes sont écrits en italien et vivent dans le code du projet : ils ne changent qu'avec une nouvelle version du site, relue comme du code, et pas d'un instant à l'autre.",
+      "p3": "Une date de relecture n'apparaît que lorsqu'une personne a réellement relu le texte sur ses sources. Si elle manque, personne ne l'a encore fait : c'est une première version, à lire comme telle, même soigneusement écrite. Ci-dessous, vous voyez combien d'éclairages ont été relus.",
+      "p4": "Quand une date dépend du fuseau horaire, ou que le point sur la carte n'est qu'un lieu de départ (comme le site de lancement d'une mission lunaire), la fiche le dit.",
+      "p5": "Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement, éclairage et parcours. Nous ne vous demandons pas qui vous êtes, nous ne pouvons donc pas répondre : nous lisons le signalement et, si besoin, nous corrigeons."
     }
   },
   "guide": {
@@ -527,7 +529,10 @@
     },
     "country_one": "{{country}} : un événement dans l'index",
     "country_other": "{{country}} : {{count}} événements dans l'index",
-    "countryYears": "{{country}} : tous les événements de {{from}} à {{to}}"
+    "countryYears": "{{country}} : tous les événements de {{from}} à {{to}}",
+    "yearLabel": "Année au centre de la comparaison",
+    "yearHint": "On compare les années autour de celle-ci.",
+    "yearInvalid": "Écrivez une année entre -9999 et 9999 (négative avant notre ère)."
   },
   "paths": {
     "pageDescription": "Des itinéraires écrits à la main : quelques étapes, chacune avec son lieu sur la carte.",
@@ -551,5 +556,16 @@
     "stopLabel": "Étape {{position}} sur {{count}}",
     "readInsight": "Pourquoi c'est important",
     "onMap": "Sur la carte"
+  },
+  "discovery": {
+    "surprise": {
+      "button": "Surprenez-moi",
+      "another": "Un autre événement",
+      "loading": "Je cherche un événement…",
+      "none": "Aucun événement ne correspond aux filtres actuels : élargissez les années ou choisissez un autre pays.",
+      "error": "Impossible de chercher un événement ({{error}}).",
+      "dateAndCountry": "{{date}}, {{country}}",
+      "onMap": "{{country}} sur la carte"
+    }
   }
 }

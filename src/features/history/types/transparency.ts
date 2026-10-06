@@ -4,14 +4,16 @@
 import type { HistoryLanguage } from './index';
 
 // One source of content. It is provenance, not a seal of reliability: nothing here says "verified".
+// The backend writes these four as an explicit `null`, not as an absent key (only the top-level
+// records of a response are serialised without nulls), so they are `string | null`.
 export interface DataSource {
   id: string;
   name: string;
   provides: string;
-  url?: string;
-  // Absent for the project's own editorial content: no licence has been chosen for it.
-  license?: string;
-  licenseUrl?: string;
+  url: string | null;
+  // null for the project's own editorial content: no licence has been chosen for it.
+  license: string | null;
+  licenseUrl: string | null;
   attributionRequired: boolean;
 }
 
@@ -30,8 +32,8 @@ export interface EditorialCoverage {
   paths: number;
   insights: number;
   reviewedInsights: number;
-  // YYYY-MM-DD; absent when no insight has been reviewed yet.
-  lastReviewedAt?: string;
+  // YYYY-MM-DD; null when no insight has been reviewed yet.
+  lastReviewedAt: string | null;
 }
 
 // What the content is not, in Italian. `code` is stable, `message` is the text to show.

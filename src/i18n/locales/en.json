@@ -176,13 +176,7 @@
     "decadeColumn_one": "{{range}}: one event. Go to the decade",
     "decadeColumn_other": "{{range}}: {{count}} events. Go to the decade",
     "startWith": "To start",
-    "countriesLoadError": "The list of countries is unavailable ({{error}}).",
-    "surprise": {
-      "button": "Surprise me",
-      "loading": "Looking for an event…",
-      "none": "No event matches the current filters: widen the years or pick another country.",
-      "error": "Couldn't look for an event ({{error}})."
-    }
+    "countriesLoadError": "The list of countries is unavailable ({{error}})."
   },
   "history": {
     "section": {
@@ -338,6 +332,14 @@
       "reviewed": "Insights checked by a person",
       "lastReviewed": "Last check",
       "limitsHeading": "What the content is not"
+    },
+    "editorial": {
+      "title": "Paths and insights: how they are made",
+      "p1": "Grains of History shows you what Wikipedia records for each day and each country. The paths and the \"Why it matters\" insights are a different addition: starting points written by hand, for anyone who doesn't know where to begin. They are not a ranking of what matters most in history, and don't claim to be.",
+      "p2": "Each insight tells an event in three parts, before, the event and after, says where to put it on the map and points to the sources where each claim can be checked. The texts are written in Italian and live in the project's code: they change only with a new version of the site, read over like code, and not from one moment to the next.",
+      "p3": "A review date appears only when a person has really read the text against its sources. If it is missing, nobody has yet: it is a first draft and should be read as one, however carefully it is written. Below you can see how many insights have been reviewed.",
+      "p4": "Where a date depends on the time zone, or the point on the map is only a place of departure (such as the launch site of a mission to the Moon), the card says so.",
+      "p5": "If something doesn't add up, \"Report a mistake\" is under every event, insight and path. We don't ask who you are, so we can't reply: we read the report and, if needed, correct it."
     }
   },
   "guide": {
@@ -527,7 +529,10 @@
     },
     "country_one": "{{country}}: one event in the index",
     "country_other": "{{country}}: {{count}} events in the index",
-    "countryYears": "{{country}}: every event from {{from}} to {{to}}"
+    "countryYears": "{{country}}: every event from {{from}} to {{to}}",
+    "yearLabel": "Year at the centre of the comparison",
+    "yearHint": "The years around this one are compared.",
+    "yearInvalid": "Write a year between -9999 and 9999 (negative before the common era)."
   },
   "paths": {
     "pageDescription": "Itineraries written by hand: a few stops, each with its place on the map.",
@@ -551,5 +556,16 @@
     "stopLabel": "Stop {{position}} of {{count}}",
     "readInsight": "Why it matters",
     "onMap": "On the map"
+  },
+  "discovery": {
+    "surprise": {
+      "button": "Surprise me",
+      "another": "Another event",
+      "loading": "Looking for an event…",
+      "none": "No event matches the current filters: widen the years or pick another country.",
+      "error": "Couldn't look for an event ({{error}}).",
+      "dateAndCountry": "{{date}}, {{country}}",
+      "onMap": "{{country}} on the map"
+    }
   }
 }

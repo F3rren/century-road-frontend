@@ -14,9 +14,9 @@ import {
   YearMark,
   type InsightDetail,
 } from '@/features/history';
+import { SamePeriod } from '@/features/discovery';
 import { LegalSection } from '@/features/legal';
 import { formatEventDate } from '@/lib/months';
-import { SamePeriod } from './SamePeriod';
 
 const LINK_CLASS =
   'inline-flex min-h-11 items-center text-sm font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
