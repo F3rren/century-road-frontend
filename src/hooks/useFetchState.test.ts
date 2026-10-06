@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import i18n from '@/i18n';
-import { describeFetchError, useKeyedFetch } from './useFetchState';
+import { describeFetchError, useFetchOnce, useKeyedFetch } from './useFetchState';
 
 describe('useKeyedFetch', () => {
   it('settles on the latest key even when an earlier key resolves after it', async () => {
@@ -52,6 +52,22 @@ describe('useKeyedFetch', () => {
 
     resolveSecond('today');
     await waitFor(() => expect(result.current.data).toBe('today'));
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('useFetchOnce', () => {
+  it('asks again on retry, so a keyless fetch can offer a "Riprova" too', async () => {
+    const fetcher = vi
+      .fn<() => Promise<string>>()
+      .mockRejectedValueOnce(new Error('HTTP 503: Service Unavailable'))
+      .mockResolvedValueOnce('ok');
+
+    const { result } = renderHook(() => useFetchOnce(fetcher));
+    await waitFor(() => expect(result.current.error).toBe(i18n.t('errors.server')));
+
+    act(() => result.current.retry());
+    await waitFor(() => expect(result.current.data).toBe('ok'));
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
 });

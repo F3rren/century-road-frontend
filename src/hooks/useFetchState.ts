@@ -74,7 +74,7 @@ export function useKeyedFetch<K, D>(
 const ONCE_KEY = 0;
 
 // For a fetch with no meaningful key — runs once per mount, like a plain [] effect.
-export function useFetchOnce<D>(fetcher: () => Promise<D>): FetchState<D> {
-  const { data, isLoading, error } = useKeyedFetch(ONCE_KEY, fetcher);
-  return { data, isLoading, error };
+export function useFetchOnce<D>(fetcher: () => Promise<D>): FetchState<D> & { retry: () => void } {
+  const { data, isLoading, error, retry } = useKeyedFetch(ONCE_KEY, fetcher);
+  return { data, isLoading, error, retry };
 }
