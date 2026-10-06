@@ -71,8 +71,8 @@ export interface ErrorReport {
   category: ReportCategory;
   // 10 to 1000 characters.
   message: string;
-  // An email address, only for replying. Personal data: optional, never required.
-  contact?: string;
+  // The backend also accepts an optional `contact` (an email, for a reply). It is left out of
+  // this type on purpose: the app collects no personal data, so it can never be sent.
 }
 
 export interface ReportReceipt {

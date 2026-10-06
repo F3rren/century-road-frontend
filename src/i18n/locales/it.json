@@ -480,7 +480,7 @@
   },
   "report": {
     "open": "Segnala un errore",
-    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei.",
+    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei, quindi non potremo risponderti.",
     "about": "Riguarda: {{subject}}",
     "categoryLabel": "Che tipo di errore è?",
     "categoryPlaceholder": "Scegli…",
@@ -493,12 +493,10 @@
     },
     "messageLabel": "Che cosa non va?",
     "messageHint": "Da {{min}} a {{max}} caratteri. Scritti finora: {{length}}.",
-    "contactLabel": "Email (facoltativa)",
-    "contactHint": "Serve solo per risponderti, se serve. Puoi lasciarla vuota.",
+    "noPersonalData": "Non scrivere dati personali: non ci servono.",
     "submit": "Invia la segnalazione",
     "sending": "Invio…",
     "sent": "Grazie, la segnalazione è arrivata (numero {{id}}).",
-    "sentContact": "L’email che hai lasciato serve solo per risponderti.",
     "error": {
       "invalid": "La segnalazione non è stata accettata. Controlla il testo e l’indirizzo email: puoi anche lasciarlo vuoto.",
       "generic": "Non è stato possibile inviare la segnalazione ({{error}})."

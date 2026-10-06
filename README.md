@@ -35,7 +35,7 @@ See [docs/PRD.md](docs/PRD.md) for the full product requirements, [PRODUCT.md](P
 - **Il mio secolo** — one country's events from every day of the year, in time order and grouped by decade; the link keeps the choice, and the page prints cleanly or saves as PDF
 - **Percorsi** — guided itineraries written by hand, each stop an event with its "Perché conta" (before, the event, after), its place on the map and its sources; "Inizia da qui" for a visitor who does not know where to begin. A day's events that have an insight are marked "Approfondimento disponibile". The hand-written content is Italian only, and a text nobody has reviewed shows no review date
 - **Sorprendimi** (in Il mio secolo) — a random event that honours the country and years in force; **Nello stesso periodo** — what the index has for the same years in other countries, with how thin the data is said at every level
-- **Segnala un errore** — under every event, insight and path: no account, no visitor identifier, an optional email only for a reply
+- **Segnala un errore** — under every event, insight and path: a category and a message, nothing that identifies the visitor (no account, no name, no email: the app collects no personal data)
 - **Dashboard** — real statistics from the live dataset (never filler numbers), plus anonymous all-time view-popularity by day and country
 - **4-language UI** (Italian default, English, German, French) via i18next
 - **Light/dark theme**, persisted, no load flash

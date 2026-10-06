@@ -16,7 +16,7 @@ import { THIRD_PARTIES } from "../data/thirdParties";
 import { ThirdPartyList } from "./ThirdPartyList";
 
 const SUMMARY_ITEMS = [
-  "Non serve un account. L'unico dato personale che puoi lasciarci è un indirizzo email, facoltativo, se segnali un errore e vuoi una risposta.",
+  "Non serve un account e non ti chiediamo dati personali.",
   "Non usiamo cookie, strumenti di analisi né pubblicità, e non ti profiliamo.",
   "Per mostrare mappa e immagini, il tuo browser contatta alcuni servizi esterni, che vedono il tuo indirizzo IP.",
   "Nel tuo browser salviamo alcune preferenze dell'interfaccia — tema, lingua, proiezione della mappa, animazioni ridotte, se hai già visto il benvenuto — solo quelle che cambi.",
@@ -59,20 +59,17 @@ export function DataCollectionSection() {
       </p>
       <p>
         Il sito non ha account né commenti e non usa la tua posizione, quindi non
-        raccogliamo il tuo nome o altri dati che ci fornisci volontariamente.
+        raccogliamo il tuo nome, la tua email o altri dati che ci fornisci
+        volontariamente.
       </p>
       <p>
         <strong>Segnalazioni di errore.</strong> Sotto un evento, un approfondimento o un
         percorso puoi segnalare un errore. Il modulo invia al nostro servizio ciò a cui
         la segnalazione si riferisce (la data, la lingua e il testo di un evento, oppure
         il nome di un approfondimento o di un percorso), il tipo di errore e il messaggio
-        che scrivi. Insieme alla segnalazione non salviamo il tuo indirizzo IP né altri
-        identificativi.
-      </p>
-      <p>
-        L'indirizzo email, nel modulo, è facoltativo e serve solo a risponderti. È un dato
-        personale: lo teniamo finché non rispondiamo e poi lo cancelliamo. Se non lo
-        lasci, la segnalazione resta anonima.
+        che scrivi. Non chiede né salva nome, email o altri dati che ti identificano, e
+        insieme alla segnalazione non salviamo il tuo indirizzo IP: per questo non
+        possiamo risponderti. Nel messaggio non scrivere dati personali.
       </p>
       <p>
         Per evitare abusi, il servizio conta in memoria quante segnalazioni arrivano da
@@ -174,10 +171,9 @@ export function RetentionSection() {
   return (
     <LegalSection title="6. Conservazione e trasferimenti fuori dall'UE">
       <p>
-        Non teniamo un archivio di dati personali dei visitatori, a parte l'email
-        facoltativa di una segnalazione di errore, conservata fino alla nostra risposta e
-        poi cancellata. I log tecnici sono gestiti dal fornitore di hosting e conservati
-        per il tempo previsto dalla sua politica.
+        Non teniamo un archivio di dati personali dei visitatori. I log tecnici sono
+        gestiti dal fornitore di hosting e conservati per il tempo previsto dalla sua
+        politica.
       </p>
       <p>
         Alcuni dei servizi indicati sopra hanno sede negli Stati Uniti. In quel caso il

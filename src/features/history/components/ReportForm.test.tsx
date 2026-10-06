@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import i18n from '@/i18n';
 import { submitErrorReport } from '../services/historyApi';
@@ -55,24 +55,20 @@ describe('ReportForm', () => {
       target,
       category: 'WRONG_DATE',
       message: 'A Baikonur era già il 5 ottobre.',
-      contact: undefined,
     });
     expect(await screen.findByRole('status')).toHaveTextContent(t('report.sent', { id: 42 }));
-    // No email was left, so nothing is said about one.
-    expect(screen.queryByText(t('report.sentContact'))).not.toBeInTheDocument();
   });
 
-  it('sends the email only when one was typed, trimmed, and says what it is for', async () => {
-    submit.mockResolvedValue({ id: 7, receivedAt: '2026-10-06T16:10:35Z' });
+  it('asks for nothing that identifies the visitor: no name, no email, only the category and the message', async () => {
     const user = userEvent.setup();
     render(<ReportForm target={target} />);
-    await openAndFill(user);
-    await user.type(screen.getByLabelText(t('report.contactLabel')), ' nome@example.org ');
-    await user.click(screen.getByRole('button', { name: t('report.submit') }));
-
-    await waitFor(() => expect(submit).toHaveBeenCalled());
-    expect(submit.mock.calls[0][0].contact).toBe('nome@example.org');
-    expect(await screen.findByText(t('report.sentContact'))).toBeInTheDocument();
+    await user.click(screen.getByText(t('report.open')));
+    expect(screen.queryByRole('textbox', { name: /email/i })).not.toBeInTheDocument();
+    expect(document.querySelector('input[type="email"]')).toBeNull();
+    // Two fields and a button: the category, the message, and sending.
+    expect(screen.getAllByRole('combobox')).toHaveLength(1);
+    expect(screen.getAllByRole('textbox')).toHaveLength(1);
+    expect(screen.getByText(new RegExp(t('report.noPersonalData')))).toBeInTheDocument();
   });
 
   it('names a 400 as a report that was not accepted, and keeps what was typed', async () => {

@@ -480,7 +480,7 @@
   },
   "report": {
     "open": "Signaler une erreur",
-    "intro": "Dites-nous ce qui ne va pas : nous le lisons et nous corrigeons. Nous ne vous demandons pas qui vous êtes.",
+    "intro": "Dites-nous ce qui ne va pas : nous le lisons et nous corrigeons. Nous ne vous demandons pas qui vous êtes, nous ne pourrons donc pas vous répondre.",
     "about": "Concerne : {{subject}}",
     "categoryLabel": "De quel type d'erreur s'agit-il ?",
     "categoryPlaceholder": "Choisir…",
@@ -493,12 +493,10 @@
     },
     "messageLabel": "Qu'est-ce qui ne va pas ?",
     "messageHint": "De {{min}} à {{max}} caractères. Écrits jusqu'ici : {{length}}.",
-    "contactLabel": "E-mail (facultatif)",
-    "contactHint": "Sert uniquement à vous répondre, si besoin. Vous pouvez le laisser vide.",
+    "noPersonalData": "N'écrivez aucune donnée personnelle : nous n'en avons pas besoin.",
     "submit": "Envoyer le signalement",
     "sending": "Envoi…",
     "sent": "Merci, votre signalement est bien arrivé (numéro {{id}}).",
-    "sentContact": "L'e-mail que vous avez laissé sert uniquement à vous répondre.",
     "error": {
       "invalid": "Le signalement n'a pas été accepté. Vérifiez le texte et l'adresse e-mail : vous pouvez aussi laisser l'adresse vide.",
       "generic": "Le signalement n'a pas pu être envoyé ({{error}})."

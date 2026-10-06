@@ -480,7 +480,7 @@
   },
   "report": {
     "open": "Einen Fehler melden",
-    "intro": "Sag uns, was nicht stimmt: Wir lesen es und korrigieren es. Wir fragen nicht, wer du bist.",
+    "intro": "Sag uns, was nicht stimmt: Wir lesen es und korrigieren es. Wir fragen nicht, wer du bist, und können dir deshalb nicht antworten.",
     "about": "Betrifft: {{subject}}",
     "categoryLabel": "Um was für einen Fehler geht es?",
     "categoryPlaceholder": "Auswählen…",
@@ -493,12 +493,10 @@
     },
     "messageLabel": "Was stimmt nicht?",
     "messageHint": "{{min}} bis {{max}} Zeichen. Bisher geschrieben: {{length}}.",
-    "contactLabel": "E-Mail (freiwillig)",
-    "contactHint": "Wird nur verwendet, um dir zu antworten, falls nötig. Du kannst das Feld leer lassen.",
+    "noPersonalData": "Schreib keine persönlichen Daten hinein: Wir brauchen sie nicht.",
     "submit": "Meldung senden",
     "sending": "Wird gesendet…",
     "sent": "Danke, deine Meldung ist angekommen (Nummer {{id}}).",
-    "sentContact": "Die hinterlassene E-Mail-Adresse dient nur dazu, dir zu antworten.",
     "error": {
       "invalid": "Die Meldung wurde nicht angenommen. Prüfe den Text und die E-Mail-Adresse: Die Adresse kannst du auch leer lassen.",
       "generic": "Die Meldung konnte nicht gesendet werden ({{error}})."

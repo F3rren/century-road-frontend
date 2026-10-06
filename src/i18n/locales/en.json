@@ -480,7 +480,7 @@
   },
   "report": {
     "open": "Report a mistake",
-    "intro": "Tell us what doesn't add up: we read it and correct it. We don't ask who you are.",
+    "intro": "Tell us what doesn't add up: we read it and correct it. We don't ask who you are, so we won't be able to reply.",
     "about": "About: {{subject}}",
     "categoryLabel": "What kind of mistake is it?",
     "categoryPlaceholder": "Choose…",
@@ -493,12 +493,10 @@
     },
     "messageLabel": "What is wrong?",
     "messageHint": "{{min}} to {{max}} characters. Written so far: {{length}}.",
-    "contactLabel": "Email (optional)",
-    "contactHint": "Only used to reply to you, if needed. You can leave it empty.",
+    "noPersonalData": "Don't write any personal data: we don't need it.",
     "submit": "Send the report",
     "sending": "Sending…",
     "sent": "Thank you, your report has arrived (number {{id}}).",
-    "sentContact": "The email you left is only used to reply to you.",
     "error": {
       "invalid": "The report wasn't accepted. Check the text and the email address: you can also leave the address empty.",
       "generic": "The report couldn't be sent ({{error}})."
