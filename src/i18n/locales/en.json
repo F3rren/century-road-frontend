@@ -556,6 +556,7 @@
     "stopsHeading": "The stops",
     "stopLabel": "Stop {{position}} of {{count}}",
     "readInsight": "Why it matters",
+    "fullInsight": "Full page",
     "onMap": "On the map"
   },
   "discovery": {

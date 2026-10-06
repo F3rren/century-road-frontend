@@ -556,6 +556,7 @@
     "stopsHeading": "Les étapes",
     "stopLabel": "Étape {{position}} sur {{count}}",
     "readInsight": "Pourquoi c'est important",
+    "fullInsight": "Page complète",
     "onMap": "Sur la carte"
   },
   "discovery": {
