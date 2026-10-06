@@ -10,6 +10,7 @@ import type { Attribution, HistoryEntry, HistoryLanguage, InsightSummary, PlaceR
 import { AttributionNotice } from './AttributionNotice';
 import { RelatedArticle } from './RelatedArticle';
 import { ReportForm } from './ReportForm';
+import { WhyItMatters } from './WhyItMatters';
 
 interface EventDialogProps {
   entry: HistoryEntry;
@@ -113,6 +114,8 @@ export function EventDialog({ entry, month, day, language, attribution, country,
             </p>
           )}
         </div>
+
+        {insight && <WhyItMatters insight={insight} />}
 
         {entry.pages.length > 0 && (
           <section aria-labelledby={relatedId} className="mt-8 border-t border-border pt-5">
