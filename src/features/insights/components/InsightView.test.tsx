@@ -8,7 +8,6 @@ import { InsightView } from './InsightView';
 
 vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn() } }));
 
-const attribution = { source: 'Wikipedia', license: 'CC BY-SA 4.0', licenseUrl: 'https://example.org', notice: 'n' };
 const t = (key: string, options?: Record<string, unknown>) => i18n.t(key, options);
 
 const insight: InsightDetail = {
@@ -41,14 +40,6 @@ function renderView(value: InsightDetail = insight) {
 
 beforeEach(() => {
   vi.mocked(api.get).mockReset();
-  // The "Nello stesso periodo" section asks for its own data: an empty window is enough here.
-  vi.mocked(api.get).mockResolvedValue({
-    success: true,
-    data: {
-      language: 'it', year: 1957, fromYear: 1952, toYear: 1962, comparison: 'TEMPORAL', notice: 'n',
-      coverage: { level: 'NONE', eventCount: 0, countryCount: 0, note: 'n' }, countries: [], attribution,
-    },
-  });
 });
 
 describe('InsightView', () => {
@@ -106,8 +97,9 @@ describe('InsightView', () => {
     expect(screen.getByText('A Baikonur era già il 5 ottobre.')).toBeInTheDocument();
   });
 
-  it('asks for the same years in other countries, leaving out the event\'s own', () => {
+  it('has no "same period" comparison: events of other countries read as related to this one', () => {
     renderView();
-    expect(api.get).toHaveBeenCalledWith(expect.stringMatching(/^\/history\/same-period\?year=1957&lang=it&excludeCountry=KZ/));
+    expect(screen.queryByRole('heading', { name: t('samePeriod.title') })).not.toBeInTheDocument();
+    expect(api.get).not.toHaveBeenCalled();
   });
 });

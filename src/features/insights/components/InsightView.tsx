@@ -14,7 +14,6 @@ import {
   YearMark,
   type InsightDetail,
 } from '@/features/history';
-import { SamePeriod } from '@/features/discovery';
 import { LegalSection } from '@/features/legal';
 import { formatEventDate } from '@/lib/months';
 
@@ -134,8 +133,6 @@ export function InsightView({ insight }: { insight: InsightDetail }) {
           {reviewedOn ? t('insights.reviewedOn', { date: reviewedOn }) : t('insights.notReviewed')}
         </p>
       </LegalSection>
-
-      <SamePeriod year={insight.date.year} excludeCountry={insight.place.countryCode} />
 
       <div className="border-t border-border pt-3">
         <ReportForm target={{ type: 'INSIGHT', slug: insight.slug }} subject={insight.title} />
