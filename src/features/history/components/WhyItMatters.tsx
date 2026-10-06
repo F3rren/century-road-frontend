@@ -20,8 +20,9 @@ export function WhyItMatters({ insight }: { insight: InsightSummary }) {
 
   return (
     <section aria-labelledby={headingId} className="mt-8 border-t border-border pt-5">
+      {/* Fixer yellow as a fill under Prussian text (DESIGN.md, The Fixer Rule), never as text. */}
       <h3 id={headingId} className="mb-4 font-display text-lg font-semibold">
-        {t('history.dialog.insight')}
+        <span className="bg-highlight px-2 py-0.5 text-highlight-foreground">{t('history.dialog.insight')}</span>
       </h3>
       <InsightExcerpt excerpt={excerpt} />
     </section>

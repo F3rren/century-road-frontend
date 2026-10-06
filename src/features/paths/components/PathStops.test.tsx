@@ -94,7 +94,7 @@ describe('a stop\'s "Perché conta"', () => {
   it('opens before, the event, after and a connection, asking only for that stop', async () => {
     const user = userEvent.setup();
     renderStops();
-    const [first, second] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary' });
+    const [first, second] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary span' });
     await user.click(first);
 
     expect(await screen.findByText('Prima di sputnik-1.')).toBeInTheDocument();
@@ -113,7 +113,7 @@ describe('a stop\'s "Perché conta"', () => {
   it('does not ask again when the same stop is closed and opened', async () => {
     const user = userEvent.setup();
     renderStops();
-    const [summary] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary' });
+    const [summary] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary span' });
     await user.click(summary);
     await screen.findByText('Prima di sputnik-1.');
     await user.click(summary);
@@ -125,7 +125,7 @@ describe('a stop\'s "Perché conta"', () => {
     vi.mocked(api.get).mockImplementationOnce(() => Promise.reject(new Error('HTTP 503: Service Unavailable')));
     const user = userEvent.setup();
     renderStops();
-    const [summary] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary' });
+    const [summary] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary span' });
     await user.click(summary);
 
     expect(await screen.findByRole('alert')).toHaveTextContent(t('errors.server'));

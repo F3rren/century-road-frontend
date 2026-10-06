@@ -48,7 +48,8 @@ export function StopWhyItMatters({ slug }: { slug: string }) {
           className="h-4 w-4 transition-transform group-open:rotate-90 motion-reduce:transition-none"
           aria-hidden="true"
         />
-        {t('paths.readInsight')}
+        {/* Fixer yellow as a fill under Prussian text (DESIGN.md, The Fixer Rule), never as text. */}
+        <span className="bg-highlight px-2 py-0.5 text-highlight-foreground">{t('paths.readInsight')}</span>
       </summary>
       <div className="mt-2 max-w-[65ch] pb-2">{hasOpened && <Body slug={slug} />}</div>
     </details>
