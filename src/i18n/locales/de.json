@@ -556,6 +556,7 @@
     "stopsHeading": "Die Stationen",
     "stopLabel": "Station {{position}} von {{count}}",
     "readInsight": "Warum es zählt",
+    "fullInsight": "Vollständige Seite",
     "onMap": "Auf der Karte"
   },
   "discovery": {

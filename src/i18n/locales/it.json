@@ -556,6 +556,7 @@
     "stopsHeading": "Le tappe",
     "stopLabel": "Tappa {{position}} di {{count}}",
     "readInsight": "Perché conta",
+    "fullInsight": "Pagina completa",
     "onMap": "Sulla mappa"
   },
   "discovery": {

@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { insightOnMapRoute, insightRoute, PlaceLine, YearMark, type PathStop } from '@/features/history';
+import { StopWhyItMatters } from './StopWhyItMatters';
 
 const LINK_CLASS =
   'inline-flex min-h-11 items-center text-sm font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
 // The stops in order, the year leading each one in the margin like every list of events. A
-// stop's own text is a page of its own (the insight with the stop's slug), one link away, so a
-// path stays short to read. `narrative` is the line that ties a stop to the one before.
+// stop's own text is the insight with the stop's slug: its "Perché conta" opens under the stop
+// when asked for, and its own page is one link away, so a path stays short to read. `narrative`
+// is the line that ties a stop to the one before.
 export function PathStops({ stops }: { stops: readonly PathStop[] }) {
   const { t } = useTranslation();
   return (
@@ -35,14 +37,17 @@ export function PathStops({ stops }: { stops: readonly PathStop[] }) {
               </p>
             </div>
           </div>
-          <p className="mt-1 flex flex-wrap gap-x-6 pl-[4.5rem]">
-            <Link to={insightRoute(stop.slug)} className={LINK_CLASS}>
-              {t('paths.readInsight')}
-            </Link>
-            <Link to={insightOnMapRoute(stop.slug)} className={LINK_CLASS}>
-              {t('paths.onMap')}
-            </Link>
-          </p>
+          <div className="mt-1 pl-[4.5rem]">
+            <StopWhyItMatters slug={stop.slug} />
+            <p className="flex flex-wrap gap-x-6">
+              <Link to={insightRoute(stop.slug)} className={LINK_CLASS}>
+                {t('paths.fullInsight')}
+              </Link>
+              <Link to={insightOnMapRoute(stop.slug)} className={LINK_CLASS}>
+                {t('paths.onMap')}
+              </Link>
+            </p>
+          </div>
         </li>
       ))}
     </ol>
