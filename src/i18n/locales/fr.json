@@ -203,7 +203,8 @@
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}} : toute l’année",
       "archiveDay": "Ce jour dans les archives",
-      "insight": "Pourquoi c'est important"
+      "insight": "Pourquoi c'est important",
+      "connections": "Liens"
     },
     "attribution": {
       "licenseLabel": "Licence"
