@@ -336,9 +336,9 @@
     },
     "editorial": {
       "title": "Percorsi e approfondimenti: come nascono",
-      "p1": "Grains of History ti mostra quello che Wikipedia registra per ogni giorno e per ogni paese. I percorsi e gli approfondimenti «Perché conta» sono un'aggiunta diversa: punti di partenza scritti a mano, per chi non sa da dove cominciare. Non sono una classifica di ciò che conta di più nella storia e non pretendono di esserlo.",
+      "p1": "Grains of History ti mostra quello che Wikipedia registra per ogni giorno e per ogni paese. I percorsi e gli approfondimenti «Perché conta» sono un'aggiunta diversa: punti di partenza redatti dal progetto con l'aiuto di un'intelligenza artificiale a partire da Wikipedia, per chi non sa da dove cominciare. Non sono una classifica di ciò che conta di più nella storia e non pretendono di esserlo.",
       "p2": "Ogni approfondimento racconta un evento in tre parti, prima, l'evento e dopo, dice dove metterlo sulla mappa e rimanda alle fonti in cui si può controllare ogni affermazione. I testi sono scritti in italiano e vivono nel codice del progetto: cambiano solo con una nuova versione del sito, riletta come il codice, e non da un momento all'altro.",
-      "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una prima stesura e va letta come tale, anche se è scritta con cura. Qui sotto trovi quanti approfondimenti sono stati riletti.",
+      "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una bozza, scritta con l'aiuto di un'intelligenza artificiale, e va letta come tale. Qui sotto trovi quanti approfondimenti sono stati riletti.",
       "p4": "Dove una data dipende dal fuso orario, o il punto sulla mappa è solo un luogo di partenza (come il sito di lancio di una missione sulla Luna), la scheda lo dice.",
       "p5": "Se qualcosa non torna, «Segnala un errore» sta sotto ogni evento, approfondimento e percorso. Non ti chiediamo chi sei, quindi non possiamo risponderti: leggiamo la segnalazione e, se serve, correggiamo."
     }
@@ -385,7 +385,7 @@
     },
     "paths": {
       "title": "Cosa sono i percorsi?",
-      "p1": "Sono itinerari scritti a mano, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
+      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
     }
   },
   "credits": {
@@ -474,12 +474,13 @@
       "description": "La pagina cercata non esiste. Torna alla mappa di Grains of History per continuare a esplorare la storia di oggi."
     },
     "paths": {
-      "description": "Percorsi guidati scritti a mano: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
+      "description": "Percorsi guidati su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
     }
   },
   "editorial": {
-    "italianOnly": "I testi di questa sezione sono scritti a mano e solo in italiano, qualunque sia la lingua dell’interfaccia.",
-    "approximatePlace": "Posizione indicativa: {{note}}"
+    "italianOnly": "I testi di questa sezione sono solo in italiano, qualunque sia la lingua dell’interfaccia.",
+    "approximatePlace": "Posizione indicativa: {{note}}",
+    "draft": "Bozze redatte con l’aiuto di un’intelligenza artificiale a partire da Wikipedia, non ancora riviste da una persona: controlla le fonti."
   },
   "report": {
     "open": "Segnala un errore",
@@ -536,9 +537,8 @@
     "yearInvalid": "Scrivi un anno tra -9999 e 9999 (negativo prima di Cristo)."
   },
   "paths": {
-    "pageDescription": "Itinerari scritti a mano: poche tappe, ognuna con il suo luogo sulla mappa.",
+    "pageDescription": "Itinerari su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa.",
     "startHere": "Inizia da qui",
-    "all": "Tutti i percorsi",
     "loadError": "Impossibile caricare i percorsi ({{error}}).",
     "empty": "Non ci sono ancora percorsi.",
     "kind": {
@@ -557,7 +557,48 @@
     "stopLabel": "Tappa {{position}} di {{count}}",
     "readInsight": "Perché conta",
     "fullInsight": "Pagina completa",
-    "onMap": "Sulla mappa"
+    "onMap": "Sulla mappa",
+    "browse": "Esplora i percorsi",
+    "metaWithYears": "{{years}}, {{stops}}, {{minutes}}",
+    "backToTopic": "Altri percorsi: {{topic}}",
+    "filters": {
+      "searchLabel": "Cerca un percorso",
+      "searchPlaceholder": "Titolo, argomento o parola chiave",
+      "topicLabel": "Argomento",
+      "allTopics": "Tutti gli argomenti",
+      "topicOption": "{{name}} ({{count}})",
+      "count_one": "{{count}} percorso",
+      "count_other": "{{count}} percorsi",
+      "noMatches": "Nessun percorso corrisponde ai filtri scelti.",
+      "clear": "Azzera i filtri"
+    },
+    "topic": {
+      "MONDO_ANTICO": "Mondo antico",
+      "ROMA_REPUBBLICANA": "Roma repubblicana",
+      "ROMA_IMPERIALE": "Roma imperiale",
+      "MEDIOEVO": "Medioevo",
+      "RINASCIMENTO": "Rinascimento e Riforma",
+      "ETA_MODERNA": "Assolutismo, Lumi e rivoluzioni",
+      "OTTOCENTO": "Ottocento",
+      "PRIMA_GUERRA_MONDIALE": "Prima guerra mondiale",
+      "TRA_LE_DUE_GUERRE": "Tra le due guerre",
+      "SECONDA_GUERRA_MONDIALE": "Seconda guerra mondiale",
+      "GUERRA_FREDDA": "Guerra fredda",
+      "OGGI": "Dal 1989 a oggi",
+      "ITALIA": "Italia",
+      "ASIA": "Asia",
+      "MONDO_ISLAMICO": "Mondo islamico",
+      "AFRICA": "Africa",
+      "AMERICHE": "Americhe",
+      "SCIENZA": "Scienza",
+      "MEDICINA": "Medicina ed epidemie",
+      "ESPLORAZIONI_E_SPAZIO": "Esplorazioni e spazio",
+      "TECNOLOGIA_ED_ECONOMIA": "Tecnologia ed economia",
+      "ARTE_E_CULTURA": "Arte, letteratura e musica",
+      "RELIGIONI_E_IDEE": "Religioni e idee",
+      "DIRITTI_E_SOCIETA": "Diritti e società",
+      "CITTA_E_LUOGHI": "Città e luoghi"
+    }
   },
   "discovery": {
     "surprise": {

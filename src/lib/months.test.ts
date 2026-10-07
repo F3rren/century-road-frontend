@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { centuryRange, daysInMonth, describeEventDate, formatEventDate, formatYear, monthNames, randomMonthDay, todayMonthDay } from "./months";
+import { centuryRange, daysInMonth, describeEventDate, formatEventDate, formatYear, formatYearSpan, monthNames, randomMonthDay, todayMonthDay } from "./months";
 
 describe("daysInMonth", () => {
   it("returns 31 for a 31-day month", () => {
@@ -137,5 +137,22 @@ describe("formatYear", () => {
   it("spells a year before the common era with its era, never as a bare negative", () => {
     expect(formatYear(-44, "it")).toBe("44 a.C.");
     expect(formatYear(-44, "en")).toBe("44 BC");
+  });
+});
+
+describe("formatYearSpan", () => {
+  it("writes a span of the common era with an en dash, and one year as that year", () => {
+    expect(formatYearSpan(1789, 1799, "it")).toBe("1789–1799");
+    expect(formatYearSpan(1957, 1957, "it")).toBe("1957");
+  });
+
+  it("says the era once when both ends are before it, counting down", () => {
+    expect(formatYearSpan(-509, -27, "it")).toBe("509–27 a.C.");
+    expect(formatYearSpan(-509, -27, "en")).toBe("509–27 BC");
+  });
+
+  it("says it on the end that is before it when the span crosses it", () => {
+    expect(formatYearSpan(-44, 14, "it")).toBe("44 a.C.–14");
+    expect(formatYearSpan(-44, -44, "it")).toBe("44 a.C.");
   });
 });

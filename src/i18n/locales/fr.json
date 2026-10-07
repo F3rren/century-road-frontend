@@ -336,9 +336,9 @@
     },
     "editorial": {
       "title": "Parcours et éclairages : comment ils naissent",
-      "p1": "Grains of History vous montre ce que Wikipédia enregistre pour chaque jour et chaque pays. Les parcours et les éclairages « Pourquoi c'est important » sont un ajout différent : des points de départ écrits à la main, pour qui ne sait pas par où commencer. Ils ne forment pas un classement de ce qui compte le plus dans l'histoire et ne prétendent pas en être un.",
+      "p1": "Grains of History vous montre ce que Wikipédia enregistre pour chaque jour et chaque pays. Les parcours et les éclairages « Pourquoi c'est important » sont un ajout différent : des points de départ rédigés par le projet avec l'aide d'une IA à partir de Wikipédia, pour qui ne sait pas par où commencer. Ils ne forment pas un classement de ce qui compte le plus dans l'histoire et ne prétendent pas en être un.",
       "p2": "Chaque éclairage raconte un événement en trois parties, avant, l'événement et après, dit où le placer sur la carte et renvoie aux sources où l'on peut vérifier chaque affirmation. Les textes sont écrits en italien et vivent dans le code du projet : ils ne changent qu'avec une nouvelle version du site, relue comme du code, et pas d'un instant à l'autre.",
-      "p3": "Une date de relecture n'apparaît que lorsqu'une personne a réellement relu le texte sur ses sources. Si elle manque, personne ne l'a encore fait : c'est une première version, à lire comme telle, même soigneusement écrite. Ci-dessous, vous voyez combien d'éclairages ont été relus.",
+      "p3": "Une date de relecture n'apparaît que lorsqu'une personne a réellement relu le texte sur ses sources. Si elle manque, personne ne l'a encore fait : c'est un brouillon, écrit avec l'aide d'une IA, à lire comme tel. Ci-dessous, vous voyez combien d'éclairages ont été relus.",
       "p4": "Quand une date dépend du fuseau horaire, ou que le point sur la carte n'est qu'un lieu de départ (comme le site de lancement d'une mission lunaire), la fiche le dit.",
       "p5": "Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement, éclairage et parcours. Nous ne vous demandons pas qui vous êtes, nous ne pouvons donc pas répondre : nous lisons le signalement et, si besoin, nous corrigeons."
     }
@@ -385,7 +385,7 @@
     },
     "paths": {
       "title": "Que sont les parcours ?",
-      "p1": "Ce sont des itinéraires écrits à la main, <paths>dans Parcours</paths> : chaque étape est un événement avec son « pourquoi c'est important », son lieu sur la carte et ses sources. Quand un événement du jour a un éclairage, il est signalé dans la liste. Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement et chaque texte."
+      "p1": "Ce sont des itinéraires sur de nombreux sujets, regroupés par thème, <paths>dans Parcours</paths> : chaque étape est un événement avec son « pourquoi c'est important », son lieu sur la carte et ses sources. Quand un événement du jour a un éclairage, il est signalé dans la liste. Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement et chaque texte."
     }
   },
   "credits": {
@@ -474,12 +474,13 @@
       "description": "La page recherchée n'existe pas. Retournez à la carte de Grains of History pour continuer à explorer l'histoire du jour."
     },
     "paths": {
-      "description": "Des parcours guidés écrits à la main : quelques étapes, chacune avec son lieu sur la carte et ce qui la rend importante."
+      "description": "Des parcours guidés sur de nombreux sujets, de l'Antiquité à nos jours : quelques étapes, chacune avec son lieu sur la carte et ce qui la rend importante."
     }
   },
   "editorial": {
-    "italianOnly": "Les textes de cette section sont écrits à la main et seulement en italien, quelle que soit la langue de l'interface.",
-    "approximatePlace": "Position approximative : {{note}}"
+    "italianOnly": "Les textes de cette section n'existent qu'en italien, quelle que soit la langue de l'interface.",
+    "approximatePlace": "Position approximative : {{note}}",
+    "draft": "Brouillons rédigés avec l'aide d'une IA à partir de Wikipédia, pas encore relus par une personne : vérifiez les sources."
   },
   "report": {
     "open": "Signaler une erreur",
@@ -536,9 +537,8 @@
     "yearInvalid": "Écrivez une année entre -9999 et 9999 (négative avant notre ère)."
   },
   "paths": {
-    "pageDescription": "Des itinéraires écrits à la main : quelques étapes, chacune avec son lieu sur la carte.",
+    "pageDescription": "Des itinéraires sur de nombreux sujets, de l'Antiquité à nos jours : quelques étapes, chacune avec son lieu sur la carte.",
     "startHere": "Commencer ici",
-    "all": "Tous les parcours",
     "loadError": "Impossible de charger les parcours ({{error}}).",
     "empty": "Il n'y a pas encore de parcours.",
     "kind": {
@@ -557,7 +557,48 @@
     "stopLabel": "Étape {{position}} sur {{count}}",
     "readInsight": "Pourquoi c'est important",
     "fullInsight": "Page complète",
-    "onMap": "Sur la carte"
+    "onMap": "Sur la carte",
+    "browse": "Explorer les parcours",
+    "metaWithYears": "{{years}}, {{stops}}, {{minutes}}",
+    "backToTopic": "Autres parcours : {{topic}}",
+    "filters": {
+      "searchLabel": "Rechercher un parcours",
+      "searchPlaceholder": "Titre, sujet ou mot-clé",
+      "topicLabel": "Sujet",
+      "allTopics": "Tous les sujets",
+      "topicOption": "{{name}} ({{count}})",
+      "count_one": "{{count}} parcours",
+      "count_other": "{{count}} parcours",
+      "noMatches": "Aucun parcours ne correspond aux filtres choisis.",
+      "clear": "Réinitialiser les filtres"
+    },
+    "topic": {
+      "MONDO_ANTICO": "Monde antique",
+      "ROMA_REPUBBLICANA": "Rome républicaine",
+      "ROMA_IMPERIALE": "Rome impériale",
+      "MEDIOEVO": "Moyen Âge",
+      "RINASCIMENTO": "Renaissance et Réforme",
+      "ETA_MODERNA": "Absolutisme, Lumières et révolutions",
+      "OTTOCENTO": "XIXe siècle",
+      "PRIMA_GUERRA_MONDIALE": "Première Guerre mondiale",
+      "TRA_LE_DUE_GUERRE": "Entre-deux-guerres",
+      "SECONDA_GUERRA_MONDIALE": "Seconde Guerre mondiale",
+      "GUERRA_FREDDA": "Guerre froide",
+      "OGGI": "De 1989 à aujourd'hui",
+      "ITALIA": "Italie",
+      "ASIA": "Asie",
+      "MONDO_ISLAMICO": "Monde islamique",
+      "AFRICA": "Afrique",
+      "AMERICHE": "Amériques",
+      "SCIENZA": "Science",
+      "MEDICINA": "Médecine et épidémies",
+      "ESPLORAZIONI_E_SPAZIO": "Explorations et espace",
+      "TECNOLOGIA_ED_ECONOMIA": "Technologie et économie",
+      "ARTE_E_CULTURA": "Art, littérature et musique",
+      "RELIGIONI_E_IDEE": "Religions et idées",
+      "DIRITTI_E_SOCIETA": "Droits et société",
+      "CITTA_E_LUOGHI": "Villes et lieux"
+    }
   },
   "discovery": {
     "surprise": {

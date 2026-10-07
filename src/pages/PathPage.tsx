@@ -6,14 +6,14 @@ import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { EditorialNotice, paragraphs, PATHS_ROUTE, ReportForm, usePath } from '@/features/history';
 import { LegalSection } from '@/features/legal';
-import { PathCover, PathStops } from '@/features/paths';
+import { describePath, PathCover, PathStops, topicName } from '@/features/paths';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
 const LINK_CLASS =
   'inline-flex min-h-11 items-center text-sm font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
 
 export function PathPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { slug = '' } = useParams();
   const { data, isLoading, error, retry } = usePath(slug);
   usePageMeta(data?.title ?? t('nav.paths'), data?.tagline ?? t('meta.paths.description'));
@@ -21,8 +21,14 @@ export function PathPage() {
   return (
     <div className="h-full overflow-y-auto p-6">
       <div className="mx-auto max-w-3xl space-y-8 pb-8">
-        <Link to={PATHS_ROUTE} className={LINK_CLASS}>
-          {t('paths.back')}
+        {/* Back to the list the reader came from: the whole of it, or the topic this path is in. */}
+        <Link
+          to={data?.topic ? `${PATHS_ROUTE}?${new URLSearchParams({ topic: data.topic })}` : PATHS_ROUTE}
+          className={LINK_CLASS}
+        >
+          {data?.topic
+            ? t('paths.backToTopic', { topic: topicName(t, data.topic, data.topicLabel) })
+            : t('paths.back')}
         </Link>
 
         {isLoading && <p className="text-sm text-muted-foreground">{t('common.loading')}</p>}
@@ -42,9 +48,11 @@ export function PathPage() {
             <EditorialNotice />
             {data.cover && <PathCover cover={data.cover} />}
             <p className="text-sm text-muted-foreground">
-              {t('paths.meta', {
-                stops: t('paths.stops', { count: data.stops.length }),
-                minutes: t('paths.minutes', { count: data.readingMinutes }),
+              {describePath(t, i18n.language, {
+                stopCount: data.stops.length,
+                readingMinutes: data.readingMinutes,
+                startYear: data.startYear,
+                endYear: data.endYear,
               })}
             </p>
             <div lang="it" className="max-w-[65ch] space-y-3 text-base leading-relaxed">

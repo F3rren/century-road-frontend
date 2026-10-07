@@ -336,9 +336,9 @@
     },
     "editorial": {
       "title": "Paths and insights: how they are made",
-      "p1": "Grains of History shows you what Wikipedia records for each day and each country. The paths and the \"Why it matters\" insights are a different addition: starting points written by hand, for anyone who doesn't know where to begin. They are not a ranking of what matters most in history, and don't claim to be.",
+      "p1": "Grains of History shows you what Wikipedia records for each day and each country. The paths and the \"Why it matters\" insights are a different addition: starting points drafted by the project with the help of an AI from Wikipedia, for anyone who doesn't know where to begin. They are not a ranking of what matters most in history, and don't claim to be.",
       "p2": "Each insight tells an event in three parts, before, the event and after, says where to put it on the map and points to the sources where each claim can be checked. The texts are written in Italian and live in the project's code: they change only with a new version of the site, read over like code, and not from one moment to the next.",
-      "p3": "A review date appears only when a person has really read the text against its sources. If it is missing, nobody has yet: it is a first draft and should be read as one, however carefully it is written. Below you can see how many insights have been reviewed.",
+      "p3": "A review date appears only when a person has really read the text against its sources. If it is missing, nobody has yet: it is a draft, written with the help of an AI, and should be read as one. Below you can see how many insights have been reviewed.",
       "p4": "Where a date depends on the time zone, or the point on the map is only a place of departure (such as the launch site of a mission to the Moon), the card says so.",
       "p5": "If something doesn't add up, \"Report a mistake\" is under every event, insight and path. We don't ask who you are, so we can't reply: we read the report and, if needed, correct it."
     }
@@ -385,7 +385,7 @@
     },
     "paths": {
       "title": "What are the paths?",
-      "p1": "They are itineraries written by hand, <paths>in Paths</paths>: each stop is an event with its \"why it matters\", its place on the map and its sources. Where one of the day's events has an insight, it is marked in the list. If something doesn't add up, \"Report a mistake\" sits under every event and every text."
+      "p1": "They are itineraries on many topics, grouped by theme, <paths>in Paths</paths>: each stop is an event with its \"why it matters\", its place on the map and its sources. Where one of the day's events has an insight, it is marked in the list. If something doesn't add up, \"Report a mistake\" sits under every event and every text."
     }
   },
   "credits": {
@@ -474,12 +474,13 @@
       "description": "The page you're looking for doesn't exist. Head back to the map to keep exploring today in history."
     },
     "paths": {
-      "description": "Guided paths written by hand: a few stops, each with its place on the map and why it matters."
+      "description": "Guided paths on many topics, from antiquity to today: a few stops, each with its place on the map and why it matters."
     }
   },
   "editorial": {
-    "italianOnly": "The texts in this section are written by hand and only in Italian, whatever language the interface is in.",
-    "approximatePlace": "Approximate position: {{note}}"
+    "italianOnly": "The texts in this section are in Italian only, whatever language the interface is in.",
+    "approximatePlace": "Approximate position: {{note}}",
+    "draft": "Drafts written with the help of an AI from Wikipedia, not yet reviewed by a person: check the sources."
   },
   "report": {
     "open": "Report a mistake",
@@ -536,9 +537,8 @@
     "yearInvalid": "Write a year between -9999 and 9999 (negative before the common era)."
   },
   "paths": {
-    "pageDescription": "Itineraries written by hand: a few stops, each with its place on the map.",
+    "pageDescription": "Itineraries on many topics, from antiquity to today: a few stops, each with its place on the map.",
     "startHere": "Start here",
-    "all": "All paths",
     "loadError": "Couldn't load the paths ({{error}}).",
     "empty": "There are no paths yet.",
     "kind": {
@@ -557,7 +557,48 @@
     "stopLabel": "Stop {{position}} of {{count}}",
     "readInsight": "Why it matters",
     "fullInsight": "Full page",
-    "onMap": "On the map"
+    "onMap": "On the map",
+    "browse": "Browse the paths",
+    "metaWithYears": "{{years}}, {{stops}}, {{minutes}}",
+    "backToTopic": "More paths: {{topic}}",
+    "filters": {
+      "searchLabel": "Search the paths",
+      "searchPlaceholder": "Title, topic or keyword",
+      "topicLabel": "Topic",
+      "allTopics": "All topics",
+      "topicOption": "{{name}} ({{count}})",
+      "count_one": "{{count}} path",
+      "count_other": "{{count}} paths",
+      "noMatches": "No path matches the chosen filters.",
+      "clear": "Clear the filters"
+    },
+    "topic": {
+      "MONDO_ANTICO": "Ancient world",
+      "ROMA_REPUBBLICANA": "Republican Rome",
+      "ROMA_IMPERIALE": "Imperial Rome",
+      "MEDIOEVO": "Middle Ages",
+      "RINASCIMENTO": "Renaissance and Reformation",
+      "ETA_MODERNA": "Absolutism, Enlightenment and revolutions",
+      "OTTOCENTO": "The 19th century",
+      "PRIMA_GUERRA_MONDIALE": "First World War",
+      "TRA_LE_DUE_GUERRE": "Between the wars",
+      "SECONDA_GUERRA_MONDIALE": "Second World War",
+      "GUERRA_FREDDA": "Cold War",
+      "OGGI": "From 1989 to today",
+      "ITALIA": "Italy",
+      "ASIA": "Asia",
+      "MONDO_ISLAMICO": "Islamic world",
+      "AFRICA": "Africa",
+      "AMERICHE": "The Americas",
+      "SCIENZA": "Science",
+      "MEDICINA": "Medicine and epidemics",
+      "ESPLORAZIONI_E_SPAZIO": "Exploration and space",
+      "TECNOLOGIA_ED_ECONOMIA": "Technology and economy",
+      "ARTE_E_CULTURA": "Art, literature and music",
+      "RELIGIONI_E_IDEE": "Religions and ideas",
+      "DIRITTI_E_SOCIETA": "Rights and society",
+      "CITTA_E_LUOGHI": "Cities and places"
+    }
   },
   "discovery": {
     "surprise": {

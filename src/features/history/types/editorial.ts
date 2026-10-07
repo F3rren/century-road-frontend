@@ -93,6 +93,14 @@ export interface PathSummary {
   slug: string;
   title: string;
   tagline: string;
+  // What the path is about: a code from a closed list on the backend's side (ROMA_IMPERIALE...),
+  // with its Italian name. Optional because an older backend does not send them.
+  topic?: string;
+  topicLabel?: string;
+  // The years the path's stops span, read from their dates by the backend. Negative before the
+  // common era.
+  startYear?: number;
+  endYear?: number;
   cover?: PathCover;
   // Counted from the words at 200 a minute, never written by hand.
   readingMinutes: number;
@@ -120,6 +128,10 @@ export interface PathDetail {
   title: string;
   tagline: string;
   intro: string;
+  topic?: string;
+  topicLabel?: string;
+  startYear?: number;
+  endYear?: number;
   cover?: PathCover;
   readingMinutes: number;
   stops: PathStop[];

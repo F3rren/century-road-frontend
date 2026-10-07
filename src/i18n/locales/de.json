@@ -336,9 +336,9 @@
     },
     "editorial": {
       "title": "Pfade und Vertiefungen: wie sie entstehen",
-      "p1": "Grains of History zeigt dir, was Wikipedia für jeden Tag und jedes Land verzeichnet. Die Pfade und die Vertiefungen „Warum es zählt“ sind etwas anderes: von Hand geschriebene Ausgangspunkte für alle, die nicht wissen, wo sie anfangen sollen. Sie sind keine Rangliste dessen, was in der Geschichte am meisten zählt, und erheben auch keinen solchen Anspruch.",
+      "p1": "Grains of History zeigt dir, was Wikipedia für jeden Tag und jedes Land verzeichnet. Die Pfade und die Vertiefungen „Warum es zählt“ sind etwas anderes: vom Projekt mit Hilfe einer KI aus Wikipedia entworfene Ausgangspunkte für alle, die nicht wissen, wo sie anfangen sollen. Sie sind keine Rangliste dessen, was in der Geschichte am meisten zählt, und erheben auch keinen solchen Anspruch.",
       "p2": "Jede Vertiefung erzählt ein Ereignis in drei Teilen, davor, das Ereignis und danach, sagt, wo es auf der Karte liegt, und verweist auf die Quellen, in denen sich jede Aussage prüfen lässt. Die Texte sind auf Italienisch geschrieben und liegen im Code des Projekts: Sie ändern sich nur mit einer neuen Version der Seite, die wie Code gegengelesen wird, und nicht von einem Moment zum anderen.",
-      "p3": "Ein Prüfdatum erscheint nur, wenn eine Person den Text wirklich anhand seiner Quellen gelesen hat. Fehlt es, hat das noch niemand getan: Es ist ein erster Entwurf und sollte auch so gelesen werden, so sorgfältig er auch geschrieben ist. Unten siehst du, wie viele Vertiefungen geprüft wurden.",
+      "p3": "Ein Prüfdatum erscheint nur, wenn eine Person den Text wirklich anhand seiner Quellen gelesen hat. Fehlt es, hat das noch niemand getan: Es ist ein Entwurf, mit Hilfe einer KI geschrieben, und sollte auch so gelesen werden. Unten siehst du, wie viele Vertiefungen geprüft wurden.",
       "p4": "Wo ein Datum von der Zeitzone abhängt oder der Punkt auf der Karte nur ein Ausgangsort ist (etwa der Startplatz einer Mondmission), sagt die Karte es.",
       "p5": "Wenn etwas nicht stimmt, steht „Einen Fehler melden“ unter jedem Ereignis, jeder Vertiefung und jedem Pfad. Wir fragen nicht, wer du bist, und können deshalb nicht antworten: Wir lesen die Meldung und korrigieren, falls nötig."
     }
@@ -385,7 +385,7 @@
     },
     "paths": {
       "title": "Was sind die Pfade?",
-      "p1": "Es sind von Hand geschriebene Routen, <paths>unter Pfade</paths>: Jede Station ist ein Ereignis mit seinem „Warum es zählt“, seinem Ort auf der Karte und seinen Quellen. Wo ein Ereignis des Tages eine Vertiefung hat, ist es in der Liste markiert. Wenn etwas nicht stimmt, steht unter jedem Ereignis und jedem Text „Einen Fehler melden“."
+      "p1": "Es sind Routen zu vielen Themen, nach Thema geordnet, <paths>unter Pfade</paths>: Jede Station ist ein Ereignis mit seinem „Warum es zählt“, seinem Ort auf der Karte und seinen Quellen. Wo ein Ereignis des Tages eine Vertiefung hat, ist es in der Liste markiert. Wenn etwas nicht stimmt, steht unter jedem Ereignis und jedem Text „Einen Fehler melden“."
     }
   },
   "credits": {
@@ -474,12 +474,13 @@
       "description": "Die gesuchte Seite existiert nicht. Kehre zur Karte von Grains of History zurück, um die Geschichte von heute weiter zu erkunden."
     },
     "paths": {
-      "description": "Von Hand geschriebene Pfade durch die Geschichte: wenige Stationen, jede mit ihrem Ort auf der Karte und der Antwort, warum sie zählt."
+      "description": "Pfade durch die Geschichte zu vielen Themen, von der Antike bis heute: wenige Stationen, jede mit ihrem Ort auf der Karte und der Antwort, warum sie zählt."
     }
   },
   "editorial": {
-    "italianOnly": "Die Texte in diesem Bereich sind von Hand und nur auf Italienisch geschrieben, egal in welcher Sprache die Oberfläche steht.",
-    "approximatePlace": "Ungefähre Position: {{note}}"
+    "italianOnly": "Die Texte in diesem Bereich gibt es nur auf Italienisch, egal in welcher Sprache die Oberfläche steht.",
+    "approximatePlace": "Ungefähre Position: {{note}}",
+    "draft": "Entwürfe, mit Hilfe einer KI aus Wikipedia geschrieben und noch von keiner Person geprüft: Prüfe die Quellen."
   },
   "report": {
     "open": "Einen Fehler melden",
@@ -536,9 +537,8 @@
     "yearInvalid": "Schreib ein Jahr zwischen -9999 und 9999 (negativ vor unserer Zeitrechnung)."
   },
   "paths": {
-    "pageDescription": "Von Hand geschriebene Routen: wenige Stationen, jede mit ihrem Ort auf der Karte.",
+    "pageDescription": "Routen zu vielen Themen, von der Antike bis heute: wenige Stationen, jede mit ihrem Ort auf der Karte.",
     "startHere": "Hier anfangen",
-    "all": "Alle Pfade",
     "loadError": "Die Pfade konnten nicht geladen werden ({{error}}).",
     "empty": "Es gibt noch keine Pfade.",
     "kind": {
@@ -557,7 +557,48 @@
     "stopLabel": "Station {{position}} von {{count}}",
     "readInsight": "Warum es zählt",
     "fullInsight": "Vollständige Seite",
-    "onMap": "Auf der Karte"
+    "onMap": "Auf der Karte",
+    "browse": "Pfade durchsuchen",
+    "metaWithYears": "{{years}}, {{stops}}, {{minutes}}",
+    "backToTopic": "Weitere Pfade: {{topic}}",
+    "filters": {
+      "searchLabel": "Einen Pfad suchen",
+      "searchPlaceholder": "Titel, Thema oder Stichwort",
+      "topicLabel": "Thema",
+      "allTopics": "Alle Themen",
+      "topicOption": "{{name}} ({{count}})",
+      "count_one": "{{count}} Pfad",
+      "count_other": "{{count}} Pfade",
+      "noMatches": "Kein Pfad passt zu den gewählten Filtern.",
+      "clear": "Filter zurücksetzen"
+    },
+    "topic": {
+      "MONDO_ANTICO": "Antike Welt",
+      "ROMA_REPUBBLICANA": "Römische Republik",
+      "ROMA_IMPERIALE": "Römisches Kaiserreich",
+      "MEDIOEVO": "Mittelalter",
+      "RINASCIMENTO": "Renaissance und Reformation",
+      "ETA_MODERNA": "Absolutismus, Aufklärung und Revolutionen",
+      "OTTOCENTO": "19. Jahrhundert",
+      "PRIMA_GUERRA_MONDIALE": "Erster Weltkrieg",
+      "TRA_LE_DUE_GUERRE": "Zwischenkriegszeit",
+      "SECONDA_GUERRA_MONDIALE": "Zweiter Weltkrieg",
+      "GUERRA_FREDDA": "Kalter Krieg",
+      "OGGI": "Von 1989 bis heute",
+      "ITALIA": "Italien",
+      "ASIA": "Asien",
+      "MONDO_ISLAMICO": "Islamische Welt",
+      "AFRICA": "Afrika",
+      "AMERICHE": "Amerika",
+      "SCIENZA": "Wissenschaft",
+      "MEDICINA": "Medizin und Epidemien",
+      "ESPLORAZIONI_E_SPAZIO": "Entdeckungen und Raumfahrt",
+      "TECNOLOGIA_ED_ECONOMIA": "Technik und Wirtschaft",
+      "ARTE_E_CULTURA": "Kunst, Literatur und Musik",
+      "RELIGIONI_E_IDEE": "Religionen und Ideen",
+      "DIRITTI_E_SOCIETA": "Rechte und Gesellschaft",
+      "CITTA_E_LUOGHI": "Städte und Orte"
+    }
   },
   "discovery": {
     "surprise": {
