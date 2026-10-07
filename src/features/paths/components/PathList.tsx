@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { insightRoute, pathRoute, type PathSummary, type StartHereItem } from '@/features/history';
-import { formatEventDate } from '@/lib/months';
+import {
+  formatEditorialDate,
+  insightRoute,
+  pathRoute,
+  type PathSummary,
+  type StartHereItem,
+} from '@/features/history';
 import type { PathGroup } from '../lib/pathFilters';
 import { describePath, topicName } from '../lib/pathText';
 
@@ -80,7 +85,7 @@ export function StartHereList({ items }: { items: readonly StartHereItem[] }) {
               <PathMeta path={item.path} />
             ) : (
               <span className="mt-1 block text-xs text-muted-foreground">
-                {formatEventDate(item.insight.date.day, item.insight.date.month, item.insight.date.year, i18n.language)}
+                {formatEditorialDate(item.insight.date, i18n.language)}
               </span>
             )}
           </Link>

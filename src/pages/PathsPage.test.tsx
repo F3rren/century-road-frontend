@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import i18n from '@/i18n';
 import { api } from '@/services/api';
-import type { PathSummary } from '@/features/history';
+import type { PathSummary, StartHereItem } from '@/features/history';
 import { PathsPage } from './PathsPage';
 
 vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn() } }));
@@ -31,10 +31,10 @@ function manyPaths(withTopics = true): PathSummary[] {
   );
 }
 
-function answer(paths: PathSummary[]) {
+function answer(paths: PathSummary[], startHere: StartHereItem[] = []) {
   vi.mocked(api.get).mockImplementation(async (endpoint: string) => ({
     success: true,
-    data: endpoint === '/history/start-here' ? [] : paths,
+    data: endpoint === '/history/start-here' ? startHere : paths,
   }));
 }
 
@@ -139,6 +139,22 @@ describe('PathsPage with a backend that sends no topics, or a few paths', () => 
     expect(screen.getByLabelText(t('paths.filters.searchLabel'))).toBeInTheDocument();
     // No years either: the line is what it always was.
     expect(screen.getAllByText('8 tappe, 8 minuti di lettura').length).toBeGreaterThan(0);
+  });
+
+  it('shows the date of a start-here event as exactly as it is known, not as an invented 1 January', async () => {
+    const insight = {
+      slug: 'fondazione-di-roma',
+      title: 'Fondazione di Roma',
+      summary: 'Una sintesi.',
+      date: { year: -753, month: 1, day: 1, precision: 'YEAR' as const },
+      place: { name: 'Palatino', lat: 41.89, lon: 12.49, approximate: false },
+    };
+    answer(manyPaths().slice(0, 4), [
+      { type: 'INSIGHT', slug: insight.slug, title: insight.title, teaser: 'Dove tutto comincia.', insight },
+    ]);
+    renderPage();
+    expect(await screen.findByText('753 a.C.')).toBeInTheDocument();
+    expect(screen.queryByText(/gennaio/)).not.toBeInTheDocument();
   });
 
   it('shows no filters over a handful of paths: it is short enough to read whole', async () => {
