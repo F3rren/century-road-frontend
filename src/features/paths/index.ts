@@ -10,4 +10,5 @@ export {
   NO_FILTERS,
   topicOptions,
 } from "./lib/pathFilters";
+export { groupByMacro } from "./lib/macroTopics";
 export { describePath, topicName } from "./lib/pathText";
