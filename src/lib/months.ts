@@ -85,6 +85,15 @@ export function formatYear(year: number, language: string): string {
   return year < 0 ? `${-year} ${i18n.t('date.era.bc', { lng: language })}` : String(year);
 }
 
+// The years a path or a period spans: "1789–1799", "509–27 a.C." (the era said once when both ends
+// are before the common era, counting down like centuryRange), "44 a.C.–14" when it crosses it, and
+// just the year when it is one.
+export function formatYearSpan(start: number, end: number, language: string): string {
+  if (start === end) return formatYear(start, language);
+  if (start < 0 && end < 0) return `${-start}–${-end} ${i18n.t('date.era.bc', { lng: language })}`;
+  return `${formatYear(start, language)}–${formatYear(end, language)}`;
+}
+
 // The years a century covers, for a column or a heading: "1900–1999", or
 // "500–401 a.C." counting down before the common era. `start` is the year
 // floored to the hundred, so -100 holds 100 to 1 BC.

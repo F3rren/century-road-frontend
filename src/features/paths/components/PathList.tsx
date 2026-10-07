@@ -2,25 +2,22 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { insightRoute, pathRoute, type PathSummary, type StartHereItem } from '@/features/history';
 import { formatEventDate } from '@/lib/months';
+import type { PathGroup } from '../lib/pathFilters';
+import { describePath, topicName } from '../lib/pathText';
 
 const ROW_LINK_CLASS =
   'group block py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring';
 const TITLE_CLASS = 'block font-display text-xl font-semibold leading-snug group-hover:text-primary';
 
-// "9 tappe, 7 minuti di lettura": counted by the backend (reading time from the words at 200 a
-// minute), never written by hand, so it is shown as given.
+// "1789–1799, 8 tappe, 9 minuti di lettura": from the backend, never written by hand.
 function PathMeta({ path }: { path: PathSummary }) {
-  const { t } = useTranslation();
-  return (
-    <span className="mt-1 block text-xs text-muted-foreground">
-      {t('paths.meta', { stops: t('paths.stops', { count: path.stopCount }), minutes: t('paths.minutes', { count: path.readingMinutes }) })}
-    </span>
-  );
+  const { t, i18n } = useTranslation();
+  return <span className="mt-1 block text-xs text-muted-foreground">{describePath(t, i18n.language, path)}</span>;
 }
 
-// Every path as a ruled row, title first: no boxes (DESIGN.md, The Flat Rule). The cover is not
-// in the list on purpose - a Commons photograph is shown only with the link to its author and
-// licence, which belongs on the path's own page.
+// Paths as ruled rows, title first: no boxes (DESIGN.md, The Flat Rule). The cover is not in the
+// list on purpose - a Commons photograph is shown only with the link to its author and licence,
+// which belongs on the path's own page.
 export function PathList({ paths }: { paths: readonly PathSummary[] }) {
   return (
     <ul className="divide-y divide-border border-y border-border">
@@ -39,7 +36,29 @@ export function PathList({ paths }: { paths: readonly PathSummary[] }) {
   );
 }
 
-// "Inizia da qui": a few paths and events picked by hand, each with a sentence on why to open it.
+// The paths under a heading per topic, in the order the backend lists them. A group with no topic
+// (an older backend sends none) has no heading: it is just the list.
+export function GroupedPathList({ groups }: { groups: readonly PathGroup[] }) {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-8">
+      {groups.map((group) =>
+        group.topic === null ? (
+          <PathList key="no-topic" paths={group.paths} />
+        ) : (
+          <section key={group.topic} aria-labelledby={`topic-${group.topic}`}>
+            <h3 id={`topic-${group.topic}`} className="mb-2 scroll-mt-6 font-display text-lg font-semibold">
+              {topicName(t, group.topic, group.label ?? undefined)}
+            </h3>
+            <PathList paths={group.paths} />
+          </section>
+        ),
+      )}
+    </div>
+  );
+}
+
+// "Inizia da qui": a few paths and events picked by an editor, each with a sentence on why to open it.
 export function StartHereList({ items }: { items: readonly StartHereItem[] }) {
   const { t, i18n } = useTranslation();
   return (

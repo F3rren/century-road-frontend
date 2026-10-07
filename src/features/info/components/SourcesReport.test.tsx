@@ -44,7 +44,7 @@ const REAL: SourcesData = {
     {
       "id": "century-road-editorial",
       "name": "Century Road - percorsi e approfondimenti",
-      "provides": "I percorsi guidati e i blocchi «Perché conta», scritti a mano a partire dalle fonti elencate in ciascuno.",
+      "provides": "I percorsi guidati e i blocchi «Perché conta»: bozze redatte con l'aiuto di un'intelligenza artificiale a partire dalle fonti elencate in ciascuno, non ancora riviste da una persona.",
       "url": null,
       "license": null,
       "licenseUrl": null,
