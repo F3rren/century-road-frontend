@@ -76,6 +76,13 @@ describe("formatEventDate", () => {
     expect(formatEventDate(22, 9, 1236, "en")).toBe("September 22 1236");
   });
 
+  it("says the common era after a year before 1000, so that a day of the year 14 is not read as one of 2014", () => {
+    expect(formatEventDate(19, 8, 14, "it")).toBe("19 agosto 14 d.C.");
+    expect(formatEventDate(19, 8, 14, "en")).toBe("August 19 14 AD");
+    expect(formatEventDate(2, 6, 999, "en")).toBe("June 2 999 AD");
+    expect(formatEventDate(2, 6, 1000, "en")).toBe("June 2 1000");
+  });
+
   it("spells out a negative (BCE) year with the era suffix instead of a bare minus sign", () => {
     const result = formatEventDate(15, 3, -44, "it");
     expect(result).not.toContain("-44");
@@ -134,6 +141,15 @@ describe("formatYear", () => {
     expect(formatYear(1969, "it")).toBe("1969");
   });
 
+  it("adds the common era to the first thousand years only", () => {
+    expect(formatYear(79, "it")).toBe("79 d.C.");
+    expect(formatYear(476, "en")).toBe("476 AD");
+    expect(formatYear(378, "de")).toBe("378 n. Chr.");
+    expect(formatYear(330, "fr")).toBe("330 apr. J.-C.");
+    expect(formatYear(999, "it")).toBe("999 d.C.");
+    expect(formatYear(1000, "it")).toBe("1000");
+  });
+
   it("spells a year before the common era with its era, never as a bare negative", () => {
     expect(formatYear(-44, "it")).toBe("44 a.C.");
     expect(formatYear(-44, "en")).toBe("44 BC");
@@ -151,8 +167,15 @@ describe("formatYearSpan", () => {
     expect(formatYearSpan(-509, -27, "en")).toBe("509–27 BC");
   });
 
+  it("says the era once when both ends are in the first thousand years of the common era", () => {
+    expect(formatYearSpan(106, 180, "it")).toBe("106–180 d.C.");
+    expect(formatYearSpan(378, 476, "en")).toBe("378–476 AD");
+    expect(formatYearSpan(878, 1066, "it")).toBe("878 d.C.–1066");
+  });
+
   it("says it on the end that is before it when the span crosses it", () => {
-    expect(formatYearSpan(-44, 14, "it")).toBe("44 a.C.–14");
+    expect(formatYearSpan(-44, 14, "it")).toBe("44 a.C.–14 d.C.");
+    expect(formatYearSpan(-31, 68, "en")).toBe("31 BC–68 AD");
     expect(formatYearSpan(-44, -44, "it")).toBe("44 a.C.");
   });
 });

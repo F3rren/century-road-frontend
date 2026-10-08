@@ -416,7 +416,8 @@
   },
   "date": {
     "era": {
-      "bc": "av. J.-C."
+      "bc": "av. J.-C.",
+      "ad": "apr. J.-C."
     }
   },
   "legal": {
