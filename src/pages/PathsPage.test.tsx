@@ -105,7 +105,7 @@ describe('PathsPage with many paths', () => {
     await screen.findByText(t('paths.filters.count', { count: 120 }));
     // -500 to -400 counts down with the era said once; 500 to 600 is plain.
     expect(screen.getAllByText(/^500–400 a\.C\., 8 tappe/).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/^500–600, 8 tappe/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/^500–600 d\.C\., 8 tappe/).length).toBeGreaterThan(0);
   });
 
   it('lists the topics in the select, each with its count, and narrows to one when it is chosen', async () => {

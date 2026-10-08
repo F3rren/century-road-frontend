@@ -72,25 +72,33 @@ export function formatEventDate(
 ): string {
   const dayMonth = dayMonthFormatter(language).format(Date.UTC(2000, month - 1, day));
   if (year === null || year === undefined) return dayMonth;
-  if (year < 0) {
-    const era = i18n.t('date.era.bc', { lng: language });
-    return `${dayMonth} ${-year} ${era}`;
-  }
-  return `${dayMonth} ${year}`;
+  return `${dayMonth} ${formatYear(year, language)}`;
 }
 
-// A year for a sentence or a heading: "1969", or "44 a.C." before the common era, never the bare
-// "-44" the API sends. The era is a translated string for the reason formatEventDate gives.
+// Below this year the common era is said too: "19 agosto 14" reads as a day of 2014, "19 agosto 14 d.C."
+// does not. From 1000 on a bare year cannot be taken for anything else.
+const FIRST_YEAR_WITHOUT_ERA = 1000;
+
+// The era after a year before 1000 CE, a translated string for the reason formatEventDate gives.
+function era(year: number, language: string): string {
+  return i18n.t(year < 0 ? 'date.era.bc' : 'date.era.ad', { lng: language });
+}
+
+// A year for a sentence or a heading: "1969", "44 a.C." before the common era, never the bare "-44"
+// the API sends, and "14 d.C." for the first thousand years after it.
 export function formatYear(year: number, language: string): string {
-  return year < 0 ? `${-year} ${i18n.t('date.era.bc', { lng: language })}` : String(year);
+  if (year < 0) return `${-year} ${era(year, language)}`;
+  return year < FIRST_YEAR_WITHOUT_ERA ? `${year} ${era(year, language)}` : String(year);
 }
 
 // The years a path or a period spans: "1789–1799", "509–27 a.C." (the era said once when both ends
-// are before the common era, counting down like centuryRange), "44 a.C.–14" when it crosses it, and
-// just the year when it is one.
+// are before the common era, counting down like centuryRange), "106–180 d.C." (once as well when both
+// are in the first thousand years after it), "44 a.C.–14 d.C." when it crosses, and just the year when
+// it is one.
 export function formatYearSpan(start: number, end: number, language: string): string {
   if (start === end) return formatYear(start, language);
-  if (start < 0 && end < 0) return `${-start}–${-end} ${i18n.t('date.era.bc', { lng: language })}`;
+  if (start < 0 && end < 0) return `${-start}–${-end} ${era(start, language)}`;
+  if (start > 0 && end < FIRST_YEAR_WITHOUT_ERA) return `${start}–${end} ${era(end, language)}`;
   return `${formatYear(start, language)}–${formatYear(end, language)}`;
 }
 

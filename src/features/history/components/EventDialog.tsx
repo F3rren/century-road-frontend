@@ -85,7 +85,9 @@ export function EventDialog({ entry, month, day, language, attribution, country,
           {entry.year !== undefined && (
             <p aria-hidden="true" className="font-display text-5xl font-semibold leading-none tabular-nums tracking-[-0.02em]">
               {Math.abs(entry.year)}
-              {entry.year < 0 && <span className="ml-2 text-xl text-muted-foreground">{t('date.era.bc')}</span>}
+              {entry.year < 1000 && (
+                <span className="ml-2 text-xl text-muted-foreground">{t(entry.year < 0 ? 'date.era.bc' : 'date.era.ad')}</span>
+              )}
             </p>
           )}
           <p className="mt-2 text-sm text-muted-foreground">
