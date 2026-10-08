@@ -572,6 +572,16 @@
       "noMatches": "Nessun percorso corrisponde ai filtri scelti.",
       "clear": "Azzera i filtri"
     },
+    "macro": {
+      "ANTICHITA": "Antichità",
+      "MEDIOEVO_E_RINASCIMENTO": "Medioevo e Rinascimento",
+      "ETA_MODERNA_E_OTTOCENTO": "Età moderna e Ottocento",
+      "NOVECENTO": "Novecento e oggi",
+      "ITALIA_E_MONDO": "Italia e mondo",
+      "SCIENZA_E_TECNICA": "Scienza e tecnica",
+      "IDEE_E_SOCIETA": "Arte, idee e società",
+      "ALTRO": "Altri argomenti"
+    },
     "topic": {
       "MONDO_ANTICO": "Mondo antico",
       "ROMA_REPUBBLICANA": "Roma repubblicana",

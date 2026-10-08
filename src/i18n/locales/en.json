@@ -572,6 +572,16 @@
       "noMatches": "No path matches the chosen filters.",
       "clear": "Clear the filters"
     },
+    "macro": {
+      "ANTICHITA": "Antiquity",
+      "MEDIOEVO_E_RINASCIMENTO": "Middle Ages and Renaissance",
+      "ETA_MODERNA_E_OTTOCENTO": "Early modern era and the 1800s",
+      "NOVECENTO": "The 20th century and today",
+      "ITALIA_E_MONDO": "Italy and the world",
+      "SCIENZA_E_TECNICA": "Science and technology",
+      "IDEE_E_SOCIETA": "Art, ideas and society",
+      "ALTRO": "Other topics"
+    },
     "topic": {
       "MONDO_ANTICO": "Ancient world",
       "ROMA_REPUBBLICANA": "Republican Rome",

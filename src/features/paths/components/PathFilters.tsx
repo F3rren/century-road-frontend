@@ -18,7 +18,7 @@ interface PathFiltersProps {
   onReset: () => void;
 }
 
-// A ruled strip over the list, like Il mio secolo's: a search box and the topic, and how many
+// A ruled strip under the title, like Il mio secolo's: a search box and the topic, and how many
 // paths are left, said aloud when it changes. No boxes (DESIGN.md, The Flat Rule).
 export function PathFilters({ filters, options, shown, onChange, onReset }: PathFiltersProps) {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export function PathFilters({ filters, options, shown, onChange, onReset }: Path
   const topicId = useId();
 
   return (
-    <div className="space-y-3 border-y border-border py-5">
+    <div className="space-y-3 border-b border-border pb-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={searchId} className={LABEL_CLASS}>

@@ -57,14 +57,46 @@ beforeEach(() => {
 });
 
 describe('PathsPage with many paths', () => {
-  it('groups them under a heading per topic, in the order the backend sent them, and counts them', async () => {
+  it('gathers the topics under a heading each, in the order the backend sent them, closed and counted', async () => {
     answer(manyPaths());
     renderPage();
 
     expect(await screen.findByText(t('paths.filters.count', { count: 120 }))).toBeInTheDocument();
     const headings = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
-    expect(headings).toEqual(['Roma repubblicana', 'Medioevo', 'Scienza']);
+    expect(headings).toEqual(['Antichità', 'Medioevo e Rinascimento', 'Scienza e tecnica']);
+    const rows = screen.getAllByText(/^(Roma repubblicana|Medioevo|Scienza)$/).map((name) => name.closest('details'));
+    expect(rows).toHaveLength(3);
+    for (const row of rows) {
+      expect(row).not.toHaveAttribute('open');
+      expect(within(row as HTMLElement).getByText(t('paths.filters.count', { count: 40 }))).toBeInTheDocument();
+    }
     expect(screen.getAllByRole('link', { name: /percorso/ })).toHaveLength(120);
+  });
+
+  it('opens a topic when its row is clicked', async () => {
+    answer(manyPaths());
+    const user = userEvent.setup();
+    renderPage();
+    const row = (await screen.findByText('Medioevo')).closest('details') as HTMLDetailsElement;
+
+    await user.click(screen.getByText('Medioevo'));
+
+    expect(row.open).toBe(true);
+  });
+
+  it('puts the search first, above the proposals, which step aside while looking for something', async () => {
+    const proposal = manyPaths()[0];
+    const startHere: StartHereItem[] = [{ type: 'PATH', slug: proposal.slug, title: proposal.title, teaser: 'Un consiglio.', path: proposal }];
+    answer(manyPaths(), startHere);
+    const user = userEvent.setup();
+    renderPage();
+    const search = await screen.findByLabelText(t('paths.filters.searchLabel'));
+    const proposals = await screen.findByRole('heading', { name: t('paths.startHere') });
+    expect(search.compareDocumentPosition(proposals) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
+    await user.type(search, 'medioevo');
+
+    expect(screen.queryByRole('heading', { name: t('paths.startHere') })).not.toBeInTheDocument();
   });
 
   it('shows the years each path spans, before the common era too', async () => {
@@ -85,15 +117,17 @@ describe('PathsPage with many paths', () => {
 
     await user.selectOptions(select, 'MEDIOEVO');
 
-    expect(screen.getByText(t('paths.filters.count', { count: 40 }))).toBeInTheDocument();
-    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['Medioevo']);
+    expect(screen.getByRole('status')).toHaveTextContent(t('paths.filters.count', { count: 40 }));
+    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['Medioevo e Rinascimento']);
+    // What was asked for is open, not behind a click.
+    expect(screen.getByText('Medioevo').closest('details')).toHaveAttribute('open');
     expect(screen.getByTestId('where')).toHaveTextContent('/paths?topic=MEDIOEVO');
   });
 
   it('opens already narrowed when the address says so', async () => {
     answer(manyPaths());
     renderPage('/paths?topic=SCIENZA');
-    expect(await screen.findByText(t('paths.filters.count', { count: 40 }))).toBeInTheDocument();
+    expect(await screen.findByRole('status')).toHaveTextContent(t('paths.filters.count', { count: 40 }));
     expect(screen.getByLabelText(t('paths.filters.topicLabel'))).toHaveValue('SCIENZA');
   });
 
@@ -107,7 +141,7 @@ describe('PathsPage with many paths', () => {
 
     await user.type(search, 'perche');
 
-    expect(screen.getByText(t('paths.filters.count', { count: 1 }))).toBeInTheDocument();
+    expect(screen.getByRole('status')).toHaveTextContent(t('paths.filters.count', { count: 1 }));
     expect(screen.getByRole('link', { name: /Il perché di Cesare/ })).toBeInTheDocument();
     expect(screen.getByTestId('where')).toHaveTextContent('/paths?q=perche');
     expect(screen.getByRole('option', { name: 'Roma repubblicana (1)' })).toBeInTheDocument();
