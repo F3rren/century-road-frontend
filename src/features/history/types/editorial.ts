@@ -3,10 +3,14 @@
 // Everything here is written in Italian only, whatever language the app is in.
 
 // The date of the event, not of today: a year (negative before the common era), a month, a day.
+// `precision` says how much of it is known. When it is `YEAR` or `MONTH` the month and day are
+// placeholders (1 January, the 1st), not facts: never show them (formatEditorialDate). Absent
+// from an older backend, which only knew whole days.
 export interface EditorialDate {
   year: number;
   month: number;
   day: number;
+  precision?: 'YEAR' | 'MONTH' | 'DAY';
 }
 
 // Where the map should move to. `approximate` means the pin is a stand-in (a launch site for
