@@ -22,7 +22,14 @@ export { useSources } from "./hooks/useSources";
 export { archiveEventRoute } from "./lib/archiveRoute";
 export { buildExcerpt, isEmptyExcerpt } from "./lib/excerpt";
 export type { Excerpt } from "./lib/excerpt";
-export { findInsight, insightOnMapRoute, insightRoute, PATHS_ROUTE, pathRoute } from "./lib/editorial";
+export {
+  findInsight,
+  formatEditorialDate,
+  insightOnMapRoute,
+  insightRoute,
+  PATHS_ROUTE,
+  pathRoute,
+} from "./lib/editorial";
 export { buildImageSources } from "./lib/images";
 export { paragraphs } from "./lib/paragraphs";
 export { matchesQuery } from "./lib/matchesQuery";

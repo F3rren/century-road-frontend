@@ -573,6 +573,16 @@
       "noMatches": "Aucun parcours ne correspond aux filtres choisis.",
       "clear": "Réinitialiser les filtres"
     },
+    "macro": {
+      "ANTICHITA": "Antiquité",
+      "MEDIOEVO_E_RINASCIMENTO": "Moyen Âge et Renaissance",
+      "ETA_MODERNA_E_OTTOCENTO": "Époque moderne et XIXe siècle",
+      "NOVECENTO": "XXe siècle et aujourd'hui",
+      "ITALIA_E_MONDO": "L'Italie et le monde",
+      "SCIENZA_E_TECNICA": "Science et technique",
+      "IDEE_E_SOCIETA": "Art, idées et société",
+      "ALTRO": "Autres sujets"
+    },
     "topic": {
       "MONDO_ANTICO": "Monde antique",
       "ROMA_REPUBBLICANA": "Rome républicaine",

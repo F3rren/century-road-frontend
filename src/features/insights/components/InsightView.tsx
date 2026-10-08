@@ -5,6 +5,7 @@ import { ReadingPage } from '@/components/layout/ReadingPage';
 import { ExternalAnchor } from '@/components/ui/ExternalAnchor';
 import {
   EditorialNotice,
+  formatEditorialDate,
   insightOnMapRoute,
   insightRoute,
   paragraphs,
@@ -15,7 +16,6 @@ import {
   type InsightDetail,
 } from '@/features/history';
 import { LegalSection } from '@/features/legal';
-import { formatEventDate } from '@/lib/months';
 
 const LINK_CLASS =
   'inline-flex min-h-11 items-center text-sm font-bold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring';
@@ -48,7 +48,7 @@ export function InsightView({ insight }: { insight: InsightDetail }) {
       <div className="space-y-3">
         <EditorialNotice />
         <p className="text-sm">
-          <span className="font-bold">{formatEventDate(insight.date.day, insight.date.month, insight.date.year, i18n.language)}</span>
+          <span className="font-bold">{formatEditorialDate(insight.date, i18n.language)}</span>
         </p>
         <p className="text-sm">
           <MapPin className="mr-1.5 inline h-4 w-4 align-text-bottom" aria-hidden="true" />

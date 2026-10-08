@@ -573,6 +573,16 @@
       "noMatches": "Kein Pfad passt zu den gewählten Filtern.",
       "clear": "Filter zurücksetzen"
     },
+    "macro": {
+      "ANTICHITA": "Antike",
+      "MEDIOEVO_E_RINASCIMENTO": "Mittelalter und Renaissance",
+      "ETA_MODERNA_E_OTTOCENTO": "Frühe Neuzeit und 19. Jahrhundert",
+      "NOVECENTO": "20. Jahrhundert und Gegenwart",
+      "ITALIA_E_MONDO": "Italien und die Welt",
+      "SCIENZA_E_TECNICA": "Wissenschaft und Technik",
+      "IDEE_E_SOCIETA": "Kunst, Ideen und Gesellschaft",
+      "ALTRO": "Weitere Themen"
+    },
     "topic": {
       "MONDO_ANTICO": "Antike Welt",
       "ROMA_REPUBBLICANA": "Römische Republik",
