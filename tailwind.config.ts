@@ -110,6 +110,12 @@ const config: Config = {
         // visibly surges/stalls at every repeat.
         "filmstrip-scroll": "filmstrip-scroll 50s linear infinite",
       },
+      maxWidth: {
+        // The reading column of DESIGN.md, 65 characters. `ch` is the width of
+        // a "0", and Atkinson Hyperlegible's zero is wide: 65ch ran to about 92
+        // characters a line (measured), so the cap is 48ch for about 68.
+        measure: "48ch",
+      },
       fontSize: {
         // Page-level <h1>, Literata 600. A text serif at display size wants
         // a little negative tracking, the opposite of a condensed grotesk.
