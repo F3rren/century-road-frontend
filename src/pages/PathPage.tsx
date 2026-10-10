@@ -55,7 +55,7 @@ export function PathPage() {
                 endYear: data.endYear,
               })}
             </p>
-            <div lang="it" className="max-w-[65ch] space-y-3 text-base leading-relaxed">
+            <div lang="it" className="max-w-measure space-y-3 text-base leading-relaxed">
               {paragraphs(data.intro).map((part, index) => (
                 <p key={index}>{part}</p>
               ))}

@@ -44,6 +44,8 @@ export function PathsPage() {
     <div className="h-full overflow-y-auto p-6">
       <div className="mx-auto max-w-3xl space-y-8 pb-8">
         <PageHeader title={t('nav.paths')} description={t('paths.pageDescription')} />
+        {/* Before the filters, so that the strip sits right above the results it filters. */}
+        <EditorialNotice />
         {showFilters && (
           <PathFilters
             filters={filters}
@@ -53,7 +55,6 @@ export function PathsPage() {
             onReset={() => update(NO_FILTERS)}
           />
         )}
-        <EditorialNotice />
 
         {/* While looking for something the results are the page: the proposals step aside. */}
         {!filtering && (
