@@ -51,7 +51,7 @@ export function StopWhyItMatters({ slug }: { slug: string }) {
         {/* Fixer yellow as a fill under Prussian text (DESIGN.md, The Fixer Rule), never as text. */}
         <span className="bg-highlight px-2 py-0.5 text-highlight-foreground">{t('paths.readInsight')}</span>
       </summary>
-      <div className="mt-2 max-w-[65ch] pb-2">{hasOpened && <Body slug={slug} />}</div>
+      <div className="mt-2 max-w-measure pb-2">{hasOpened && <Body slug={slug} />}</div>
     </details>
   );
 }

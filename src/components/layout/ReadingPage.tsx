@@ -50,7 +50,7 @@ export function ReadingPage({ title, description, lang, children }: ReadingPageP
 
   return (
     <div className="h-full overflow-y-auto p-6">
-      <div className="mx-auto max-w-5xl pb-8 lg:grid lg:grid-cols-[12rem_minmax(0,65ch)] lg:gap-x-12">
+      <div className="mx-auto max-w-5xl pb-8 lg:grid lg:grid-cols-[12rem_minmax(0,theme(maxWidth.measure))] lg:gap-x-12">
         <div className="lg:col-start-2">
           <PageHeader title={title} description={description} lang={lang} />
         </div>

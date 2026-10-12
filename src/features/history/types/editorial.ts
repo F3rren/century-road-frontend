@@ -3,10 +3,14 @@
 // Everything here is written in Italian only, whatever language the app is in.
 
 // The date of the event, not of today: a year (negative before the common era), a month, a day.
+// `precision` says how much of it is known. When it is `YEAR` or `MONTH` the month and day are
+// placeholders (1 January, the 1st), not facts: never show them (formatEditorialDate). Absent
+// from an older backend, which only knew whole days.
 export interface EditorialDate {
   year: number;
   month: number;
   day: number;
+  precision?: 'YEAR' | 'MONTH' | 'DAY';
 }
 
 // Where the map should move to. `approximate` means the pin is a stand-in (a launch site for
@@ -93,6 +97,14 @@ export interface PathSummary {
   slug: string;
   title: string;
   tagline: string;
+  // What the path is about: a code from a closed list on the backend's side (ROMA_IMPERIALE...),
+  // with its Italian name. Optional because an older backend does not send them.
+  topic?: string;
+  topicLabel?: string;
+  // The years the path's stops span, read from their dates by the backend. Negative before the
+  // common era.
+  startYear?: number;
+  endYear?: number;
   cover?: PathCover;
   // Counted from the words at 200 a minute, never written by hand.
   readingMinutes: number;
@@ -120,6 +132,10 @@ export interface PathDetail {
   title: string;
   tagline: string;
   intro: string;
+  topic?: string;
+  topicLabel?: string;
+  startYear?: number;
+  endYear?: number;
   cover?: PathCover;
   readingMinutes: number;
   stops: PathStop[];

@@ -53,6 +53,21 @@ describe('InsightView', () => {
     expect(screen.getByText('Prima due.')).toBeInTheDocument();
   });
 
+  it('shows a date as exactly as it is known: the day, the month, or only the year', () => {
+    const { unmount } = renderView();
+    expect(screen.getByText('4 ottobre 1957')).toBeInTheDocument();
+    unmount();
+
+    const month = renderView({ ...insight, date: { year: -52, month: 9, day: 1, precision: 'MONTH' } });
+    expect(screen.getByText('settembre 52 a.C.')).toBeInTheDocument();
+    month.unmount();
+
+    // The month and day behind a year-only date are placeholders: an invented "1 gennaio" must not show.
+    renderView({ ...insight, date: { year: -133, month: 1, day: 1, precision: 'YEAR' } });
+    expect(screen.getByText('133 a.C.')).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/gennaio/i);
+  });
+
   it('links to the place on the map, to the path it is a stop of, and to what to read next', () => {
     renderView();
     expect(screen.getByRole('link', { name: t('insights.showOnMap') })).toHaveAttribute('href', '/?insight=sputnik-1');
