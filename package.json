@@ -21,7 +21,7 @@
     "@turf/boolean-point-in-polygon": "^7.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "i18next": "^26.4.2",
+    "i18next": "^26.4.3",
     "lucide-react": "^1.47.0",
     "maplibre-gl": "^6.11.2",
     "react": "^18.3.1",
