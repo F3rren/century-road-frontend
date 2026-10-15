@@ -8,7 +8,9 @@
   "errors": {
     "network": "il servizio non risponde: controlla la connessione e riprova",
     "server": "il servizio non è disponibile in questo momento: riprova tra qualche minuto",
-    "unexpected": "risposta inattesa dal servizio: riprova più tardi"
+    "unexpected": "risposta inattesa dal servizio: riprova più tardi",
+    "notFound": "il contenuto richiesto non esiste",
+    "rateLimited": "troppe richieste in poco tempo: riprova tra un po’"
   },
   "nav": {
     "map": "Mappa",
@@ -22,7 +24,8 @@
     "methodology": "Dietro i dati",
     "credits": "Crediti e contatti",
     "ariaLabel": "Navigazione principale",
-    "brandTagline": "Esplora il passato, una storia alla volta"
+    "brandTagline": "Esplora il passato, una storia alla volta",
+    "paths": "Percorsi"
   },
   "header": {
     "openMenu": "Apri menu",
@@ -77,6 +80,12 @@
       "closePanel": "Chiudi pannello eventi",
       "anniversariesTitle": "Anniversari del {{day}} {{month}}",
       "seeCentury": "Vedi i suoi eventi di tutto l’anno"
+    },
+    "place": {
+      "ariaLabel": "Luogo mostrato sulla mappa",
+      "heading": "Luogo dell’approfondimento",
+      "clear": "Togli il segno dalla mappa",
+      "read": "Leggi l’approfondimento"
     }
   },
   "dashboard": {
@@ -185,14 +194,17 @@
     "empty": "Nessuna voce per questo giorno.",
     "card": {
       "relatedCount_one": "{{count}} articolo collegato",
-      "relatedCount_other": "{{count}} articoli collegati"
+      "relatedCount_other": "{{count}} articoli collegati",
+      "insight": "Approfondimento disponibile"
     },
     "dialog": {
       "close": "Chiudi",
       "relatedHeading": "Articoli collegati",
       "when": "{{date}}, {{ago}}",
       "countryYear": "{{country}}: tutto l’anno",
-      "archiveDay": "Questo giorno nell’archivio"
+      "archiveDay": "Questo giorno nell’archivio",
+      "insight": "Perché conta",
+      "connections": "Collegamenti"
     },
     "attribution": {
       "licenseLabel": "Licenza"
@@ -292,7 +304,7 @@
     "errors": {
       "title": "Contraddizioni ed errori",
       "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
-      "p2": "Per gli errori di questo sito, come un paese attribuito male, scrivici da <credits>Crediti e contatti</credits>."
+      "p2": "Per gli errori di questo sito, come un paese attribuito male, o per un errore in un evento, in un approfondimento o in un percorso, usa «Segnala un errore» che trovi sotto ciascuno, oppure scrivici da <credits>Crediti e contatti</credits>."
     },
     "limits": {
       "title": "Limiti",
@@ -301,6 +313,34 @@
     "views": {
       "title": "Statistiche di visita",
       "p1": "«I più visitati», nella Dashboard, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
+    },
+    "sources": {
+      "title": "Fonti, copertura e limiti",
+      "intro": "Quello che segue lo chiediamo al servizio ogni volta, quindi non resta indietro. Sono provenienze, non un sigillo di affidabilità: un approfondimento è stato controllato da una persona solo se ha una data di revisione.",
+      "loadError": "Impossibile caricare le fonti ({{error}}).",
+      "sourcesHeading": "Fonti",
+      "noLicense": "Nessuna licenza scelta per ora.",
+      "attributionRequired": "Va citata.",
+      "coverageHeading": "Quanto c’è",
+      "indexCaption": "Eventi nell’indice dei paesi, per edizione di Wikipedia",
+      "colEvents": "Eventi",
+      "colCountries": "Paesi",
+      "colYears": "Anni",
+      "colUpdated": "Aggiornato il",
+      "indexEmpty": "L’indice dei paesi è in preparazione.",
+      "paths": "Percorsi",
+      "insights": "Approfondimenti",
+      "reviewed": "Approfondimenti controllati da una persona",
+      "lastReviewed": "Ultimo controllo",
+      "limitsHeading": "Che cosa non sono"
+    },
+    "editorial": {
+      "title": "Percorsi e approfondimenti: come nascono",
+      "p1": "Grains of History ti mostra quello che Wikipedia registra per ogni giorno e per ogni paese. I percorsi e gli approfondimenti «Perché conta» sono un'aggiunta diversa: punti di partenza redatti dal progetto con l'aiuto di un'intelligenza artificiale a partire da Wikipedia, per chi non sa da dove cominciare. Non sono una classifica di ciò che conta di più nella storia e non pretendono di esserlo.",
+      "p2": "Ogni approfondimento racconta un evento in tre parti, prima, l'evento e dopo, dice dove metterlo sulla mappa e rimanda alle fonti in cui si può controllare ogni affermazione. I testi sono scritti in italiano e vivono nel codice del progetto: cambiano solo con una nuova versione del sito, riletta come il codice, e non da un momento all'altro.",
+      "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una bozza, scritta con l'aiuto di un'intelligenza artificiale, e va letta come tale. Qui sotto trovi quanti approfondimenti sono stati riletti.",
+      "p4": "Dove una data dipende dal fuso orario, o il punto sulla mappa è solo un luogo di partenza (come il sito di lancio di una missione sulla Luna), la scheda lo dice.",
+      "p5": "Se qualcosa non torna, «Segnala un errore» sta sotto ogni evento, approfondimento e percorso. Non ti chiediamo chi sei, quindi non possiamo risponderti: leggiamo la segnalazione e, se serve, correggiamo."
     }
   },
   "guide": {
@@ -337,11 +377,15 @@
     },
     "shortcuts": {
       "title": "Ci sono scorciatoie da tastiera?",
-      "p1": "Sì: <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>, <kbd>4</kbd> e <kbd>5</kbd> aprono Mappa, Dashboard, Archivio, Il mio secolo e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
+      "p1": "Sì: da <kbd>1</kbd> a <kbd>6</kbd> aprono Mappa, Dashboard, Archivio, Il mio secolo, Percorsi e Impostazioni; <kbd>/</kbd> porta al selettore dei paesi. Non funzionano mentre scrivi in un campo. L'elenco è anche in <settings>Impostazioni</settings>."
     },
     "prefs": {
       "title": "Dove vengono salvate le mie preferenze?",
       "p1": "Solo nel tuo browser: tema, lingua, proiezione della mappa, animazioni ridotte e se hai già visto la pagina di benvenuto. Puoi cancellarle da <settings>Impostazioni</settings>; i dettagli sono nella <privacy>Privacy</privacy>."
+    },
+    "paths": {
+      "title": "Cosa sono i percorsi?",
+      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
     }
   },
   "credits": {
@@ -372,7 +416,8 @@
   },
   "date": {
     "era": {
-      "bc": "a.C."
+      "bc": "a.C.",
+      "ad": "d.C."
     }
   },
   "legal": {
@@ -428,6 +473,153 @@
     },
     "notFound": {
       "description": "La pagina cercata non esiste. Torna alla mappa di Grains of History per continuare a esplorare la storia di oggi."
+    },
+    "paths": {
+      "description": "Percorsi guidati su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
+    }
+  },
+  "editorial": {
+    "italianOnly": "I testi di questa sezione sono solo in italiano, qualunque sia la lingua dell’interfaccia.",
+    "approximatePlace": "Posizione indicativa: {{note}}",
+    "draft": "Bozze redatte con l’aiuto di un’intelligenza artificiale a partire da Wikipedia, non ancora riviste da una persona: controlla le fonti."
+  },
+  "report": {
+    "open": "Segnala un errore",
+    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei, quindi non potremo risponderti.",
+    "about": "Riguarda: {{subject}}",
+    "categoryLabel": "Che tipo di errore è?",
+    "categoryPlaceholder": "Scegli…",
+    "category": {
+      "WRONG_DATE": "La data è sbagliata",
+      "WRONG_PLACE": "Il luogo è sbagliato",
+      "WRONG_TEXT": "Il testo contiene un errore",
+      "BROKEN_LINK": "Un link non funziona",
+      "OTHER": "Altro"
+    },
+    "messageLabel": "Che cosa non va?",
+    "messageHint": "Da {{min}} a {{max}} caratteri. Scritti finora: {{length}}.",
+    "noPersonalData": "Non scrivere dati personali: non ci servono.",
+    "submit": "Invia la segnalazione",
+    "sending": "Invio…",
+    "sent": "Grazie, la segnalazione è arrivata (numero {{id}}).",
+    "error": {
+      "invalid": "La segnalazione non è stata accettata. Controlla il testo e l’indirizzo email: puoi anche lasciarlo vuoto.",
+      "generic": "Non è stato possibile inviare la segnalazione ({{error}})."
+    }
+  },
+  "insights": {
+    "showOnMap": "Vedi il luogo sulla mappa",
+    "stopOf": "Tappa {{position}} di {{count}}: {{title}}",
+    "before": "Prima",
+    "event": "L’evento",
+    "after": "Dopo",
+    "notes": "Da sapere su date e luoghi",
+    "related": "Continua a esplorare",
+    "sources": "Fonti",
+    "writtenBy": "Scritto da {{author}}.",
+    "reviewedOn": "Controllato da una persona sulle sue fonti il {{date}}.",
+    "notReviewed": "Nessuno ha ancora controllato questo testo sulle sue fonti.",
+    "loadError": "Impossibile caricare l’approfondimento ({{error}})."
+  },
+  "samePeriod": {
+    "title": "Nello stesso periodo",
+    "loadError": "Impossibile caricare il confronto ({{error}}).",
+    "intro": "Che cosa accadeva in altri paesi intorno al {{year}}, tra il {{from}} e il {{to}}.",
+    "level": {
+      "NONE": "Nessun materiale nell’indice per questo periodo.",
+      "SPARSE": "Poco materiale: il confronto dice poco.",
+      "OK": "{{events}} eventi in {{countries}} paesi."
+    },
+    "country_one": "{{country}}: un evento nell’indice",
+    "country_other": "{{country}}: {{count}} eventi nell’indice",
+    "countryYears": "{{country}}: tutti gli eventi dal {{from}} al {{to}}",
+    "yearLabel": "Anno al centro del confronto",
+    "yearHint": "Si confrontano gli anni intorno a questo.",
+    "yearInvalid": "Scrivi un anno tra -9999 e 9999 (negativo prima di Cristo)."
+  },
+  "paths": {
+    "pageDescription": "Itinerari su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa.",
+    "startHere": "Inizia da qui",
+    "loadError": "Impossibile caricare i percorsi ({{error}}).",
+    "empty": "Non ci sono ancora percorsi.",
+    "kind": {
+      "path": "Percorso",
+      "insight": "Approfondimento"
+    },
+    "meta": "{{stops}}, {{minutes}}",
+    "stops_one": "{{count}} tappa",
+    "stops_other": "{{count}} tappe",
+    "minutes_one": "{{count}} minuto di lettura",
+    "minutes_other": "{{count}} minuti di lettura",
+    "back": "Tutti i percorsi",
+    "pathLoadError": "Impossibile caricare il percorso ({{error}}).",
+    "coverCredit": "Autore e licenza dell’immagine",
+    "stopsHeading": "Le tappe",
+    "stopLabel": "Tappa {{position}} di {{count}}",
+    "readInsight": "Perché conta",
+    "fullInsight": "Pagina completa",
+    "onMap": "Sulla mappa",
+    "browse": "Esplora i percorsi",
+    "metaWithYears": "{{years}}, {{stops}}, {{minutes}}",
+    "backToTopic": "Altri percorsi: {{topic}}",
+    "filters": {
+      "searchLabel": "Cerca un percorso",
+      "searchPlaceholder": "Titolo, argomento o parola chiave",
+      "topicLabel": "Argomento",
+      "allTopics": "Tutti gli argomenti",
+      "topicOption": "{{name}} ({{count}})",
+      "count_one": "{{count}} percorso",
+      "count_other": "{{count}} percorsi",
+      "noMatches": "Nessun percorso corrisponde ai filtri scelti.",
+      "clear": "Azzera i filtri"
+    },
+    "macro": {
+      "ANTICHITA": "Antichità",
+      "MEDIOEVO_E_RINASCIMENTO": "Medioevo e Rinascimento",
+      "ETA_MODERNA_E_OTTOCENTO": "Età moderna e Ottocento",
+      "NOVECENTO": "Novecento e oggi",
+      "ITALIA_E_MONDO": "Italia e mondo",
+      "SCIENZA_E_TECNICA": "Scienza e tecnica",
+      "IDEE_E_SOCIETA": "Arte, idee e società",
+      "ALTRO": "Altri argomenti"
+    },
+    "topic": {
+      "MONDO_ANTICO": "Mondo antico",
+      "ROMA_REPUBBLICANA": "Roma repubblicana",
+      "ROMA_IMPERIALE": "Roma imperiale",
+      "MEDIOEVO": "Medioevo",
+      "RINASCIMENTO": "Rinascimento e Riforma",
+      "ETA_MODERNA": "Assolutismo, Lumi e rivoluzioni",
+      "OTTOCENTO": "Ottocento",
+      "PRIMA_GUERRA_MONDIALE": "Prima guerra mondiale",
+      "TRA_LE_DUE_GUERRE": "Tra le due guerre",
+      "SECONDA_GUERRA_MONDIALE": "Seconda guerra mondiale",
+      "GUERRA_FREDDA": "Guerra fredda",
+      "OGGI": "Dal 1989 a oggi",
+      "ITALIA": "Italia",
+      "ASIA": "Asia",
+      "MONDO_ISLAMICO": "Mondo islamico",
+      "AFRICA": "Africa",
+      "AMERICHE": "Americhe",
+      "SCIENZA": "Scienza",
+      "MEDICINA": "Medicina ed epidemie",
+      "ESPLORAZIONI_E_SPAZIO": "Esplorazioni e spazio",
+      "TECNOLOGIA_ED_ECONOMIA": "Tecnologia ed economia",
+      "ARTE_E_CULTURA": "Arte, letteratura e musica",
+      "RELIGIONI_E_IDEE": "Religioni e idee",
+      "DIRITTI_E_SOCIETA": "Diritti e società",
+      "CITTA_E_LUOGHI": "Città e luoghi"
+    }
+  },
+  "discovery": {
+    "surprise": {
+      "button": "Sorprendimi",
+      "another": "Un altro evento",
+      "loading": "Cerco un evento…",
+      "none": "Nessun evento corrisponde ai filtri attuali: allarga gli anni o scegli un altro paese.",
+      "error": "Impossibile cercare un evento ({{error}}).",
+      "dateAndCountry": "{{date}}, {{country}}",
+      "onMap": "{{country}} sulla mappa"
     }
   }
 }

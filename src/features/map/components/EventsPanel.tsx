@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils';
 import { useIsDesktop } from '@/hooks/useMediaQuery';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { AttributionNotice, EntryList, HistoryEvents, type HistoryEntry } from '@/features/history';
+import { SurpriseButton, SurpriseResult, useSurprise } from '@/features/discovery';
+import { deriveContentLanguage } from '@/i18n/contentLanguage';
 import { formatEventDate, monthNames } from '@/lib/months';
 import type { useTodayHistory } from '../hooks/useTodayHistory';
 import type { Country } from '../types';
@@ -86,6 +88,9 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
     setMobileOpen(false);
     triggerRef.current?.focus();
   };
+
+  // "Sorprendimi" honours the country in force here; with none chosen, any country.
+  const surprise = useSurprise({ lang: deriveContentLanguage(i18n.language), country: selectedCode });
 
   const date = formatEventDate(today.day, today.month, undefined, i18n.language);
   const events = data?.sections.events;
@@ -254,9 +259,11 @@ export function EventsPanel({ selectedCountry, onClearCountry, onSelectCountry, 
         <p id={hintId} className="mt-1.5 text-xs text-muted-foreground">
           {t('map.events.clickHint')}
         </p>
+        <SurpriseButton outcome={surprise.outcome} onDraw={surprise.draw} className="mt-2" />
       </div>
 
       <div className="flex-1 overflow-y-auto scrollbar-hidden p-4">
+        <SurpriseResult outcome={surprise.outcome} compact className="mb-4" />
         {countryView || (
           <HistoryEvents data={data} isLoading={isLoading} error={error} onRetry={retry} countryFor={countryFor} />
         )}

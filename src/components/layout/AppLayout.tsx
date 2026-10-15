@@ -17,7 +17,8 @@ export function AppLayout() {
       "2": () => navigate("/dashboard"),
       "3": () => navigate("/archive"),
       "4": () => navigate("/century"),
-      "5": () => navigate("/settings"),
+      "5": () => navigate("/paths"),
+      "6": () => navigate("/settings"),
     }),
     [navigate],
   );
@@ -36,18 +37,18 @@ export function AppLayout() {
   return (
     // On paper the fixed screen frame lets go, so a long page flows across sheets instead of
     // being clipped to one viewport.
-    <div className="flex h-screen overflow-hidden print:block print:h-auto print:overflow-visible">
+    <div className="fixed inset-0 flex overflow-clip print:static print:block print:overflow-visible">
       <Sidebar
         open={sidebarOpen}
         isDesktop={isDesktop}
         onClose={() => setSidebarOpen(false)}
       />
-      <div className="flex flex-1 flex-col overflow-hidden print:block print:overflow-visible">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-clip print:block print:overflow-visible">
         <Header
           sidebarOpen={sidebarOpen}
           onMenuToggle={() => setSidebarOpen((v) => !v)}
         />
-        <main className="flex-1 overflow-hidden print:overflow-visible">
+        <main className="min-h-0 flex-1 overflow-clip print:overflow-visible">
           <Suspense fallback={<RouteFallback />}>
             <Outlet />
           </Suspense>

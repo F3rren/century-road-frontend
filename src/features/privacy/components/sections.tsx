@@ -58,8 +58,23 @@ export function DataCollectionSection() {
         per quella richiesta il tuo indirizzo IP non viene inoltrato a Wikipedia.
       </p>
       <p>
-        Il sito non ha moduli, account né commenti e non usa la tua posizione, quindi
-        non raccogliamo nome, email o altri dati che ci fornisci volontariamente.
+        Il sito non ha account né commenti e non usa la tua posizione, quindi non
+        raccogliamo il tuo nome, la tua email o altri dati che ci fornisci
+        volontariamente.
+      </p>
+      <p>
+        <strong>Segnalazioni di errore.</strong> Sotto un evento, un approfondimento o un
+        percorso puoi segnalare un errore. Il modulo invia al nostro servizio ciò a cui
+        la segnalazione si riferisce (la data, la lingua e il testo di un evento, oppure
+        il nome di un approfondimento o di un percorso), il tipo di errore e il messaggio
+        che scrivi. Non chiede né salva nome, email o altri dati che ti identificano, e
+        insieme alla segnalazione non salviamo il tuo indirizzo IP: per questo non
+        possiamo risponderti. Nel messaggio non scrivere dati personali.
+      </p>
+      <p>
+        Per evitare abusi, il servizio conta in memoria quante segnalazioni arrivano da
+        uno stesso indirizzo IP in un'ora, senza salvare quel conteggio con la
+        segnalazione.
       </p>
     </LegalSection>
   );

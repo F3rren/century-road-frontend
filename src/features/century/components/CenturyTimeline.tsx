@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from '@/components/ui/Alert';
 import { GrainChart } from '@/components/ui/GrainChart';
 import {
+  archiveEventRoute,
   AttributionNotice,
   buildCountryTimelinePath,
   cleanText,
@@ -13,6 +14,7 @@ import {
   YearMark,
 } from '@/features/history';
 import { useKeyedFetch } from '@/hooks/useFetchState';
+import { CenturySamePeriod } from './CenturySamePeriod';
 import { formatEventDate } from '@/lib/months';
 
 const STATUS_CLASS = 'px-0.5 py-2 text-sm text-muted-foreground';
@@ -33,20 +35,6 @@ function groupByDecade(events: readonly CountryTimelineEvent[]): [number, Countr
     else decades.set(decade, [event]);
   }
   return [...decades.entries()];
-}
-
-// The full entry, its articles and image credits already live in the archive: each row opens
-// that day there, narrowed to the event's own year.
-function archiveLink(event: CountryTimelineEvent, language: HistoryLanguage): string {
-  const params = new URLSearchParams({
-    month: String(event.month),
-    day: String(event.day),
-    from: String(event.year),
-    to: String(event.year),
-    types: 'events',
-    lang: language,
-  });
-  return `/archive?${params}`;
 }
 
 export function CenturyTimeline({ country, language, fromYear, toYear }: CenturyTimelineProps) {
@@ -120,7 +108,7 @@ export function CenturyTimeline({ country, language, fromYear, toYear }: Century
             {events.map((event, index) => (
               <li key={`${event.year}-${event.month}-${event.day}-${index}`} className="break-inside-avoid py-2.5">
                 <Link
-                  to={archiveLink(event, language)}
+                  to={archiveEventRoute(event, language)}
                   className="group grid grid-cols-[3.75rem_minmax(0,1fr)] gap-x-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <YearMark year={event.year} />
@@ -138,6 +126,13 @@ export function CenturyTimeline({ country, language, fromYear, toYear }: Century
           </ol>
         </section>
       ))}
+
+      {/* Keyed on the country: another country starts again from its own middle year. */}
+      <CenturySamePeriod
+        key={country}
+        country={country}
+        initialYear={data.events[Math.floor(data.events.length / 2)].year}
+      />
 
       <div className="border-t border-border pt-3">
         <AttributionNotice attribution={data.attribution} />

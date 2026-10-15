@@ -1,9 +1,10 @@
 import { Trans, useTranslation } from "react-i18next";
 import { ReadingPage } from "@/components/layout/ReadingPage";
-import { ProseLink, TodayReport } from "@/features/info";
+import { ProseLink, SourcesReport, TodayReport } from "@/features/info";
 import { LegalSection } from "@/features/legal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
+const EDITORIAL_PARAGRAPHS = ["p1", "p2", "p3", "p4", "p5"] as const;
 const GEOCODING_LIMITS = ["limitSubject", "limitNone", "limitBorder", "limitIslands"] as const;
 
 export function MethodologyPage() {
@@ -21,6 +22,16 @@ export function MethodologyPage() {
 
         <LegalSection title={t("methodology.report.title")}>
           <TodayReport />
+        </LegalSection>
+
+        <LegalSection title={t("methodology.editorial.title")}>
+          {EDITORIAL_PARAGRAPHS.map((key) => (
+            <p key={key}>{t(`methodology.editorial.${key}`)}</p>
+          ))}
+        </LegalSection>
+
+        <LegalSection title={t("methodology.sources.title")}>
+          <SourcesReport />
         </LegalSection>
 
         <LegalSection title={t("methodology.languages.title")}>

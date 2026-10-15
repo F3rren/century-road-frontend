@@ -5,6 +5,7 @@ import { Alert } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/Select';
 import { YearRangeFields } from '@/features/archive';
+import { Surprise } from '@/features/discovery';
 import { fetchTimelineCountries, type HistoryLanguage } from '@/features/history';
 import { localizedCountryName } from '@/features/map/data';
 import { useKeyedFetch } from '@/hooks/useFetchState';
@@ -76,10 +77,13 @@ export function CenturyFilters({ params, language, onChange }: CenturyFiltersPro
           </div>
         </div>
       </div>
-      <Button type="button" variant="outline" disabled={params.country === null} onClick={() => window.print()}>
-        <Printer className="h-4 w-4" aria-hidden="true" />
-        {t('century.print')}
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        <Surprise lang={language} country={params.country} fromYear={params.fromYear} toYear={params.toYear} />
+        <Button type="button" variant="outline" disabled={params.country === null} onClick={() => window.print()}>
+          <Printer className="h-4 w-4" aria-hidden="true" />
+          {t('century.print')}
+        </Button>
+      </div>
     </div>
   );
 }

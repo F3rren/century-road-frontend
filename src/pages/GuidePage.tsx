@@ -10,6 +10,7 @@ const LINKS = {
   kbd: <Kbd />,
   archive: <ProseLink to="/archive" />,
   century: <ProseLink to="/century" />,
+  paths: <ProseLink to="/paths" />,
   methodology: <ProseLink to="/methodology" />,
   settings: <ProseLink to="/settings" />,
   privacy: <ProseLink to="/privacy" />,
@@ -17,7 +18,7 @@ const LINKS = {
 
 // Asked in this order: first what the map shows, then how to move around it,
 // then the questions people hit once they're using it.
-const QUESTIONS = ["country", "archive", "theme", "dashboard", "language", "stale", "shortcuts", "prefs"] as const;
+const QUESTIONS = ["country", "archive", "paths", "theme", "dashboard", "language", "stale", "shortcuts", "prefs"] as const;
 
 export function GuidePage() {
   const { t } = useTranslation();

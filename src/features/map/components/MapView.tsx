@@ -27,6 +27,9 @@ const FIXER = '#E2B44A';
 // speak through the heat, and the panel names them.
 const LABELS_FROM_ZOOM = 4;
 const CAMERA_MS = 900;
+// Close enough that the place names have appeared (LABELS_FROM_ZOOM) and the country around the
+// pin is readable, far enough that the pin is still placed in the world.
+const PLACE_ZOOM = 4.5;
 
 // ── Basemap ──────────────────────────────────────────────────────────────────
 
@@ -105,11 +108,30 @@ function heatFilter(heatmap: Record<string, number>): maplibregl.FilterSpecifica
 
 // ── Component ────────────────────────────────────────────────────────────────
 
+// A place the map is asked to show: where an insight happened. Not a country, so it is a pin.
+export interface FocusPlace {
+  lat: number;
+  lon: number;
+  // Said to screen readers; the visible name is in the plaque beside the map.
+  label: string;
+}
+
 interface MapViewProps {
   projection: ProjectionType;
   onCountryClick?: (country: Country) => void;
   selectedCountryCode?: string | null;
   countryHeatmap?: Record<string, number>;
+  focusPlace?: FocusPlace | null;
+}
+
+// The pin is one grain, an event placed on the print: fixer yellow, which marks what is selected
+// or focused, with a Prussian rule so it holds on any ground.
+function createPlaceMarkerElement(label: string): HTMLElement {
+  const el = document.createElement('div');
+  el.setAttribute('role', 'img');
+  el.setAttribute('aria-label', label);
+  el.style.cssText = `width:18px;height:18px;border-radius:9999px;background:${FIXER};border:2px solid ${PRUSSIAN};`;
+  return el;
 }
 
 export function MapView({
@@ -117,6 +139,7 @@ export function MapView({
   onCountryClick,
   selectedCountryCode,
   countryHeatmap,
+  focusPlace,
 }: MapViewProps) {
   const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -325,6 +348,25 @@ export function MapView({
     };
   }, [projection, retryKey]);
 
+  // A place named by a link (an insight's): pin it and turn the map to it. Declared before the
+  // effect that faces today's events, which must not then take the camera away from it.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !loaded || !focusPlace) return;
+    const marker = new maplibregl.Marker({ element: createPlaceMarkerElement(focusPlace.label) })
+      .setLngLat([focusPlace.lon, focusPlace.lat])
+      .addTo(map);
+    framedRef.current = true;
+    map.easeTo({
+      center: [focusPlace.lon, focusPlace.lat],
+      zoom: Math.max(map.getZoom(), PLACE_ZOOM),
+      duration: prefersReducedMotion() ? 0 : CAMERA_MS,
+    });
+    return () => {
+      marker.remove();
+    };
+  }, [focusPlace, loaded]);
+
   // Sync the selected country: highlight it, and turn the map to it, so picking
   // a country on the far side of the globe shows where it is.
   useEffect(() => {
@@ -345,7 +387,7 @@ export function MapView({
   // the world where today's history happened.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !loaded || !anchorsReady || framedRef.current || userMovedRef.current || selectedCountryCode) return;
+    if (!map || !loaded || !anchorsReady || framedRef.current || userMovedRef.current || selectedCountryCode || focusPlace) return;
     const points = Object.entries(countryHeatmap ?? {}).flatMap(([code, count]) => {
       const anchor = anchorsRef.current.get(code);
       return anchor ? [{ lng: anchor[0], lat: anchor[1], weight: count }] : [];
@@ -354,7 +396,7 @@ export function MapView({
     if (!center) return;
     framedRef.current = true;
     map.easeTo({ center, duration: prefersReducedMotion() ? 0 : CAMERA_MS });
-  }, [countryHeatmap, loaded, anchorsReady, selectedCountryCode]);
+  }, [countryHeatmap, loaded, anchorsReady, selectedCountryCode, focusPlace]);
 
   // Keep languageRef current for the click handler above, and the place names
   // and control labels in the interface's language.

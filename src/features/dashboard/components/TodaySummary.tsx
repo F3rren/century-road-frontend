@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { formatEventDate } from "@/lib/months";
+import { formatEventDate, formatYear } from "@/lib/months";
 import type { TodaySummary as Summary } from "../types";
 
 interface TodaySummaryProps {
@@ -13,7 +13,7 @@ interface TodaySummaryProps {
 // rather than "in <country>", which no language here inflects safely.
 export function TodaySummary({ summary, month, day }: TodaySummaryProps) {
   const { t, i18n } = useTranslation();
-  const year = (y: number | null) => (y === null ? "—" : y < 0 ? `${-y} ${t("date.era.bc")}` : String(y));
+  const year = (y: number | null) => (y === null ? "—" : formatYear(y, i18n.language));
   const top = summary.topCountry;
 
   const placed =

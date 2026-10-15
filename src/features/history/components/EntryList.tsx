@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { centuryRange } from '@/lib/months';
 import { matchesQuery } from '../lib/matchesQuery';
-import type { Attribution, HistoryEntry, PlaceRef, SectionResult } from '../types';
+import type { Attribution, HistoryEntry, InsightSummary, PlaceRef, SectionResult } from '../types';
 import { HistoryEventCard } from './HistoryEventCard';
 
 interface EntryListProps {
@@ -23,10 +23,12 @@ interface EntryListProps {
   featured?: ReadonlySet<HistoryEntry>;
   // The country each entry is placed in, where the caller knows it.
   countryFor?: (entry: HistoryEntry) => PlaceRef | undefined;
+  // The "Perché conta" each entry has, where the caller knows it: those entries are marked.
+  insightFor?: (entry: HistoryEntry) => InsightSummary | undefined;
 }
 
 // Oldest first, like the map's own event lists.
-export function EntryList({ section, month, day, attribution, query, compact, centuryHeadings, featured, countryFor }: EntryListProps) {
+export function EntryList({ section, month, day, attribution, query, compact, centuryHeadings, featured, countryFor, insightFor }: EntryListProps) {
   const { i18n } = useTranslation();
   const entries = useMemo(() => {
     const sorted = [...section.items].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
@@ -69,6 +71,7 @@ export function EntryList({ section, month, day, attribution, query, compact, ce
               compact={compact}
               featured={featured?.has(entry)}
               country={countryFor?.(entry)}
+              insight={insightFor?.(entry)}
             />
           ))}
         </div>

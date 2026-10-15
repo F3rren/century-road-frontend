@@ -2,13 +2,14 @@ import { useTranslation } from "react-i18next";
 import { SettingsSection } from "./SettingsSection";
 
 // Documents the app's real bindings — AppLayout's useKeyboardShortcuts call
-// (1–5) and EventsPanel's own ('/') — nothing invented here.
+// (1–6) and EventsPanel's own ('/') — nothing invented here.
 const SHORTCUTS: readonly { key: string; actionKey: string }[] = [
   { key: "1", actionKey: "nav.map" },
   { key: "2", actionKey: "nav.dashboard" },
   { key: "3", actionKey: "nav.archive" },
   { key: "4", actionKey: "nav.century" },
-  { key: "5", actionKey: "nav.settings" },
+  { key: "5", actionKey: "nav.paths" },
+  { key: "6", actionKey: "nav.settings" },
   { key: "/", actionKey: "settings.shortcuts.focusCountryPicker" },
 ];
 

@@ -11,6 +11,7 @@ import {
   Globe,
   Handshake,
   LayoutDashboard,
+  Route,
   Settings,
   ShieldCheck,
 } from 'lucide-react';
@@ -28,7 +29,8 @@ const navItems = [
   { labelKey: 'nav.dashboard',  href: '/dashboard', icon: LayoutDashboard,  end: true,  shortcut: '2' },
   { labelKey: 'nav.archive',    href: '/archive',   icon: Archive,          end: false, shortcut: '3' },
   { labelKey: 'nav.century',    href: '/century',   icon: CalendarRange,    end: false, shortcut: '4' },
-  { labelKey: 'nav.settings',   href: '/settings',  icon: Settings,         end: false, shortcut: '5' },
+  { labelKey: 'nav.paths',      href: '/paths',     icon: Route,            end: false, shortcut: '5' },
+  { labelKey: 'nav.settings',   href: '/settings',  icon: Settings,         end: false, shortcut: '6' },
 ] as const;
 
 // Reference pages (how-to, methodology, credits, legal): reachable from anywhere

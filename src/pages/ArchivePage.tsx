@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ArchiveFilters, ArchiveResults, useArchiveFilters } from "@/features/archive";
+import { Surprise } from "@/features/discovery";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function ArchivePage() {
@@ -29,6 +30,10 @@ export function ArchivePage() {
             setResetToken((token) => token + 1);
           }}
         />
+        {/* A random event from the years set above; the day and the types are the Archive's own. */}
+        <div className="flex flex-wrap gap-3">
+          <Surprise lang={filters.lang} fromYear={filters.fromYear} toYear={filters.toYear} />
+        </div>
         <ArchiveResults filters={filters} onClearQuery={() => update({ query: "" })} />
       </div>
     </div>

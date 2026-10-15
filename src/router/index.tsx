@@ -15,6 +15,9 @@ const IndexRoute = lazy(() => import('@/pages/IndexRoute').then((m) => ({ defaul
 const DashboardPage = lazy(() => import('@/pages/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 const ArchivePage = lazy(() => import('@/pages/ArchivePage').then((m) => ({ default: m.ArchivePage })));
 const CenturyPage = lazy(() => import('@/pages/CenturyPage').then((m) => ({ default: m.CenturyPage })));
+const PathsPage = lazy(() => import('@/pages/PathsPage').then((m) => ({ default: m.PathsPage })));
+const PathPage = lazy(() => import('@/pages/PathPage').then((m) => ({ default: m.PathPage })));
+const InsightPage = lazy(() => import('@/pages/InsightPage').then((m) => ({ default: m.InsightPage })));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = lazy(() => import('@/pages/TermsPage').then((m) => ({ default: m.TermsPage })));
@@ -48,6 +51,9 @@ export const router = createBrowserRouter([
       { path: 'dashboard',    element: <DashboardPage /> },
       { path: 'archive',      element: <ArchivePage /> },
       { path: 'century',      element: <CenturyPage /> },
+      { path: 'paths',        element: <PathsPage /> },
+      { path: 'paths/:slug',  element: <PathPage /> },
+      { path: 'insights/:slug', element: <InsightPage /> },
       { path: 'settings',     element: <SettingsPage /> },
       { path: 'privacy',      element: <PrivacyPage /> },
       { path: 'terms',        element: <TermsPage /> },
