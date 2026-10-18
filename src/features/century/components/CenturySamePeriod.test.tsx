@@ -33,7 +33,7 @@ describe('CenturySamePeriod', () => {
     renderIt();
     expect(screen.getByLabelText(t('samePeriod.yearLabel'))).toHaveValue('1950');
     await waitFor(() =>
-      expect(api.get).toHaveBeenCalledWith('/history/same-period?year=1950&lang=it&excludeCountry=IT'),
+      expect(api.get).toHaveBeenCalledWith('/history/same-period?year=1950&lang=it&excludeCountry=IT', expect.any(AbortSignal)),
     );
   });
 
@@ -44,7 +44,7 @@ describe('CenturySamePeriod', () => {
     await user.clear(field);
     await user.type(field, '1969');
     await waitFor(
-      () => expect(api.get).toHaveBeenLastCalledWith('/history/same-period?year=1969&lang=it&excludeCountry=IT'),
+      () => expect(api.get).toHaveBeenLastCalledWith('/history/same-period?year=1969&lang=it&excludeCountry=IT', expect.any(AbortSignal)),
       { timeout: 2000 },
     );
     // Not one request per keystroke.
@@ -73,7 +73,7 @@ describe('CenturySamePeriod', () => {
     await user.clear(field);
     await user.type(field, '-44');
     await waitFor(
-      () => expect(api.get).toHaveBeenLastCalledWith('/history/same-period?year=-44&lang=it&excludeCountry=IT'),
+      () => expect(api.get).toHaveBeenLastCalledWith('/history/same-period?year=-44&lang=it&excludeCountry=IT', expect.any(AbortSignal)),
       { timeout: 2000 },
     );
   });

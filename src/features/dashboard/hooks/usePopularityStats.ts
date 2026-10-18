@@ -10,8 +10,8 @@ interface Popularity {
   topCountries: CountryViewStat[];
 }
 
-function fetchPopularity(): Promise<Popularity> {
-  return Promise.all([fetchTopDays(LIMIT), fetchTopCountries(LIMIT)]).then(
+function fetchPopularity(signal: AbortSignal): Promise<Popularity> {
+  return Promise.all([fetchTopDays(LIMIT, signal), fetchTopCountries(LIMIT, signal)]).then(
     ([topDays, topCountries]) => ({ topDays, topCountries }),
   );
 }

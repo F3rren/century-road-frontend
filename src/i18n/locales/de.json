@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "der Dienst antwortet nicht: prüfe die Verbindung und versuche es erneut",
+    "timeout": "der Dienst hat nicht rechtzeitig geantwortet: versuche es gleich noch einmal",
     "server": "der Dienst ist gerade nicht erreichbar: versuche es in ein paar Minuten erneut",
     "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut",
     "notFound": "der gewünschte Inhalt existiert nicht",

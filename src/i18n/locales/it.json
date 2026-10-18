@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "il servizio non risponde: controlla la connessione e riprova",
+    "timeout": "il servizio non ha risposto in tempo: riprova tra poco",
     "server": "il servizio non è disponibile in questo momento: riprova tra qualche minuto",
     "unexpected": "risposta inattesa dal servizio: riprova più tardi",
     "notFound": "il contenuto richiesto non esiste",

@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "the service is not responding: check your connection and try again",
+    "timeout": "the service didn't answer in time: try again in a moment",
     "server": "the service is unavailable right now: try again in a few minutes",
     "unexpected": "unexpected answer from the service: try again later",
     "notFound": "the content you asked for doesn't exist",
