@@ -65,8 +65,8 @@ function isOnThisDayData(value: unknown): value is OnThisDayData {
   );
 }
 
-export async function fetchOnThisDay(path: string): Promise<OnThisDayData> {
-  const envelope = await api.get<ApiResponse<unknown>>(path);
+export async function fetchOnThisDay(path: string, signal?: AbortSignal): Promise<OnThisDayData> {
+  const envelope = await api.get<ApiResponse<unknown>>(path, signal);
 
   if (!envelope.success || !isOnThisDayData(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
@@ -84,16 +84,16 @@ export function trackCountryView(countryCode: string): void {
   });
 }
 
-export async function fetchTopDays(limit: number): Promise<DayViewStat[]> {
-  const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/days?limit=${limit}`);
+export async function fetchTopDays(limit: number, signal?: AbortSignal): Promise<DayViewStat[]> {
+  const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/days?limit=${limit}`, signal);
   if (!envelope.success || !Array.isArray(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data as DayViewStat[];
 }
 
-export async function fetchTopCountries(limit: number): Promise<CountryViewStat[]> {
-  const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/countries?limit=${limit}`);
+export async function fetchTopCountries(limit: number, signal?: AbortSignal): Promise<CountryViewStat[]> {
+  const envelope = await api.get<ApiResponse<unknown>>(`/history/stats/countries?limit=${limit}`, signal);
   if (!envelope.success || !Array.isArray(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
@@ -102,8 +102,11 @@ export async function fetchTopCountries(limit: number): Promise<CountryViewStat[
 
 // The countries the country index has events for, with how many: empty until the backend's
 // first pass over the year has run.
-export async function fetchTimelineCountries(lang: HistoryLanguage): Promise<CountryEventCount[]> {
-  const envelope = await api.get<ApiResponse<unknown>>(`/history/countries?lang=${lang}`);
+export async function fetchTimelineCountries(
+  lang: HistoryLanguage,
+  signal?: AbortSignal,
+): Promise<CountryEventCount[]> {
+  const envelope = await api.get<ApiResponse<unknown>>(`/history/countries?lang=${lang}`, signal);
   if (!envelope.success || !Array.isArray(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
@@ -128,8 +131,8 @@ function isCountryTimelineData(value: unknown): value is CountryTimelineData {
   );
 }
 
-export async function fetchCountryTimeline(path: string): Promise<CountryTimelineData> {
-  const envelope = await api.get<ApiResponse<unknown>>(path);
+export async function fetchCountryTimeline(path: string, signal?: AbortSignal): Promise<CountryTimelineData> {
+  const envelope = await api.get<ApiResponse<unknown>>(path, signal);
   if (!envelope.success || !isCountryTimelineData(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
@@ -145,16 +148,16 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
 
-async function fetchList<T>(path: string): Promise<T[]> {
-  const envelope = await api.get<ApiResponse<unknown>>(path);
+async function fetchList<T>(path: string, signal?: AbortSignal): Promise<T[]> {
+  const envelope = await api.get<ApiResponse<unknown>>(path, signal);
   if (!envelope.success || !Array.isArray(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
   return envelope.data as T[];
 }
 
-async function fetchObject<T>(path: string, isValid: (value: unknown) => boolean): Promise<T> {
-  const envelope = await api.get<ApiResponse<unknown>>(path);
+async function fetchObject<T>(path: string, isValid: (value: unknown) => boolean, signal?: AbortSignal): Promise<T> {
+  const envelope = await api.get<ApiResponse<unknown>>(path, signal);
   if (!envelope.success || !isValid(envelope.data)) {
     throw new Error(extractErrorMessage(envelope));
   }
@@ -162,12 +165,12 @@ async function fetchObject<T>(path: string, isValid: (value: unknown) => boolean
 }
 
 // "Inizia da qui": a few paths and events picked by hand, in the order to show them.
-export function fetchStartHere(): Promise<StartHereItem[]> {
-  return fetchList<StartHereItem>('/history/start-here');
+export function fetchStartHere(signal?: AbortSignal): Promise<StartHereItem[]> {
+  return fetchList<StartHereItem>('/history/start-here', signal);
 }
 
-export function fetchPaths(): Promise<PathSummary[]> {
-  return fetchList<PathSummary>('/history/paths');
+export function fetchPaths(signal?: AbortSignal): Promise<PathSummary[]> {
+  return fetchList<PathSummary>('/history/paths', signal);
 }
 
 function isPathDetail(value: unknown): boolean {
@@ -180,8 +183,8 @@ function isPathDetail(value: unknown): boolean {
 }
 
 // 404 (PATH_NOT_FOUND) arrives as a thrown "HTTP 404", like any non-ok answer.
-export function fetchPath(slug: string): Promise<PathDetail> {
-  return fetchObject<PathDetail>(`/history/paths/${encodeURIComponent(slug)}`, isPathDetail);
+export function fetchPath(slug: string, signal?: AbortSignal): Promise<PathDetail> {
+  return fetchObject<PathDetail>(`/history/paths/${encodeURIComponent(slug)}`, isPathDetail, signal);
 }
 
 // Without a day, every insight; with one, those of that day of the year whatever the year - the
@@ -191,8 +194,8 @@ export function buildInsightsPath(day?: InsightsDayParams): string {
   return `/history/insights?month=${day.month}&day=${day.day}`;
 }
 
-export function fetchInsights(path: string): Promise<InsightSummary[]> {
-  return fetchList<InsightSummary>(path);
+export function fetchInsights(path: string, signal?: AbortSignal): Promise<InsightSummary[]> {
+  return fetchList<InsightSummary>(path, signal);
 }
 
 function isInsightDetail(value: unknown): boolean {
@@ -208,8 +211,8 @@ function isInsightDetail(value: unknown): boolean {
 }
 
 // 404 (INSIGHT_NOT_FOUND) arrives as a thrown "HTTP 404", like any non-ok answer.
-export function fetchInsight(slug: string): Promise<InsightDetail> {
-  return fetchObject<InsightDetail>(`/history/insights/${encodeURIComponent(slug)}`, isInsightDetail);
+export function fetchInsight(slug: string, signal?: AbortSignal): Promise<InsightDetail> {
+  return fetchObject<InsightDetail>(`/history/insights/${encodeURIComponent(slug)}`, isInsightDetail, signal);
 }
 
 // "Sorprendimi": one event picked at random from the country index, among those that match the
@@ -260,8 +263,8 @@ function isSamePeriodData(value: unknown): boolean {
   );
 }
 
-export function fetchSamePeriod(path: string): Promise<SamePeriodData> {
-  return fetchObject<SamePeriodData>(path, isSamePeriodData);
+export function fetchSamePeriod(path: string, signal?: AbortSignal): Promise<SamePeriodData> {
+  return fetchObject<SamePeriodData>(path, isSamePeriodData, signal);
 }
 
 function isSourcesData(value: unknown): boolean {
@@ -276,8 +279,8 @@ function isSourcesData(value: unknown): boolean {
 }
 
 // Where the content comes from, under what terms, how much of it there is and what it leaves out.
-export function fetchSources(): Promise<SourcesData> {
-  return fetchObject<SourcesData>('/history/sources', isSourcesData);
+export function fetchSources(signal?: AbortSignal): Promise<SourcesData> {
+  return fetchObject<SourcesData>('/history/sources', isSourcesData, signal);
 }
 
 // "Segnala un errore". The one endpoint that writes, so the backend limits it per caller: a

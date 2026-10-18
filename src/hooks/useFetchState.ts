@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import i18n from '@/i18n';
+import { httpStatus, isTimeout } from '@/services/fetchErrors';
+
+// Re-exported: callers have always imported it from here.
+export { httpStatus };
 
 export interface FetchState<D> {
   data: D | null;
@@ -21,6 +25,7 @@ type Settled<K, D> =
 // fetcher ever does more than parse a response.
 export function describeFetchError(error: unknown): string {
   if (error instanceof TypeError) return i18n.t('errors.network');
+  if (isTimeout(error)) return i18n.t('errors.timeout');
   const status = httpStatus(error);
   if (status === 404) return i18n.t('errors.notFound');
   if (status === 429) return i18n.t('errors.rateLimited');
@@ -28,29 +33,28 @@ export function describeFetchError(error: unknown): string {
   return i18n.t('errors.unexpected');
 }
 
-// The status api.ts puts in the message of the Error it throws for a non-ok answer
-// ("HTTP 404: Not Found"); undefined for anything else.
-export function httpStatus(error: unknown): number | undefined {
-  const status = error instanceof Error ? /^HTTP (\d{3})/.exec(error.message)?.[1] : undefined;
-  return status === undefined ? undefined : Number(status);
-}
-
 // Shared fetch+race-guard engine, generalizing useOnThisDay's original settle-by-key
 // logic: a fetch that resolves for a key that is no longer current is discarded
 // (isStale), and even the latest-fired fetch's result is only trusted if it matches
 // the render's current key — this avoids a stale-data flash when the key changes
 // rapidly, without resetting state inside the effect (which would cost an extra render).
+//
+// Each run also hands its fetcher an AbortSignal, aborted when the key changes or the component
+// unmounts: a fetcher that passes it on to api.get() cancels the request nobody is waiting for
+// any more, instead of leaving it to finish and be thrown away. One that ignores it still works,
+// guarded by isStale as before.
 export function useKeyedFetch<K, D>(
   key: K,
-  fetcher: (key: K) => Promise<D>,
+  fetcher: (key: K, signal: AbortSignal) => Promise<D>,
 ): FetchState<D> & { key: K; retry: () => void } {
   const [settled, setSettled] = useState<Settled<K, D> | null>(null);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let isStale = false;
+    const controller = new AbortController();
 
-    fetcher(key)
+    fetcher(key, controller.signal)
       .then((data) => {
         if (!isStale) setSettled({ key, attempt, data, error: null });
       })
@@ -60,6 +64,7 @@ export function useKeyedFetch<K, D>(
 
     return () => {
       isStale = true;
+      controller.abort();
     };
     // `fetcher` is expected to be referentially stable for the lifetime of a given
     // key (a module-level function, or a caller-memoized closure) — only `key`, or
@@ -83,7 +88,9 @@ export function useKeyedFetch<K, D>(
 const ONCE_KEY = 0;
 
 // For a fetch with no meaningful key — runs once per mount, like a plain [] effect.
-export function useFetchOnce<D>(fetcher: () => Promise<D>): FetchState<D> & { retry: () => void } {
-  const { data, isLoading, error, retry } = useKeyedFetch(ONCE_KEY, fetcher);
+export function useFetchOnce<D>(
+  fetcher: (signal: AbortSignal) => Promise<D>,
+): FetchState<D> & { retry: () => void } {
+  const { data, isLoading, error, retry } = useKeyedFetch(ONCE_KEY, (_key, signal) => fetcher(signal));
   return { data, isLoading, error, retry };
 }

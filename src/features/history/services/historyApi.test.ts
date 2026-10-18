@@ -57,7 +57,26 @@ describe('lists', () => {
   ])('%s resolves the array in the envelope', async (_name, call, endpoint) => {
     get.mockResolvedValue(ok([{ slug: 'a' }]));
     await expect(call()).resolves.toEqual([{ slug: 'a' }]);
-    expect(get).toHaveBeenCalledWith(endpoint);
+    expect(get).toHaveBeenCalledWith(endpoint, undefined);
+  });
+
+  // What lets a hook cancel a request whose key it has left behind.
+  it.each([
+    ['fetchStartHere', (signal: AbortSignal) => fetchStartHere(signal), '/history/start-here'],
+    ['fetchPaths', (signal: AbortSignal) => fetchPaths(signal), '/history/paths'],
+    ['fetchInsights', (signal: AbortSignal) => fetchInsights('/history/insights', signal), '/history/insights'],
+    ['fetchPath', (signal: AbortSignal) => fetchPath('a', signal), '/history/paths/a'],
+    ['fetchInsight', (signal: AbortSignal) => fetchInsight('a', signal), '/history/insights/a'],
+    ['fetchSamePeriod', (signal: AbortSignal) => fetchSamePeriod('/history/same-period?year=1', signal), '/history/same-period?year=1'],
+    ['fetchSources', (signal: AbortSignal) => fetchSources(signal), '/history/sources'],
+  ])('%s hands the caller\'s abort signal to the request', async (_name, call, endpoint) => {
+    // Whether the answer passes the shape check does not matter here, only what api.get was given.
+    get.mockResolvedValue(ok([]));
+    const signal = new AbortController().signal;
+
+    await call(signal).catch(() => undefined);
+
+    expect(get).toHaveBeenCalledWith(endpoint, signal);
   });
 
   it('treats a day with no insights as an empty list, not an error', async () => {
@@ -90,7 +109,7 @@ describe('one path, one insight', () => {
   it('escapes the slug it puts in the URL', async () => {
     get.mockResolvedValue(ok(path));
     await fetchPath('a/b c');
-    expect(get).toHaveBeenCalledWith('/history/paths/a%2Fb%20c');
+    expect(get).toHaveBeenCalledWith('/history/paths/a%2Fb%20c', undefined);
   });
 
   it('accepts a path and an insight in the documented shape', async () => {
@@ -98,7 +117,7 @@ describe('one path, one insight', () => {
     await expect(fetchPath(path.slug)).resolves.toEqual(path);
     get.mockResolvedValueOnce(ok(insight));
     await expect(fetchInsight(insight.slug)).resolves.toEqual(insight);
-    expect(get).toHaveBeenLastCalledWith('/history/insights/sputnik-1');
+    expect(get).toHaveBeenLastCalledWith('/history/insights/sputnik-1', undefined);
   });
 
   it('rejects an insight missing one of its three parts', async () => {
@@ -171,7 +190,7 @@ describe('sources', () => {
     get.mockResolvedValue(ok(sources));
     const data = await fetchSources();
     expect(data.coverage.editorial.lastReviewedAt).toBeUndefined();
-    expect(get).toHaveBeenCalledWith('/history/sources');
+    expect(get).toHaveBeenCalledWith('/history/sources', undefined);
   });
 
   it('rejects an answer without its coverage', async () => {

@@ -39,8 +39,8 @@ export function useInsight(slug: string) {
   return { slug, isLoading, data, error, retry };
 }
 
-const fetchInsightIfAny = (slug: string | null): Promise<InsightDetail | null> =>
-  slug === null ? Promise.resolve(null) : fetchInsight(slug);
+const fetchInsightIfAny = (slug: string | null, signal: AbortSignal): Promise<InsightDetail | null> =>
+  slug === null ? Promise.resolve(null) : fetchInsight(slug, signal);
 
 // For a page where the insight is optional (the map, when a link names one): with no slug there
 // is nothing to ask for, and data stays null once settled.
@@ -49,8 +49,8 @@ export function useOptionalInsight(slug: string | null) {
   return { isLoading, data, error };
 }
 
-const fetchDayInsights = (path: string | null): Promise<InsightSummary[]> =>
-  path === null ? Promise.resolve([]) : fetchInsights(path);
+const fetchDayInsights = (path: string | null, signal: AbortSignal): Promise<InsightSummary[]> =>
+  path === null ? Promise.resolve([]) : fetchInsights(path, signal);
 
 // "Approfondimento disponibile": asks for a day's insights next to the day's own events and
 // answers, for any event, which insight (if any) it has. A failure just means no event is marked:

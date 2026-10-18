@@ -60,7 +60,7 @@ describe('Surprise', () => {
     renderSurprise({ lang: 'it', country: 'IT', fromYear: 1901, toYear: null });
     await user.click(screen.getByRole('button', { name: t('discovery.surprise.button') }));
     await screen.findByText(t('discovery.surprise.none'));
-    expect(api.get).toHaveBeenCalledWith('/history/random?lang=it&country=IT&fromYear=1901');
+    expect(api.get).toHaveBeenCalledWith('/history/random?lang=it&country=IT&fromYear=1901', undefined);
   });
 
   it('says so when nothing matches, as an answer and not as a failure', async () => {

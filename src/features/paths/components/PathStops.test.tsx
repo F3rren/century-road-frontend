@@ -104,7 +104,7 @@ describe('a stop\'s "Perché conta"', () => {
     const firstStop = first.closest('ol > li') as HTMLElement;
     expect(within(firstStop).getByRole('link', { name: /Apollo 11/ })).toHaveAttribute('href', '/insights/apollo-11');
     expect(api.get).toHaveBeenCalledTimes(1);
-    expect(api.get).toHaveBeenCalledWith('/history/insights/sputnik-1');
+    expect(api.get).toHaveBeenCalledWith('/history/insights/sputnik-1', expect.any(AbortSignal));
     // The other stop stays closed and has not been read.
     expect(second.closest('details')).not.toHaveAttribute('open');
     expect(screen.queryByText('Prima di apollo-11.')).not.toBeInTheDocument();
