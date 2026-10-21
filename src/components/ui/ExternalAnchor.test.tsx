@@ -35,4 +35,32 @@ describe("ExternalAnchor", () => {
     expect(link).toHaveClass("text-primary");
     expect(link).toHaveClass("underline");
   });
+
+  describe("with an address that is not a web URL", () => {
+    it.each(["javascript:alert(1)", " JavaScript:alert(1)", "data:text/html,<b>x</b>", "vbscript:msgbox(1)", "/just/a/path", ""])(
+      "shows the text and links nothing for %j",
+      (href) => {
+        render(<ExternalAnchor href={href}>Wikipedia</ExternalAnchor>);
+        expect(screen.queryByRole("link")).not.toBeInTheDocument();
+        expect(screen.getByText("Wikipedia")).toBeInTheDocument();
+      },
+    );
+
+    it("shows the text and links nothing when there is no address at all", () => {
+      render(<ExternalAnchor>Wikipedia</ExternalAnchor>);
+      expect(screen.queryByRole("link")).not.toBeInTheDocument();
+      expect(screen.getByText("Wikipedia")).toBeInTheDocument();
+    });
+
+    it("does not announce a new tab it will not open", () => {
+      const { container } = render(<ExternalAnchor href="javascript:alert(1)">Wikipedia</ExternalAnchor>);
+      expect(container.querySelector(".sr-only")).toBeNull();
+      expect(container.querySelector("[href], [target]")).toBeNull();
+    });
+  });
+
+  it("still links an uppercase scheme, which is a web URL all the same", () => {
+    render(<ExternalAnchor href="HTTPS://example.org">Wikipedia</ExternalAnchor>);
+    expect(screen.getByRole("link")).toHaveAttribute("target", "_blank");
+  });
 });
