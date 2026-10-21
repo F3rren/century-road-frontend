@@ -302,17 +302,17 @@
     },
     "geocoding": {
       "title": "Le pays sur la carte",
-      "p1": "Wikipédia n'indique pas dans quel pays un événement a eu lieu : nous le déduisons. Nous prenons le premier article lié qui possède des coordonnées et cherchons le pays qui contient ce point, sur les frontières de Natural Earth à l'échelle 1:110 millions.",
+      "p1": "Wikipédia n'indique pas dans quel pays un événement a eu lieu : nous le déduisons. Nous prenons le premier article lié qui possède des coordonnées et cherchons le pays qui contient ce point, sur les frontières de Natural Earth à l'échelle 1:10 millions, simplifiées.",
       "p2": "C'est une approximation, avec des limites précises :",
       "limitSubject": "les coordonnées décrivent le sujet de l'article, pas toujours le lieu de l'événement ;",
       "limitNone": "un événement sans article lié doté de coordonnées reste sans pays : il figure dans la liste du jour, mais n'est pas compté sur la carte ;",
       "limitBorder": "un point proche d'une frontière peut tomber dans le pays voisin ;",
-      "limitIslands": "certains petits États insulaires n'ont pas de forme à cette échelle et ne sont jamais identifiés.",
+      "limitIslands": "quelques très petites îles n'ont pas de forme à cette échelle et ne sont jamais identifiées ; la capitale d'un État insulaire, sur la côte, peut tomber juste en dehors de sa forme.",
       "p3": "Sur la carte, seuls les Événements comptent : « À la une » en reprend certains, et les compter deux fois gonflerait les chiffres."
     },
     "index": {
       "title": "L'index par pays",
-      "p1": "La page <century>Mon siècle</century> utilise un index que notre serveur construit chaque nuit : il lit tous les jours de l'année en italien et en anglais et place chaque événement dans un pays avec la même règle et les mêmes frontières que la carte. Il ne contient que les Événements avec une année et un pays identifié, chaque édition séparément (sans repli entre les langues), et peut avoir un jour de retard sur Wikipédia."
+      "p1": "La page <century>Mon siècle</century> utilise un index que notre serveur construit chaque nuit : il lit tous les jours de l'année en italien et en anglais et place chaque événement dans un pays avec la même règle que la carte, mais sur des frontières moins détaillées (Natural Earth à l'échelle 1:110 millions) : un événement dans un micro-État ou près d'une frontière peut y finir dans un autre pays que sur la carte. Il ne contient que les Événements avec une année et un pays identifié, chaque édition séparément (sans repli entre les langues), et peut avoir un jour de retard sur Wikipédia."
     },
     "errors": {
       "title": "Contradictions et erreurs",
@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "Comment voir les événements d'un pays ?",
-      "p1": "Cliquez sur le pays dans la carte, ou choisissez-le dans « Aller à un pays » du panneau des événements : la touche <kbd>/</kbd> vous y mène directement. Pour revenir à tous les événements du jour, utilisez le X en haut du panneau."
+      "p1": "Cliquez sur le pays dans la carte, ou choisissez-le dans « Aller à un pays » du panneau des événements : la touche <kbd>/</kbd> vous y mène directement. Pour revenir à tous les événements du jour, cliquez sur la carte en dehors de tout pays (sur la mer, par exemple), ou utilisez « Tous les pays » en haut du panneau."
     },
     "archive": {
       "title": "Comment consulter un autre jour ?",

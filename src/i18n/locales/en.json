@@ -302,17 +302,17 @@
     },
     "geocoding": {
       "title": "The country on the map",
-      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:110 million borders.",
+      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:10 million borders, simplified.",
       "p2": "It's an approximation, with specific limits:",
       "limitSubject": "coordinates describe the article's subject, not always where the event took place;",
       "limitNone": "an event with no linked article carrying coordinates gets no country: it's in the day's list, but isn't counted on the map;",
       "limitBorder": "a point near a border can land in the neighboring country;",
-      "limitIslands": "some small island states have no shape at this scale and are never identified.",
+      "limitIslands": "a few very small islands have no shape at this scale and are never identified; the capital of an island state, on its coast, can fall just outside its shape.",
       "p3": "Only Events count on the map: Featured repeats some of them, and counting them twice would inflate the numbers."
     },
     "index": {
       "title": "The country index",
-      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule and the same borders as the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
+      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule as the map, but on less detailed borders (Natural Earth at 1:110 million): an event in a microstate or near a border can end up there in a different country from the one on the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
     },
     "errors": {
       "title": "Contradictions and errors",
@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "How do I see a country's events?",
-      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, use the X at the top of the panel."
+      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, click the map outside any country (on the sea, say), or use “All countries” at the top of the panel."
     },
     "archive": {
       "title": "How do I look up another day?",

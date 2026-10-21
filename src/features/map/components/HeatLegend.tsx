@@ -58,13 +58,14 @@ export function HeatLegend() {
           </Button>
         )}
       </div>
-      {[...HEAT_LEVELS].reverse().map(({ color, labelKey }) => (
+      {[...HEAT_LEVELS].reverse().map(({ swatch, labelKey }) => (
         <div key={labelKey} className="flex items-center gap-2">
-          {/* A paper frame: each step as it prints on the map, which the
-              Prussian plate alone would swallow ("≥ 6" is the plate's own blue). */}
+          {/* A paper frame: each step as it prints on the map (the translucent ink
+              already blended with the paper), which the Prussian plate alone would
+              swallow ("≥ 6" is nearly the plate's own blue). */}
           <span
             className="h-4 w-4 shrink-0 border-2 border-[#F4F6F3]"
-            style={{ backgroundColor: color }}
+            style={{ backgroundColor: swatch }}
           />
           <span className="text-xs text-white/90">{t(`map.legend.level.${labelKey}`)}</span>
         </div>

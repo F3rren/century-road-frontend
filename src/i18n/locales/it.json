@@ -302,17 +302,17 @@
     },
     "geocoding": {
       "title": "Il paese sulla mappa",
-      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:110 milioni.",
+      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:10 milioni, semplificati.",
       "p2": "È un'approssimazione, con limiti precisi:",
       "limitSubject": "le coordinate descrivono il soggetto dell'articolo, non sempre il luogo dell'evento;",
       "limitNone": "un evento senza articoli con coordinate resta senza paese: compare nell'elenco del giorno, ma non viene contato sulla mappa;",
       "limitBorder": "un punto vicino a un confine può cadere nel paese accanto;",
-      "limitIslands": "alcuni piccoli stati insulari non hanno una forma a questa scala e non vengono mai individuati.",
+      "limitIslands": "qualche isola molto piccola non ha una forma a questa scala e non viene mai individuata; la capitale di uno stato insulare, sulla costa, può cadere appena fuori dalla sua forma.",
       "p3": "Sulla mappa contano solo gli Eventi: In evidenza ne ripete alcuni, e contarli due volte gonfierebbe i numeri."
     },
     "index": {
       "title": "L'indice per paese",
-      "p1": "La pagina <century>Il mio secolo</century> usa un indice che il nostro server costruisce ogni notte: legge tutti i giorni dell'anno in italiano e in inglese e colloca ogni evento in un paese con la stessa regola e gli stessi confini della mappa. Contiene solo gli Eventi con un anno e un paese individuato, ogni edizione per conto suo (senza ripiego tra le lingue), e può essere indietro di un giorno rispetto a Wikipedia."
+      "p1": "La pagina <century>Il mio secolo</century> usa un indice che il nostro server costruisce ogni notte: legge tutti i giorni dell'anno in italiano e in inglese e colloca ogni evento in un paese con la stessa regola della mappa, ma su confini meno dettagliati (Natural Earth in scala 1:110 milioni): un evento in un microstato o vicino a un confine può finirvi in un paese diverso da quello della mappa. Contiene solo gli Eventi con un anno e un paese individuato, ogni edizione per conto suo (senza ripiego tra le lingue), e può essere indietro di un giorno rispetto a Wikipedia."
     },
     "errors": {
       "title": "Contraddizioni ed errori",
@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "Come vedo gli eventi di un paese?",
-      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, usa la X in cima al pannello."
+      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, fai clic sulla mappa fuori da ogni paese (sul mare, per esempio), oppure usa «Tutti i paesi» in cima al pannello."
     },
     "archive": {
       "title": "Come cerco un altro giorno?",
