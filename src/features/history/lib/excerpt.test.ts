@@ -34,6 +34,13 @@ describe('buildExcerpt', () => {
     expect(connections.map((c) => c.slug)).toEqual(['e-1', 'e-2', 'e-3']);
   });
 
+  it('carries the notes, trimmed and without the blank ones, and who wrote the text', () => {
+    const excerpt = buildExcerpt({ ...insight, notes: ['  A Baikonur era già il 5 ottobre.  ', '   ', 'Una seconda.'] });
+    expect(excerpt.notes).toEqual(['A Baikonur era già il 5 ottobre.', 'Una seconda.']);
+    expect(excerpt.provenance).toEqual({ author: 'Century Road' });
+    expect(buildExcerpt({ ...insight, notes: [] }).notes).toEqual([]);
+  });
+
   it('leaves out a part with no text', () => {
     expect(buildExcerpt({ ...insight, before: '  \n\n ' }).parts.map((p) => p.key)).toEqual(['event', 'after']);
   });
@@ -42,5 +49,11 @@ describe('buildExcerpt', () => {
     expect(isEmptyExcerpt(buildExcerpt(insight))).toBe(false);
     expect(isEmptyExcerpt(buildExcerpt({ ...insight, before: '', event: '', after: '' }))).toBe(false);
     expect(isEmptyExcerpt(buildExcerpt({ ...insight, before: '', event: '', after: '', related: [] }))).toBe(true);
+  });
+
+  it('does not count the notes or the provenance as content: they only qualify a story', () => {
+    const bare = buildExcerpt({ ...insight, before: '', event: '', after: '', related: [], notes: ['Una nota.'] });
+    expect(bare.notes).toHaveLength(1);
+    expect(isEmptyExcerpt(bare)).toBe(true);
   });
 });

@@ -28,10 +28,10 @@ function Body({ slug }: { slug: string }) {
   return <InsightExcerpt excerpt={excerpt} />;
 }
 
-// "Perché conta" under a stop, closed until opened: before, the event, after and a few
-// connections, from the insight the stop opens. Once opened it stays mounted, so closing and
-// opening it again does not ask again. The page of the insight itself, with the caveats, the
-// sources and who wrote it, stays one link away.
+// "Perché conta" under a stop, closed until opened: before, the event, after, the caveats on its
+// dates and places, a few connections and who wrote it, from the insight the stop opens. Once
+// opened it stays mounted, so closing and opening it again does not ask again. The page of the
+// insight itself, with its sources, stays one link away.
 export function StopWhyItMatters({ slug }: { slug: string }) {
   const { t } = useTranslation();
   const [hasOpened, setHasOpened] = useState(false);

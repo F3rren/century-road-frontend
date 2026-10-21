@@ -18,7 +18,7 @@ Three co-primary personas (not one dominant persona with two afterthoughts) — 
 
 1. **Open-ended discovery** — land on the globe (`/`) → spin/click a country → see today's events attributed to it (or the accessible `<select>` picker as a keyboard/screen-reader equivalent of the same click).
 2. **Targeted lookup by date** — open Archivio (`/archive`) → filter by month/day, optionally a year range, entry type, and language → text-search the results.
-3. **Understanding the dataset at a glance** — open Dashboard (`/dashboard`) → see today's real event stats (count, countries geocoded, time span, most-cited country) and the all-time most-viewed days/countries → jump into Archivio from there.
+3. **Understanding the dataset at a glance** — open Dashboard (`/dashboard`) → see today's real event stats (count, countries geocoded, time span, most-cited country) and the all-time most-viewed days/countries (the full rankings are on `/popular`) → jump into Archivio from there.
 4. **Adjusting how the app behaves** — open Impostazioni (`/settings`) → change UI language (4 available), theme, default map projection, or the reduced-motion override — six real sections, no placeholders.
 5. **First-ever visit** — a new visitor is routed to `/welcome` (a chrome-free threshold screen) before ever seeing the app shell; every later visit lands straight on the globe.
 
@@ -39,9 +39,9 @@ This is a first-draft prioritization derived from what `PRODUCT.md` already call
 - Light/dark theme, persisted, no load flash
 - WCAG AAA text contrast (7:1) on an AA floor (see Non-Functional Requirements)
 - Anonymous, aggregate view tracking (day + country), with no visitor identifier
+- "I più visitati" (`/popular`): the full day/country rankings behind the Dashboard's top five, reached from the Dashboard
 
 **Should have** (clearly adjacent, not yet built):
-- Surfacing the view-popularity trend more prominently than the current Dashboard panel (e.g. a dedicated "most read" surface)
 - Translated Privacy/Termini pages (currently Italian-only by design, not yet revisited)
 
 **Could have** (speculative, needs a scoping decision before it's real):

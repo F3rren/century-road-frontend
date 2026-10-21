@@ -9,7 +9,6 @@ import { insightRoute } from '../lib/editorial';
 import type { Attribution, HistoryEntry, HistoryLanguage, InsightSummary, PlaceRef } from '../types';
 import { AttributionNotice } from './AttributionNotice';
 import { RelatedArticle } from './RelatedArticle';
-import { ReportForm } from './ReportForm';
 import { WhyItMatters } from './WhyItMatters';
 
 interface EventDialogProps {
@@ -40,7 +39,7 @@ const LINK_CLASS =
 // articles to read further. It all scrolls as one; only the close button
 // stays in its corner. Under the event, the ways on from it: its "Perché conta",
 // when it has one, its country's whole year, when the map places it, and the rest
-// of its day in the archive. Last, a way to say the event is wrong.
+// of its day in the archive.
 export function EventDialog({ entry, month, day, language, attribution, country, insight, onClose }: EventDialogProps) {
   const { t, i18n } = useTranslation();
   const onArchive = useLocation().pathname.startsWith('/archive');
@@ -131,15 +130,8 @@ export function EventDialog({ entry, month, day, language, attribution, country,
             </ul>
           </section>
         )}
-        <div className="mt-4 space-y-2 border-t border-border pt-3">
+        <div className="mt-4 border-t border-border pt-3">
           <AttributionNotice attribution={attribution} />
-          {/* An event with no year (a holiday) cannot be named to the backend. */}
-          {entry.year !== undefined && (
-            <ReportForm
-              target={{ type: 'EVENT', year: entry.year, month, day, language, text: cleanText(entry.text) }}
-              subject={cleanText(entry.text)}
-            />
-          )}
         </div>
       </div>
     </dialog>

@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { insightRoute } from '../lib/editorial';
 import type { Excerpt } from '../lib/excerpt';
+import { ProvenanceLine } from './ProvenanceLine';
 import { YearMark } from './YearMark';
 
-// An insight's before, the event, after and a few connections, without a heading of its own: the
-// caller says what it is (the dialog's "Perché conta", the path stop's summary). The hand-written
-// text is Italian only, whatever the interface language.
+// An insight's before, the event, after, the caveats on its dates and places, a few connections
+// and who wrote it, without a heading of its own: the caller says what it is (the dialog's
+// "Perché conta", the path stop's summary). The hand-written text is Italian only, whatever the
+// interface language.
 //
 // Set apart from Wikipedia's text around it by its own palette, drawn from the system's tokens: a
 // Haze surface (tone, not a shadow or a box), a 2px Exposure Blue rule on its edge, and the part
@@ -14,7 +16,7 @@ import { YearMark } from './YearMark';
 // 12.0:1, Shade 7.5:1, Exposure Blue 7.1:1 (light); 12.7, 7.2 and 7.3 (dark).
 export function InsightExcerpt({ excerpt }: { excerpt: Excerpt }) {
   const { t } = useTranslation();
-  const { parts, connections } = excerpt;
+  const { parts, notes, connections, provenance } = excerpt;
   return (
     <div className="border-l-2 border-primary bg-muted px-4 py-3">
       <div className="space-y-4">
@@ -29,6 +31,16 @@ export function InsightExcerpt({ excerpt }: { excerpt: Excerpt }) {
           </div>
         ))}
       </div>
+      {notes.length > 0 && (
+        <div className="mt-5">
+          <h4 className="text-sm font-bold text-primary">{t('insights.notes')}</h4>
+          <ul lang="it" className="mt-1 list-disc space-y-1.5 pl-5">
+            {notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       {connections.length > 0 && (
         <div className="mt-5">
           <h4 className="text-sm font-bold text-primary">{t('history.dialog.connections')}</h4>
@@ -52,6 +64,7 @@ export function InsightExcerpt({ excerpt }: { excerpt: Excerpt }) {
           </ul>
         </div>
       )}
+      <ProvenanceLine provenance={provenance} className="mt-5" />
     </div>
   );
 }
