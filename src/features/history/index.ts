@@ -4,6 +4,7 @@ export { EntryList } from "./components/EntryList";
 export { HistoryEvents } from "./components/HistoryEvents";
 export { InsightExcerpt } from "./components/InsightExcerpt";
 export { PlaceLine } from "./components/PlaceLine";
+export { ProvenanceLine } from "./components/ProvenanceLine";
 export { YearMark } from "./components/YearMark";
 export { SECTION_LABEL_KEYS, SECTION_ORDER } from "./constants";
 export {

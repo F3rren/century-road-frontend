@@ -5,8 +5,9 @@ import { buildExcerpt, isEmptyExcerpt } from '../lib/excerpt';
 import type { InsightSummary } from '../types';
 import { InsightExcerpt } from './InsightExcerpt';
 
-// "Perché conta" inside an event's dialog: before, the event, after, and a few events to read
-// on. The text is asked for when the dialog opens, from the insight the day already matched.
+// "Perché conta" inside an event's dialog: before, the event, after, the caveats on its dates and
+// places, a few events to read on, and who wrote it and whether anyone checked it. The text is
+// asked for when the dialog opens, from the insight the day already matched.
 // Anything missing is left out rather than shown empty (no loading line, no error: the link to
 // the full page above stays), and the whole block is hidden when the insight cannot be read.
 export function WhyItMatters({ insight }: { insight: InsightSummary }) {
