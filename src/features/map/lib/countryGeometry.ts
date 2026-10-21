@@ -22,9 +22,9 @@ interface CountryFeatureCollection {
 
 // Fetched once per page load and reused: every caller (the map's heatmap,
 // the "vai a un paese" picker, the dashboard's stats) needs the exact same
-// ~175 country shapes, and the file is ~600KB uncompressed — worth sharing
-// a single in-flight/resolved promise across all of them rather than each
-// doing its own fetch.
+// ~240 country shapes, and the file is ~1.7MB uncompressed (~0.6MB over the
+// wire) — worth sharing a single in-flight/resolved promise across all of them
+// rather than each doing its own fetch.
 let cachedFeatures: Promise<CountryFeature[]> | null = null;
 
 export function fetchCountryFeatures(): Promise<CountryFeature[]> {
@@ -34,11 +34,12 @@ export function fetchCountryFeatures(): Promise<CountryFeature[]> {
       return response.json() as Promise<CountryFeatureCollection>;
     })
     .then((collection) =>
-      // A few disputed territories (Kosovo, Somaliland, Northern Cyprus) carry
-      // no ISO A2 code in this dataset. MapView's own click handler already
-      // requires one before it will select a country, so entries without one
-      // are dropped here too rather than surfacing as an unselectable country.
-      collection.features.filter((f) => f.properties.iso_a2 && f.properties.iso_a2 !== '-99'),
+      // MapView's own click handler requires a code before it will select a country, so
+      // an entry without one would be an unselectable country: leave it out. The file is
+      // written largest shape first, which is how MapLibre draws it (a small shape lands
+      // on top of the one around it); a lookup wants the opposite, the smallest first,
+      // so that Gibraltar's few streets answer before the Spain they overlap.
+      collection.features.filter((f) => f.properties.iso_a2 && f.properties.iso_a2 !== '-99').reverse(),
     )
     .catch((error: unknown) => {
       // Don't cache a rejection: a transient network failure shouldn't
@@ -87,11 +88,12 @@ function toCountry(feature: CountryFeature, language: string): Country {
 }
 
 // Which of these country shapes, if any, contains the given point. Natural
-// Earth's 110m resolution is simplified for map rendering, not surveyed for
-// geocoding: a coordinate right at a border (a capital a few km from a
-// frontier) can land in the neighbouring country, and a small enough island
-// nation's shape can be missing from this resolution entirely — both true of
-// real coordinates Wikipedia supplies, not edge cases invented here.
+// Earth's 1:50m is simplified for map rendering, not surveyed for geocoding:
+// a coordinate right at a border (a capital a few km from a frontier) can land
+// in the neighbouring country, and a very small island's shape can still be
+// missing — both true of real coordinates Wikipedia supplies, not edge cases
+// invented here. Where shapes overlap, the first one in `features` wins:
+// fetchCountryFeatures hands them over smallest first.
 export function findCountryAt(
   lon: number,
   lat: number,
@@ -121,6 +123,28 @@ export function listCountries(features: readonly CountryFeature[], language: str
     if (!byCode.has(country.code)) byCode.set(country.code, country);
   }
   return Array.from(byCode.values()).sort((a, b) => a.name.localeCompare(b.name, language));
+}
+
+// Countries whose shapes add up to less than this many square degrees of bounding box (about
+// 1.5 by 1, or 165 by 110 km at the equator) are a few pixels at world scale: Luxembourg, Qatar,
+// Malta, every microstate, and archipelagos of tiny atolls such as the Maldives. The map gives
+// each of them a marker when it has events today, since the polygon alone cannot be seen or hit.
+export const SMALL_COUNTRY_DEG2 = 1.5;
+
+export function isSmallCountry(feature: CountryFeature): boolean {
+  const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+  let area = 0;
+  for (const polygon of polygons) {
+    let [minLng, minLat, maxLng, maxLat] = [Infinity, Infinity, -Infinity, -Infinity];
+    for (const [lng, lat] of polygon[0] ?? []) {
+      minLng = Math.min(minLng, lng);
+      maxLng = Math.max(maxLng, lng);
+      minLat = Math.min(minLat, lat);
+      maxLat = Math.max(maxLat, lat);
+    }
+    if (maxLng >= minLng) area += (maxLng - minLng) * (maxLat - minLat);
+  }
+  return area < SMALL_COUNTRY_DEG2;
 }
 
 // Where the camera should look to show a country: the middle of its largest

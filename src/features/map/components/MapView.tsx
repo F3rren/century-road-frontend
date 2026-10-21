@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { FeatureCollection } from 'geojson';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { AlertTriangle, RotateCw } from 'lucide-react';
@@ -6,10 +7,17 @@ import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { heatColor } from '../constants/heat';
+import { heatColor, heatOpacity, PAPER } from '../constants/heat';
 import { COUNTRIES_GEOJSON_URL } from '../constants/countries';
-import { countryAnchor, facingCenter, fetchCountryFeatures, localizedCountryName } from '../lib/countryGeometry';
+import {
+  countryAnchor,
+  facingCenter,
+  fetchCountryFeatures,
+  isSmallCountry,
+  localizedCountryName,
+} from '../lib/countryGeometry';
 import { createProjectionAnimator, prefersReducedMotion, type ProjectionAnimator } from '../lib/projectionAnimator';
+import { smallCountryPoints, type SmallCountry } from '../lib/smallCountries';
 import type { Country, ProjectionType } from '../types';
 
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
@@ -17,8 +25,8 @@ const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
 // The basemap is printed like a cyanotype's paper (DESIGN.md, The Paper Map
 // Rule): land and sea are both the paper, countries are thin lines, and only
 // today's countries are printed, in the exposure scale. MapLibre paint can't
-// read CSS custom properties, so these are the fixed token hexes.
-const PAPER = '#F4F6F3';
+// read CSS custom properties, so these are the fixed token hexes (PAPER is with the heat
+// scale, which blends against it).
 const COUNTRY_LINE = '#7A8C9E'; // 3.2:1 on the paper: the geography stays readable
 const PRUSSIAN = '#0E2A47';
 const SHADE = '#394A5B';
@@ -88,7 +96,9 @@ function labelControls(container: HTMLElement, t: TFunction) {
 
 // ── Heat ─────────────────────────────────────────────────────────────────────
 
-function buildHeatExpression(heatmap: Record<string, number>): maplibregl.ExpressionSpecification {
+// The ink of each of today's countries, and how much of it is printed: translucent, so the
+// country's own line and the geography beneath stay in sight (constants/heat).
+function buildHeatColor(heatmap: Record<string, number>): maplibregl.ExpressionSpecification {
   const entries = Object.entries(heatmap);
   if (!entries.length) {
     return 'rgba(0,0,0,0)' as unknown as maplibregl.ExpressionSpecification;
@@ -100,6 +110,19 @@ function buildHeatExpression(heatmap: Record<string, number>): maplibregl.Expres
     'rgba(0,0,0,0)',
   ] as maplibregl.ExpressionSpecification;
 }
+
+function buildHeatOpacity(heatmap: Record<string, number>): maplibregl.ExpressionSpecification | number {
+  const entries = Object.entries(heatmap);
+  if (!entries.length) return 0;
+  return [
+    'match',
+    ['get', 'iso_a2'],
+    ...entries.flatMap(([code, count]) => [code, heatOpacity(count)]),
+    0,
+  ] as unknown as maplibregl.ExpressionSpecification;
+}
+
+const EMPTY_POINTS: FeatureCollection = { type: 'FeatureCollection', features: [] };
 
 // The countries with an event today, for their Prussian outline.
 function heatFilter(heatmap: Record<string, number>): maplibregl.FilterSpecification {
@@ -162,6 +185,8 @@ export function MapView({
   const [loaded, setLoaded] = useState(false);
   // Where to point the camera for each country, once the shapes have loaded.
   const anchorsRef = useRef(new Map<string, [number, number]>());
+  // The countries too small to be seen or hit as a shape, which get a marker when they matter.
+  const smallRef = useRef<SmallCountry[]>([]);
   const [anchorsReady, setAnchorsReady] = useState(false);
   // The globe turns to today's events once, and never after the reader has
   // moved it or picked a country.
@@ -210,7 +235,9 @@ export function MapView({
 
       map.addSource('countries-ne', {
         type: 'geojson',
-        data: COUNTRIES_GEOJSON_URL,
+        // MapLibre fetches it from a worker: an absolute address does not depend on where that
+        // worker believes it is.
+        data: new URL(COUNTRIES_GEOJSON_URL, window.location.href).href,
       });
 
       // 1. Every country as a thin line on the paper.
@@ -227,13 +254,16 @@ export function MapView({
         firstLabel,
       );
 
-      // 2. Today's countries printed in the exposure scale, opaque.
+      // 2. Today's countries printed in the exposure scale, translucent.
       map.addLayer(
         {
           id: 'countries-heat',
           type: 'fill',
           source: 'countries-ne',
-          paint: { 'fill-color': buildHeatExpression(heatmapRef.current), 'fill-opacity': 1 },
+          paint: {
+            'fill-color': buildHeatColor(heatmapRef.current),
+            'fill-opacity': buildHeatOpacity(heatmapRef.current),
+          },
         },
         firstLabel,
       );
@@ -284,8 +314,36 @@ export function MapView({
         firstLabel,
       );
 
-      map.on('click', 'countries-fill', (e) => {
-        const feature = e.features?.[0];
+      // 6. A grain for each small country that matters today, or is selected: its shape is a
+      //    few pixels at world scale, and cannot be seen or hit. Under it, an invisible target of
+      //    the size a finger needs.
+      map.addSource('countries-small', { type: 'geojson', data: EMPTY_POINTS });
+      map.addLayer(
+        {
+          id: 'countries-small-grain',
+          type: 'circle',
+          source: 'countries-small',
+          paint: {
+            'circle-color': ['get', 'color'],
+            'circle-opacity': ['get', 'opacity'],
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 1, 4, 6, 9],
+            'circle-stroke-color': PRUSSIAN,
+            'circle-stroke-width': 1.5,
+          },
+        },
+        firstLabel,
+      );
+      map.addLayer(
+        {
+          id: 'countries-small-hit',
+          type: 'circle',
+          source: 'countries-small',
+          paint: { 'circle-radius': 22, 'circle-opacity': 0 },
+        },
+        firstLabel,
+      );
+
+      const selectFrom = (feature: maplibregl.MapGeoJSONFeature | undefined) => {
         if (!feature) return;
         const props = feature.properties as Record<string, string>;
         const code = props['iso_a2'] ?? '';
@@ -293,14 +351,22 @@ export function MapView({
         if (code && englishName) {
           onCountryClickRef.current?.({ name: localizedCountryName(code, englishName, languageRef.current), code });
         }
+      };
+      // A small country's target wins over the country around it, or beside it, within its reach.
+      map.on('click', 'countries-fill', (e) => {
+        if (map.queryRenderedFeatures(e.point, { layers: ['countries-small-hit'] }).length > 0) return;
+        selectFrom(e.features?.[0]);
       });
+      map.on('click', 'countries-small-hit', (e) => selectFrom(e.features?.[0]));
 
-      map.on('mouseenter', 'countries-fill', () => {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-      map.on('mouseleave', 'countries-fill', () => {
-        map.getCanvas().style.cursor = '';
-      });
+      for (const layer of ['countries-fill', 'countries-small-hit']) {
+        map.on('mouseenter', layer, () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', layer, () => {
+          map.getCanvas().style.cursor = '';
+        });
+      }
 
       setLoaded(true);
     });
@@ -322,6 +388,11 @@ export function MapView({
       .then((features) => {
         if (!active) return;
         anchorsRef.current = new Map(features.map((f) => [f.properties.iso_a2, countryAnchor(f)]));
+        smallRef.current = features.filter(isSmallCountry).map((f) => ({
+          code: f.properties.iso_a2,
+          name: f.properties.name || f.properties.admin,
+          anchor: anchorsRef.current.get(f.properties.iso_a2) ?? countryAnchor(f),
+        }));
         setAnchorsReady(true);
       })
       // The panel reports a failure to load the shapes; the camera just stays put.
@@ -420,9 +491,17 @@ export function MapView({
     heatmapRef.current = countryHeatmap ?? {};
     const map = mapRef.current;
     if (!map || !map.getLayer('countries-heat')) return;
-    map.setPaintProperty('countries-heat', 'fill-color', buildHeatExpression(heatmapRef.current));
+    map.setPaintProperty('countries-heat', 'fill-color', buildHeatColor(heatmapRef.current));
+    map.setPaintProperty('countries-heat', 'fill-opacity', buildHeatOpacity(heatmapRef.current));
     map.setFilter('countries-heat-outline', heatFilter(heatmapRef.current));
   }, [countryHeatmap, loaded]);
+
+  // Sync the small countries' grains: those with an event today, and the selected one.
+  useEffect(() => {
+    const map = mapRef.current;
+    const source = loaded && anchorsReady ? (map?.getSource('countries-small') as maplibregl.GeoJSONSource | undefined) : undefined;
+    source?.setData(smallCountryPoints(smallRef.current, countryHeatmap ?? {}, selectedCountryCode ?? null, FIXER));
+  }, [countryHeatmap, selectedCountryCode, loaded, anchorsReady]);
 
   return (
     <div className="relative h-full w-full">

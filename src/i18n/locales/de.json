@@ -302,17 +302,17 @@
     },
     "geocoding": {
       "title": "Das Land auf der Karte",
-      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:110 Millionen.",
+      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:50 Millionen.",
       "p2": "Das ist eine Annäherung mit klaren Grenzen:",
       "limitSubject": "die Koordinaten beschreiben den Gegenstand des Artikels, nicht immer den Ort des Ereignisses;",
       "limitNone": "ein Ereignis ohne verlinkten Artikel mit Koordinaten bleibt ohne Land: Es steht in der Liste des Tages, wird auf der Karte aber nicht gezählt;",
       "limitBorder": "ein Punkt nahe einer Grenze kann im Nachbarland landen;",
-      "limitIslands": "einige kleine Inselstaaten haben in diesem Maßstab keine Form und werden nie erkannt.",
+      "limitIslands": "einige sehr kleine Inseln haben in diesem Maßstab keine Form und werden nie erkannt; die Hauptstadt eines Inselstaats kann an der Küste knapp außerhalb ihrer Form liegen.",
       "p3": "Auf der Karte zählen nur die Ereignisse: „Ausgewählt“ wiederholt einige davon, und doppelt gezählt würden die Zahlen aufgebläht."
     },
     "index": {
       "title": "Der Länderindex",
-      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel und denselben Grenzen wie die Karte einem Land zu. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
+      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel wie die Karte, aber anhand weniger detaillierter Grenzen (Natural Earth im Maßstab 1:110 Millionen) einem Land zu: Ein Ereignis in einem Kleinstaat oder nahe einer Grenze kann dort in einem anderen Land landen als auf der Karte. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
     },
     "errors": {
       "title": "Widersprüche und Fehler",

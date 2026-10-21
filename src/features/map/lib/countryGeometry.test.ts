@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { countryAnchor, facingCenter, type CountryFeature } from './countryGeometry';
+import { countryAnchor, facingCenter, isSmallCountry, type CountryFeature } from './countryGeometry';
 
 function feature(geometry: CountryFeature['geometry']): CountryFeature {
   return { type: 'Feature', properties: { iso_a2: 'XX', name: 'X', admin: 'X' }, geometry };
@@ -51,5 +51,24 @@ describe('facingCenter', () => {
       { lng: 0, lat: 0, weight: 1 },
       { lng: 180, lat: 0, weight: 1 },
     ])).toBeNull();
+  });
+});
+
+describe('isSmallCountry', () => {
+  it('counts a shape of a few thousandths of a degree, like a microstate, as small', () => {
+    expect(isSmallCountry(feature({ type: 'Polygon', coordinates: square(12.43, 41.9, 0.01) }))).toBe(true);
+  });
+
+  it('does not count a country of a few degrees, even a small one', () => {
+    expect(isSmallCountry(feature({ type: 'Polygon', coordinates: square(5, 49.5, 1.5) }))).toBe(false);
+  });
+
+  it('adds up the islands, not the box around them: an atoll chain is small', () => {
+    const atolls = [0, 1, 2, 3, 4].map((i) => square(73 + i * 0.1, i * 1.5, 0.2));
+    expect(isSmallCountry(feature({ type: 'MultiPolygon', coordinates: atolls }))).toBe(true);
+  });
+
+  it('does not count a country of several large shapes', () => {
+    expect(isSmallCountry(feature({ type: 'MultiPolygon', coordinates: [square(0, 0, 3), square(10, 0, 3)] }))).toBe(false);
   });
 });
