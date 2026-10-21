@@ -113,7 +113,7 @@
     },
     "popularity": {
       "heading": "Most viewed",
-      "description": "How many times each page has been viewed in total, across every visitor — no personal data, just an anonymous, aggregate count.",
+      "description": "How many times the site has shown a day or a country, in total — no personal data, just an anonymous, aggregate count.",
       "loadError": "Couldn't load the view stats ({{error}}).",
       "days": {
         "label": "Most-viewed days"
@@ -125,6 +125,18 @@
       "views_other": "{{count}} views",
       "noData": "Not enough data yet.",
       "cta": "Explore the map"
+    }
+  },
+  "popular": {
+    "title": "Most viewed",
+    "description": "The days and countries the site has shown most often, in order, up to the first 50.",
+    "back": "Back to the Dashboard",
+    "seeAll": "See the full rankings",
+    "method": {
+      "title": "How they are counted",
+      "days": "A day is counted each time the site shows its events: also when the map opens on today, or when you change a filter in the Archive. So the days at the top are often the days the site was opened the most.",
+      "countries": "A country is counted each time someone selects it on the map.",
+      "anonymous": "These are totals since counting began, with no dates and no identifiers: we don’t know who looked or when, and the same person coming back counts again. Details are on the <privacy>Privacy</privacy> page (in Italian)."
     }
   },
   "archive": {
@@ -313,7 +325,7 @@
     },
     "views": {
       "title": "Visit statistics",
-      "p1": "“Most viewed”, on the Dashboard, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
+      "p1": "“Most viewed”, on the Dashboard and on its full-rankings page, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
     },
     "sources": {
       "title": "Sources, coverage and limits",
@@ -366,7 +378,7 @@
     },
     "dashboard": {
       "title": "What does the Dashboard measure?",
-      "p1": "Figures computed from today's entries: how many events, in how many countries, the span of years they cover and the most-cited country. Below, the most-viewed days and countries, counted anonymously."
+      "p1": "Figures computed from today's entries: how many events, in how many countries, the span of years they cover and the most-cited country. Below, the most-viewed days and countries, counted anonymously. From there you can also reach the full rankings."
     },
     "language": {
       "title": "Why aren't the texts always in my language?",
@@ -477,6 +489,9 @@
     },
     "paths": {
       "description": "Guided paths on many topics, from antiquity to today: a few stops, each with its place on the map and why it matters."
+    },
+    "popular": {
+      "description": "The most-viewed days and countries on Grains of History, with anonymous view totals."
     }
   },
   "editorial": {

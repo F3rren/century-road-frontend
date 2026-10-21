@@ -113,7 +113,7 @@
     },
     "popularity": {
       "heading": "I più visitati",
-      "description": "Quante volte ogni pagina è stata vista in totale, da tutti i visitatori — nessun dato personale, solo un conteggio aggregato e anonimo.",
+      "description": "Quante volte il sito ha mostrato un giorno o un paese, in totale — nessun dato personale, solo un conteggio aggregato e anonimo.",
       "loadError": "Impossibile caricare le statistiche sulle visualizzazioni ({{error}}).",
       "days": {
         "label": "Giorni più visitati"
@@ -125,6 +125,18 @@
       "views_other": "{{count}} visite",
       "noData": "Non ci sono ancora dati sufficienti.",
       "cta": "Esplora la mappa"
+    }
+  },
+  "popular": {
+    "title": "I più visitati",
+    "description": "I giorni e i paesi che il sito ha mostrato più spesso, in ordine, fino ai primi 50.",
+    "back": "Torna alla Dashboard",
+    "seeAll": "Vedi le classifiche complete",
+    "method": {
+      "title": "Come si contano",
+      "days": "Un giorno viene contato ogni volta che il sito ne mostra gli eventi: anche quando la mappa si apre sul giorno di oggi, o quando cambi un filtro nell’Archivio. Per questo in cima ci sono spesso i giorni in cui il sito è stato più aperto.",
+      "countries": "Un paese viene contato ogni volta che qualcuno lo seleziona sulla mappa.",
+      "anonymous": "Sono totali dall’inizio del conteggio, senza date né identificativi: non sappiamo chi ha guardato né quando, e la stessa persona che torna conta più volte. I dettagli sono nella <privacy>Privacy</privacy>."
     }
   },
   "archive": {
@@ -313,7 +325,7 @@
     },
     "views": {
       "title": "Statistiche di visita",
-      "p1": "«I più visitati», nella Dashboard, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
+      "p1": "«I più visitati», nella Dashboard e nella pagina con le classifiche complete, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
     },
     "sources": {
       "title": "Fonti, copertura e limiti",
@@ -366,7 +378,7 @@
     },
     "dashboard": {
       "title": "Cosa misura la Dashboard?",
-      "p1": "Numeri calcolati sulle voci di oggi: quanti eventi, in quanti paesi, quale arco di anni coprono e qual è il paese più citato. Sotto, i giorni e i paesi più visitati, contati in forma anonima."
+      "p1": "Numeri calcolati sulle voci di oggi: quanti eventi, in quanti paesi, quale arco di anni coprono e qual è il paese più citato. Sotto, i giorni e i paesi più visitati, contati in forma anonima. Da lì si arriva anche alle classifiche complete."
     },
     "language": {
       "title": "Perché i testi non sono sempre nella mia lingua?",
@@ -477,6 +489,9 @@
     },
     "paths": {
       "description": "Percorsi guidati su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
+    },
+    "popular": {
+      "description": "I giorni e i paesi più visitati di Grains of History, con i totali anonimi di visita."
     }
   },
   "editorial": {

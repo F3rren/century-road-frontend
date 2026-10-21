@@ -113,7 +113,7 @@
     },
     "popularity": {
       "heading": "Les plus consultés",
-      "description": "Le nombre total de consultations de chaque page, tous visiteurs confondus — aucune donnée personnelle, juste un comptage agrégé et anonyme.",
+      "description": "Combien de fois le site a affiché un jour ou un pays, au total — aucune donnée personnelle, juste un comptage agrégé et anonyme.",
       "loadError": "Impossible de charger les statistiques de vues ({{error}}).",
       "days": {
         "label": "Jours les plus consultés"
@@ -125,6 +125,18 @@
       "views_other": "{{count}} consultations",
       "noData": "Pas encore assez de données.",
       "cta": "Explorer la carte"
+    }
+  },
+  "popular": {
+    "title": "Les plus consultés",
+    "description": "Les jours et les pays que le site a le plus souvent montrés, dans l’ordre, jusqu’aux 50 premiers.",
+    "back": "Retour au tableau de bord",
+    "seeAll": "Voir les classements complets",
+    "method": {
+      "title": "Comment on compte",
+      "days": "Un jour est compté chaque fois que le site en affiche les événements : aussi quand la carte s’ouvre sur aujourd’hui ou quand vous changez un filtre dans les Archives. C’est pourquoi les jours en tête sont souvent ceux où le site a été le plus ouvert.",
+      "countries": "Un pays est compté chaque fois que quelqu’un le sélectionne sur la carte.",
+      "anonymous": "Ce sont des totaux depuis le début du comptage, sans dates ni identifiants : nous ne savons pas qui a regardé ni quand, et une même personne qui revient compte plusieurs fois. Les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
     }
   },
   "archive": {
@@ -313,7 +325,7 @@
     },
     "views": {
       "title": "Statistiques de visite",
-      "p1": "« Les plus consultés », dans le tableau de bord, sont des totaux anonymes : un jour est compté chaque fois que ses événements sont demandés, un pays chaque fois qu'il est sélectionné. Aucune donnée personnelle ni identifiant de visiteur ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
+      "p1": "« Les plus consultés », dans le tableau de bord et sur la page des classements complets, sont des totaux anonymes : un jour est compté chaque fois que ses événements sont demandés, un pays chaque fois qu'il est sélectionné. Aucune donnée personnelle ni identifiant de visiteur ; les détails sont dans la page <privacy>Confidentialité</privacy> (en italien)."
     },
     "sources": {
       "title": "Sources, couverture et limites",
@@ -366,7 +378,7 @@
     },
     "dashboard": {
       "title": "Que mesure le tableau de bord ?",
-      "p1": "Des chiffres calculés sur les entrées du jour : combien d'événements, dans combien de pays, quelle période ils couvrent et quel pays est le plus cité. En dessous, les jours et les pays les plus consultés, comptés de façon anonyme."
+      "p1": "Des chiffres calculés sur les entrées du jour : combien d'événements, dans combien de pays, quelle période ils couvrent et quel pays est le plus cité. En dessous, les jours et les pays les plus consultés, comptés de façon anonyme. De là, vous accédez aussi aux classements complets."
     },
     "language": {
       "title": "Pourquoi les textes ne sont-ils pas toujours dans ma langue ?",
@@ -477,6 +489,9 @@
     },
     "paths": {
       "description": "Des parcours guidés sur de nombreux sujets, de l'Antiquité à nos jours : quelques étapes, chacune avec son lieu sur la carte et ce qui la rend importante."
+    },
+    "popular": {
+      "description": "Les jours et les pays les plus consultés de Grains of History, avec les totaux anonymes de consultation."
     }
   },
   "editorial": {

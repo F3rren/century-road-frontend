@@ -15,6 +15,7 @@ const IndexRoute = lazy(() => import('@/pages/IndexRoute').then((m) => ({ defaul
 const DashboardPage = lazy(() => import('@/pages/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 const ArchivePage = lazy(() => import('@/pages/ArchivePage').then((m) => ({ default: m.ArchivePage })));
 const CenturyPage = lazy(() => import('@/pages/CenturyPage').then((m) => ({ default: m.CenturyPage })));
+const PopularPage = lazy(() => import('@/pages/PopularPage').then((m) => ({ default: m.PopularPage })));
 const PathsPage = lazy(() => import('@/pages/PathsPage').then((m) => ({ default: m.PathsPage })));
 const PathPage = lazy(() => import('@/pages/PathPage').then((m) => ({ default: m.PathPage })));
 const InsightPage = lazy(() => import('@/pages/InsightPage').then((m) => ({ default: m.InsightPage })));
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true,          element: <IndexRoute /> },
       { path: 'dashboard',    element: <DashboardPage /> },
+      { path: 'popular',      element: <PopularPage /> },
       { path: 'archive',      element: <ArchivePage /> },
       { path: 'century',      element: <CenturyPage /> },
       { path: 'paths',        element: <PathsPage /> },

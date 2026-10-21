@@ -113,7 +113,7 @@
     },
     "popularity": {
       "heading": "Meistbesucht",
-      "description": "Wie oft jede Seite insgesamt von allen Besuchern aufgerufen wurde — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
+      "description": "Wie oft die Seite insgesamt einen Tag oder ein Land gezeigt hat — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
       "loadError": "Die Statistiken zu den Aufrufen konnten nicht geladen werden ({{error}}).",
       "days": {
         "label": "Meistbesuchte Tage"
@@ -125,6 +125,18 @@
       "views_other": "{{count}} Aufrufe",
       "noData": "Noch nicht genügend Daten.",
       "cta": "Karte erkunden"
+    }
+  },
+  "popular": {
+    "title": "Meistbesucht",
+    "description": "Die Tage und Länder, die die Seite am häufigsten gezeigt hat, der Reihe nach, bis zu den ersten 50.",
+    "back": "Zurück zum Dashboard",
+    "seeAll": "Vollständige Ranglisten ansehen",
+    "method": {
+      "title": "So wird gezählt",
+      "days": "Ein Tag wird jedes Mal gezählt, wenn die Seite seine Ereignisse zeigt: auch wenn die Karte sich auf den heutigen Tag öffnet oder wenn du im Archiv einen Filter änderst. Deshalb stehen oben oft die Tage, an denen die Seite am meisten geöffnet wurde.",
+      "countries": "Ein Land wird jedes Mal gezählt, wenn jemand es auf der Karte auswählt.",
+      "anonymous": "Es sind Summen seit Beginn der Zählung, ohne Datum und ohne Kennungen: Wir wissen nicht, wer geschaut hat und wann, und dieselbe Person, die wiederkommt, zählt mehrmals. Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
     }
   },
   "archive": {
@@ -313,7 +325,7 @@
     },
     "views": {
       "title": "Besuchsstatistik",
-      "p1": "„Meistbesucht“ im Dashboard sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+      "p1": "„Meistbesucht“ im Dashboard und auf der Seite mit den vollständigen Ranglisten sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
     },
     "sources": {
       "title": "Quellen, Abdeckung und Grenzen",
@@ -366,7 +378,7 @@
     },
     "dashboard": {
       "title": "Was misst das Dashboard?",
-      "p1": "Zahlen aus den heutigen Einträgen: wie viele Ereignisse, in wie vielen Ländern, welche Jahresspanne sie abdecken und welches Land am häufigsten vorkommt. Darunter die meistbesuchten Tage und Länder, anonym gezählt."
+      "p1": "Zahlen aus den heutigen Einträgen: wie viele Ereignisse, in wie vielen Ländern, welche Jahresspanne sie abdecken und welches Land am häufigsten vorkommt. Darunter die meistbesuchten Tage und Länder, anonym gezählt. Von dort kommst du auch zu den vollständigen Ranglisten."
     },
     "language": {
       "title": "Warum sind die Texte nicht immer in meiner Sprache?",
@@ -477,6 +489,9 @@
     },
     "paths": {
       "description": "Pfade durch die Geschichte zu vielen Themen, von der Antike bis heute: wenige Stationen, jede mit ihrem Ort auf der Karte und der Antwort, warum sie zählt."
+    },
+    "popular": {
+      "description": "Die meistbesuchten Tage und Länder von Grains of History, mit anonymen Besuchssummen."
     }
   },
   "editorial": {
