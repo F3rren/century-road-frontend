@@ -4,7 +4,6 @@ export { EntryList } from "./components/EntryList";
 export { HistoryEvents } from "./components/HistoryEvents";
 export { InsightExcerpt } from "./components/InsightExcerpt";
 export { PlaceLine } from "./components/PlaceLine";
-export { ReportForm } from "./components/ReportForm";
 export { YearMark } from "./components/YearMark";
 export { SECTION_LABEL_KEYS, SECTION_ORDER } from "./constants";
 export {
@@ -53,7 +52,6 @@ export {
   fetchTimelineCountries,
   fetchTopCountries,
   fetchTopDays,
-  submitErrorReport,
   trackCountryView,
 } from "./services/historyApi";
 export type { ImageSources } from "./lib/images";
@@ -73,7 +71,6 @@ export type {
   EditorialDate,
   EditorialPlace,
   EditorialSource,
-  ErrorReport,
   HistoryEntry,
   HistoryLanguage,
   HistorySectionKey,
@@ -96,9 +93,6 @@ export type {
   RandomEvent,
   RandomEventData,
   RandomEventParams,
-  ReportCategory,
-  ReportReceipt,
-  ReportTarget,
   SamePeriodCountry,
   SamePeriodCoverage,
   SamePeriodData,

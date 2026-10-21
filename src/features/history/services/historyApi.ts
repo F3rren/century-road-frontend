@@ -6,7 +6,6 @@ import type {
   CountryTimelineParams,
   CountryViewStat,
   DayViewStat,
-  ErrorReport,
   HistoryLanguage,
   InsightDetail,
   InsightsDayParams,
@@ -17,7 +16,6 @@ import type {
   PathSummary,
   RandomEventData,
   RandomEventParams,
-  ReportReceipt,
   SamePeriodData,
   SamePeriodParams,
   SourcesData,
@@ -281,15 +279,4 @@ function isSourcesData(value: unknown): boolean {
 // Where the content comes from, under what terms, how much of it there is and what it leaves out.
 export function fetchSources(signal?: AbortSignal): Promise<SourcesData> {
   return fetchObject<SourcesData>('/history/sources', isSourcesData, signal);
-}
-
-// "Segnala un errore". The one endpoint that writes, so the backend limits it per caller: a
-// refused or over-limit report arrives as a thrown "HTTP 400" / "HTTP 429", for the form to tell
-// apart (describeFetchError reads such a status the same way).
-export async function submitErrorReport(report: ErrorReport): Promise<ReportReceipt> {
-  const envelope = await api.post<ApiResponse<unknown>>('/history/reports', report);
-  if (!envelope.success || !isRecord(envelope.data) || typeof envelope.data.id !== 'number') {
-    throw new Error(extractErrorMessage(envelope));
-  }
-  return envelope.data as unknown as ReportReceipt;
 }

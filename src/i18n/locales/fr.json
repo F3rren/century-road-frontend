@@ -305,7 +305,7 @@
     "errors": {
       "title": "Contradictions et erreurs",
       "p1": "Avec une seule source, il n'y a rien à concilier : nous ne comparons pas les entrées à d'autres archives. Une erreur dans le texte d'un événement se corrige sur Wikipédia, sur la page consacrée à ce jour de l'année ; la correction arrive ici à la mise à jour suivante.",
-      "p2": "Pour les erreurs propres à ce site, comme un pays mal attribué, ou pour une erreur dans un événement, un éclairage ou un parcours, utilisez « Signaler une erreur » sous chacun, ou écrivez-nous depuis <credits>Crédits et contact</credits>."
+      "p2": "Pour les erreurs propres à ce site, comme un pays mal attribué, écrivez-nous depuis <credits>Crédits et contact</credits>."
     },
     "limits": {
       "title": "Limites",
@@ -341,7 +341,7 @@
       "p2": "Chaque éclairage raconte un événement en trois parties, avant, l'événement et après, dit où le placer sur la carte et renvoie aux sources où l'on peut vérifier chaque affirmation. Les textes sont écrits en italien et vivent dans le code du projet : ils ne changent qu'avec une nouvelle version du site, relue comme du code, et pas d'un instant à l'autre.",
       "p3": "Une date de relecture n'apparaît que lorsqu'une personne a réellement relu le texte sur ses sources. Si elle manque, personne ne l'a encore fait : c'est un brouillon, écrit avec l'aide d'une IA, à lire comme tel. Ci-dessous, vous voyez combien d'éclairages ont été relus.",
       "p4": "Quand une date dépend du fuseau horaire, ou que le point sur la carte n'est qu'un lieu de départ (comme le site de lancement d'une mission lunaire), la fiche le dit.",
-      "p5": "Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement, éclairage et parcours. Nous ne vous demandons pas qui vous êtes, nous ne pouvons donc pas répondre : nous lisons le signalement et, si besoin, nous corrigeons."
+      "p5": "Si quelque chose ne va pas dans un parcours ou un éclairage, écrivez-nous depuis « Crédits et contact »."
     }
   },
   "guide": {
@@ -386,7 +386,7 @@
     },
     "paths": {
       "title": "Que sont les parcours ?",
-      "p1": "Ce sont des itinéraires sur de nombreux sujets, regroupés par thème, <paths>dans Parcours</paths> : chaque étape est un événement avec son « pourquoi c'est important », son lieu sur la carte et ses sources. Quand un événement du jour a un éclairage, il est signalé dans la liste. Si quelque chose ne va pas, « Signaler une erreur » figure sous chaque événement et chaque texte."
+      "p1": "Ce sont des itinéraires sur de nombreux sujets, regroupés par thème, <paths>dans Parcours</paths> : chaque étape est un événement avec son « pourquoi c'est important », son lieu sur la carte et ses sources. Quand un événement du jour a un éclairage, il est signalé dans la liste."
     }
   },
   "credits": {
@@ -483,30 +483,6 @@
     "italianOnly": "Les textes de cette section n'existent qu'en italien, quelle que soit la langue de l'interface.",
     "approximatePlace": "Position approximative : {{note}}",
     "draft": "Brouillons rédigés avec l'aide d'une IA à partir de Wikipédia, pas encore relus par une personne : vérifiez les sources."
-  },
-  "report": {
-    "open": "Signaler une erreur",
-    "intro": "Dites-nous ce qui ne va pas : nous le lisons et nous corrigeons. Nous ne vous demandons pas qui vous êtes, nous ne pourrons donc pas vous répondre.",
-    "about": "Concerne : {{subject}}",
-    "categoryLabel": "De quel type d'erreur s'agit-il ?",
-    "categoryPlaceholder": "Choisir…",
-    "category": {
-      "WRONG_DATE": "La date est fausse",
-      "WRONG_PLACE": "Le lieu est faux",
-      "WRONG_TEXT": "Le texte contient une erreur",
-      "BROKEN_LINK": "Un lien ne fonctionne pas",
-      "OTHER": "Autre chose"
-    },
-    "messageLabel": "Qu'est-ce qui ne va pas ?",
-    "messageHint": "De {{min}} à {{max}} caractères. Écrits jusqu'ici : {{length}}.",
-    "noPersonalData": "N'écrivez aucune donnée personnelle : nous n'en avons pas besoin.",
-    "submit": "Envoyer le signalement",
-    "sending": "Envoi…",
-    "sent": "Merci, votre signalement est bien arrivé (numéro {{id}}).",
-    "error": {
-      "invalid": "Le signalement n'a pas été accepté. Vérifiez le texte et l'adresse e-mail : vous pouvez aussi laisser l'adresse vide.",
-      "generic": "Le signalement n'a pas pu être envoyé ({{error}})."
-    }
   },
   "insights": {
     "showOnMap": "Voir le lieu sur la carte",

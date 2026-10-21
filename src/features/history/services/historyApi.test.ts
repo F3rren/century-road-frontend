@@ -12,20 +12,17 @@ import {
   fetchSamePeriod,
   fetchSources,
   fetchStartHere,
-  submitErrorReport,
 } from './historyApi';
 
-vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn() } }));
+vi.mock('@/services/api', () => ({ api: { get: vi.fn() } }));
 
 const get = vi.mocked(api.get);
-const post = vi.mocked(api.post);
 
 const ok = (data: unknown) => ({ success: true, data });
 const failed = (message: string) => ({ success: false, message });
 
 beforeEach(() => {
   get.mockReset();
-  post.mockReset();
 });
 
 describe('path builders', () => {
@@ -196,29 +193,5 @@ describe('sources', () => {
   it('rejects an answer without its coverage', async () => {
     get.mockResolvedValue(ok({ sources: [], limits: [] }));
     await expect(fetchSources()).rejects.toThrow();
-  });
-});
-
-describe('submitErrorReport', () => {
-  const report = {
-    target: { type: 'INSIGHT', slug: 'sputnik-1' },
-    category: 'WRONG_DATE',
-    message: 'A Baikonur era già il 5 ottobre.',
-  } as const;
-
-  it('posts the report as given and returns its receipt', async () => {
-    post.mockResolvedValue(ok({ id: 42, receivedAt: '2026-10-06T16:10:35Z' }));
-    await expect(submitErrorReport(report)).resolves.toEqual({ id: 42, receivedAt: '2026-10-06T16:10:35Z' });
-    expect(post).toHaveBeenCalledWith('/history/reports', report);
-  });
-
-  it('rejects an answer that carries no report number', async () => {
-    post.mockResolvedValue(ok({}));
-    await expect(submitErrorReport(report)).rejects.toThrow();
-  });
-
-  it("lets the transport's HTTP 429 through, so a form can tell a limit from a typo", async () => {
-    post.mockRejectedValue(new Error('HTTP 429: Too Many Requests'));
-    await expect(submitErrorReport(report)).rejects.toThrow(/^HTTP 429/);
   });
 });

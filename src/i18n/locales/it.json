@@ -305,7 +305,7 @@
     "errors": {
       "title": "Contraddizioni ed errori",
       "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
-      "p2": "Per gli errori di questo sito, come un paese attribuito male, o per un errore in un evento, in un approfondimento o in un percorso, usa «Segnala un errore» che trovi sotto ciascuno, oppure scrivici da <credits>Crediti e contatti</credits>."
+      "p2": "Per gli errori di questo sito, come un paese attribuito male, scrivici da <credits>Crediti e contatti</credits>."
     },
     "limits": {
       "title": "Limiti",
@@ -341,7 +341,7 @@
       "p2": "Ogni approfondimento racconta un evento in tre parti, prima, l'evento e dopo, dice dove metterlo sulla mappa e rimanda alle fonti in cui si può controllare ogni affermazione. I testi sono scritti in italiano e vivono nel codice del progetto: cambiano solo con una nuova versione del sito, riletta come il codice, e non da un momento all'altro.",
       "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una bozza, scritta con l'aiuto di un'intelligenza artificiale, e va letta come tale. Qui sotto trovi quanti approfondimenti sono stati riletti.",
       "p4": "Dove una data dipende dal fuso orario, o il punto sulla mappa è solo un luogo di partenza (come il sito di lancio di una missione sulla Luna), la scheda lo dice.",
-      "p5": "Se qualcosa non torna, «Segnala un errore» sta sotto ogni evento, approfondimento e percorso. Non ti chiediamo chi sei, quindi non possiamo risponderti: leggiamo la segnalazione e, se serve, correggiamo."
+      "p5": "Se qualcosa non torna in un percorso o in un approfondimento, scrivici da «Crediti e contatti»."
     }
   },
   "guide": {
@@ -386,7 +386,7 @@
     },
     "paths": {
       "title": "Cosa sono i percorsi?",
-      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
+      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco."
     }
   },
   "credits": {
@@ -483,30 +483,6 @@
     "italianOnly": "I testi di questa sezione sono solo in italiano, qualunque sia la lingua dell’interfaccia.",
     "approximatePlace": "Posizione indicativa: {{note}}",
     "draft": "Bozze redatte con l’aiuto di un’intelligenza artificiale a partire da Wikipedia, non ancora riviste da una persona: controlla le fonti."
-  },
-  "report": {
-    "open": "Segnala un errore",
-    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei, quindi non potremo risponderti.",
-    "about": "Riguarda: {{subject}}",
-    "categoryLabel": "Che tipo di errore è?",
-    "categoryPlaceholder": "Scegli…",
-    "category": {
-      "WRONG_DATE": "La data è sbagliata",
-      "WRONG_PLACE": "Il luogo è sbagliato",
-      "WRONG_TEXT": "Il testo contiene un errore",
-      "BROKEN_LINK": "Un link non funziona",
-      "OTHER": "Altro"
-    },
-    "messageLabel": "Che cosa non va?",
-    "messageHint": "Da {{min}} a {{max}} caratteri. Scritti finora: {{length}}.",
-    "noPersonalData": "Non scrivere dati personali: non ci servono.",
-    "submit": "Invia la segnalazione",
-    "sending": "Invio…",
-    "sent": "Grazie, la segnalazione è arrivata (numero {{id}}).",
-    "error": {
-      "invalid": "La segnalazione non è stata accettata. Controlla il testo e l’indirizzo email: puoi anche lasciarlo vuoto.",
-      "generic": "Non è stato possibile inviare la segnalazione ({{error}})."
-    }
   },
   "insights": {
     "showOnMap": "Vedi il luogo sulla mappa",

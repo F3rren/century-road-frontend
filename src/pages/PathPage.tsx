@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { EditorialNotice, paragraphs, PATHS_ROUTE, ReportForm, usePath } from '@/features/history';
+import { EditorialNotice, paragraphs, PATHS_ROUTE, usePath } from '@/features/history';
 import { LegalSection } from '@/features/legal';
 import { describePath, PathCover, PathStops, topicName } from '@/features/paths';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -64,8 +64,6 @@ export function PathPage() {
             <LegalSection title={t('paths.stopsHeading')}>
               <PathStops stops={data.stops} />
             </LegalSection>
-
-            <ReportForm target={{ type: 'PATH', slug: data.slug }} subject={data.title} />
           </>
         )}
       </div>

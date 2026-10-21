@@ -11,7 +11,6 @@ import {
   paragraphs,
   PlaceLine,
   pathRoute,
-  ReportForm,
   YearMark,
   type InsightDetail,
 } from '@/features/history';
@@ -133,10 +132,6 @@ export function InsightView({ insight }: { insight: InsightDetail }) {
           {reviewedOn ? t('insights.reviewedOn', { date: reviewedOn }) : t('insights.notReviewed')}
         </p>
       </LegalSection>
-
-      <div className="border-t border-border pt-3">
-        <ReportForm target={{ type: 'INSIGHT', slug: insight.slug }} subject={insight.title} />
-      </div>
     </ReadingPage>
   );
 }
