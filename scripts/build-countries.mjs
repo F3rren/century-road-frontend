@@ -27,6 +27,10 @@
 //   simplified coast of an island state: Bridgetown, Hong Kong, San Juan..., and Monaco, whose
 //   outline Natural Earth enlarges); Palau, the Turks and Caicos and Pitcairn draw their capital's
 //   island 7, 63 and 193 km away, or not at all;
+// - a polygon that crosses the antimeridian is cut along it (Russia's Chukotka and Wrangel Island,
+//   Fiji's Taveuni): world-atlas writes such a ring with a step from 179.8 to -180, which a flat
+//   map draws as a line across the whole world and the point-in-polygon lookup reads as a ring
+//   that encloses the world; each side becomes a polygon of its own, in [-180, 180];
 // - coordinates are rounded to 3 decimals (about 110 m), finer than the 1:50m scale itself;
 // - every polygon is wound the way RFC 7946 asks, and every shape has its `bbox`, which the
 //   point-in-polygon lookup uses to skip most shapes;
@@ -69,6 +73,75 @@ const codeOf = (feature) => {
 };
 
 const polygonsOf = (geometry) => (geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates);
+
+// ── antimeridian ─────────────────────────────────────────────────────────────
+
+// The ring with every longitude shifted by whole turns so that no step is wider than 180 degrees.
+// Null when it does not close again, which is a ring round a pole (Antarctica's): it is not cut.
+const unwrapRing = (ring) => {
+  const out = [[...ring[0]]];
+  let shift = 0;
+  for (let i = 1; i < ring.length; i++) {
+    let lon = ring[i][0] + shift;
+    const previous = out[i - 1][0];
+    while (lon - previous > 180) {
+      lon -= 360;
+      shift -= 360;
+    }
+    while (lon - previous < -180) {
+      lon += 360;
+      shift += 360;
+    }
+    out.push([lon, ring[i][1]]);
+  }
+  return Math.abs(out[out.length - 1][0] - out[0][0]) < 1e-9 ? out : null;
+};
+
+// The part of a closed ring on one side of the meridian `edge` (Sutherland-Hodgman), closed again.
+const clipRing = (ring, edge, keepEast) => {
+  const points = ring.slice(0, -1);
+  const inside = (p) => (keepEast ? p[0] >= edge : p[0] <= edge);
+  const crossing = (a, b) => [edge, a[1] + ((edge - a[0]) / (b[0] - a[0])) * (b[1] - a[1])];
+  const out = [];
+  points.forEach((current, i) => {
+    const previous = points[(i + points.length - 1) % points.length];
+    if (inside(current)) {
+      if (!inside(previous)) out.push(crossing(previous, current));
+      out.push(current);
+    } else if (inside(previous)) {
+      out.push(crossing(previous, current));
+    }
+  });
+  return out.length ? [...out, [...out[0]]] : [];
+};
+
+const ringArea = (ring) => Math.abs(signedArea(ring));
+
+// The polygon, or the polygons it is cut into where it crosses the antimeridian, each with its
+// longitudes in [-180, 180].
+const splitAtAntimeridian = (polygon) => {
+  const rings = polygon.map(unwrapRing);
+  if (rings.includes(null)) return [polygon];
+  const lons = rings[0].map(([lon]) => lon);
+  const [min, max] = [Math.min(...lons), Math.max(...lons)];
+  if (min >= -180 && max <= 180) return [polygon];
+
+  // Across 180 going east, or across -180 going west: the piece that is over the edge comes back
+  // by a turn.
+  const [edge, turn] = max > 180 ? [180, -360] : [-180, 360];
+  const across = (ring) => clipRing(ring, edge, max > 180).map(([lon, lat]) => [lon + turn, lat]);
+  const stays = (ring) => clipRing(ring, edge, max <= 180);
+  const piece = (cut) => {
+    const [outer, ...holes] = rings.map(cut);
+    return outer.length ? [outer, ...holes.filter((hole) => hole.length)] : null;
+  };
+  const pieces = [piece(stays), piece(across)].filter(Boolean);
+
+  const before = ringArea(rings[0]) - rings.slice(1).reduce((sum, hole) => sum + ringArea(hole), 0);
+  const after = pieces.reduce((sum, [outer, ...holes]) => sum + ringArea(outer) - holes.reduce((s, h) => s + ringArea(h), 0), 0);
+  if (Math.abs(before - after) > before * 1e-6) throw new Error(`Cutting at the antimeridian changed an area: ${before} to ${after}`);
+  return pieces;
+};
 
 // A counter-clockwise circle of 24 points, closed.
 const circle = ([lon, lat, metres]) => {
@@ -148,7 +221,8 @@ for (const feature of atlas('10m')) {
 }
 for (const code of FROM_10M) if (!byCode.has(code)) throw new Error(`${code} is not in the 1:10m file`);
 
-const features = [...byCode.values()].map(({ code, name, polygons }) => {
+const features = [...byCode.values()].map(({ code, name, polygons: wrapped }) => {
+  const polygons = wrapped.flatMap(splitAtAntimeridian);
   let cleaned;
   for (const digits of [PRECISION, PRECISION + 1, PRECISION + 2]) {
     cleaned = polygons.map((polygon) => cleanPolygon(polygon, digits)).filter(Boolean);

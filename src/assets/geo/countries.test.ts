@@ -52,6 +52,46 @@ describe('countries.json', () => {
     }
   });
 
+  it('has no ring that steps across the antimeridian, which a flat map draws as a line across the world', () => {
+    const jumping: string[] = [];
+    for (const f of collection.features) {
+      const polygons = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+      for (const ring of polygons.flat()) {
+        if (ring.some((point, i) => i > 0 && Math.abs(point[0] - ring[i - 1][0]) > 180)) jumping.push(f.properties.iso_a2);
+      }
+    }
+    // Antarctica's ring runs along the south pole's edge on purpose: it closes round the pole.
+    expect([...new Set(jumping)]).toEqual(['AQ']);
+  });
+
+  it('keeps every polygon within 180 degrees of longitude, and Russia in several, cut along the antimeridian', () => {
+    for (const f of collection.features) {
+      const polygons = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+      for (const polygon of polygons) {
+        for (const [lon] of polygon[0]) expect(Math.abs(lon), f.properties.iso_a2).toBeLessThanOrEqual(180);
+      }
+    }
+    const russia = collection.features.find((f) => f.properties.iso_a2 === 'RU')!;
+    const widest = Math.max(
+      ...(russia.geometry.type === 'MultiPolygon' ? russia.geometry.coordinates : [russia.geometry.coordinates]).map((polygon) => {
+        const lons = polygon[0].map(([lon]) => lon);
+        return Math.max(...lons) - Math.min(...lons);
+      }),
+    );
+    // The mainland, from the Baltic to the edge of the map, and not the world.
+    expect(widest).toBeLessThan(160);
+  });
+
+  it('finds both sides of the antimeridian: eastern Russia and Fiji', () => {
+    expect(lookup(177.0, 65.2)).toBe('RU'); // inland from Anadyr, west of the antimeridian
+    expect(lookup(-179.1, 66.3)).toBe('RU'); // Chukotka over the edge of the map
+    expect(lookup(-172.0, 66.5)).toBe('RU');
+    expect(lookup(131.9, 43.1)).toBe('RU'); // Vladivostok
+    expect(lookup(177.97, -17.8)).toBe('FJ'); // Viti Levu
+    expect(lookup(179.2, -16.6)).toBe('FJ'); // Vanua Levu
+    expect(lookup(-179.95, -16.85)).toBe('FJ'); // Taveuni, east of the antimeridian
+  });
+
   it('finds a microstate for a point in it, not the country around it', () => {
     expect(lookup(12.4539, 41.9022)).toBe('VA'); // St Peter's, inside Rome
     expect(lookup(12.4663, 41.9031)).toBe('IT'); // Castel Sant'Angelo, 1 km on, is Rome
