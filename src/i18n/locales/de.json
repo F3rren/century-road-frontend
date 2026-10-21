@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "Wie sehe ich die Ereignisse eines Landes?",
-      "p1": "Klicke auf das Land in der Karte oder wähle es unter „Zu einem Land wechseln“ im Ereignisbereich: Die Taste <kbd>/</kbd> bringt dich direkt dorthin. Zurück zu allen heutigen Ereignissen geht es mit dem X oben im Bereich."
+      "p1": "Klicke auf das Land in der Karte oder wähle es unter „Zu einem Land wechseln“ im Ereignisbereich: Die Taste <kbd>/</kbd> bringt dich direkt dorthin. Zurück zu allen heutigen Ereignissen geht es mit einem Klick auf die Karte außerhalb jedes Landes (etwa aufs Meer) oder mit „Alle Länder“ oben im Bereich."
     },
     "archive": {
       "title": "Wie schlage ich einen anderen Tag nach?",

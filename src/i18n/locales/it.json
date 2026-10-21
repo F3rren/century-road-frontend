@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "Come vedo gli eventi di un paese?",
-      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, usa la X in cima al pannello."
+      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, fai clic sulla mappa fuori da ogni paese (sul mare, per esempio), oppure usa «Tutti i paesi» in cima al pannello."
     },
     "archive": {
       "title": "Come cerco un altro giorno?",

@@ -124,6 +124,15 @@ function buildHeatOpacity(heatmap: Record<string, number>): maplibregl.Expressio
 
 const EMPTY_POINTS: FeatureCollection = { type: 'FeatureCollection', features: [] };
 
+// Whether a point of the screen is on the map. On the globe, a point in the space round the sphere
+// is read as the nearest point of its edge, so that a click there would land on whichever country
+// is at the limb; projecting that place back puts it somewhere else. On the flat map, every point
+// comes back to where it was.
+function isOnMap(map: maplibregl.Map, point: maplibregl.Point): boolean {
+  const back = map.project(map.unproject(point));
+  return Math.hypot(back.x - point.x, back.y - point.y) < 2;
+}
+
 // The countries with an event today, for their Prussian outline.
 function heatFilter(heatmap: Record<string, number>): maplibregl.FilterSpecification {
   return ['in', ['get', 'iso_a2'], ['literal', Object.keys(heatmap)]];
@@ -142,6 +151,8 @@ export interface FocusPlace {
 interface MapViewProps {
   projection: ProjectionType;
   onCountryClick?: (country: Country) => void;
+  // A click on no country: the sea, the space round the globe, a place the shapes do not have.
+  onBackgroundClick?: () => void;
   selectedCountryCode?: string | null;
   countryHeatmap?: Record<string, number>;
   focusPlace?: FocusPlace | null;
@@ -160,6 +171,7 @@ function createPlaceMarkerElement(label: string): HTMLElement {
 export function MapView({
   projection,
   onCountryClick,
+  onBackgroundClick,
   selectedCountryCode,
   countryHeatmap,
   focusPlace,
@@ -178,6 +190,7 @@ export function MapView({
   // bound once and would otherwise keep calling whichever onCountryClick was
   // passed in on that first render, forever.
   const onCountryClickRef = useRef(onCountryClick);
+  const onBackgroundClickRef = useRef(onBackgroundClick);
   const [loadError, setLoadError] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
   // Effects that touch the style wait for it: a country can arrive from the
@@ -354,10 +367,23 @@ export function MapView({
       };
       // A small country's target wins over the country around it, or beside it, within its reach.
       map.on('click', 'countries-fill', (e) => {
+        if (!isOnMap(map, e.point)) return;
         if (map.queryRenderedFeatures(e.point, { layers: ['countries-small-hit'] }).length > 0) return;
         selectFrom(e.features?.[0]);
       });
       map.on('click', 'countries-small-hit', (e) => selectFrom(e.features?.[0]));
+
+      // A click that lands on no country leaves the selected one: the sea, the space round the
+      // globe, a place the shapes do not have. A marker (the pin of an insight) is not the map: a
+      // click on it is not a click on nothing.
+      map.on('click', (e) => {
+        const target = e.originalEvent.target;
+        if (target instanceof Element && target.closest('.maplibregl-marker')) return;
+        const onCountry =
+          isOnMap(map, e.point) &&
+          map.queryRenderedFeatures(e.point, { layers: ['countries-fill', 'countries-small-hit'] }).length > 0;
+        if (!onCountry) onBackgroundClickRef.current?.();
+      });
 
       for (const layer of ['countries-fill', 'countries-small-hit']) {
         map.on('mouseenter', layer, () => {
@@ -481,10 +507,11 @@ export function MapView({
     if (containerRef.current) labelControls(containerRef.current, t);
   }, [t, i18n.language, retryKey]);
 
-  // Keep onCountryClickRef current for the click handler above.
+  // Keep the click callbacks current for the handlers above.
   useEffect(() => {
     onCountryClickRef.current = onCountryClick;
-  }, [onCountryClick]);
+    onBackgroundClickRef.current = onBackgroundClick;
+  }, [onCountryClick, onBackgroundClick]);
 
   // Sync the heat: colours and outlines.
   useEffect(() => {

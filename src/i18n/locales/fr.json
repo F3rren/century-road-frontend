@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "Comment voir les événements d'un pays ?",
-      "p1": "Cliquez sur le pays dans la carte, ou choisissez-le dans « Aller à un pays » du panneau des événements : la touche <kbd>/</kbd> vous y mène directement. Pour revenir à tous les événements du jour, utilisez le X en haut du panneau."
+      "p1": "Cliquez sur le pays dans la carte, ou choisissez-le dans « Aller à un pays » du panneau des événements : la touche <kbd>/</kbd> vous y mène directement. Pour revenir à tous les événements du jour, cliquez sur la carte en dehors de tout pays (sur la mer, par exemple), ou utilisez « Tous les pays » en haut du panneau."
     },
     "archive": {
       "title": "Comment consulter un autre jour ?",

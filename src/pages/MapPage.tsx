@@ -77,6 +77,7 @@ export function MapPage() {
         <MapView
           projection={projection}
           onCountryClick={selectCountry}
+          onBackgroundClick={clearCountry}
           selectedCountryCode={selectedCountry?.code}
           countryHeatmap={history.countryHeatmap}
           focusPlace={focusPlace}

@@ -366,7 +366,7 @@
     },
     "country": {
       "title": "How do I see a country's events?",
-      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, use the X at the top of the panel."
+      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, click the map outside any country (on the sea, say), or use “All countries” at the top of the panel."
     },
     "archive": {
       "title": "How do I look up another day?",
