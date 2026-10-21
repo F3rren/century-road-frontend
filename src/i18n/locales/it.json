@@ -302,7 +302,7 @@
     },
     "geocoding": {
       "title": "Il paese sulla mappa",
-      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:50 milioni.",
+      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:10 milioni, semplificati.",
       "p2": "È un'approssimazione, con limiti precisi:",
       "limitSubject": "le coordinate descrivono il soggetto dell'articolo, non sempre il luogo dell'evento;",
       "limitNone": "un evento senza articoli con coordinate resta senza paese: compare nell'elenco del giorno, ma non viene contato sulla mappa;",

@@ -29,7 +29,7 @@ See [docs/PRD.md](docs/PRD.md) for the full product requirements, [PRODUCT.md](P
 ## Features
 
 - **Interactive globe/map** (MapLibre GL), with a flat-projection toggle
-- **Country selection** by map click or an accessible `<select>` picker — always both, never map-only. 238 countries, microstates included (the Vatican, Monaco, San Marino, Singapore, Malta, the Maldives...): a small one with an event today gets a grain on the map, since its shape is a few pixels. The country lives in the URL (`/?country=IT`) and leads on to its whole year in Il mio secolo
+- **Country selection** by map click or an accessible `<select>` picker — always both, never map-only. 239 countries at 1:10m, microstates included (the Vatican, Monaco, San Marino, Singapore, Malta, the Maldives...): a small one with an event today gets a grain on the map, since its shape is a few pixels. The country lives in the URL (`/?country=IT`) and leads on to its whole year in Il mio secolo
 - **"Accadde oggi"** — today's events highlighted, with a heatmap of event density per country, printed translucent so that the borders show through
 - **Archivio** — every entry across all centuries for a chosen day, filterable by year range, entry type, and language, with text search
 - **Il mio secolo** — one country's events from every day of the year, in time order and grouped by decade; the link keeps the choice, and the page prints cleanly or saves as PDF

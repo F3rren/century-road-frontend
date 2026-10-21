@@ -22,7 +22,7 @@ interface CountryFeatureCollection {
 
 // Fetched once per page load and reused: every caller (the map's heatmap,
 // the "vai a un paese" picker, the dashboard's stats) needs the exact same
-// ~240 country shapes, and the file is ~1.7MB uncompressed (~0.6MB over the
+// ~240 country shapes, and the file is ~3.8MB uncompressed (~1.2MB over the
 // wire) — worth sharing a single in-flight/resolved promise across all of them
 // rather than each doing its own fetch.
 let cachedFeatures: Promise<CountryFeature[]> | null = null;
@@ -88,11 +88,11 @@ function toCountry(feature: CountryFeature, language: string): Country {
 }
 
 // Which of these country shapes, if any, contains the given point. Natural
-// Earth's 1:50m is simplified for map rendering, not surveyed for geocoding:
-// a coordinate right at a border (a capital a few km from a frontier) can land
-// in the neighbouring country, and a very small island's shape can still be
-// missing — both true of real coordinates Wikipedia supplies, not edge cases
-// invented here. Where shapes overlap, the first one in `features` wins:
+// Earth's 1:10m, simplified, is drawn for a map, not surveyed for geocoding:
+// a coordinate right at a border (a capital a few km from a frontier) or on a
+// coast can land in the neighbouring country or in the sea, and a very small
+// island's shape can still be missing — both true of real coordinates
+// Wikipedia supplies, not edge cases invented here. Where shapes overlap, the first one in `features` wins:
 // fetchCountryFeatures hands them over smallest first.
 export function findCountryAt(
   lon: number,

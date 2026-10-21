@@ -302,7 +302,7 @@
     },
     "geocoding": {
       "title": "The country on the map",
-      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:50 million borders.",
+      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:10 million borders, simplified.",
       "p2": "It's an approximation, with specific limits:",
       "limitSubject": "coordinates describe the article's subject, not always where the event took place;",
       "limitNone": "an event with no linked article carrying coordinates gets no country: it's in the day's list, but isn't counted on the map;",

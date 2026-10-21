@@ -302,7 +302,7 @@
     },
     "geocoding": {
       "title": "Das Land auf der Karte",
-      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:50 Millionen.",
+      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:10 Millionen, vereinfacht.",
       "p2": "Das ist eine Annäherung mit klaren Grenzen:",
       "limitSubject": "die Koordinaten beschreiben den Gegenstand des Artikels, nicht immer den Ort des Ereignisses;",
       "limitNone": "ein Ereignis ohne verlinkten Artikel mit Koordinaten bleibt ohne Land: Es steht in der Liste des Tages, wird auf der Karte aber nicht gezählt;",

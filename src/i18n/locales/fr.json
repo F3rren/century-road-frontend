@@ -302,7 +302,7 @@
     },
     "geocoding": {
       "title": "Le pays sur la carte",
-      "p1": "Wikipédia n'indique pas dans quel pays un événement a eu lieu : nous le déduisons. Nous prenons le premier article lié qui possède des coordonnées et cherchons le pays qui contient ce point, sur les frontières de Natural Earth à l'échelle 1:50 millions.",
+      "p1": "Wikipédia n'indique pas dans quel pays un événement a eu lieu : nous le déduisons. Nous prenons le premier article lié qui possède des coordonnées et cherchons le pays qui contient ce point, sur les frontières de Natural Earth à l'échelle 1:10 millions, simplifiées.",
       "p2": "C'est une approximation, avec des limites précises :",
       "limitSubject": "les coordonnées décrivent le sujet de l'article, pas toujours le lieu de l'événement ;",
       "limitNone": "un événement sans article lié doté de coordonnées reste sans pays : il figure dans la liste du jour, mais n'est pas compté sur la carte ;",

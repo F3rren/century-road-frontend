@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { heatColor, heatOpacity, PAPER } from '../constants/heat';
 import { COUNTRIES_GEOJSON_URL } from '../constants/countries';
+import { FIXER, SELECTED_OPACITY } from '../constants/selection';
 import {
   countryAnchor,
   facingCenter,
@@ -30,7 +31,6 @@ const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
 const COUNTRY_LINE = '#7A8C9E'; // 3.2:1 on the paper: the geography stays readable
 const PRUSSIAN = '#0E2A47';
 const SHADE = '#394A5B';
-const FIXER = '#E2B44A';
 // Place labels only once the map is zoomed in: at world scale the countries
 // speak through the heat, and the panel names them.
 const LABELS_FROM_ZOOM = 4;
@@ -299,7 +299,7 @@ export function MapView({
           type: 'fill',
           source: 'countries-ne',
           filter: ['==', 'iso_a2', ''],
-          paint: { 'fill-color': FIXER, 'fill-opacity': 0.85 },
+          paint: { 'fill-color': FIXER, 'fill-opacity': SELECTED_OPACITY },
         },
         firstLabel,
       );
@@ -500,7 +500,7 @@ export function MapView({
   useEffect(() => {
     const map = mapRef.current;
     const source = loaded && anchorsReady ? (map?.getSource('countries-small') as maplibregl.GeoJSONSource | undefined) : undefined;
-    source?.setData(smallCountryPoints(smallRef.current, countryHeatmap ?? {}, selectedCountryCode ?? null, FIXER));
+    source?.setData(smallCountryPoints(smallRef.current, countryHeatmap ?? {}, selectedCountryCode ?? null));
   }, [countryHeatmap, selectedCountryCode, loaded, anchorsReady]);
 
   return (
