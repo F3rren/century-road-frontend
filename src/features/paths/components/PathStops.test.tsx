@@ -104,10 +104,28 @@ describe('a stop\'s "Perché conta"', () => {
     const firstStop = first.closest('ol > li') as HTMLElement;
     expect(within(firstStop).getByRole('link', { name: /Apollo 11/ })).toHaveAttribute('href', '/insights/apollo-11');
     expect(api.get).toHaveBeenCalledTimes(1);
-    expect(api.get).toHaveBeenCalledWith('/history/insights/sputnik-1');
+    expect(api.get).toHaveBeenCalledWith('/history/insights/sputnik-1', expect.any(AbortSignal));
     // The other stop stays closed and has not been read.
     expect(second.closest('details')).not.toHaveAttribute('open');
     expect(screen.queryByText('Prima di apollo-11.')).not.toBeInTheDocument();
+  });
+
+  it('opens the caveats and who wrote it too, so a stop reads no more settled than its page', async () => {
+    vi.mocked(api.get).mockImplementation(async (path: string) => ({
+      success: true,
+      data: { ...detail(path.split('/').pop() ?? ''), notes: ['Il punto è il sito di lancio.'] },
+    }));
+    const user = userEvent.setup();
+    renderStops();
+    const [first] = screen.getAllByText(t('paths.readInsight'), { selector: 'summary span' });
+    await user.click(first);
+
+    const firstStop = first.closest('ol > li') as HTMLElement;
+    expect(await within(firstStop).findByRole('heading', { name: t('insights.notes') })).toBeInTheDocument();
+    expect(within(firstStop).getByText('Il punto è il sito di lancio.')).toBeInTheDocument();
+    expect(within(firstStop).getByText(/Scritto da Century Road\./)).toBeInTheDocument();
+    expect(within(firstStop).getByText(new RegExp(t('insights.notReviewed')))).toBeInTheDocument();
+    expect(firstStop.textContent).not.toMatch(/verificat/i);
   });
 
   it('does not ask again when the same stop is closed and opened', async () => {

@@ -1,11 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import i18n from '@/i18n';
 import { api } from '@/services/api';
 import type { InsightDetail, InsightSummary } from '../types';
 import { WhyItMatters } from './WhyItMatters';
 
 vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn() } }));
+
+const t = (key: string, options?: Record<string, unknown>) => i18n.t(key, options);
 
 const summary: InsightSummary = {
   slug: 'sputnik-1',
@@ -58,6 +61,38 @@ describe('WhyItMatters', () => {
     expect(screen.getByText('Dopo.')).toBeInTheDocument();
     expect(screen.getAllByRole('link')).toHaveLength(3);
     expect(screen.getByRole('link', { name: /Evento 1/ })).toHaveAttribute('href', '/insights/evento-1');
+  });
+
+  it('lists the caveats on dates and places under their heading, only when there are any', async () => {
+    vi.mocked(api.get).mockResolvedValue({ success: true, data: detail });
+    const { unmount } = renderBlock();
+    expect(await screen.findByText("L'evento.")).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: t('insights.notes') })).not.toBeInTheDocument();
+    unmount();
+
+    vi.mocked(api.get).mockResolvedValue({ success: true, data: { ...detail, notes: ['A Baikonur era già il 5 ottobre.'] } });
+    renderBlock();
+    expect(await screen.findByRole('heading', { level: 4, name: t('insights.notes') })).toBeInTheDocument();
+    expect(screen.getByText('A Baikonur era già il 5 ottobre.')).toBeInTheDocument();
+  });
+
+  it('says a text nobody reviewed was not, with no review date and never the word "verified"', async () => {
+    vi.mocked(api.get).mockResolvedValue({ success: true, data: detail });
+    renderBlock();
+    expect(await screen.findByText(new RegExp(t('insights.notReviewed')))).toBeInTheDocument();
+    expect(screen.getByText(/Scritto da Century Road\./)).toBeInTheDocument();
+    expect(screen.queryByText(/controllato da una persona/i)).not.toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/verificat/i);
+  });
+
+  it('shows the day a person reviewed the text, when one did', async () => {
+    vi.mocked(api.get).mockResolvedValue({
+      success: true,
+      data: { ...detail, provenance: { author: 'Century Road', reviewedAt: '2026-10-05' } },
+    });
+    renderBlock();
+    expect(await screen.findByText(/Controllato da una persona sulle sue fonti il 5 ottobre 2026/)).toBeInTheDocument();
+    expect(screen.queryByText(new RegExp(t('insights.notReviewed')))).not.toBeInTheDocument();
   });
 
   it('shows nothing while loading', () => {

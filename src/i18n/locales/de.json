@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "der Dienst antwortet nicht: prüfe die Verbindung und versuche es erneut",
+    "timeout": "der Dienst hat nicht rechtzeitig geantwortet: versuche es gleich noch einmal",
     "server": "der Dienst ist gerade nicht erreichbar: versuche es in ein paar Minuten erneut",
     "unexpected": "unerwartete Antwort des Dienstes: versuche es später erneut",
     "notFound": "der gewünschte Inhalt existiert nicht",
@@ -112,7 +113,7 @@
     },
     "popularity": {
       "heading": "Meistbesucht",
-      "description": "Wie oft jede Seite insgesamt von allen Besuchern aufgerufen wurde — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
+      "description": "Wie oft die Seite insgesamt einen Tag oder ein Land gezeigt hat — keine personenbezogenen Daten, nur eine anonyme, aggregierte Zählung.",
       "loadError": "Die Statistiken zu den Aufrufen konnten nicht geladen werden ({{error}}).",
       "days": {
         "label": "Meistbesuchte Tage"
@@ -124,6 +125,18 @@
       "views_other": "{{count}} Aufrufe",
       "noData": "Noch nicht genügend Daten.",
       "cta": "Karte erkunden"
+    }
+  },
+  "popular": {
+    "title": "Meistbesucht",
+    "description": "Die Tage und Länder, die die Seite am häufigsten gezeigt hat, der Reihe nach, bis zu den ersten 50.",
+    "back": "Zurück zum Dashboard",
+    "seeAll": "Vollständige Ranglisten ansehen",
+    "method": {
+      "title": "So wird gezählt",
+      "days": "Ein Tag wird jedes Mal gezählt, wenn die Seite seine Ereignisse zeigt: auch wenn die Karte sich auf den heutigen Tag öffnet oder wenn du im Archiv einen Filter änderst. Deshalb stehen oben oft die Tage, an denen die Seite am meisten geöffnet wurde.",
+      "countries": "Ein Land wird jedes Mal gezählt, wenn jemand es auf der Karte auswählt.",
+      "anonymous": "Es sind Summen seit Beginn der Zählung, ohne Datum und ohne Kennungen: Wir wissen nicht, wer geschaut hat und wann, und dieselbe Person, die wiederkommt, zählt mehrmals. Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
     }
   },
   "archive": {
@@ -289,22 +302,22 @@
     },
     "geocoding": {
       "title": "Das Land auf der Karte",
-      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:110 Millionen.",
+      "p1": "Wikipedia gibt nicht an, in welchem Land ein Ereignis stattfand: Wir leiten es ab. Wir nehmen den ersten verlinkten Artikel mit Koordinaten und suchen das Land, das diesen Punkt enthält, anhand der Grenzen von Natural Earth im Maßstab 1:10 Millionen, vereinfacht.",
       "p2": "Das ist eine Annäherung mit klaren Grenzen:",
       "limitSubject": "die Koordinaten beschreiben den Gegenstand des Artikels, nicht immer den Ort des Ereignisses;",
       "limitNone": "ein Ereignis ohne verlinkten Artikel mit Koordinaten bleibt ohne Land: Es steht in der Liste des Tages, wird auf der Karte aber nicht gezählt;",
       "limitBorder": "ein Punkt nahe einer Grenze kann im Nachbarland landen;",
-      "limitIslands": "einige kleine Inselstaaten haben in diesem Maßstab keine Form und werden nie erkannt.",
+      "limitIslands": "einige sehr kleine Inseln haben in diesem Maßstab keine Form und werden nie erkannt; die Hauptstadt eines Inselstaats kann an der Küste knapp außerhalb ihrer Form liegen.",
       "p3": "Auf der Karte zählen nur die Ereignisse: „Ausgewählt“ wiederholt einige davon, und doppelt gezählt würden die Zahlen aufgebläht."
     },
     "index": {
       "title": "Der Länderindex",
-      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel und denselben Grenzen wie die Karte einem Land zu. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
+      "p1": "Die Seite <century>Mein Jahrhundert</century> nutzt einen Index, den unser Server jede Nacht erstellt: Er liest alle Tage des Jahres auf Italienisch und Englisch und ordnet jedes Ereignis mit derselben Regel wie die Karte, aber anhand weniger detaillierter Grenzen (Natural Earth im Maßstab 1:110 Millionen) einem Land zu: Ein Ereignis in einem Kleinstaat oder nahe einer Grenze kann dort in einem anderen Land landen als auf der Karte. Er enthält nur Ereignisse mit einem Jahr und einem ermittelten Land, jede Ausgabe für sich (ohne Ersatz zwischen den Sprachen), und kann Wikipedia um einen Tag hinterherhinken."
     },
     "errors": {
       "title": "Widersprüche und Fehler",
       "p1": "Bei einer einzigen Quelle gibt es nichts abzugleichen: Wir vergleichen die Einträge nicht mit anderen Archiven. Ein Fehler im Text eines Ereignisses wird auf Wikipedia korrigiert, auf der Seite zu diesem Tag des Jahres; die Korrektur erscheint hier mit der nächsten Aktualisierung.",
-      "p2": "Für Fehler dieser Seite, etwa ein falsch zugeordnetes Land, oder für einen Fehler in einem Ereignis, einer Vertiefung oder einem Pfad nutze „Einen Fehler melden“ darunter oder schreib uns über <credits>Quellen und Kontakt</credits>."
+      "p2": "Fehler dieser Seite, etwa ein falsch zugeordnetes Land, meldest du über <credits>Quellen und Kontakt</credits>."
     },
     "limits": {
       "title": "Grenzen",
@@ -312,7 +325,7 @@
     },
     "views": {
       "title": "Besuchsstatistik",
-      "p1": "„Meistbesucht“ im Dashboard sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
+      "p1": "„Meistbesucht“ im Dashboard und auf der Seite mit den vollständigen Ranglisten sind anonyme Summen: Ein Tag wird jedes Mal gezählt, wenn seine Ereignisse abgerufen werden, ein Land jedes Mal, wenn es ausgewählt wird. Keine personenbezogenen Daten und keine Besucherkennung; Details stehen in der <privacy>Datenschutzerklärung</privacy> (auf Italienisch)."
     },
     "sources": {
       "title": "Quellen, Abdeckung und Grenzen",
@@ -340,7 +353,7 @@
       "p2": "Jede Vertiefung erzählt ein Ereignis in drei Teilen, davor, das Ereignis und danach, sagt, wo es auf der Karte liegt, und verweist auf die Quellen, in denen sich jede Aussage prüfen lässt. Die Texte sind auf Italienisch geschrieben und liegen im Code des Projekts: Sie ändern sich nur mit einer neuen Version der Seite, die wie Code gegengelesen wird, und nicht von einem Moment zum anderen.",
       "p3": "Ein Prüfdatum erscheint nur, wenn eine Person den Text wirklich anhand seiner Quellen gelesen hat. Fehlt es, hat das noch niemand getan: Es ist ein Entwurf, mit Hilfe einer KI geschrieben, und sollte auch so gelesen werden. Unten siehst du, wie viele Vertiefungen geprüft wurden.",
       "p4": "Wo ein Datum von der Zeitzone abhängt oder der Punkt auf der Karte nur ein Ausgangsort ist (etwa der Startplatz einer Mondmission), sagt die Karte es.",
-      "p5": "Wenn etwas nicht stimmt, steht „Einen Fehler melden“ unter jedem Ereignis, jeder Vertiefung und jedem Pfad. Wir fragen nicht, wer du bist, und können deshalb nicht antworten: Wir lesen die Meldung und korrigieren, falls nötig."
+      "p5": "Wenn in einem Pfad oder einer Vertiefung etwas nicht stimmt, schreib uns über „Quellen und Kontakt“."
     }
   },
   "guide": {
@@ -353,7 +366,7 @@
     },
     "country": {
       "title": "Wie sehe ich die Ereignisse eines Landes?",
-      "p1": "Klicke auf das Land in der Karte oder wähle es unter „Zu einem Land wechseln“ im Ereignisbereich: Die Taste <kbd>/</kbd> bringt dich direkt dorthin. Zurück zu allen heutigen Ereignissen geht es mit dem X oben im Bereich."
+      "p1": "Klicke auf das Land in der Karte oder wähle es unter „Zu einem Land wechseln“ im Ereignisbereich: Die Taste <kbd>/</kbd> bringt dich direkt dorthin. Zurück zu allen heutigen Ereignissen geht es mit einem Klick auf die Karte außerhalb jedes Landes (etwa aufs Meer) oder mit „Alle Länder“ oben im Bereich."
     },
     "archive": {
       "title": "Wie schlage ich einen anderen Tag nach?",
@@ -365,7 +378,7 @@
     },
     "dashboard": {
       "title": "Was misst das Dashboard?",
-      "p1": "Zahlen aus den heutigen Einträgen: wie viele Ereignisse, in wie vielen Ländern, welche Jahresspanne sie abdecken und welches Land am häufigsten vorkommt. Darunter die meistbesuchten Tage und Länder, anonym gezählt."
+      "p1": "Zahlen aus den heutigen Einträgen: wie viele Ereignisse, in wie vielen Ländern, welche Jahresspanne sie abdecken und welches Land am häufigsten vorkommt. Darunter die meistbesuchten Tage und Länder, anonym gezählt. Von dort kommst du auch zu den vollständigen Ranglisten."
     },
     "language": {
       "title": "Warum sind die Texte nicht immer in meiner Sprache?",
@@ -385,7 +398,7 @@
     },
     "paths": {
       "title": "Was sind die Pfade?",
-      "p1": "Es sind Routen zu vielen Themen, nach Thema geordnet, <paths>unter Pfade</paths>: Jede Station ist ein Ereignis mit seinem „Warum es zählt“, seinem Ort auf der Karte und seinen Quellen. Wo ein Ereignis des Tages eine Vertiefung hat, ist es in der Liste markiert. Wenn etwas nicht stimmt, steht unter jedem Ereignis und jedem Text „Einen Fehler melden“."
+      "p1": "Es sind Routen zu vielen Themen, nach Thema geordnet, <paths>unter Pfade</paths>: Jede Station ist ein Ereignis mit seinem „Warum es zählt“, seinem Ort auf der Karte und seinen Quellen. Wo ein Ereignis des Tages eine Vertiefung hat, ist es in der Liste markiert."
     }
   },
   "credits": {
@@ -476,36 +489,15 @@
     },
     "paths": {
       "description": "Pfade durch die Geschichte zu vielen Themen, von der Antike bis heute: wenige Stationen, jede mit ihrem Ort auf der Karte und der Antwort, warum sie zählt."
+    },
+    "popular": {
+      "description": "Die meistbesuchten Tage und Länder von Grains of History, mit anonymen Besuchssummen."
     }
   },
   "editorial": {
     "italianOnly": "Die Texte in diesem Bereich gibt es nur auf Italienisch, egal in welcher Sprache die Oberfläche steht.",
     "approximatePlace": "Ungefähre Position: {{note}}",
     "draft": "Entwürfe, mit Hilfe einer KI aus Wikipedia geschrieben und noch von keiner Person geprüft: Prüfe die Quellen."
-  },
-  "report": {
-    "open": "Einen Fehler melden",
-    "intro": "Sag uns, was nicht stimmt: Wir lesen es und korrigieren es. Wir fragen nicht, wer du bist, und können dir deshalb nicht antworten.",
-    "about": "Betrifft: {{subject}}",
-    "categoryLabel": "Um was für einen Fehler geht es?",
-    "categoryPlaceholder": "Auswählen…",
-    "category": {
-      "WRONG_DATE": "Das Datum ist falsch",
-      "WRONG_PLACE": "Der Ort ist falsch",
-      "WRONG_TEXT": "Der Text enthält einen Fehler",
-      "BROKEN_LINK": "Ein Link funktioniert nicht",
-      "OTHER": "Etwas anderes"
-    },
-    "messageLabel": "Was stimmt nicht?",
-    "messageHint": "{{min}} bis {{max}} Zeichen. Bisher geschrieben: {{length}}.",
-    "noPersonalData": "Schreib keine persönlichen Daten hinein: Wir brauchen sie nicht.",
-    "submit": "Meldung senden",
-    "sending": "Wird gesendet…",
-    "sent": "Danke, deine Meldung ist angekommen (Nummer {{id}}).",
-    "error": {
-      "invalid": "Die Meldung wurde nicht angenommen. Prüfe den Text und die E-Mail-Adresse: Die Adresse kannst du auch leer lassen.",
-      "generic": "Die Meldung konnte nicht gesendet werden ({{error}})."
-    }
   },
   "insights": {
     "showOnMap": "Den Ort auf der Karte ansehen",

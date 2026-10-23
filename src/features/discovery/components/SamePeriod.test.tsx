@@ -92,7 +92,7 @@ describe('SamePeriod', () => {
       </MemoryRouter>,
     );
     await screen.findByText(t('samePeriod.level.NONE'));
-    expect(api.get).toHaveBeenCalledWith('/history/same-period?year=-44&lang=it');
+    expect(api.get).toHaveBeenCalledWith('/history/same-period?year=-44&lang=it', expect.any(AbortSignal));
   });
 
   it('explains a failure in plain words and offers to try again', async () => {

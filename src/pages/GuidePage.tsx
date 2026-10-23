@@ -30,9 +30,9 @@ export function GuidePage() {
           <p>{t("guide.map.p1")}</p>
           {/* Same thresholds, colors and labels as the map's own legend. */}
           <ul className="space-y-1">
-            {[...HEAT_LEVELS].reverse().map(({ color, labelKey }) => (
+            {[...HEAT_LEVELS].reverse().map(({ swatch, labelKey }) => (
               <li key={labelKey} className="flex items-center gap-2 text-sm tabular-nums">
-                <span aria-hidden="true" className="h-3 w-3 shrink-0 border border-foreground/30" style={{ backgroundColor: color }} />
+                <span aria-hidden="true" className="h-3 w-3 shrink-0 border border-foreground/30" style={{ backgroundColor: swatch }} />
                 {t(`map.legend.level.${labelKey}`)}
               </li>
             ))}

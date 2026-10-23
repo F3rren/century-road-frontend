@@ -11,7 +11,7 @@ import {
   paragraphs,
   PlaceLine,
   pathRoute,
-  ReportForm,
+  ProvenanceLine,
   YearMark,
   type InsightDetail,
 } from '@/features/history';
@@ -36,12 +36,6 @@ function Paragraphs({ text }: { text: string }) {
 // called verified, and the caveats on dates and places are listed.
 export function InsightView({ insight }: { insight: InsightDetail }) {
   const { t, i18n } = useTranslation();
-  const { provenance } = insight;
-  const reviewedOn =
-    provenance.reviewedAt &&
-    new Intl.DateTimeFormat(i18n.language, { dateStyle: 'long', timeZone: 'UTC' }).format(
-      new Date(provenance.reviewedAt),
-    );
 
   return (
     <ReadingPage title={insight.title} description={insight.summary} lang="it">
@@ -127,16 +121,8 @@ export function InsightView({ insight }: { insight: InsightDetail }) {
             </li>
           ))}
         </ul>
-        {/* Provenance, not a seal: a date only when a person really reviewed the text. */}
-        <p className="text-sm text-muted-foreground">
-          {t('insights.writtenBy', { author: provenance.author })}{' '}
-          {reviewedOn ? t('insights.reviewedOn', { date: reviewedOn }) : t('insights.notReviewed')}
-        </p>
+        <ProvenanceLine provenance={insight.provenance} />
       </LegalSection>
-
-      <div className="border-t border-border pt-3">
-        <ReportForm target={{ type: 'INSIGHT', slug: insight.slug }} subject={insight.title} />
-      </div>
     </ReadingPage>
   );
 }

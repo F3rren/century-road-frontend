@@ -56,6 +56,75 @@ describe('useKeyedFetch', () => {
   });
 });
 
+describe('abort', () => {
+  // The signal a hook hands its fetcher is how a fetcher that passes it on to api.get() stops a
+  // request nobody is waiting for any more.
+  it('aborts the request of a key that has been left behind, and only that one', async () => {
+    const signals: Record<string, AbortSignal> = {};
+    const fetcher = vi.fn((key: 'a' | 'b', signal: AbortSignal) => {
+      signals[key] = signal;
+      return new Promise<string>(() => {});
+    });
+
+    const { rerender } = renderHook(({ key }: { key: 'a' | 'b' }) => useKeyedFetch(key, fetcher), {
+      initialProps: { key: 'a' },
+    });
+    expect(signals.a.aborted).toBe(false);
+
+    rerender({ key: 'b' });
+
+    expect(signals.a.aborted).toBe(true);
+    expect(signals.b.aborted).toBe(false);
+  });
+
+  it('aborts the request when the component goes away', () => {
+    let signal: AbortSignal | undefined;
+    const fetcher = vi.fn((_key: string, given: AbortSignal) => {
+      signal = given;
+      return new Promise<string>(() => {});
+    });
+
+    const { unmount } = renderHook(() => useKeyedFetch('day', fetcher));
+    expect(signal?.aborted).toBe(false);
+
+    unmount();
+    expect(signal?.aborted).toBe(true);
+  });
+
+  it('shows nothing for an aborted request that rejects, and settles on the key that is current', async () => {
+    const fetcher = vi.fn((key: 'a' | 'b', signal: AbortSignal) =>
+      key === 'a'
+        ? new Promise<string>((_resolve, reject) =>
+            signal.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError'))),
+          )
+        : Promise.resolve('data for b'),
+    );
+
+    const { result, rerender } = renderHook(({ key }: { key: 'a' | 'b' }) => useKeyedFetch(key, fetcher), {
+      initialProps: { key: 'a' },
+    });
+    rerender({ key: 'b' });
+
+    await waitFor(() => expect(result.current.data).toBe('data for b'));
+    expect(result.current.error).toBeNull();
+  });
+
+  it('is how a keyless fetch gets its signal too, and it is the first argument', () => {
+    let signal: AbortSignal | undefined;
+    const fetcher = vi.fn((given: AbortSignal) => {
+      signal = given;
+      return new Promise<string>(() => {});
+    });
+
+    const { unmount } = renderHook(() => useFetchOnce(fetcher));
+    expect(signal).toBeInstanceOf(AbortSignal);
+    expect(signal?.aborted).toBe(false);
+
+    unmount();
+    expect(signal?.aborted).toBe(true);
+  });
+});
+
 describe('useFetchOnce', () => {
   it('asks again on retry, so a keyless fetch can offer a "Riprova" too', async () => {
     const fetcher = vi
@@ -75,6 +144,15 @@ describe('useFetchOnce', () => {
 describe('describeFetchError', () => {
   it('reads a fetch that never reached the server as a connection problem', () => {
     expect(describeFetchError(new TypeError('Failed to fetch'))).toBe(i18n.t('errors.network'));
+  });
+
+  it('reads a request the service did not answer in time as that, not as a connection problem', () => {
+    expect(describeFetchError(new DOMException('No answer after 20s', 'TimeoutError'))).toBe(i18n.t('errors.timeout'));
+    expect(i18n.t('errors.timeout')).not.toBe(i18n.t('errors.network'));
+  });
+
+  it('reads a request the page itself gave up on as nothing worth a message of its own', () => {
+    expect(describeFetchError(new DOMException('aborted', 'AbortError'))).toBe(i18n.t('errors.unexpected'));
   });
 
   it('reads a 5xx answer as the service being down', () => {

@@ -12,20 +12,17 @@ import {
   fetchSamePeriod,
   fetchSources,
   fetchStartHere,
-  submitErrorReport,
 } from './historyApi';
 
-vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn() } }));
+vi.mock('@/services/api', () => ({ api: { get: vi.fn() } }));
 
 const get = vi.mocked(api.get);
-const post = vi.mocked(api.post);
 
 const ok = (data: unknown) => ({ success: true, data });
 const failed = (message: string) => ({ success: false, message });
 
 beforeEach(() => {
   get.mockReset();
-  post.mockReset();
 });
 
 describe('path builders', () => {
@@ -57,7 +54,26 @@ describe('lists', () => {
   ])('%s resolves the array in the envelope', async (_name, call, endpoint) => {
     get.mockResolvedValue(ok([{ slug: 'a' }]));
     await expect(call()).resolves.toEqual([{ slug: 'a' }]);
-    expect(get).toHaveBeenCalledWith(endpoint);
+    expect(get).toHaveBeenCalledWith(endpoint, undefined);
+  });
+
+  // What lets a hook cancel a request whose key it has left behind.
+  it.each([
+    ['fetchStartHere', (signal: AbortSignal) => fetchStartHere(signal), '/history/start-here'],
+    ['fetchPaths', (signal: AbortSignal) => fetchPaths(signal), '/history/paths'],
+    ['fetchInsights', (signal: AbortSignal) => fetchInsights('/history/insights', signal), '/history/insights'],
+    ['fetchPath', (signal: AbortSignal) => fetchPath('a', signal), '/history/paths/a'],
+    ['fetchInsight', (signal: AbortSignal) => fetchInsight('a', signal), '/history/insights/a'],
+    ['fetchSamePeriod', (signal: AbortSignal) => fetchSamePeriod('/history/same-period?year=1', signal), '/history/same-period?year=1'],
+    ['fetchSources', (signal: AbortSignal) => fetchSources(signal), '/history/sources'],
+  ])('%s hands the caller\'s abort signal to the request', async (_name, call, endpoint) => {
+    // Whether the answer passes the shape check does not matter here, only what api.get was given.
+    get.mockResolvedValue(ok([]));
+    const signal = new AbortController().signal;
+
+    await call(signal).catch(() => undefined);
+
+    expect(get).toHaveBeenCalledWith(endpoint, signal);
   });
 
   it('treats a day with no insights as an empty list, not an error', async () => {
@@ -90,7 +106,7 @@ describe('one path, one insight', () => {
   it('escapes the slug it puts in the URL', async () => {
     get.mockResolvedValue(ok(path));
     await fetchPath('a/b c');
-    expect(get).toHaveBeenCalledWith('/history/paths/a%2Fb%20c');
+    expect(get).toHaveBeenCalledWith('/history/paths/a%2Fb%20c', undefined);
   });
 
   it('accepts a path and an insight in the documented shape', async () => {
@@ -98,7 +114,7 @@ describe('one path, one insight', () => {
     await expect(fetchPath(path.slug)).resolves.toEqual(path);
     get.mockResolvedValueOnce(ok(insight));
     await expect(fetchInsight(insight.slug)).resolves.toEqual(insight);
-    expect(get).toHaveBeenLastCalledWith('/history/insights/sputnik-1');
+    expect(get).toHaveBeenLastCalledWith('/history/insights/sputnik-1', undefined);
   });
 
   it('rejects an insight missing one of its three parts', async () => {
@@ -171,35 +187,11 @@ describe('sources', () => {
     get.mockResolvedValue(ok(sources));
     const data = await fetchSources();
     expect(data.coverage.editorial.lastReviewedAt).toBeUndefined();
-    expect(get).toHaveBeenCalledWith('/history/sources');
+    expect(get).toHaveBeenCalledWith('/history/sources', undefined);
   });
 
   it('rejects an answer without its coverage', async () => {
     get.mockResolvedValue(ok({ sources: [], limits: [] }));
     await expect(fetchSources()).rejects.toThrow();
-  });
-});
-
-describe('submitErrorReport', () => {
-  const report = {
-    target: { type: 'INSIGHT', slug: 'sputnik-1' },
-    category: 'WRONG_DATE',
-    message: 'A Baikonur era già il 5 ottobre.',
-  } as const;
-
-  it('posts the report as given and returns its receipt', async () => {
-    post.mockResolvedValue(ok({ id: 42, receivedAt: '2026-10-06T16:10:35Z' }));
-    await expect(submitErrorReport(report)).resolves.toEqual({ id: 42, receivedAt: '2026-10-06T16:10:35Z' });
-    expect(post).toHaveBeenCalledWith('/history/reports', report);
-  });
-
-  it('rejects an answer that carries no report number', async () => {
-    post.mockResolvedValue(ok({}));
-    await expect(submitErrorReport(report)).rejects.toThrow();
-  });
-
-  it("lets the transport's HTTP 429 through, so a form can tell a limit from a typo", async () => {
-    post.mockRejectedValue(new Error('HTTP 429: Too Many Requests'));
-    await expect(submitErrorReport(report)).rejects.toThrow(/^HTTP 429/);
   });
 });

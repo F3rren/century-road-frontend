@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "the service is not responding: check your connection and try again",
+    "timeout": "the service didn't answer in time: try again in a moment",
     "server": "the service is unavailable right now: try again in a few minutes",
     "unexpected": "unexpected answer from the service: try again later",
     "notFound": "the content you asked for doesn't exist",
@@ -112,7 +113,7 @@
     },
     "popularity": {
       "heading": "Most viewed",
-      "description": "How many times each page has been viewed in total, across every visitor — no personal data, just an anonymous, aggregate count.",
+      "description": "How many times the site has shown a day or a country, in total — no personal data, just an anonymous, aggregate count.",
       "loadError": "Couldn't load the view stats ({{error}}).",
       "days": {
         "label": "Most-viewed days"
@@ -124,6 +125,18 @@
       "views_other": "{{count}} views",
       "noData": "Not enough data yet.",
       "cta": "Explore the map"
+    }
+  },
+  "popular": {
+    "title": "Most viewed",
+    "description": "The days and countries the site has shown most often, in order, up to the first 50.",
+    "back": "Back to the Dashboard",
+    "seeAll": "See the full rankings",
+    "method": {
+      "title": "How they are counted",
+      "days": "A day is counted each time the site shows its events: also when the map opens on today, or when you change a filter in the Archive. So the days at the top are often the days the site was opened the most.",
+      "countries": "A country is counted each time someone selects it on the map.",
+      "anonymous": "These are totals since counting began, with no dates and no identifiers: we don’t know who looked or when, and the same person coming back counts again. Details are on the <privacy>Privacy</privacy> page (in Italian)."
     }
   },
   "archive": {
@@ -289,22 +302,22 @@
     },
     "geocoding": {
       "title": "The country on the map",
-      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:110 million borders.",
+      "p1": "Wikipedia doesn't say which country an event happened in, so we infer it. We take the first linked article that has coordinates and look up the country containing that point, on Natural Earth's 1:10 million borders, simplified.",
       "p2": "It's an approximation, with specific limits:",
       "limitSubject": "coordinates describe the article's subject, not always where the event took place;",
       "limitNone": "an event with no linked article carrying coordinates gets no country: it's in the day's list, but isn't counted on the map;",
       "limitBorder": "a point near a border can land in the neighboring country;",
-      "limitIslands": "some small island states have no shape at this scale and are never identified.",
+      "limitIslands": "a few very small islands have no shape at this scale and are never identified; the capital of an island state, on its coast, can fall just outside its shape.",
       "p3": "Only Events count on the map: Featured repeats some of them, and counting them twice would inflate the numbers."
     },
     "index": {
       "title": "The country index",
-      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule and the same borders as the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
+      "p1": "The <century>My century</century> page uses an index our server builds every night: it reads every day of the year in Italian and English and places each event in a country with the same rule as the map, but on less detailed borders (Natural Earth at 1:110 million): an event in a microstate or near a border can end up there in a different country from the one on the map. It holds only Events with a year and an identified country, each edition on its own (no fallback between languages), and can be a day behind Wikipedia."
     },
     "errors": {
       "title": "Contradictions and errors",
       "p1": "With a single source there's nothing to reconcile: we don't check entries against other archives. A mistake in an event's text is fixed on Wikipedia, on the page for that day of the year; the correction reaches this site with the next update.",
-      "p2": "For this site's own mistakes, such as a wrongly attributed country, or for a mistake in an event, an insight or a path, use \"Report a mistake\" under each one, or write to us via <credits>Credits and contact</credits>."
+      "p2": "For this site's own mistakes, such as a wrongly attributed country, write to us via <credits>Credits and contact</credits>."
     },
     "limits": {
       "title": "Limits",
@@ -312,7 +325,7 @@
     },
     "views": {
       "title": "Visit statistics",
-      "p1": "“Most viewed”, on the Dashboard, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
+      "p1": "“Most viewed”, on the Dashboard and on its full-rankings page, are anonymous totals: a day is counted each time its events are requested, a country each time it's selected. No personal data and no visitor identifier; details are on the <privacy>Privacy</privacy> page (in Italian)."
     },
     "sources": {
       "title": "Sources, coverage and limits",
@@ -340,7 +353,7 @@
       "p2": "Each insight tells an event in three parts, before, the event and after, says where to put it on the map and points to the sources where each claim can be checked. The texts are written in Italian and live in the project's code: they change only with a new version of the site, read over like code, and not from one moment to the next.",
       "p3": "A review date appears only when a person has really read the text against its sources. If it is missing, nobody has yet: it is a draft, written with the help of an AI, and should be read as one. Below you can see how many insights have been reviewed.",
       "p4": "Where a date depends on the time zone, or the point on the map is only a place of departure (such as the launch site of a mission to the Moon), the card says so.",
-      "p5": "If something doesn't add up, \"Report a mistake\" is under every event, insight and path. We don't ask who you are, so we can't reply: we read the report and, if needed, correct it."
+      "p5": "If something doesn't add up in a path or an insight, write to us via \"Credits and contact\"."
     }
   },
   "guide": {
@@ -353,7 +366,7 @@
     },
     "country": {
       "title": "How do I see a country's events?",
-      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, use the X at the top of the panel."
+      "p1": "Click the country on the map, or pick it from “Go to a country” in the events panel: the <kbd>/</kbd> key takes you straight there. To return to all of today's events, click the map outside any country (on the sea, say), or use “All countries” at the top of the panel."
     },
     "archive": {
       "title": "How do I look up another day?",
@@ -365,7 +378,7 @@
     },
     "dashboard": {
       "title": "What does the Dashboard measure?",
-      "p1": "Figures computed from today's entries: how many events, in how many countries, the span of years they cover and the most-cited country. Below, the most-viewed days and countries, counted anonymously."
+      "p1": "Figures computed from today's entries: how many events, in how many countries, the span of years they cover and the most-cited country. Below, the most-viewed days and countries, counted anonymously. From there you can also reach the full rankings."
     },
     "language": {
       "title": "Why aren't the texts always in my language?",
@@ -385,7 +398,7 @@
     },
     "paths": {
       "title": "What are the paths?",
-      "p1": "They are itineraries on many topics, grouped by theme, <paths>in Paths</paths>: each stop is an event with its \"why it matters\", its place on the map and its sources. Where one of the day's events has an insight, it is marked in the list. If something doesn't add up, \"Report a mistake\" sits under every event and every text."
+      "p1": "They are itineraries on many topics, grouped by theme, <paths>in Paths</paths>: each stop is an event with its \"why it matters\", its place on the map and its sources. Where one of the day's events has an insight, it is marked in the list."
     }
   },
   "credits": {
@@ -476,36 +489,15 @@
     },
     "paths": {
       "description": "Guided paths on many topics, from antiquity to today: a few stops, each with its place on the map and why it matters."
+    },
+    "popular": {
+      "description": "The most-viewed days and countries on Grains of History, with anonymous view totals."
     }
   },
   "editorial": {
     "italianOnly": "The texts in this section are in Italian only, whatever language the interface is in.",
     "approximatePlace": "Approximate position: {{note}}",
     "draft": "Drafts written with the help of an AI from Wikipedia, not yet reviewed by a person: check the sources."
-  },
-  "report": {
-    "open": "Report a mistake",
-    "intro": "Tell us what doesn't add up: we read it and correct it. We don't ask who you are, so we won't be able to reply.",
-    "about": "About: {{subject}}",
-    "categoryLabel": "What kind of mistake is it?",
-    "categoryPlaceholder": "Choose…",
-    "category": {
-      "WRONG_DATE": "The date is wrong",
-      "WRONG_PLACE": "The place is wrong",
-      "WRONG_TEXT": "The text contains a mistake",
-      "BROKEN_LINK": "A link doesn't work",
-      "OTHER": "Something else"
-    },
-    "messageLabel": "What is wrong?",
-    "messageHint": "{{min}} to {{max}} characters. Written so far: {{length}}.",
-    "noPersonalData": "Don't write any personal data: we don't need it.",
-    "submit": "Send the report",
-    "sending": "Sending…",
-    "sent": "Thank you, your report has arrived (number {{id}}).",
-    "error": {
-      "invalid": "The report wasn't accepted. Check the text and the email address: you can also leave the address empty.",
-      "generic": "The report couldn't be sent ({{error}})."
-    }
   },
   "insights": {
     "showOnMap": "See the place on the map",

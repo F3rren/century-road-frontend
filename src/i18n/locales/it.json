@@ -7,6 +7,7 @@
   },
   "errors": {
     "network": "il servizio non risponde: controlla la connessione e riprova",
+    "timeout": "il servizio non ha risposto in tempo: riprova tra poco",
     "server": "il servizio non è disponibile in questo momento: riprova tra qualche minuto",
     "unexpected": "risposta inattesa dal servizio: riprova più tardi",
     "notFound": "il contenuto richiesto non esiste",
@@ -112,7 +113,7 @@
     },
     "popularity": {
       "heading": "I più visitati",
-      "description": "Quante volte ogni pagina è stata vista in totale, da tutti i visitatori — nessun dato personale, solo un conteggio aggregato e anonimo.",
+      "description": "Quante volte il sito ha mostrato un giorno o un paese, in totale — nessun dato personale, solo un conteggio aggregato e anonimo.",
       "loadError": "Impossibile caricare le statistiche sulle visualizzazioni ({{error}}).",
       "days": {
         "label": "Giorni più visitati"
@@ -124,6 +125,18 @@
       "views_other": "{{count}} visite",
       "noData": "Non ci sono ancora dati sufficienti.",
       "cta": "Esplora la mappa"
+    }
+  },
+  "popular": {
+    "title": "I più visitati",
+    "description": "I giorni e i paesi che il sito ha mostrato più spesso, in ordine, fino ai primi 50.",
+    "back": "Torna alla Dashboard",
+    "seeAll": "Vedi le classifiche complete",
+    "method": {
+      "title": "Come si contano",
+      "days": "Un giorno viene contato ogni volta che il sito ne mostra gli eventi: anche quando la mappa si apre sul giorno di oggi, o quando cambi un filtro nell’Archivio. Per questo in cima ci sono spesso i giorni in cui il sito è stato più aperto.",
+      "countries": "Un paese viene contato ogni volta che qualcuno lo seleziona sulla mappa.",
+      "anonymous": "Sono totali dall’inizio del conteggio, senza date né identificativi: non sappiamo chi ha guardato né quando, e la stessa persona che torna conta più volte. I dettagli sono nella <privacy>Privacy</privacy>."
     }
   },
   "archive": {
@@ -289,22 +302,22 @@
     },
     "geocoding": {
       "title": "Il paese sulla mappa",
-      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:110 milioni.",
+      "p1": "Wikipedia non dice in quale paese è avvenuto un evento: lo deduciamo noi. Prendiamo il primo articolo collegato che ha delle coordinate e cerchiamo il paese che contiene quel punto, sui confini di Natural Earth in scala 1:10 milioni, semplificati.",
       "p2": "È un'approssimazione, con limiti precisi:",
       "limitSubject": "le coordinate descrivono il soggetto dell'articolo, non sempre il luogo dell'evento;",
       "limitNone": "un evento senza articoli con coordinate resta senza paese: compare nell'elenco del giorno, ma non viene contato sulla mappa;",
       "limitBorder": "un punto vicino a un confine può cadere nel paese accanto;",
-      "limitIslands": "alcuni piccoli stati insulari non hanno una forma a questa scala e non vengono mai individuati.",
+      "limitIslands": "qualche isola molto piccola non ha una forma a questa scala e non viene mai individuata; la capitale di uno stato insulare, sulla costa, può cadere appena fuori dalla sua forma.",
       "p3": "Sulla mappa contano solo gli Eventi: In evidenza ne ripete alcuni, e contarli due volte gonfierebbe i numeri."
     },
     "index": {
       "title": "L'indice per paese",
-      "p1": "La pagina <century>Il mio secolo</century> usa un indice che il nostro server costruisce ogni notte: legge tutti i giorni dell'anno in italiano e in inglese e colloca ogni evento in un paese con la stessa regola e gli stessi confini della mappa. Contiene solo gli Eventi con un anno e un paese individuato, ogni edizione per conto suo (senza ripiego tra le lingue), e può essere indietro di un giorno rispetto a Wikipedia."
+      "p1": "La pagina <century>Il mio secolo</century> usa un indice che il nostro server costruisce ogni notte: legge tutti i giorni dell'anno in italiano e in inglese e colloca ogni evento in un paese con la stessa regola della mappa, ma su confini meno dettagliati (Natural Earth in scala 1:110 milioni): un evento in un microstato o vicino a un confine può finirvi in un paese diverso da quello della mappa. Contiene solo gli Eventi con un anno e un paese individuato, ogni edizione per conto suo (senza ripiego tra le lingue), e può essere indietro di un giorno rispetto a Wikipedia."
     },
     "errors": {
       "title": "Contraddizioni ed errori",
       "p1": "Con una sola fonte non c'è nulla da conciliare: non confrontiamo le voci con altri archivi. Un errore nel testo di un evento va corretto su Wikipedia, nella pagina dedicata a quel giorno dell'anno; la correzione arriva anche qui con l'aggiornamento successivo.",
-      "p2": "Per gli errori di questo sito, come un paese attribuito male, o per un errore in un evento, in un approfondimento o in un percorso, usa «Segnala un errore» che trovi sotto ciascuno, oppure scrivici da <credits>Crediti e contatti</credits>."
+      "p2": "Per gli errori di questo sito, come un paese attribuito male, scrivici da <credits>Crediti e contatti</credits>."
     },
     "limits": {
       "title": "Limiti",
@@ -312,7 +325,7 @@
     },
     "views": {
       "title": "Statistiche di visita",
-      "p1": "«I più visitati», nella Dashboard, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
+      "p1": "«I più visitati», nella Dashboard e nella pagina con le classifiche complete, sono totali anonimi: un giorno viene contato ogni volta che se ne chiedono gli eventi, un paese ogni volta che viene selezionato. Nessun dato personale e nessun identificativo del visitatore: i dettagli sono nella <privacy>Privacy</privacy>."
     },
     "sources": {
       "title": "Fonti, copertura e limiti",
@@ -340,7 +353,7 @@
       "p2": "Ogni approfondimento racconta un evento in tre parti, prima, l'evento e dopo, dice dove metterlo sulla mappa e rimanda alle fonti in cui si può controllare ogni affermazione. I testi sono scritti in italiano e vivono nel codice del progetto: cambiano solo con una nuova versione del sito, riletta come il codice, e non da un momento all'altro.",
       "p3": "Una data di revisione compare solo quando una persona ha davvero riletto il testo sulle sue fonti. Se manca, nessuno l'ha ancora fatto: è una bozza, scritta con l'aiuto di un'intelligenza artificiale, e va letta come tale. Qui sotto trovi quanti approfondimenti sono stati riletti.",
       "p4": "Dove una data dipende dal fuso orario, o il punto sulla mappa è solo un luogo di partenza (come il sito di lancio di una missione sulla Luna), la scheda lo dice.",
-      "p5": "Se qualcosa non torna, «Segnala un errore» sta sotto ogni evento, approfondimento e percorso. Non ti chiediamo chi sei, quindi non possiamo risponderti: leggiamo la segnalazione e, se serve, correggiamo."
+      "p5": "Se qualcosa non torna in un percorso o in un approfondimento, scrivici da «Crediti e contatti»."
     }
   },
   "guide": {
@@ -353,7 +366,7 @@
     },
     "country": {
       "title": "Come vedo gli eventi di un paese?",
-      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, usa la X in cima al pannello."
+      "p1": "Fai clic sul paese nella mappa, oppure sceglilo da «Vai a un paese» nel pannello degli eventi: il tasto <kbd>/</kbd> porta direttamente lì. Per tornare a tutti gli eventi di oggi, fai clic sulla mappa fuori da ogni paese (sul mare, per esempio), oppure usa «Tutti i paesi» in cima al pannello."
     },
     "archive": {
       "title": "Come cerco un altro giorno?",
@@ -365,7 +378,7 @@
     },
     "dashboard": {
       "title": "Cosa misura la Dashboard?",
-      "p1": "Numeri calcolati sulle voci di oggi: quanti eventi, in quanti paesi, quale arco di anni coprono e qual è il paese più citato. Sotto, i giorni e i paesi più visitati, contati in forma anonima."
+      "p1": "Numeri calcolati sulle voci di oggi: quanti eventi, in quanti paesi, quale arco di anni coprono e qual è il paese più citato. Sotto, i giorni e i paesi più visitati, contati in forma anonima. Da lì si arriva anche alle classifiche complete."
     },
     "language": {
       "title": "Perché i testi non sono sempre nella mia lingua?",
@@ -385,7 +398,7 @@
     },
     "paths": {
       "title": "Cosa sono i percorsi?",
-      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco. Se qualcosa non torna, sotto ogni evento e ogni testo c’è «Segnala un errore»."
+      "p1": "Sono itinerari su molti argomenti, raggruppati per tema, <paths>nei Percorsi</paths>: ogni tappa è un evento con il suo «perché conta», il suo luogo sulla mappa e le fonti. Dove un evento del giorno ha un approfondimento, lo trovi segnato nell’elenco."
     }
   },
   "credits": {
@@ -476,36 +489,15 @@
     },
     "paths": {
       "description": "Percorsi guidati su molti argomenti, dall'antichità a oggi: poche tappe, ognuna con il suo luogo sulla mappa e il perché conta."
+    },
+    "popular": {
+      "description": "I giorni e i paesi più visitati di Grains of History, con i totali anonimi di visita."
     }
   },
   "editorial": {
     "italianOnly": "I testi di questa sezione sono solo in italiano, qualunque sia la lingua dell’interfaccia.",
     "approximatePlace": "Posizione indicativa: {{note}}",
     "draft": "Bozze redatte con l’aiuto di un’intelligenza artificiale a partire da Wikipedia, non ancora riviste da una persona: controlla le fonti."
-  },
-  "report": {
-    "open": "Segnala un errore",
-    "intro": "Dicci che cosa non torna: lo leggiamo e correggiamo. Non ti chiediamo chi sei, quindi non potremo risponderti.",
-    "about": "Riguarda: {{subject}}",
-    "categoryLabel": "Che tipo di errore è?",
-    "categoryPlaceholder": "Scegli…",
-    "category": {
-      "WRONG_DATE": "La data è sbagliata",
-      "WRONG_PLACE": "Il luogo è sbagliato",
-      "WRONG_TEXT": "Il testo contiene un errore",
-      "BROKEN_LINK": "Un link non funziona",
-      "OTHER": "Altro"
-    },
-    "messageLabel": "Che cosa non va?",
-    "messageHint": "Da {{min}} a {{max}} caratteri. Scritti finora: {{length}}.",
-    "noPersonalData": "Non scrivere dati personali: non ci servono.",
-    "submit": "Invia la segnalazione",
-    "sending": "Invio…",
-    "sent": "Grazie, la segnalazione è arrivata (numero {{id}}).",
-    "error": {
-      "invalid": "La segnalazione non è stata accettata. Controlla il testo e l’indirizzo email: puoi anche lasciarlo vuoto.",
-      "generic": "Non è stato possibile inviare la segnalazione ({{error}})."
-    }
   },
   "insights": {
     "showOnMap": "Vedi il luogo sulla mappa",
