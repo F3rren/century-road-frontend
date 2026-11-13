@@ -47,11 +47,68 @@ describe('useKeyedFetch', () => {
     await waitFor(() => expect(result.current.error).toBe(i18n.t('errors.network')));
 
     act(() => result.current.retry());
-    expect(result.current.isLoading).toBe(true);
+    // The reset reaches the component on the next tick, not in the same one.
+    await waitFor(() => expect(result.current.isLoading).toBe(true));
     expect(result.current.error).toBeNull();
 
     resolveSecond('today');
     await waitFor(() => expect(result.current.data).toBe('today'));
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('the shared cache', () => {
+  it('asks once when two components ask the same thing at the same time', async () => {
+    const fetcher = vi.fn(() => Promise.resolve('countries'));
+
+    const { result } = renderHook(() => ({
+      first: useKeyedFetch('it', fetcher),
+      second: useKeyedFetch('it', fetcher),
+    }));
+
+    await waitFor(() => expect(result.current.first.data).toBe('countries'));
+    expect(result.current.second.data).toBe('countries');
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not mix up two different questions that happen to share a key', async () => {
+    const countries = vi.fn(() => Promise.resolve('the countries'));
+    const paths = vi.fn(() => Promise.resolve('the paths'));
+
+    const { result } = renderHook(() => ({
+      a: useKeyedFetch('it', countries),
+      b: useKeyedFetch('it', paths),
+    }));
+
+    await waitFor(() => expect(result.current.b.data).toBe('the paths'));
+    expect(result.current.a.data).toBe('the countries');
+  });
+
+  it('gives a page the answer it already had, instead of asking again, when it is shown a second time', async () => {
+    const fetcher = vi.fn(() => Promise.resolve('day'));
+
+    const first = renderHook(() => useKeyedFetch('10-16', fetcher));
+    await waitFor(() => expect(first.result.current.data).toBe('day'));
+    first.unmount();
+
+    const second = renderHook(() => useKeyedFetch('10-16', fetcher));
+    expect(second.result.current.data).toBe('day');
+    expect(second.result.current.isLoading).toBe(false);
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps a failure out of the cache: the next ask is a real one', async () => {
+    const fetcher = vi
+      .fn<() => Promise<string>>()
+      .mockRejectedValueOnce(new Error('HTTP 503: Service Unavailable'))
+      .mockResolvedValueOnce('ok');
+
+    const first = renderHook(() => useKeyedFetch('x', fetcher));
+    await waitFor(() => expect(first.result.current.error).toBe(i18n.t('errors.server')));
+    first.unmount();
+
+    const second = renderHook(() => useKeyedFetch('x', fetcher));
+    await waitFor(() => expect(second.result.current.data).toBe('ok'));
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
 });

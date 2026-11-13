@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { RouteError } from '@/components/layout/RouteError';
 import { RouteFallback } from '@/components/layout/RouteFallback';
 
 // Each page becomes its own chunk instead of one ~1.5MB bundle every visitor
@@ -43,26 +44,36 @@ export const router = createBrowserRouter([
         <WelcomePage />
       </Suspense>
     ),
+    errorElement: <RouteError />,
   },
   {
     path: '/',
     element: <AppLayout />,
+    // A failure of the layout itself: nothing of it is left to keep around the message.
+    errorElement: <RouteError />,
     children: [
-      { index: true,          element: <IndexRoute /> },
-      { path: 'dashboard',    element: <DashboardPage /> },
-      { path: 'popular',      element: <PopularPage /> },
-      { path: 'archive',      element: <ArchivePage /> },
-      { path: 'century',      element: <CenturyPage /> },
-      { path: 'paths',        element: <PathsPage /> },
-      { path: 'paths/:slug',  element: <PathPage /> },
-      { path: 'insights/:slug', element: <InsightPage /> },
-      { path: 'settings',     element: <SettingsPage /> },
-      { path: 'privacy',      element: <PrivacyPage /> },
-      { path: 'terms',        element: <TermsPage /> },
-      { path: 'guide',        element: <GuidePage /> },
-      { path: 'methodology',  element: <MethodologyPage /> },
-      { path: 'credits',      element: <CreditsPage /> },
-      { path: '*',            element: <NotFoundPage /> },
+      {
+        // A pathless route, there only to hold the boundary: a page that throws, or whose chunk cannot
+        // be fetched, is replaced by the message inside the layout, with the sidebar still there.
+        errorElement: <RouteError />,
+        children: [
+          { index: true,          element: <IndexRoute /> },
+          { path: 'dashboard',    element: <DashboardPage /> },
+          { path: 'popular',      element: <PopularPage /> },
+          { path: 'archive',      element: <ArchivePage /> },
+          { path: 'century',      element: <CenturyPage /> },
+          { path: 'paths',        element: <PathsPage /> },
+          { path: 'paths/:slug',  element: <PathPage /> },
+          { path: 'insights/:slug', element: <InsightPage /> },
+          { path: 'settings',     element: <SettingsPage /> },
+          { path: 'privacy',      element: <PrivacyPage /> },
+          { path: 'terms',        element: <TermsPage /> },
+          { path: 'guide',        element: <GuidePage /> },
+          { path: 'methodology',  element: <MethodologyPage /> },
+          { path: 'credits',      element: <CreditsPage /> },
+          { path: '*',            element: <NotFoundPage /> },
+        ],
+      },
     ],
   },
 ], { basename });

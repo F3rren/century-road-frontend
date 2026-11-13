@@ -13,6 +13,12 @@
     "notFound": "il contenuto richiesto non esiste",
     "rateLimited": "troppe richieste in poco tempo: riprova tra un po’"
   },
+  "errorPage": {
+    "title": "Qualcosa è andato storto",
+    "message": "Questa pagina non si è potuta mostrare. Il resto del sito funziona: riprova, oppure riparti dalla mappa.",
+    "newVersion": "Il sito è stato aggiornato mentre lo stavi usando: ricarica la pagina per continuare.",
+    "reload": "Ricarica la pagina"
+  },
   "nav": {
     "map": "Mappa",
     "dashboard": "Dashboard",

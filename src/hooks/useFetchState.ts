@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import i18n from '@/i18n';
+import { queryClient } from '@/lib/queryClient';
 import { httpStatus, isTimeout } from '@/services/fetchErrors';
 
 // Re-exported: callers have always imported it from here.
@@ -10,12 +12,6 @@ export interface FetchState<D> {
   isLoading: boolean;
   error: string | null;
 }
-
-// `attempt` ties a result to the try that produced it, so a retry shows as loading
-// again instead of keeping the previous error on screen until the new answer lands.
-type Settled<K, D> =
-  | { key: K; attempt: number; data: D; error: null }
-  | { key: K; attempt: number; data: null; error: string };
 
 // What a reader needs from a failed request: what went wrong in plain words and
 // what to do, never the browser's or the server's own text ("Failed to fetch",
@@ -33,56 +29,67 @@ export function describeFetchError(error: unknown): string {
   return i18n.t('errors.unexpected');
 }
 
-// Shared fetch+race-guard engine, generalizing useOnThisDay's original settle-by-key
-// logic: a fetch that resolves for a key that is no longer current is discarded
-// (isStale), and even the latest-fired fetch's result is only trusted if it matches
-// the render's current key — this avoids a stale-data flash when the key changes
-// rapidly, without resetting state inside the effect (which would cost an extra render).
+// Which fetcher a cached answer came from. The key a caller passes is often just a language or a slug,
+// and two hooks with the same one ask for different things, so the cache key also carries the identity
+// of the owner of the question: the fetcher itself, which is a module-level function, never a closure
+// made per render (a new one every time would be a new question every time).
+let nextScope = 0;
+const scopes = new WeakMap<object, number>();
+
+function scopeOf(owner: object): number {
+  let scope = scopes.get(owner);
+  if (scope === undefined) {
+    scope = nextScope++;
+    scopes.set(owner, scope);
+  }
+  return scope;
+}
+
+function useScopedFetch<K, D>(
+  owner: object,
+  key: K,
+  fetcher: (key: K, signal: AbortSignal) => Promise<D>,
+): FetchState<D> & { key: K; retry: () => void } {
+  const scope = scopeOf(owner);
+  const queryKey = useMemo(() => ['fetch', scope, key] as const, [scope, key]);
+
+  const query = useQuery(
+    {
+      queryKey,
+      // TanStack hands over a signal and aborts it when nobody is looking at the query any more: the
+      // fetcher passes it on to api.get, which cancels the request.
+      queryFn: ({ signal }) => fetcher(key, signal),
+    },
+    queryClient,
+  );
+
+  // Asks again for the same key, and shows loading until the new answer lands: what a "Riprova"
+  // button calls after an error. A reset, not a refetch: a refetch would keep the old error on screen.
+  const retry = useCallback(() => {
+    void queryClient.resetQueries({ queryKey });
+  }, [queryKey]);
+
+  return {
+    key,
+    isLoading: query.isPending,
+    data: query.data ?? null,
+    error: query.error ? describeFetchError(query.error) : null,
+    retry,
+  };
+}
+
+// The cached, deduplicated fetch behind every data hook. Two components asking the same thing - the
+// same fetcher and the same key - share one request and one answer; an answer for a key that is no
+// longer current can never be shown for the new one, because each key is its own query.
 //
-// Each run also hands its fetcher an AbortSignal, aborted when the key changes or the component
-// unmounts: a fetcher that passes it on to api.get() cancels the request nobody is waiting for
-// any more, instead of leaving it to finish and be thrown away. One that ignores it still works,
-// guarded by isStale as before.
+// The fetcher is handed an AbortSignal, aborted when the last component reading the query goes away: one
+// that passes it on to api.get() cancels the request nobody is waiting for any more. `fetcher` must be
+// a stable function (module-level, or a caller-memoized closure), as it is the question's identity.
 export function useKeyedFetch<K, D>(
   key: K,
   fetcher: (key: K, signal: AbortSignal) => Promise<D>,
 ): FetchState<D> & { key: K; retry: () => void } {
-  const [settled, setSettled] = useState<Settled<K, D> | null>(null);
-  const [attempt, setAttempt] = useState(0);
-
-  useEffect(() => {
-    let isStale = false;
-    const controller = new AbortController();
-
-    fetcher(key, controller.signal)
-      .then((data) => {
-        if (!isStale) setSettled({ key, attempt, data, error: null });
-      })
-      .catch((error: unknown) => {
-        if (!isStale) setSettled({ key, attempt, data: null, error: describeFetchError(error) });
-      });
-
-    return () => {
-      isStale = true;
-      controller.abort();
-    };
-    // `fetcher` is expected to be referentially stable for the lifetime of a given
-    // key (a module-level function, or a caller-memoized closure) — only `key`, or
-    // an explicit retry, should retrigger the fetch.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, attempt]);
-
-  const current = settled?.key === key && settled.attempt === attempt ? settled : null;
-  // Asks again for the same key: what a "Riprova" button calls after an error.
-  const retry = useCallback(() => setAttempt((n) => n + 1), []);
-
-  return {
-    key,
-    isLoading: current === null,
-    data: current?.data ?? null,
-    error: current?.error ?? null,
-    retry,
-  };
+  return useScopedFetch(fetcher, key, fetcher);
 }
 
 const ONCE_KEY = 0;
@@ -91,6 +98,6 @@ const ONCE_KEY = 0;
 export function useFetchOnce<D>(
   fetcher: (signal: AbortSignal) => Promise<D>,
 ): FetchState<D> & { retry: () => void } {
-  const { data, isLoading, error, retry } = useKeyedFetch(ONCE_KEY, (_key, signal) => fetcher(signal));
+  const { data, isLoading, error, retry } = useScopedFetch(fetcher, ONCE_KEY, (_key, signal) => fetcher(signal));
   return { data, isLoading, error, retry };
 }
