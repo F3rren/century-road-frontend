@@ -47,6 +47,11 @@ jobs:
       - name: Test
         run: npm run test
 
+      # The generated types must be what the committed OpenAPI document produces: one updated
+      # without the other fails here, instead of compiling against a contract nobody wrote down.
+      - name: API types are up to date
+        run: npm run api:check
+
       - name: Type-check and build
         run: npm run build
 
