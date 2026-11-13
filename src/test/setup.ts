@@ -1,6 +1,7 @@
 import { afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
+import { queryClient } from "@/lib/queryClient";
 
 // RTL's auto-cleanup-after-each-test hooks into a global `afterEach` that
 // only exists when Vitest's `test.globals` is on. This project deliberately
@@ -10,6 +11,9 @@ import "@testing-library/jest-dom/vitest";
 // matching more than one element.
 afterEach(() => {
   cleanup();
+  // The data cache lives at module level (src/lib/queryClient.ts): without this an answer fetched by
+  // one test would be served to the next one that asks the same thing, instead of its own mock.
+  queryClient.clear();
 });
 
 // jsdom doesn't implement matchMedia at all — every hook that reads a media

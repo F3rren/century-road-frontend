@@ -2,7 +2,7 @@
 
 Century Road is a React/Vite/TS SPA: an interactive historical almanac (globe + "on this day" events) backed by a Spring Boot gateway in the sibling repo [century-road-backend](https://github.com/F3rren/century-road-backend). All backend calls go through `src/services/api.ts` — never fetch the gateway directly from a component.
 
-**Stack**: React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, maplibre-gl ^6.10.0, lucide-react.
+**Stack**: React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, TanStack Query (the data cache behind `useKeyedFetch`), maplibre-gl ^6.10.0, lucide-react.
 
 **Commands**:
 ```

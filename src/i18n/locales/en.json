@@ -13,6 +13,12 @@
     "notFound": "the content you asked for doesn't exist",
     "rateLimited": "too many requests in a short time: try again in a while"
   },
+  "errorPage": {
+    "title": "Something went wrong",
+    "message": "This page could not be shown. The rest of the site still works: try again, or start over from the map.",
+    "newVersion": "The site was updated while you were using it: reload the page to carry on.",
+    "reload": "Reload the page"
+  },
   "nav": {
     "map": "Map",
     "dashboard": "Dashboard",

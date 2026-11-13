@@ -13,6 +13,12 @@
     "notFound": "der gewünschte Inhalt existiert nicht",
     "rateLimited": "zu viele Anfragen in kurzer Zeit: versuch es in einer Weile noch einmal"
   },
+  "errorPage": {
+    "title": "Etwas ist schiefgelaufen",
+    "message": "Diese Seite konnte nicht angezeigt werden. Der Rest der Seite funktioniert: versuche es erneut oder beginne wieder bei der Karte.",
+    "newVersion": "Die Seite wurde aktualisiert, während du sie benutzt hast: lade sie neu, um fortzufahren.",
+    "reload": "Seite neu laden"
+  },
   "nav": {
     "map": "Karte",
     "dashboard": "Dashboard",
