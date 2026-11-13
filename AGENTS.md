@@ -2,7 +2,7 @@
 
 Century Road is a React/Vite/TS SPA: an interactive historical almanac (globe + "on this day" events) backed by a Spring Boot gateway in the sibling repo [century-road-backend](https://github.com/F3rren/century-road-backend). All backend calls go through `src/services/api.ts` — never fetch the gateway directly from a component.
 
-**Stack**: React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, maplibre-gl ^6.10.0, lucide-react.
+**Stack**: React 18.3.1, Vite ^8.3.0, TypeScript ^5.5.3, Tailwind ^3.4.10, react-router-dom ^7, i18next/react-i18next, TanStack Query (the data cache behind `useKeyedFetch`), maplibre-gl ^6.10.0, lucide-react.
 
 **Commands**:
 ```
@@ -16,6 +16,8 @@ npm run preview
 Test files sit next to the code they cover (`foo.ts` → `foo.test.ts`), not in a separate `tests/` tree. RTL cleanup is wired by hand in `src/test/setup.ts` — this project keeps Vitest's `globals` off and imports `describe/it/expect` explicitly in every test file, so don't add `globals: true` to `vitest.config.ts` without also removing those imports everywhere.
 
 **Conventions**: feature-folder pattern (`src/features/<name>/`, own `components/hooks/lib/services/types`, cross-feature imports via `index.ts` barrels only). i18n keys for all UI copy except Privacy/Terms (Italian-only, intentional). Errors are plain thrown `Error`s, not a custom error type.
+
+**The API contract is checked by the compiler**: `src/api/openapi/history-service.json` is the OpenAPI document the backend commits (`docs/openapi/` there), `src/api/schema.d.ts` is generated from it (`npm run api:sync && npm run api:types`, never edited by hand) and `src/api/contract.ts` states that whatever the server may send is a valid hand-written type — a renamed or removed field fails `npm run build`. CI also runs `npm run api:check`.
 
 **Never touch**: `.env` (real values), `.impeccable/` and the `<!-- impeccable:product-schema 1 -->` marker in `PRODUCT.md` (owned by the installed impeccable skill's read/write contract), the two build-time guards in `vite.config.ts` without understanding what they prevent (mixed content, leaked secrets).
 

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import i18n from '@/i18n';
+import { queryClient } from '@/lib/queryClient';
 import { api } from '@/services/api';
 import type { InsightDetail, InsightSummary } from '../types';
 import { WhyItMatters } from './WhyItMatters';
@@ -69,6 +70,8 @@ describe('WhyItMatters', () => {
     expect(await screen.findByText("L'evento.")).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: t('insights.notes') })).not.toBeInTheDocument();
     unmount();
+    // The answer is cached for five minutes: ask again, as a visitor would after they have gone.
+    queryClient.clear();
 
     vi.mocked(api.get).mockResolvedValue({ success: true, data: { ...detail, notes: ['A Baikonur era già il 5 ottobre.'] } });
     renderBlock();

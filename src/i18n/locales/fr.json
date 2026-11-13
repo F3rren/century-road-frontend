@@ -13,6 +13,12 @@
     "notFound": "le contenu demandé n'existe pas",
     "rateLimited": "trop de requêtes en peu de temps : réessayez dans un moment"
   },
+  "errorPage": {
+    "title": "Une erreur s’est produite",
+    "message": "Cette page n’a pas pu s’afficher. Le reste du site fonctionne : réessayez, ou repartez de la carte.",
+    "newVersion": "Le site a été mis à jour pendant que vous l’utilisiez : rechargez la page pour continuer.",
+    "reload": "Recharger la page"
+  },
   "nav": {
     "map": "Carte",
     "dashboard": "Tableau de bord",
