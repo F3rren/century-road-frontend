@@ -17,6 +17,8 @@ Test files sit next to the code they cover (`foo.ts` → `foo.test.ts`), not in 
 
 **Conventions**: feature-folder pattern (`src/features/<name>/`, own `components/hooks/lib/services/types`, cross-feature imports via `index.ts` barrels only). i18n keys for all UI copy except Privacy/Terms (Italian-only, intentional). Errors are plain thrown `Error`s, not a custom error type.
 
+**The API contract is checked by the compiler**: `src/api/openapi/history-service.json` is the OpenAPI document the backend commits (`docs/openapi/` there), `src/api/schema.d.ts` is generated from it (`npm run api:sync && npm run api:types`, never edited by hand) and `src/api/contract.ts` states that whatever the server may send is a valid hand-written type — a renamed or removed field fails `npm run build`. CI also runs `npm run api:check`.
+
 **Never touch**: `.env` (real values), `.impeccable/` and the `<!-- impeccable:product-schema 1 -->` marker in `PRODUCT.md` (owned by the installed impeccable skill's read/write contract), the two build-time guards in `vite.config.ts` without understanding what they prevent (mixed content, leaked secrets).
 
 **Ask before**: adding a dependency, changing the supported-language list, changing routing structure, editing `DESIGN.md`/`PRODUCT.md` content directly (use the impeccable skill's own flow instead).
