@@ -70,10 +70,12 @@ jobs:
     timeout-minutes: 20
 
     # Declaring permissions at all drops every unlisted scope to none, so contents: read has to
-    # be spelled out again or the checkout below loses read access.
+    # be spelled out again or the checkout below loses read access. security-events: write is
+    # for the Trivy SARIF upload further down, same as codeql.yml's job permissions.
     permissions:
       contents: read
       packages: write
+      security-events: write
 
     steps:
       - name: Checkout repository
@@ -124,6 +126,40 @@ jobs:
             ${{ steps.names.outputs.image }}:${{ steps.names.outputs.moving }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # Scans the image just pushed, by its immutable commit tag, so what gets scanned is exactly
+      # what was published. This is the part `npm audit` (dependency-scan.yml) cannot see: the
+      # web server and the operating system the static files are served from. ignore-unfixed is
+      # a deliberate policy, as in the backend's CI: a HIGH/CRITICAL CVE with no fix available
+      # yet should not keep this job red forever.
+      - name: Scan the image for vulnerabilities
+        id: trivy
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: ${{ steps.names.outputs.image }}:${{ steps.names.outputs.sha }}
+          format: sarif
+          output: trivy-frontend.sarif
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+
+      # Uploaded whether the scan passed or failed, so findings are visible in the Security tab
+      # even when the scan reports any - the same tab codeql.yml already publishes to.
+      - name: Upload scan results to the Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-frontend.sarif
+          category: trivy-frontend
+
+      # Visible, not blocking: a warning annotation on this run, on top of the Security tab
+      # entries the upload above created. Failing the job would also fail release.sh's "CI passed
+      # for this commit" check, which would hold every release hostage until the scan is clean.
+      - name: Warn if the scan found HIGH/CRITICAL vulnerabilities
+        if: steps.trivy.outcome == 'failure'
+        run: echo "::warning::Trivy found HIGH/CRITICAL vulnerabilities in the frontend image - see the Security tab (category trivy-frontend)"
 
   # The release script decides what gets published under a version, so it is tested like code.
   # It talks to gh and docker through stand-ins: no network, a few seconds.
