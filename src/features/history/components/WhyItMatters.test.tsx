@@ -15,14 +15,14 @@ const summary: InsightSummary = {
   slug: 'sputnik-1',
   title: 'Lo Sputnik 1 entra in orbita',
   summary: 'Il primo satellite artificiale.',
-  date: { year: 1957, month: 10, day: 4 },
+  date: { year: 1957, month: 10, day: 4, precision: 'DAY' as const },
   place: { name: 'Baikonur', lat: 45.92, lon: 63.34, approximate: false },
 };
 
 const related = (n: number) => ({
   slug: `evento-${n}`,
   title: `Evento ${n}`,
-  date: { year: 1960 + n, month: 1, day: 1 },
+  date: { year: 1960 + n, month: 1, day: 1, precision: 'DAY' as const },
   reason: `Perché ${n}.`,
 });
 

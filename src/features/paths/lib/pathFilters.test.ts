@@ -12,12 +12,14 @@ import {
   topicOptions,
 } from './pathFilters';
 
-const path = (slug: string, title: string, topic?: string, topicLabel?: string, tagline = 'Una frase.'): PathSummary => ({
+const path = (slug: string, title: string, topic: string, topicLabel: string, tagline = 'Una frase.'): PathSummary => ({
   slug,
   title,
   tagline,
   topic,
   topicLabel,
+  startYear: 1900,
+  endYear: 1910,
   readingMinutes: 5,
   stopCount: 8,
 });
@@ -59,7 +61,7 @@ describe('matchesPath', () => {
   it('finds a word without its accent or its capital', () => {
     expect(normalizeText('Perché')).toBe('perche');
     expect(matchesPath(medicine, 'MEDICINA')).toBe(true);
-    expect(matchesPath(path('x', 'Perché conta'), 'perche')).toBe(true);
+    expect(matchesPath(path('x', 'Perché conta', 'SCIENZA', 'Scienza'), 'perche')).toBe(true);
   });
 
   it('wants every word, in any order, in the title, the tagline or the topic', () => {
@@ -99,10 +101,6 @@ describe('topicOptions', () => {
     const withUnknown = topicOptions(all, '', 'SCONOSCIUTO');
     expect(withUnknown[withUnknown.length - 1]).toEqual({ code: 'SCONOSCIUTO', label: 'SCONOSCIUTO', count: 0 });
   });
-
-  it('has no options when the backend sends no topics', () => {
-    expect(topicOptions([path('a', 'A'), path('b', 'B')], '', null)).toEqual([]);
-  });
 });
 
 describe('groupByTopic', () => {
@@ -111,12 +109,5 @@ describe('groupByTopic', () => {
     expect(groups.map((g) => g.topic)).toEqual(['ROMA_REPUBBLICANA', 'ROMA_IMPERIALE', 'MEDICINA']);
     expect(groups[0].label).toBe('Roma repubblicana');
     expect(groups[0].paths.map((p) => p.slug)).toEqual(['cesare', 'gracchi']);
-  });
-
-  it('is a single group with no label when no path has a topic (an older backend)', () => {
-    const groups = groupByTopic([path('a', 'A'), path('b', 'B')]);
-    expect(groups).toHaveLength(1);
-    expect(groups[0]).toMatchObject({ topic: null, label: null });
-    expect(groups[0].paths).toHaveLength(2);
   });
 });

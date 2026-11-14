@@ -23,12 +23,10 @@ export function PathPage() {
       <div className="mx-auto max-w-3xl space-y-8 pb-8">
         {/* Back to the list the reader came from: the whole of it, or the topic this path is in. */}
         <Link
-          to={data?.topic ? `${PATHS_ROUTE}?${new URLSearchParams({ topic: data.topic })}` : PATHS_ROUTE}
+          to={data ? `${PATHS_ROUTE}?${new URLSearchParams({ topic: data.topic })}` : PATHS_ROUTE}
           className={LINK_CLASS}
         >
-          {data?.topic
-            ? t('paths.backToTopic', { topic: topicName(t, data.topic, data.topicLabel) })
-            : t('paths.back')}
+          {data ? t('paths.backToTopic', { topic: topicName(t, data.topic, data.topicLabel) }) : t('paths.back')}
         </Link>
 
         {isLoading && <p className="text-sm text-muted-foreground">{t('common.loading')}</p>}

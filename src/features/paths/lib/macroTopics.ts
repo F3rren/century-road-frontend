@@ -22,8 +22,7 @@ const MACRO_OF_TOPIC = new Map(MACRO_TOPICS.flatMap(({ code, topics }) => topics
 const MACRO_ORDER = [...MACRO_TOPICS.map(({ code }) => code), OTHER_MACRO];
 
 export interface MacroGroup {
-  // null: paths the backend sent without a topic (an older backend): one group, no heading.
-  macro: string | null;
+  macro: string;
   // The topics in it, in the order the backend lists them.
   groups: PathGroup[];
 }
@@ -31,13 +30,12 @@ export interface MacroGroup {
 // The topic groups gathered by heading, in the order of the table above. A topic keeps its place
 // among its own heading's topics (the backend's order); a heading with no path left is not listed.
 export function groupByMacro(groups: readonly PathGroup[]): MacroGroup[] {
-  const byMacro = new Map<string | null, PathGroup[]>();
+  const byMacro = new Map<string, PathGroup[]>();
   for (const group of groups) {
-    const macro = group.topic === null ? null : (MACRO_OF_TOPIC.get(group.topic) ?? OTHER_MACRO);
+    const macro = MACRO_OF_TOPIC.get(group.topic) ?? OTHER_MACRO;
     byMacro.set(macro, [...(byMacro.get(macro) ?? []), group]);
   }
-  const order = [null, ...MACRO_ORDER];
-  return order.flatMap((macro) => {
+  return MACRO_ORDER.flatMap((macro) => {
     const found = byMacro.get(macro);
     return found ? [{ macro, groups: found }] : [];
   });

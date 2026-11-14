@@ -10,8 +10,12 @@
 // this file stops compiling at the type that no longer matches, which `npm run build` (`tsc -b`) then fails on.
 //
 // Only that direction is checked, on purpose: a hand-written type may be stricter than the server (a
-// union of the two languages, say) or more lenient (a field marked optional for an older backend), but it
-// must never promise something the server does not send.
+// union of the two languages, say) or more lenient (a field the server always sends, but that the app
+// does not need), but it must never promise something the server does not send.
+//
+// The backend is always released before the frontend, so the frontend does not carry code for a backend
+// older than the contract it was generated from: a field the contract lists as required is required in
+// the hand-written type too, and `npm run api:sync` is how a new backend is taken in.
 import type { components } from './schema';
 import type {
   Attribution,

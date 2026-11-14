@@ -544,7 +544,6 @@
       "path": "Parcours",
       "insight": "Éclairage"
     },
-    "meta": "{{stops}}, {{minutes}}",
     "stops_one": "{{count}} étape",
     "stops_other": "{{count}} étapes",
     "minutes_one": "{{count}} minute de lecture",

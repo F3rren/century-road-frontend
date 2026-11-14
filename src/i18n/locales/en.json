@@ -544,7 +544,6 @@
       "path": "Path",
       "insight": "Insight"
     },
-    "meta": "{{stops}}, {{minutes}}",
     "stops_one": "{{count}} stop",
     "stops_other": "{{count}} stops",
     "minutes_one": "{{count}} minute to read",
