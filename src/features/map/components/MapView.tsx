@@ -108,7 +108,7 @@ function buildHeatColor(heatmap: Record<string, number>): maplibregl.ExpressionS
     ['get', 'iso_a2'],
     ...entries.flatMap(([code, count]) => [code, heatColor(count)]),
     'rgba(0,0,0,0)',
-  ] as maplibregl.ExpressionSpecification;
+  ] as unknown as maplibregl.ExpressionSpecification;
 }
 
 function buildHeatOpacity(heatmap: Record<string, number>): maplibregl.ExpressionSpecification | number {
@@ -218,7 +218,6 @@ export function MapView({
       style: STYLE_URL,
       center: [10, 20],
       zoom: 1.8,
-      projection: { type: projection },
       attributionControl: false,
     });
 
@@ -405,7 +404,7 @@ export function MapView({
       map.remove();
       mapRef.current = null;
     };
-  }, [retryKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [retryKey]);
 
   // The country shapes are shared with the panel's picker (one cached fetch).
   useEffect(() => {

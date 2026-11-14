@@ -7,7 +7,7 @@
 //
 // Each line below says "whatever the server may send for this schema is a valid <hand-written type>".
 // It produces no code. When the backend changes, `npm run api:types` brings the new document in and
-// this file stops compiling at the type that no longer matches, which `npm run build` (tsc) then fails on.
+// this file stops compiling at the type that no longer matches, which `npm run build` (`tsc -b`) then fails on.
 //
 // Only that direction is checked, on purpose: a hand-written type may be stricter than the server (a
 // union of the two languages, say) or more lenient (a field marked optional for an older backend), but it
