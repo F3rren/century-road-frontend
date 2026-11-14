@@ -44,7 +44,7 @@ export function normalizeText(text: string): string {
 export function matchesPath(path: Pick<PathSummary, 'title' | 'tagline' | 'topicLabel'>, query: string): boolean {
   const words = normalizeText(query).split(/\s+/).filter((word) => word !== '');
   if (words.length === 0) return true;
-  const haystack = normalizeText(`${path.title} ${path.tagline} ${path.topicLabel ?? ''}`);
+  const haystack = normalizeText(`${path.title} ${path.tagline} ${path.topicLabel}`);
   return words.every((word) => haystack.includes(word));
 }
 
@@ -66,8 +66,7 @@ export interface TopicOption {
 export function topicOptions(all: readonly PathSummary[], query: string, chosen: string | null): TopicOption[] {
   const options = new Map<string, TopicOption>();
   for (const path of all) {
-    if (path.topic === undefined) continue;
-    const option = options.get(path.topic) ?? { code: path.topic, label: path.topicLabel ?? path.topic, count: 0 };
+    const option = options.get(path.topic) ?? { code: path.topic, label: path.topicLabel, count: 0 };
     if (matchesPath(path, query)) option.count += 1;
     options.set(path.topic, option);
   }
@@ -76,21 +75,19 @@ export function topicOptions(all: readonly PathSummary[], query: string, chosen:
 }
 
 export interface PathGroup {
-  // null: paths the backend sent without a topic (an older backend), listed in one group.
-  topic: string | null;
-  label: string | null;
+  topic: string;
+  label: string;
   paths: PathSummary[];
 }
 
 // Runs of the same topic, in the order they come: the backend already orders by topic, and the
-// frontend does not second-guess it. With no topic anywhere there is one group and no headings.
+// frontend does not second-guess it.
 export function groupByTopic(paths: readonly PathSummary[]): PathGroup[] {
-  const groups = new Map<string | null, PathGroup>();
+  const groups = new Map<string, PathGroup>();
   for (const path of paths) {
-    const key = path.topic ?? null;
-    const group = groups.get(key) ?? { topic: key, label: key === null ? null : path.topicLabel ?? key, paths: [] };
+    const group = groups.get(path.topic) ?? { topic: path.topic, label: path.topicLabel, paths: [] };
     group.paths.push(path);
-    groups.set(key, group);
+    groups.set(path.topic, group);
   }
   return [...groups.values()];
 }

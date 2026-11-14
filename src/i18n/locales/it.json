@@ -544,7 +544,6 @@
       "path": "Percorso",
       "insight": "Approfondimento"
     },
-    "meta": "{{stops}}, {{minutes}}",
     "stops_one": "{{count}} tappa",
     "stops_other": "{{count}} tappe",
     "minutes_one": "{{count}} minuto di lettura",

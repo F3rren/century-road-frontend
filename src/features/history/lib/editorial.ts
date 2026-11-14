@@ -19,12 +19,12 @@ export function insightOnMapRoute(slug: string): string {
 }
 
 // An insight's date as exactly as it is known and no more: "133 a.C." when only the year is,
-// "settembre 52 a.C." with the month, the whole day when the backend says so or says nothing (an
-// older one). The month and day of a coarser date are placeholders the backend sorts by: showing
-// them would invent a "1 gennaio 133 a.C.", so a precision this does not know, or a month that is
-// not one, falls back to the year alone.
+// "settembre 52 a.C." with the month, the whole day when the backend says so. The month and day of
+// a coarser date are placeholders the backend sorts by: showing them would invent a "1 gennaio
+// 133 a.C.", so a precision this does not know, or a month that is not one, falls back to the
+// year alone.
 export function formatEditorialDate(date: EditorialDate, language: string): string {
-  if (date.precision === undefined || date.precision === 'DAY') {
+  if (date.precision === 'DAY') {
     return formatEventDate(date.day, date.month, date.year, language);
   }
   const month = date.precision === 'MONTH' ? monthNames(language)[date.month] : undefined;

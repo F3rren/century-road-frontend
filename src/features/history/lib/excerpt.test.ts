@@ -2,14 +2,14 @@ import { describe, expect, it } from 'vitest';
 import type { InsightDetail } from '../types';
 import { buildExcerpt, isEmptyExcerpt, MAX_CONNECTIONS } from './excerpt';
 
-const related = (n: number) => ({ slug: `e-${n}`, title: `E ${n}`, date: { year: 1960 + n, month: 1, day: 1 }, reason: `R ${n}` });
+const related = (n: number) => ({ slug: `e-${n}`, title: `E ${n}`, date: { year: 1960 + n, month: 1, day: 1, precision: 'DAY' as const }, reason: `R ${n}` });
 
 const insight: InsightDetail = {
   slug: 'sputnik-1',
   language: 'it',
   title: 'Lo Sputnik 1',
   summary: 's',
-  date: { year: 1957, month: 10, day: 4 },
+  date: { year: 1957, month: 10, day: 4, precision: 'DAY' as const },
   place: { name: 'Baikonur', lat: 1, lon: 2, approximate: false },
   before: 'Prima uno.\n\nPrima due.',
   event: "L'evento.",

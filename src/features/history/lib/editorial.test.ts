@@ -6,7 +6,7 @@ const insight = (slug: string, year: number): InsightSummary => ({
   slug,
   title: slug,
   summary: '',
-  date: { year, month: 10, day: 4 },
+  date: { year, month: 10, day: 4, precision: 'DAY' as const },
   place: { name: 'Baikonur', lat: 45.92, lon: 63.34, approximate: false },
 });
 
@@ -45,9 +45,8 @@ describe('formatEditorialDate', () => {
     expect(formatEditorialDate({ ...monthOnly, month: 13 }, 'it')).toBe('52 a.C.');
   });
 
-  it('says the whole day when it is known, or when the backend says nothing', () => {
+  it('says the whole day when it is known', () => {
     expect(formatEditorialDate({ year: -44, month: 3, day: 15, precision: 'DAY' }, 'it')).toBe('15 marzo 44 a.C.');
-    expect(formatEditorialDate({ year: -44, month: 3, day: 15 }, 'it')).toBe('15 marzo 44 a.C.');
   });
 });
 

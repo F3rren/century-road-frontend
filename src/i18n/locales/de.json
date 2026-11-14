@@ -544,7 +544,6 @@
       "path": "Pfad",
       "insight": "Vertiefung"
     },
-    "meta": "{{stops}}, {{minutes}}",
     "stops_one": "{{count}} Station",
     "stops_other": "{{count}} Stationen",
     "minutes_one": "{{count}} Minute Lesezeit",

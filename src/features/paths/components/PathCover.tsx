@@ -19,16 +19,14 @@ export function PathCover({ cover }: { cover: PathCoverData }) {
           className="h-full w-full object-cover mix-blend-luminosity grayscale contrast-125"
         />
       </div>
-      {cover.filePageUrl && (
-        <figcaption>
-          <ExternalAnchor
-            href={cover.filePageUrl}
-            className="inline-flex min-h-11 items-center text-xs text-muted-foreground hover:text-foreground"
-          >
-            {t('paths.coverCredit')}
-          </ExternalAnchor>
-        </figcaption>
-      )}
+      <figcaption>
+        <ExternalAnchor
+          href={cover.filePageUrl}
+          className="inline-flex min-h-11 items-center text-xs text-muted-foreground hover:text-foreground"
+        >
+          {t('paths.coverCredit')}
+        </ExternalAnchor>
+      </figcaption>
     </figure>
   );
 }

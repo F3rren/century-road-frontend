@@ -15,7 +15,7 @@ const stop = (position: number) => ({
   slug: `tappa-${position}`,
   title: `Tappa ${position}`,
   summary: 'Riassunto.',
-  date: { year: -509 + position, month: 1, day: 1 },
+  date: { year: -509 + position, month: 1, day: 1, precision: 'DAY' as const },
   place: { name: 'Roma', lat: 41.9, lon: 12.5, approximate: false },
   narrative: 'Perché.',
 });
@@ -59,13 +59,5 @@ describe('PathPage', () => {
     renderPage(detail);
     const link = await screen.findByRole('link', { name: t('paths.backToTopic', { topic: 'Roma repubblicana' }) });
     expect(link).toHaveAttribute('href', '/paths?topic=ROMA_REPUBBLICANA');
-  });
-
-  it('goes back to the whole list, and shows no years, for a backend that sends no topic or years', async () => {
-    const { topic, topicLabel, startYear, endYear, ...old } = detail;
-    void topic; void topicLabel; void startYear; void endYear;
-    renderPage(old);
-    expect(await screen.findByText('6 tappe, 7 minuti di lettura')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: t('paths.back') })).toHaveAttribute('href', '/paths');
   });
 });

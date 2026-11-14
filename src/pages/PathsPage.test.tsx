@@ -18,13 +18,16 @@ const TOPICS: readonly [string, string][] = [
 ];
 
 // 120 paths, 40 in each of three topics, in the order the backend would send them.
-function manyPaths(withTopics = true): PathSummary[] {
+function manyPaths(): PathSummary[] {
   return TOPICS.flatMap(([code, label], topicIndex) =>
     Array.from({ length: 40 }, (_, i) => ({
       slug: `${code.toLowerCase()}-${i}`,
       title: `${label}, percorso ${i + 1}`,
       tagline: 'Una frase.',
-      ...(withTopics ? { topic: code, topicLabel: label, startYear: -500 + topicIndex * 1000 + i, endYear: -400 + topicIndex * 1000 + i } : {}),
+      topic: code,
+      topicLabel: label,
+      startYear: -500 + topicIndex * 1000 + i,
+      endYear: -400 + topicIndex * 1000 + i,
       readingMinutes: 8,
       stopCount: 8,
     })),
@@ -163,18 +166,7 @@ describe('PathsPage with many paths', () => {
   });
 });
 
-describe('PathsPage with a backend that sends no topics, or a few paths', () => {
-  it('is one list with no headings and no topic select, but still searchable', async () => {
-    answer(manyPaths(false));
-    renderPage();
-    expect(await screen.findByText(t('paths.filters.count', { count: 120 }))).toBeInTheDocument();
-    expect(screen.queryAllByRole('heading', { level: 3 })).toHaveLength(0);
-    expect(screen.queryByLabelText(t('paths.filters.topicLabel'))).not.toBeInTheDocument();
-    expect(screen.getByLabelText(t('paths.filters.searchLabel'))).toBeInTheDocument();
-    // No years either: the line is what it always was.
-    expect(screen.getAllByText('8 tappe, 8 minuti di lettura').length).toBeGreaterThan(0);
-  });
-
+describe('PathsPage, start-here events and short lists', () => {
   it('shows the date of a start-here event as exactly as it is known, not as an invented 1 January', async () => {
     const insight = {
       slug: 'fondazione-di-roma',

@@ -7,7 +7,7 @@ Century Road is a React/Vite/TS SPA: an interactive historical almanac (globe + 
 **Commands**:
 ```
 npm run dev            # Vite dev server, :5173
-npm run build          # tsc && vite build — this IS the typecheck
+npm run build          # tsc -b && vite build — this IS the typecheck (plain `tsc` would check nothing: see README)
 npm run lint           # eslint --max-warnings 0
 npm run test           # vitest run — Vitest + React Testing Library, jsdom
 npm run test:coverage  # same, with a v8 coverage report (nothing gates on it yet)

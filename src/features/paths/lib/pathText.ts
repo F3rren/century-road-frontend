@@ -10,7 +10,6 @@ export function topicName(t: TFunction, code: string, fallback?: string): string
 
 // "1789–1799, 8 tappe, 9 minuti di lettura": the years come from the backend (read from the stops'
 // dates), the stop count and the reading time are counted by it, so none of it is written by hand.
-// Without years (an older backend) it is the line it always was.
 export function describePath(
   t: TFunction,
   language: string,
@@ -18,6 +17,5 @@ export function describePath(
 ): string {
   const stops = t('paths.stops', { count: path.stopCount });
   const minutes = t('paths.minutes', { count: path.readingMinutes });
-  if (path.startYear === undefined || path.endYear === undefined) return t('paths.meta', { stops, minutes });
   return t('paths.metaWithYears', { years: formatYearSpan(path.startYear, path.endYear, language), stops, minutes });
 }

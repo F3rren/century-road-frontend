@@ -3,8 +3,18 @@ import type { PathSummary } from '@/features/history';
 import { groupByMacro, OTHER_MACRO } from './macroTopics';
 import type { PathGroup } from './pathFilters';
 
-function group(topic: string | null): PathGroup {
-  const path: PathSummary = { slug: `${topic}-1`, title: 't', tagline: 't', readingMinutes: 1, stopCount: 6 };
+function group(topic: string): PathGroup {
+  const path: PathSummary = {
+    slug: `${topic}-1`,
+    title: 't',
+    tagline: 't',
+    topic,
+    topicLabel: topic,
+    startYear: 1900,
+    endYear: 1910,
+    readingMinutes: 1,
+    stopCount: 6,
+  };
   return { topic, label: topic, paths: [path] };
 }
 
@@ -20,10 +30,6 @@ describe('groupByMacro', () => {
     const macros = groupByMacro([group('TOPIC_DI_DOMANI'), group('SCIENZA')]);
 
     expect(macros.map(({ macro }) => macro)).toEqual(['SCIENZA_E_TECNICA', OTHER_MACRO]);
-  });
-
-  it('keeps paths with no topic (an older backend) in a group with no heading', () => {
-    expect(groupByMacro([group(null)])).toEqual([{ macro: null, groups: [group(null)] }]);
   });
 
   it('has nothing to group when there is nothing', () => {

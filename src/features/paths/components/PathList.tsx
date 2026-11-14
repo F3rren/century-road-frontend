@@ -56,7 +56,7 @@ function TopicRow({ code, group, open }: { code: string; group: PathGroup; open:
           className="h-4 w-4 shrink-0 text-primary transition-transform group-open/topic:rotate-90 motion-reduce:transition-none"
           aria-hidden="true"
         />
-        <span className="font-display text-lg font-semibold">{topicName(t, code, group.label ?? undefined)}</span>
+        <span className="font-display text-lg font-semibold">{topicName(t, code, group.label)}</span>
         <span className="ml-auto text-xs text-muted-foreground">{t('paths.filters.count', { count: group.paths.length })}</span>
       </summary>
       <div className="pl-6">
@@ -67,28 +67,23 @@ function TopicRow({ code, group, open }: { code: string; group: PathGroup; open:
 }
 
 // The paths under a heading per macro-topic, each topic closed until opened. With a search or a
-// topic chosen they are open, so that what was asked for is in view. A group with no topic (an
-// older backend sends none) has no heading and no row: it is just the list.
+// topic chosen they are open, so that what was asked for is in view.
 export function GroupedPathList({ macros, open }: { macros: readonly MacroGroup[]; open: boolean }) {
   const { t } = useTranslation();
   return (
     <div className="space-y-8">
-      {macros.map(({ macro, groups }) =>
-        macro === null ? (
-          groups.map((group) => <PathList key="no-topic" paths={group.paths} />)
-        ) : (
-          <section key={macro} aria-labelledby={`macro-${macro}`}>
-            <h3 id={`macro-${macro}`} className="mb-1 scroll-mt-6 text-eyebrow text-primary">
-              {t(`paths.macro.${macro}`)}
-            </h3>
-            <div className="divide-y divide-border border-y border-border">
-              {groups.map((group) =>
-                group.topic === null ? null : <TopicRow key={group.topic} code={group.topic} group={group} open={open} />,
-              )}
-            </div>
-          </section>
-        ),
-      )}
+      {macros.map(({ macro, groups }) => (
+        <section key={macro} aria-labelledby={`macro-${macro}`}>
+          <h3 id={`macro-${macro}`} className="mb-1 scroll-mt-6 text-eyebrow text-primary">
+            {t(`paths.macro.${macro}`)}
+          </h3>
+          <div className="divide-y divide-border border-y border-border">
+            {groups.map((group) => (
+              <TopicRow key={group.topic} code={group.topic} group={group} open={open} />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

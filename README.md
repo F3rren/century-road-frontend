@@ -63,7 +63,7 @@ The dev server proxies `/api/*` to `BACKEND_URL` (default `http://localhost:8080
 | Command | What it does |
 |---|---|
 | `npm run dev` | Vite dev server at `:5173` |
-| `npm run build` | `tsc && vite build` — this is also the typecheck |
+| `npm run build` | `tsc -b && vite build` — this is also the typecheck (`-b` matters: `tsconfig.json` only references the real configs, and a plain `tsc` then checks nothing) |
 | `npm run lint` | `eslint --max-warnings 0` |
 | `npm run test` | Unit/component tests (Vitest + React Testing Library) |
 | `npm run test:coverage` | Same, with a coverage report — nothing gates on it yet |
