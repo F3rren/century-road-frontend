@@ -142,6 +142,9 @@ jobs:
           format: sarif
           output: trivy-frontend.sarif
           severity: HIGH,CRITICAL
+          # Without this, a SARIF report ignores `severity` and lists every finding, and the exit
+          # code (so the warning below) fires for a fixable LOW as much as for a CRITICAL.
+          limit-severities-for-sarif: true
           ignore-unfixed: true
           exit-code: "1"
 
